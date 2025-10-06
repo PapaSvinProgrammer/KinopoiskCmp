@@ -1,4 +1,4 @@
-package org.mordva.kinopoiskdev.di
+package com.mordva.kinopoiskkmp.di
 
 import com.mordva.domain.usecase.awards.GetMovieAwardsByDate
 import com.mordva.domain.usecase.awards.GetMovieAwardsByTitle

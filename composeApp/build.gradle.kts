@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -41,20 +40,20 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.domain)
 
-//            implementation(projects.feature.profile)
-//            implementation(projects.feature.home)
-//            implementation(projects.feature.aboutApp)
-//            implementation(projects.feature.awardsList)
+            implementation(projects.feature.profile)
+            implementation(projects.feature.home)
+            implementation(projects.feature.aboutApp)
+            implementation(projects.feature.awardsList)
             implementation(projects.feature.search)
-//            implementation(projects.feature.favorite)
-//            implementation(projects.feature.collectionList)
-//            implementation(projects.feature.movieList)
-//            implementation(projects.feature.movie)
-//            implementation(projects.feature.awardsList)
-//            implementation(projects.feature.otp)
-//            implementation(projects.feature.person)
-//            implementation(projects.feature.personPodium)
-//            implementation(projects.feature.settings)
+            implementation(projects.feature.favorite)
+            implementation(projects.feature.collectionList)
+            implementation(projects.feature.movieList)
+            implementation(projects.feature.movie)
+            implementation(projects.feature.awardsList)
+            implementation(projects.feature.otp)
+            implementation(projects.feature.person)
+            implementation(projects.feature.personPodium)
+            implementation(projects.feature.settings)
 
             implementation(libs.navigation.compose)
             implementation(compose.runtime)

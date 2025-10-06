@@ -1,14 +1,20 @@
 package com.mordva.kinopoiskkmp.di
 
+import com.mordva.awards_list.di.awardsListModule
+import com.mordva.collection_list.di.collectionModule
 import com.mordva.data.di.dataModule
 import com.mordva.data.di.dataModulePlatform
+import com.mordva.home.di.homeModule
+import com.mordva.movie.di.movieModule
 import com.mordva.network.internal.di.networkModule
 import com.mordva.network.internal.di.networkModulePlatform
+import com.mordva.otp.di.otpModule
+import com.mordva.person.di.personModule
 import com.mordva.search.di.searchModule
 import com.mordva.security.internal.di.securityModulePlatform
+import com.mordva.settings.di.settingsModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
-import org.mordva.kinopoiskdev.di.appModule
 
 fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {
@@ -24,14 +30,14 @@ fun initKoin(config: KoinAppDeclaration? = null) {
 
             securityModulePlatform,
 
-//            homeModule,
-//            awardsListModule,
-//            collectionModule,
-//            movieModule,
+            homeModule,
+            awardsListModule,
+            collectionModule,
+            movieModule,
             searchModule,
-//            personModule,
-//            otpModule,
-//            settingsModule
+            personModule,
+            otpModule,
+            settingsModule
         )
     }
 }
