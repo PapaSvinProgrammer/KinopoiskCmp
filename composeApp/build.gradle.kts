@@ -54,6 +54,7 @@ kotlin {
             implementation(projects.feature.person)
             implementation(projects.feature.personPodium)
             implementation(projects.feature.settings)
+            implementation(projects.feature.imagesList)
 
             implementation(libs.navigation.compose)
             implementation(compose.runtime)

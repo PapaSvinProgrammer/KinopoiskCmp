@@ -1,7 +1,6 @@
 package com.mordva.data
 
 import com.mordva.domain.repository.MovieRepository
-import com.mordva.model.image.Poster
 import com.mordva.model.movie.Movie
 import com.mordva.network.external.MovieService
 
@@ -26,12 +25,5 @@ internal class MovieRepositoryImpl(
             page = page,
             q = q
         )
-    }
-
-    override suspend fun getImages(
-        movieId: Int,
-        page: Int
-    ): Result<List<Poster>> {
-        return service.getMovieImages(movieId, page)
     }
 }

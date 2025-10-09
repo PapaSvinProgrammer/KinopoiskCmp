@@ -41,6 +41,7 @@ import com.mordva.movie.presentation.movie.widget.itemContent.voiceActorsItem
 import com.mordva.movie.presentation.movie.widget.itemContent.watchabilityItem
 import com.mordva.movie.utils.toScreenObject
 import com.mordva.movie.presentation.navigation.GroupPersonRoute
+import com.mordva.navigation.ImageListGraph
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.uiState.MovieUIState
 import com.mordva.ui.widget.bottomSheets.FactSheet
@@ -128,7 +129,9 @@ internal fun MovieScreen(
 
                 commentsItem(uiState.comments)
 
-                imagesItem(uiState.images)
+                imagesItem(uiState.images) {
+                    navController.navigate(ImageListGraph.ImageListRoute(id))
+                }
 
                 collectionsItem(
                     data = uiState.collections,

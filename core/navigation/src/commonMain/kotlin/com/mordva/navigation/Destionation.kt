@@ -104,3 +104,9 @@ data object SettingsGraph : RootGraph {
     @Serializable
     data object SupportRoute
 }
+
+@Serializable
+data object ImageListGraph : RootGraph {
+    @Serializable
+    data class ImageListRoute(val movieId: Int)
+}

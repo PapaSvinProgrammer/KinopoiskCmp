@@ -5,6 +5,7 @@ import com.mordva.collection_list.di.collectionModule
 import com.mordva.data.di.dataModule
 import com.mordva.data.di.dataModulePlatform
 import com.mordva.home.di.homeModule
+import com.mordva.images_list.di.imageListViewModel
 import com.mordva.movie.di.movieModule
 import com.mordva.network.internal.di.networkModule
 import com.mordva.network.internal.di.networkModulePlatform
@@ -37,7 +38,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             searchModule,
             personModule,
             otpModule,
-            settingsModule
+            settingsModule,
+            imageListViewModel,
         )
     }
 }

@@ -5,6 +5,7 @@ import com.mordva.data.CategoryRepositoryImpl
 import com.mordva.data.CollectionRepositoryImpl
 import com.mordva.data.CommentRepositoryImpl
 import com.mordva.data.HistoryRepositoryImpl
+import com.mordva.data.ImageRepositoryImpl
 import com.mordva.data.MovieRepositoryImpl
 import com.mordva.data.PersonRepositoryImpl
 import com.mordva.data.SeasonRepositoryImpl
@@ -14,6 +15,7 @@ import com.mordva.domain.repository.CategoryRepository
 import com.mordva.domain.repository.CollectionRepository
 import com.mordva.domain.repository.CommentRepository
 import com.mordva.domain.repository.HistoryRepository
+import com.mordva.domain.repository.ImageRepository
 import com.mordva.domain.repository.MovieRepository
 import com.mordva.domain.repository.PersonRepository
 import com.mordva.domain.repository.SeasonRepository
@@ -35,4 +37,5 @@ val dataModule = module {
     singleOf(::PersonRepositoryImpl).bind<PersonRepository>()
     singleOf(::StudioRepositoryImpl).bind<StudioRepository>()
     singleOf(::HistoryRepositoryImpl).bind<HistoryRepository>()
+    singleOf(::ImageRepositoryImpl).bind<ImageRepository>()
 }

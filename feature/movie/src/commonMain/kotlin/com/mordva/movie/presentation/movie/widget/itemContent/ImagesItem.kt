@@ -16,12 +16,15 @@ import com.mordva.ui.widget.listItems.LastItemCard
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-internal fun LazyListScope.imagesItem(images: List<Poster>) {
+internal fun LazyListScope.imagesItem(
+    images: List<Poster>,
+    onShowAll: () -> Unit,
+) {
     if (images.isEmpty()) return
 
     item {
         TitleRow(title = stringResource(Resources.Strings.Images)) {
-
+            onShowAll()
         }
 
         DefaultLazyRow(

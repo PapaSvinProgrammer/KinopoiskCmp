@@ -15,6 +15,7 @@ import com.mordva.awards_list.presentation.navigation.AwardListFeatureImpl
 import com.mordva.collection_list.presentation.navigation.CollectionFeatureImpl
 import com.mordva.favorite.navigation.FavoriteFeatureImpl
 import com.mordva.home.presentation.navigation.HomeFeatureImpl
+import com.mordva.images_list.presentation.navigation.ImageListFeatureImpl
 import com.mordva.movie.presentation.navigation.MovieFeatureImpl
 import com.mordva.movie_list.navigation.MovieListFeatureImpl
 import com.mordva.navigation.FeatureApi
@@ -49,7 +50,8 @@ fun App() {
         PersonFeatureImpl(),
         PersonPodiumListFeatureImpl(),
         SettingsFeatureImpl(),
-        AboutAppFeatureImpl()
+        AboutAppFeatureImpl(),
+        ImageListFeatureImpl(),
     )
 
     val navController = rememberNavController()
