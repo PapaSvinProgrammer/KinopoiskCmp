@@ -3,25 +3,29 @@ package com.mordva.movie.presentation.movie
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.mordva.model.movie.Movie
 import com.mordva.movie.presentation.movie.widget.collapsingTopBar.BackdropContent
 import com.mordva.movie.presentation.movie.widget.collapsingTopBar.CollapsedTopBar
 import com.mordva.movie.presentation.movie.widget.collapsingTopBar.ExpandedContent
@@ -39,14 +43,21 @@ import com.mordva.movie.presentation.movie.widget.itemContent.similarMoviesItem
 import com.mordva.movie.presentation.movie.widget.itemContent.supportPersonalItem
 import com.mordva.movie.presentation.movie.widget.itemContent.voiceActorsItem
 import com.mordva.movie.presentation.movie.widget.itemContent.watchabilityItem
-import com.mordva.movie.utils.toScreenObject
+import com.mordva.movie.presentation.movie.widget.moreBottomSheet.MoreBottomSheet
 import com.mordva.movie.presentation.navigation.GroupPersonRoute
+import com.mordva.movie.utils.body
+import com.mordva.movie.utils.handleSnackBarSate
+import com.mordva.movie.utils.toScreenObject
+import com.mordva.movieScreen.presentation.movie.widget.moreBottomSheet.MoreSheetAction
+import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.ScoreBottomSheet
 import com.mordva.navigation.ImageListGraph
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.uiState.MovieUIState
 import com.mordva.ui.widget.bottomSheets.FactSheet
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.other.TitleTopBarText
+import com.mordva.ui.widget.packageBottomSheet.PackageBottomSheet
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun MovieScreen(
@@ -54,16 +65,18 @@ internal fun MovieScreen(
     viewModel: MovieViewModel,
     id: Int
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    val scope = rememberCoroutineScope()
+    val snackbarState = remember { SnackbarHostState() }
 
     val scrollState = rememberLazyListState()
     val firstOffset by remember { derivedStateOf { scrollState.firstVisibleItemScrollOffset } }
     val index by remember { derivedStateOf { scrollState.firstVisibleItemIndex } }
-    var isCollapsed by remember { mutableStateOf(false) }
 
     LaunchedEffect(firstOffset, index) {
         if (index == 0) {
-            isCollapsed = firstOffset > 800
+            viewModel.updateCollapsedState(firstOffset > 800)
         }
     }
 
@@ -73,15 +86,21 @@ internal fun MovieScreen(
         viewModel.getComments(id)
     }
 
-    LaunchedEffect(uiState.movieState) {
-        uiState.movieState.body()?.let {
+    LaunchedEffect(state.movieState) {
+        state.movieState.body().let {
+            viewModel.save(it)
+            viewModel.isRatedMovie()
+            viewModel.isWillWatchPackage()
+            viewModel.isBlocked()
+            viewModel.isViewed()
             viewModel.getCollections(it.lists)
+            viewModel.getInfoForPackages()
         }
     }
 
-    RenderMovieContent(state = uiState.movieState)
+    RenderMovieContent(state = state.movieState)
 
-    uiState.movieState.body()?.let { movie ->
+    state.movieState.body().let { movie ->
         Box(modifier = Modifier.fillMaxSize()) {
             BackdropContent(
                 scrollState = scrollState,
@@ -89,7 +108,7 @@ internal fun MovieScreen(
             )
 
             CollapsedTopBar(
-                isCollapsed = isCollapsed,
+                isCollapsed = state.isCollapsed,
                 title = { TitleTopBarText(text = movie.name ?: "") },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
@@ -103,7 +122,28 @@ internal fun MovieScreen(
             )
 
             LazyColumn(state = scrollState) {
-                item { ExpandedContent(movie) }
+                item {
+                    ExpandedContent(
+                        movie = movie,
+                        isCustomRating = state.isRatedMovieState?.rating,
+                        isWillWatchPackage = state.isWillWatch,
+                        onEvaluate = {
+                            viewModel.updateScoreSheetVisible(true)
+                        },
+                        onAddIntoFuturePackage = {
+                            viewModel.handleWillWatchAction()
+                            scope.launch {
+                                snackbarState.handleSnackBarSate(state.isWillWatch)
+                            }
+                        },
+                        onShare = {
+                            //context.shareMovieIntent(state.movieState.body())
+                        },
+                        onMore = {
+                            viewModel.updateMoreSheetVisible(true)
+                        }
+                    )
+                }
 
                 movieDescriptionItem(movie)
 
@@ -111,10 +151,15 @@ internal fun MovieScreen(
 
                 watchabilityItem(movie, navController)
 
-                ratingCardLargeItem(movie)
+                ratingCardLargeItem(
+                    movie = movie,
+                    onClick = {
+                        viewModel.updateScoreSheetVisible(true)
+                    }
+                )
 
                 personGridHorizontalItem(
-                    actors = uiState.actors,
+                    actors = state.actors,
                     navController = navController,
                     onClick = {
                         navController.navigate(
@@ -123,18 +168,23 @@ internal fun MovieScreen(
                     }
                 )
 
-                supportPersonalItem(uiState.supportPersonal, navController)
+                supportPersonalItem(state.supportPersonal, navController)
 
-                voiceActorsItem(uiState.voiceActors, navController)
+                voiceActorsItem(state.voiceActors, navController)
 
-                commentsItem(uiState.comments)
+                commentsItem(state.comments)
 
-                imagesItem(uiState.images) {
-                    navController.navigate(ImageListGraph.ImageListRoute(id))
-                }
+                imagesItem(
+                    images = state.images,
+                    onShowAll = {
+                        navController.navigate(ImageListGraph.ImageListRoute(id)) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
 
                 collectionsItem(
-                    data = uiState.collections,
+                    data = state.collections,
                     navController = navController,
                     listId = movie.lists
                 )
@@ -152,18 +202,78 @@ internal fun MovieScreen(
         }
     }
 
-    if (uiState.selectedFact.isNotEmpty()) {
+    if (state.selectedFact.isNotEmpty()) {
         FactSheet(
-            text = uiState.selectedFact,
+            text = state.selectedFact,
             onDismissRequest = {
                 viewModel.updateSelectedFact("")
             }
         )
     }
-}
 
-private fun MovieUIState.body(): Movie? {
-    return (this as? MovieUIState.Success)?.data?.first()
+    if (state.scoreSheetVisible) {
+        ScoreBottomSheet(
+            movie = state.movieState.body(),
+            initialValue = state.isRatedMovieState?.rating,
+            ratedMovieState = state.ratedMoviesState,
+            onAction = { action ->
+                viewModel.handleScoreSheetHandle(action)
+            },
+            onDismissRequest = {
+                viewModel.updateScoreSheetVisible(false)
+            },
+            onValueChange = {
+                if (it == state.currentMovieRating) return@ScoreBottomSheet
+
+                viewModel.updateCurrentRatingMovie(it)
+                viewModel.getRatedMovies(it)
+            }
+        )
+    }
+
+    if (state.moreSheetVisible) {
+        MoreBottomSheet(
+            movie = state.movieState.body(),
+            isBlocked = state.isBlocked,
+            isViewed = state.isViewed,
+            onAction = { action ->
+                when (action) {
+                    MoreSheetAction.AddInFolder -> viewModel.updatePackageVisible(true)
+                    MoreSheetAction.BlockedChange -> viewModel.handleBlockedAction()
+                    MoreSheetAction.VisibilityChange -> viewModel.handleViewedAction()
+                }
+            },
+            onDismissRequest = {
+                viewModel.updateMoreSheetVisible(false)
+            }
+        )
+    }
+
+    if (state.packageSheetVisible) {
+        PackageBottomSheet(
+            movie = state.movieState.body(),
+            selectedSet = state.selectedPackage,
+            packageSize = state.packageSize,
+            onAction = { action ->
+                viewModel.handlePackageAction(action)
+            },
+            onDismissRequest = {
+                viewModel.updatePackageVisible(false)
+            }
+        )
+    }
+
+    SnackbarHost(
+        modifier = Modifier.safeContentPadding(),
+        hostState = snackbarState,
+        snackbar = { data ->
+            Snackbar(
+                modifier = Modifier.fillMaxWidth(),
+                snackbarData = data,
+                shape = RoundedCornerShape(10.dp)
+            )
+        }
+    )
 }
 
 @Composable

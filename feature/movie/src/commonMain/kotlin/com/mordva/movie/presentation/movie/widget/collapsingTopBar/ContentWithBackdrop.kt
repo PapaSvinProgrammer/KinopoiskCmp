@@ -14,7 +14,8 @@ internal fun ContentWithBackdrop(
     genres: String,
     countries: String,
     length: String,
-    age: String
+    age: String,
+    customRating: Int? = null,
 ) {
     Spacer(modifier = Modifier.height(360.dp))
 
@@ -28,6 +29,7 @@ internal fun ContentWithBackdrop(
         countries = countries,
         length = length,
         age = age,
+        customRating = customRating,
         title = {
             MovieLogo(
                 url = movie.logo?.url,

@@ -11,13 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
-import com.mordva.ui.theme.Resources
-import org.jetbrains.compose.resources.painterResource
+import com.mordva.ui.widget.listItems.poster.SquareImage
 
 @Composable
 internal fun SpouseCard(
@@ -36,12 +33,11 @@ internal fun SpouseCard(
                 onClick = onClick
             )
     ) {
-        AsyncImage(
+        SquareImage(
             model = photo,
-            error = painterResource(Resources.Icons.Movie),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.size(60.dp).clip(CircleShape)
+            modifier = Modifier
+                .size(60.dp)
+                .clip(CircleShape)
         )
 
         Spacer(modifier = Modifier.height(5.dp))

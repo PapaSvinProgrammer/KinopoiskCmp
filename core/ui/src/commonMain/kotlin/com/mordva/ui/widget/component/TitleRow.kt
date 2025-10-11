@@ -35,7 +35,7 @@ fun TitleRow(
             fontWeight = fontWeight,
             modifier = Modifier
                 .align(Alignment.CenterStart)
-                .padding(horizontal = 15.dp, vertical = 10.dp)
+                .padding(15.dp)
         )
 
         Icon(
@@ -43,7 +43,7 @@ fun TitleRow(
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .padding(horizontal = 15.dp, vertical = 10.dp)
+                .padding(15.dp)
         )
     }
 }

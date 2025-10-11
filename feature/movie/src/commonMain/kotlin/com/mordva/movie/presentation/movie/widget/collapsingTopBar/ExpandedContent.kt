@@ -13,7 +13,15 @@ import com.mordva.ui.util.ConvertData
 import com.mordva.ui.util.PrettyData
 
 @Composable
-internal fun ExpandedContent(movie: Movie) {
+internal fun ExpandedContent(
+    movie: Movie,
+    isCustomRating: Int? = null,
+    isWillWatchPackage: Boolean = false,
+    onEvaluate: () -> Unit,
+    onAddIntoFuturePackage: () -> Unit,
+    onShare: () -> Unit,
+    onMore: () -> Unit
+) {
     val date = ConvertData.convertDateCreated(movie.year, movie.releaseYears)
     val genres = movie.genres.take(2).joinToString(", ") { it.name }
     val countries = movie.countries.take(2).joinToString(", ") { it.name }
@@ -33,7 +41,8 @@ internal fun ExpandedContent(movie: Movie) {
                 date = date,
                 countries = countries,
                 length = length,
-                age = age
+                age = age,
+                customRating = isCustomRating,
             )
         }
         else {
@@ -42,6 +51,7 @@ internal fun ExpandedContent(movie: Movie) {
                 genres = genres,
                 date = date,
                 countries = countries,
+                customRating = isCustomRating,
                 length = length,
                 age = age
             )
@@ -49,7 +59,14 @@ internal fun ExpandedContent(movie: Movie) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        ExpandedNavigationBar()
+        ExpandedNavigationBar(
+            customRating = isCustomRating,
+            isWillWatchPackage = isWillWatchPackage,
+            onEvaluate = onEvaluate,
+            onShare = onShare,
+            onMore = onMore,
+            onAddIntoFuturePackage = onAddIntoFuturePackage
+        )
         Spacer(modifier = Modifier.height(20.dp))
         HorizontalDivider()
     }

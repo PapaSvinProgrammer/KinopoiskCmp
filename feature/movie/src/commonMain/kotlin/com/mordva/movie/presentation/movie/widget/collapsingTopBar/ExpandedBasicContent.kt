@@ -32,6 +32,7 @@ internal fun ExpandedBasicContent(
     length: String,
     age: String,
     top250: Int? = null,
+    customRating: Int? = null,
     title: @Composable () -> Unit
 ) {
     Column(
@@ -45,7 +46,8 @@ internal fun ExpandedBasicContent(
         Row(
             modifier = Modifier
                 .wrapContentWidth()
-                .padding(horizontal = 20.dp)
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             RatingText(
                 rating = rating,
@@ -64,6 +66,11 @@ internal fun ExpandedBasicContent(
             )
 
             Spacer(modifier = Modifier.width(6.dp))
+
+            customRating?.let { value ->
+                CustomRatingChip(value)
+                Spacer(modifier = Modifier.width(6.dp))
+            }
 
             Text(
                 text = titleEn,

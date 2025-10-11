@@ -10,22 +10,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import com.mordva.model.person.Person
 import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Typography
+import com.mordva.ui.widget.listItems.poster.StandardImageLarge
 import com.mordva.ui.widget.other.BirthdayDepthContent
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -38,16 +35,7 @@ internal fun MainPersonContent(
             .fillMaxWidth()
             .padding(horizontal = 15.dp)
     ) {
-        AsyncImage(
-            model = person.photo,
-            error = painterResource(Resources.Icons.Movie),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .width(140.dp)
-                .height(210.dp)
-                .clip(RoundedCornerShape(10.dp))
-        )
+        StandardImageLarge(person.photo)
 
         Spacer(modifier = Modifier.width(15.dp))
 
@@ -100,7 +88,7 @@ private fun NameContent(
 
     Text(
         text = alternativeName ?: "",
-        fontSize = 14.sp,
+        fontSize = Typography.bodyMedium.fontSize,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )

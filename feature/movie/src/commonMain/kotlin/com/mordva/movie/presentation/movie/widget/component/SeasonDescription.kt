@@ -37,7 +37,7 @@ internal fun SeasonDescription(
         Column {
             Text(
                 text = stringResource(Resources.Strings.SeasonsSeries),
-                fontSize = Typography.titleMedium.fontSize,
+                fontSize = Typography.bodyLarge.fontSize,
                 fontWeight = FontWeight.Bold
             )
 

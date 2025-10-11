@@ -30,7 +30,7 @@ import com.mordva.ui.theme.Resources
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-internal fun CustomSearchBar(
+internal fun DefaultCustomSearchBar(
     query: String,
     onValueChange: (String) -> Unit
 ) {

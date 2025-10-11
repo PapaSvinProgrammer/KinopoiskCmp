@@ -22,10 +22,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import coil3.compose.AsyncImage
 import com.mordva.movie.domain.model.WatchabilityScreenObject
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
+import com.mordva.ui.widget.listItems.poster.SquareImage
 import com.mordva.ui.widget.other.TitleTopBarText
 import org.jetbrains.compose.resources.stringResource
 
@@ -68,9 +68,8 @@ fun WatchabilityListScreen(
                         )
                     },
                     leadingContent = {
-                        AsyncImage(
+                        SquareImage(
                             model = watchabilityItem.logo?.url,
-                            contentDescription = null,
                             modifier = Modifier
                                 .size(45.dp)
                                 .clip(CircleShape)

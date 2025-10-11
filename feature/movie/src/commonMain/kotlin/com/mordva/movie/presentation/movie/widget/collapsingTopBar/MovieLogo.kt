@@ -8,18 +8,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 internal fun MovieLogo(url: String?, name: String) {
     if (url == null) {
         Text(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .fillMaxWidth(),
             text = name,
-            fontSize = 30.sp,
+            fontSize = Typography.titleLarge.fontSize,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )

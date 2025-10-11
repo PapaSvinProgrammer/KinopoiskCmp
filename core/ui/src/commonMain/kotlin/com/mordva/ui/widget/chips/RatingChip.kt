@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mordva.ui.theme.Gold
 import com.mordva.ui.theme.Green
 import com.mordva.ui.theme.Resources
@@ -92,9 +93,10 @@ private fun EliteBox(
             fontWeight = FontWeight.Bold,
             fontSize = fontSize,
             color = Color.Black,
+            lineHeight = 10.sp,
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(horizontal = 15.dp)
+                .padding(horizontal = 15.dp, vertical = 3.dp)
         )
 
         Icon(
@@ -126,7 +128,11 @@ private fun DefaultBox(
             fontWeight = FontWeight.Bold,
             fontSize = fontSize,
             color = Color.White,
-            modifier = Modifier.padding(horizontal = 8.dp)
+            lineHeight = 10.sp,
+            modifier = Modifier.padding(
+                horizontal = 8.dp,
+                vertical = 3.dp
+            )
         )
     }
 }

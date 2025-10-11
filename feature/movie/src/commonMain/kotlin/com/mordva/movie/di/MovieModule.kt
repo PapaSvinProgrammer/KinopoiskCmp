@@ -6,6 +6,11 @@ import com.mordva.movie.domain.FilterPersonsLikeSupport
 import com.mordva.movie.domain.FilterPersonsLikeVoiceActors
 import com.mordva.movie.domain.GetPersonLittleById
 import com.mordva.movie.domain.GroupPersonsByProfession
+import com.mordva.movie.domain.HandleBlockedAction
+import com.mordva.movie.domain.HandleFavoritePackageAction
+import com.mordva.movie.domain.HandleRatedMovieAction
+import com.mordva.movie.domain.HandleViewedAction
+import com.mordva.movie.domain.HandleWillWatchAction
 import com.mordva.movie.domain.UnionPersonsAndPersonMovie
 import com.mordva.movie.presentation.groupPerson.GroupPersonViewModel
 import com.mordva.movie.presentation.movie.MovieViewModel
@@ -23,4 +28,9 @@ val movieModule = module {
     factoryOf(::GetPersonLittleById)
     factoryOf(::GroupPersonsByProfession)
     factoryOf(::UnionPersonsAndPersonMovie)
+    factoryOf(::HandleBlockedAction)
+    factoryOf(::HandleFavoritePackageAction)
+    factoryOf(::HandleRatedMovieAction)
+    factoryOf(::HandleViewedAction)
+    factoryOf(::HandleWillWatchAction)
 }

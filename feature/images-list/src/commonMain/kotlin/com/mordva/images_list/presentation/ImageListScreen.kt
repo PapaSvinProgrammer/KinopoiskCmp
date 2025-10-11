@@ -28,19 +28,18 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.mordva.images_list.util.imageTypeDropDownItems
 import com.mordva.images_list.util.isLongImage
-import com.mordva.images_list.util.toAspectRatio
 import com.mordva.images_list.util.toStringResource
 import com.mordva.model.image.ImageType
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.uiState.ImageUIState
+import com.mordva.ui.util.toAspectRatio
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.component.customDropDownList.DropDownItem
 import com.mordva.ui.widget.component.customDropDownList.SelectableMultiDropDownList
 import com.mordva.ui.widget.lazyComponent.EndlessLazyVerticalStaggeredGrid
 import com.mordva.ui.widget.other.TitleTopBarText
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -131,7 +130,6 @@ private fun RenderMainContent(
 
                 AsyncImage(
                     model = poster.url,
-                    placeholder = painterResource(Resources.Icons.Movie),
                     contentScale = ContentScale.Crop,
                     contentDescription = null,
                     modifier = Modifier

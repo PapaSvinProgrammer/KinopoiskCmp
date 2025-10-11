@@ -100,7 +100,7 @@ private fun MainContent(
             .fillMaxSize()
             .padding(innerPadding)
     ) {
-        CustomSearchBar(
+        DefaultCustomSearchBar(
             query = query,
             onValueChange = { query = it }
         )

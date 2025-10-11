@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,15 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import com.mordva.model.person.PersonMovie
-import com.mordva.ui.theme.Resources
-import org.jetbrains.compose.resources.painterResource
+import com.mordva.ui.theme.Typography
+import com.mordva.ui.widget.listItems.poster.StandardImageSmall
 
 @Composable
 internal fun SupportPersonCard(
@@ -43,16 +39,7 @@ internal fun SupportPersonCard(
             .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        AsyncImage(
-            model = person.photo,
-            contentDescription = null,
-            error = painterResource(Resources.Icons.Image),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .height(80.dp)
-                .width(60.dp)
-                .clip(RoundedCornerShape(10.dp))
-        )
+        StandardImageSmall(person.photo)
 
         Spacer(modifier = Modifier.width(15.dp))
 
@@ -62,14 +49,14 @@ internal fun SupportPersonCard(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 fontWeight = FontWeight.Bold,
-                fontSize = 14.sp
+                fontSize = Typography.bodyMedium.fontSize
             )
 
             Text(
                 text = person.profession ?: "",
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                fontSize = 14.sp,
+                fontSize = Typography.bodyMedium.fontSize,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }

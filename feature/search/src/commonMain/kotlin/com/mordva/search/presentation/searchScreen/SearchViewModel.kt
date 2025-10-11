@@ -149,7 +149,7 @@ internal class SearchViewModel(
     }
 
     fun insertSearchHistoryItem(searchItem: SearchItem) = launchWithoutOld(INSERT_HISTORY_JOB) {
-        historyRepository.insert(searchItem.toHistory())
+//        historyRepository.insert(searchItem.toHistory())
     }
 
     fun deleteSearchHistoryItem(id: Int) = launchWithoutOld(DELETE_HISTORY_JOB) {

@@ -1,7 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.History
-
+import com.mordva.model.local.History
 
 interface HistoryRepository {
     suspend fun insert(history: History)

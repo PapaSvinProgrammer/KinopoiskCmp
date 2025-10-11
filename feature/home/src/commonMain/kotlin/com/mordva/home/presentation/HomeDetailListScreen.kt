@@ -22,7 +22,7 @@ import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.uiState.MovieUIState
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.lazyComponent.EndlessLazyVerticalGrid
-import com.mordva.ui.widget.listItems.MovieCard
+import com.mordva.ui.widget.listItems.MovieFillCard
 import com.mordva.ui.widget.other.TitleTopBarText
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,7 +74,7 @@ private fun RenderMovieState(
 ) {
     when (state) {
         MovieUIState.Loading -> BasicLoadingBox()
-        is MovieUIState.Success -> MainPersonContent(
+        is MovieUIState.Success -> MainMovieContent(
             list = state.data,
             modifier = modifier,
             onLoadMore = onLoadMore,
@@ -84,7 +84,7 @@ private fun RenderMovieState(
 }
 
 @Composable
-private fun MainPersonContent(
+private fun MainMovieContent(
     list: List<Movie>,
     modifier: Modifier,
     onLoadMore: () -> Unit,
@@ -95,8 +95,11 @@ private fun MainPersonContent(
         list = list,
         onLoadMore = onLoadMore
     ) {
-        MovieCard(
-            movie = it,
+        MovieFillCard(
+            name = it.name ?: "",
+            image = it.poster?.url ?: "",
+            rating = it.rating?.kp,
+            top250 = it.top250,
             modifier = Modifier.height(300.dp),
             onClick = { onClick(it) }
         )

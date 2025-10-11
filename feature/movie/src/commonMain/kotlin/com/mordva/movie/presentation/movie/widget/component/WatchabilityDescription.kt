@@ -34,7 +34,7 @@ internal fun WatchabilityDescription(
             Text(
                 text = stringResource(Resources.Strings.WhereCanWatch),
                 fontWeight = FontWeight.Bold,
-                fontSize = Typography.titleMedium.fontSize
+                fontSize = Typography.bodyLarge.fontSize
             )
 
             Text(

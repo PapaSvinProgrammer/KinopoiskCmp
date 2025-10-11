@@ -1,10 +1,13 @@
-package com.mordva.movie.presentation.movie.widget
+package com.mordva.movieScreen.presentation.movie.widget
 
+import com.mordva.model.PackageType
 import com.mordva.model.image.CollectionMovie
 import com.mordva.model.image.Poster
+import com.mordva.model.local.RatedMovie
 import com.mordva.model.movie.Comment
 import com.mordva.model.person.PersonMovie
 import com.mordva.ui.uiState.MovieUIState
+import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
 
 internal data class UIState(
     val movieState: MovieUIState = MovieUIState.Loading,
@@ -14,5 +17,17 @@ internal data class UIState(
     val comments: List<Comment> = listOf(),
     val images: List<Poster> = listOf(),
     val collections: List<CollectionMovie> = listOf(),
-    val selectedFact: String = ""
+    val ratedMoviesState: RatedMovieState = RatedMovieState.Init,
+    val selectedPackage: Set<PackageType> = setOf(),
+    val packageSize: Map<PackageType, Int> = mapOf(),
+    val isRatedMovieState: RatedMovie? = null,
+    val scoreSheetVisible: Boolean = false,
+    val moreSheetVisible: Boolean = false,
+    val packageSheetVisible: Boolean = false,
+    val currentMovieRating: Int = -1,
+    val selectedFact: String = "",
+    val isCollapsed: Boolean = false,
+    val isWillWatch: Boolean = false,
+    val isViewed: Boolean = false,
+    val isBlocked: Boolean = false,
 )

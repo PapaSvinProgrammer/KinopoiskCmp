@@ -11,23 +11,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import com.mordva.model.SearchItem
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.widget.listItems.poster.StandardImageSmall
 import com.mordva.ui.widget.other.RatingText
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SearchItemCard(
@@ -41,16 +36,7 @@ fun SearchItemCard(
             .clickable(onClick = onClick)
             .padding(15.dp)
     ) {
-        AsyncImage(
-            model = searchItem.poster,
-            contentDescription = null,
-            error = painterResource(Resources.Icons.Image),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .height(80.dp)
-                .width(60.dp)
-                .clip(RoundedCornerShape(10.dp))
-        )
+        StandardImageSmall(searchItem.poster)
 
         Spacer(modifier = Modifier.width(15.dp))
 
