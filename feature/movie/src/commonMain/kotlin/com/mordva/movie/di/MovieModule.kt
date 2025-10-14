@@ -15,11 +15,34 @@ import com.mordva.movie.domain.UnionPersonsAndPersonMovie
 import com.mordva.movie.presentation.groupPerson.GroupPersonViewModel
 import com.mordva.movie.presentation.movie.MovieViewModel
 import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val movieModule = module {
-    viewModelOf(::MovieViewModel)
+    viewModel { (movieId: Int) ->
+        MovieViewModel(
+            movieId = movieId,
+            getMovieById = get(),
+            getMovieImages = get(),
+            getCollectionBySlug = get(),
+            getCommentByDate = get(),
+            filterCollection = get(),
+            filterPersonsLikeVoiceActors = get(),
+            filterPersonsLikeActors = get(),
+            filterPersonsLikeSupport = get(),
+            ratedMovieRepository = get(),
+            willWatchPackageRepository = get(),
+            handleWillWatchAction = get(),
+            handleRatedMovieAction = get(),
+            handleFavoritePackageAction = get(),
+            handleViewedAction = get(),
+            handleBlockedAction = get(),
+            favoritePackageRepository = get(),
+            viewedRepository = get(),
+            blockedRepository = get(),
+        )
+    }
     viewModelOf(::GroupPersonViewModel)
     factoryOf(::FilterCollection)
     factoryOf(::FilterPersonsLikeActors)

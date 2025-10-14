@@ -1,4 +1,4 @@
-package com.mordva.movieScreen.presentation.movie.widget
+package com.mordva.movie.presentation.movie.widget
 
 import com.mordva.model.PackageType
 import com.mordva.model.image.CollectionMovie

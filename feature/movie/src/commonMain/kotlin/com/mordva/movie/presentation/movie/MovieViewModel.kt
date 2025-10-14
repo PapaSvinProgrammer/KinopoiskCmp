@@ -24,24 +24,28 @@ import com.mordva.movie.domain.HandleFavoritePackageAction
 import com.mordva.movie.domain.HandleRatedMovieAction
 import com.mordva.movie.domain.HandleViewedAction
 import com.mordva.movie.domain.HandleWillWatchAction
+import com.mordva.movie.presentation.movie.widget.UIState
 import com.mordva.movie.utils.body
 import com.mordva.movieScreen.domain.model.CheckedParams
 import com.mordva.movieScreen.domain.model.PackageItemParams
 import com.mordva.movieScreen.domain.model.RatedMovieActionParams
-import com.mordva.movieScreen.presentation.movie.widget.UIState
 import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
 import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
 import com.mordva.ui.uiState.MovieUIState
 import com.mordva.ui.widget.packageBottomSheet.PackageItemAction
-import com.mordva.util.Log
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import com.mordva.util.multiRequest
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
 internal class MovieViewModel(
+    private val movieId: Int,
     private val getMovieById: GetMovieById,
     private val getMovieImages: GetMovieImages,
     private val getCollectionBySlug: GetCollectionBySlug,
@@ -65,8 +69,11 @@ internal class MovieViewModel(
     private val _uiState = MutableStateFlow(UIState())
     val uiState = _uiState.asStateFlow()
 
-    fun save(movie: Movie) = launchWithoutOld {
-//        movieLocalService.insert(movie)
+    init {
+        getMovie(movieId)
+        getImages(movieId)
+        getComments(movieId)
+        observeMovieState()
     }
 
     fun updatePackageVisible(visible: Boolean) {
@@ -111,114 +118,6 @@ internal class MovieViewModel(
         )
 
         handleRatedMovieAction.execute(params)
-    }
-
-    fun isRatedMovie() = launchWithoutOld(IS_RATED_MOVIE_JOB) {
-        val movieId = uiState.value.movieState.body().id
-
-        ratedMovieRepository.isStock(movieId).collect { ratedMovie ->
-            _uiState.update {
-                it.copy(isRatedMovieState = ratedMovie)
-            }
-        }
-    }
-
-    fun getComments(movieId: Int) = launchWithoutOld(GET_COMMENTS_JOB) {
-        val params = CommentParams(
-            movieId = movieId,
-            sort = -1
-        )
-
-        getCommentByDate.execute(params).onSuccess { comments ->
-            _uiState.update {
-                it.copy(comments = comments)
-            }
-        }
-    }
-
-    fun getMovie(id: Int) = launchWithoutOld(GET_MOVIE_JOB) {
-        val res = getMovieById.execute(id)
-
-        res.onSuccess { movie ->
-            Log.d("RRRR", movie.poster.toString())
-            val state = MovieUIState.Success(listOf(movie))
-
-            _uiState.update {
-                it.copy(movieState = state)
-            }
-
-            filterActors(movie.persons)
-        }
-    }
-
-    fun getImages(movieId: Int) = launchWithoutOld(GET_IMAGES_JOB) {
-        val params = MovieParams(
-            movieId = movieId
-        )
-
-        val res = getMovieImages.execute(params)
-
-        res.onSuccess { images ->
-            _uiState.update { it.copy(images = images) }
-        }
-    }
-
-    fun getCollections(list: List<String>) = launchWithoutOld(GET_COLLECTIONS) {
-        if (uiState.value.collections.isNotEmpty()) {
-            return@launchWithoutOld
-        }
-
-        val temp = multiRequest(list) {
-            getCollectionBySlug.execute(it)
-        }
-
-        if (temp.isNotEmpty()) {
-            val res = filterCollection.execute(temp)
-
-            _uiState.update {
-                it.copy(collections = res)
-            }
-        }
-    }
-
-    fun isWillWatchPackage() = launchWithoutOld(IS_WILL_WATCH_JOB) {
-        val movieId = uiState.value.movieState.body().id
-
-        willWatchPackageRepository.isStock(movieId).collect { result ->
-            val set = uiState.value.selectedPackage.toMutableSet()
-
-            _uiState.update {
-                it.copy(isWillWatch = result != null)
-            }
-
-            if (result != null) {
-                set.add(PackageType.WILL_WATCH)
-            } else {
-                set.remove(PackageType.WILL_WATCH)
-            }
-
-            _uiState.update { it.copy(selectedPackage = set) }
-        }
-    }
-
-    fun isBlocked() = launchWithoutOld(IS_BLOCKED_JPB) {
-        val movieId = uiState.value.movieState.body().id
-
-        blockedRepository.isStock(movieId).collect { moviePackage ->
-            _uiState.update {
-                it.copy(isBlocked = moviePackage != null)
-            }
-        }
-    }
-
-    fun isViewed() = launchWithoutOld(IS_VIEWED_JOB) {
-        val movieId = uiState.value.movieState.body().id
-
-        viewedRepository.isStock(movieId).collect { moviePackage ->
-            _uiState.update {
-                it.copy(isViewed = moviePackage != null)
-            }
-        }
     }
 
     fun handleViewedAction() = launchWithoutOld(VIEWED_JOB) {
@@ -267,9 +166,127 @@ internal class MovieViewModel(
         handleFavoritePackageAction.execute(params)
     }
 
-    fun getInfoForPackages() {
-        val movieId = uiState.value.movieState.body().id
+    private fun observeMovieState() = launchWithoutOld(OBSERVE) {
+        uiState.map { it.movieState }
+            .distinctUntilChanged()
+            .collectLatest { state ->
+                state.body().let {
+                    save(it)
+                    isRatedMovie()
+                    isWillWatchPackage()
+                    isBlocked()
+                    isViewed()
+                    getCollections(it.lists)
+                    getInfoForPackages()
+                    this.cancel()
+                }
+            }
+    }
 
+    private fun save(movie: Movie) = launchWithoutOld {
+//        movieLocalService.insert(movie)
+    }
+
+    private fun isRatedMovie() = launchWithoutOld(IS_RATED_MOVIE_JOB) {
+        ratedMovieRepository.isStock(movieId).collect { ratedMovie ->
+            _uiState.update {
+                it.copy(isRatedMovieState = ratedMovie)
+            }
+        }
+    }
+
+    private fun getComments(movieId: Int) = launchWithoutOld(GET_COMMENTS_JOB) {
+        val params = CommentParams(
+            movieId = movieId,
+            sort = -1
+        )
+
+        getCommentByDate.execute(params).onSuccess { comments ->
+            _uiState.update {
+                it.copy(comments = comments)
+            }
+        }
+    }
+
+    private fun getMovie(id: Int) = launchWithoutOld(GET_MOVIE_JOB) {
+        val res = getMovieById.execute(id)
+
+        res.onSuccess { movie ->
+            val state = MovieUIState.Success(listOf(movie))
+
+            _uiState.update {
+                it.copy(movieState = state)
+            }
+
+            filterActors(movie.persons)
+        }
+    }
+
+    private fun getImages(movieId: Int) = launchWithoutOld(GET_IMAGES_JOB) {
+        val params = MovieParams(
+            movieId = movieId
+        )
+
+        val res = getMovieImages.execute(params)
+
+        res.onSuccess { images ->
+            _uiState.update { it.copy(images = images) }
+        }
+    }
+
+    private fun getCollections(list: List<String>) = launchWithoutOld(GET_COLLECTIONS) {
+        if (uiState.value.collections.isNotEmpty()) {
+            return@launchWithoutOld
+        }
+
+        val temp = multiRequest(list) {
+            getCollectionBySlug.execute(it)
+        }
+
+        if (temp.isNotEmpty()) {
+            val res = filterCollection.execute(temp)
+
+            _uiState.update {
+                it.copy(collections = res)
+            }
+        }
+    }
+
+    private fun isWillWatchPackage() = launchWithoutOld(IS_WILL_WATCH_JOB) {
+        willWatchPackageRepository.isStock(movieId).collect { result ->
+            val set = uiState.value.selectedPackage.toMutableSet()
+
+            _uiState.update {
+                it.copy(isWillWatch = result != null)
+            }
+
+            if (result != null) {
+                set.add(PackageType.WILL_WATCH)
+            } else {
+                set.remove(PackageType.WILL_WATCH)
+            }
+
+            _uiState.update { it.copy(selectedPackage = set) }
+        }
+    }
+
+    private fun isBlocked() = launchWithoutOld(IS_BLOCKED_JPB) {
+        blockedRepository.isStock(movieId).collect { moviePackage ->
+            _uiState.update {
+                it.copy(isBlocked = moviePackage != null)
+            }
+        }
+    }
+
+    private fun isViewed() = launchWithoutOld(IS_VIEWED_JOB) {
+        viewedRepository.isStock(movieId).collect { moviePackage ->
+            _uiState.update {
+                it.copy(isViewed = moviePackage != null)
+            }
+        }
+    }
+
+    private fun getInfoForPackages() {
         isFavoritePackage(movieId)
         getCountFavoritePackage()
         getCountWillWatchPackage()
@@ -316,7 +333,6 @@ internal class MovieViewModel(
     }
 
     override fun onCleared() {
-        Log.d("RRRR", "CLEAR")
         cancelAllJobs()
         super.onCleared()
     }
@@ -339,5 +355,6 @@ internal class MovieViewModel(
         const val GET_IMAGES_JOB = "get_images"
         const val GET_COLLECTIONS = "get_collections"
         const val FILTER_ACTORS_JOB = "filter_actors"
+        const val OBSERVE = "observe_ui_state"
     }
 }

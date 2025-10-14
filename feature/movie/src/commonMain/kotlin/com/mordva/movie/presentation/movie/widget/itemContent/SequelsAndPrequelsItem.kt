@@ -8,9 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.mordva.model.movie.Movie
-import com.mordva.navigation.MovieGraph
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
@@ -19,7 +17,7 @@ import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.sequelsAndPrequelsItem(
     list: List<Movie>,
-    navController: NavController
+    onClick: (Movie) -> Unit,
 ) {
     item {
         if (list.isEmpty()) return@item
@@ -42,9 +40,7 @@ internal fun LazyListScope.sequelsAndPrequelsItem(
                 image = it.poster?.url ?: "",
                 rating = it.rating?.kp,
                 top250 = it.top250,
-                onClick = {
-                    navController.navigate(MovieGraph.MovieRoute(it.id))
-                }
+                onClick = { onClick(it) }
             )
         }
     }

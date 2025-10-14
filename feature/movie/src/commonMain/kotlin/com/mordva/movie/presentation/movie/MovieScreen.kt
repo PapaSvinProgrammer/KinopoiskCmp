@@ -22,10 +22,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
+import com.mordva.model.image.CollectionMovie
+import com.mordva.model.movie.Movie
+import com.mordva.model.movie.Watchability
+import com.mordva.model.person.PersonMovie
 import com.mordva.movie.presentation.movie.widget.collapsingTopBar.BackdropContent
 import com.mordva.movie.presentation.movie.widget.collapsingTopBar.CollapsedTopBar
 import com.mordva.movie.presentation.movie.widget.collapsingTopBar.ExpandedContent
@@ -44,13 +45,10 @@ import com.mordva.movie.presentation.movie.widget.itemContent.supportPersonalIte
 import com.mordva.movie.presentation.movie.widget.itemContent.voiceActorsItem
 import com.mordva.movie.presentation.movie.widget.itemContent.watchabilityItem
 import com.mordva.movie.presentation.movie.widget.moreBottomSheet.MoreBottomSheet
-import com.mordva.movie.presentation.navigation.GroupPersonRoute
+import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.ScoreBottomSheet
 import com.mordva.movie.utils.body
 import com.mordva.movie.utils.handleSnackBarSate
-import com.mordva.movie.utils.toScreenObject
 import com.mordva.movieScreen.presentation.movie.widget.moreBottomSheet.MoreSheetAction
-import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.ScoreBottomSheet
-import com.mordva.navigation.ImageListGraph
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.uiState.MovieUIState
 import com.mordva.ui.widget.bottomSheets.FactSheet
@@ -61,9 +59,15 @@ import kotlinx.coroutines.launch
 
 @Composable
 internal fun MovieScreen(
-    navController: NavController,
     viewModel: MovieViewModel,
-    id: Int
+    onBackClick: () -> Unit,
+    onPersonClick: (PersonMovie) -> Unit,
+    onWatchabilityClick: (Watchability) -> Unit,
+    onCollectionClick: (CollectionMovie) -> Unit,
+    onMovieClick: (Movie) -> Unit,
+    onShowAllPersons: (List<PersonMovie>) -> Unit,
+    onShowAllCollections: (List<String>) -> Unit,
+    onShowAllImages: () -> Unit,
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -80,24 +84,6 @@ internal fun MovieScreen(
         }
     }
 
-    LifecycleEventEffect(Lifecycle.Event.ON_START) {
-        viewModel.getMovie(id)
-        viewModel.getImages(id)
-        viewModel.getComments(id)
-    }
-
-    LaunchedEffect(state.movieState) {
-        state.movieState.body().let {
-            viewModel.save(it)
-            viewModel.isRatedMovie()
-            viewModel.isWillWatchPackage()
-            viewModel.isBlocked()
-            viewModel.isViewed()
-            viewModel.getCollections(it.lists)
-            viewModel.getInfoForPackages()
-        }
-    }
-
     RenderMovieContent(state = state.movieState)
 
     state.movieState.body().let { movie ->
@@ -111,7 +97,7 @@ internal fun MovieScreen(
                 isCollapsed = state.isCollapsed,
                 title = { TitleTopBarText(text = movie.name ?: "") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = PlatformResources.Icons.ArrowBack,
                             contentDescription = null
@@ -149,7 +135,9 @@ internal fun MovieScreen(
 
                 seasonDescriptionItem(movie)
 
-                watchabilityItem(movie, navController)
+                watchabilityItem(movie) {
+                    onWatchabilityClick(movie.watchability)
+                }
 
                 ratingCardLargeItem(
                     movie = movie,
@@ -160,42 +148,48 @@ internal fun MovieScreen(
 
                 personGridHorizontalItem(
                     actors = state.actors,
-                    navController = navController,
-                    onClick = {
-                        navController.navigate(
-                            GroupPersonRoute(movie.persons.toScreenObject())
-                        ) { launchSingleTop = true }
-                    }
+                    personOnClick = onPersonClick,
+                    onClick = { onShowAllPersons(movie.persons) }
                 )
 
-                supportPersonalItem(state.supportPersonal, navController)
+                supportPersonalItem(
+                    supportPersonal = state.supportPersonal,
+                    onClick = onPersonClick,
+                    onShowAllPersons = { onShowAllPersons(state.supportPersonal) }
+                )
 
-                voiceActorsItem(state.voiceActors, navController)
+                voiceActorsItem(
+                    voiceActors = state.voiceActors,
+                    onShowAllPersons = { onShowAllPersons(state.voiceActors) },
+                    onClick = onPersonClick
+                )
 
                 commentsItem(state.comments)
 
                 imagesItem(
                     images = state.images,
-                    onShowAll = {
-                        navController.navigate(ImageListGraph.ImageListRoute(id)) {
-                            launchSingleTop = true
-                        }
-                    }
+                    onShowAll = onShowAllImages
                 )
 
                 collectionsItem(
                     data = state.collections,
-                    navController = navController,
-                    listId = movie.lists
+                    onClick = onCollectionClick,
+                    onShowAll = { onShowAllCollections(movie.lists) }
                 )
 
                 factsItem(movie.facts)
 
                 premierItem(movie.premiere)
 
-                sequelsAndPrequelsItem(movie.sequelsAndPrequels, navController)
+                sequelsAndPrequelsItem(
+                    list = movie.sequelsAndPrequels,
+                    onClick = onMovieClick
+                )
 
-                similarMoviesItem(movie.similarMovies, navController)
+                similarMoviesItem(
+                    similarMovies = movie.similarMovies,
+                    onClick = onMovieClick
+                )
 
                 item { Spacer(modifier = Modifier.height(130.dp)) }
             }

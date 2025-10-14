@@ -1,6 +1,7 @@
 package com.mordva.movie.presentation.navigation
 
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key.Companion.P
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -15,9 +16,16 @@ import com.mordva.movie.presentation.movie.MovieViewModel
 import com.mordva.movie.presentation.watchability.WatchabilityListScreen
 import com.mordva.movie.utils.PersonMovieListScreenObjectType
 import com.mordva.movie.utils.WatchabilityType
+import com.mordva.movie.utils.toScreenObject
+import com.mordva.navigation.CollectionListGraph
 import com.mordva.navigation.FeatureApi
+import com.mordva.navigation.ImageListGraph
 import com.mordva.navigation.MovieGraph
+import com.mordva.navigation.MovieListGraph
+import com.mordva.navigation.PersonGraph
+import com.mordva.util.Constants
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 import kotlin.reflect.typeOf
 
 class MovieFeatureImpl : FeatureApi {
@@ -31,12 +39,59 @@ class MovieFeatureImpl : FeatureApi {
         ) {
             composable<MovieGraph.MovieRoute> {
                 val route = it.toRoute<MovieGraph.MovieRoute>()
-                val viewModel: MovieViewModel = koinViewModel()
+                val viewModel: MovieViewModel = koinViewModel { parametersOf(route.id) }
 
                 MovieScreen(
-                    navController = navController,
                     viewModel = viewModel,
-                    id = route.id
+                    onBackClick = { navController.popBackStack() },
+                    onPersonClick = { person ->
+                        navController.navigate(PersonGraph.PersonRoute(person.id)) {
+                            launchSingleTop = true
+                        }
+                    },
+                    onCollectionClick = { collection ->
+                        val query = arrayListOf(
+                            Constants.LISTS_FIELD to collection.slug.toString(),
+                            Constants.SORT_FIELD to Constants.RATING_KP_FIELD,
+                            Constants.SORT_TYPE to Constants.SORT_DESC
+                        )
+
+                        navController.navigate(
+                            MovieListGraph.MovieListRoute(
+                                title = collection.name ?: "",
+                                queryParameters = query
+                            )
+                        ) { launchSingleTop = true }
+                    },
+                    onMovieClick = { movie ->
+                        navController.navigate(MovieGraph.MovieRoute(movie.id))
+                    },
+                    onShowAllPersons = { persons ->
+                        navController.navigate(
+                            GroupPersonRoute(persons.toScreenObject())
+                        ) { launchSingleTop = true }
+                    },
+                    onWatchabilityClick = { watchability ->
+                        navController.navigate(
+                            WatchabilityListRoute(
+                                watchability = watchability.toScreenObject()
+                            )
+                        ) {
+                            launchSingleTop = true
+                        }
+                    },
+                    onShowAllCollections = { listId ->
+                        navController.navigate(
+                            CollectionListGraph.CollectionListRoute(listId = listId)
+                        ) {
+                            launchSingleTop = true
+                        }
+                    },
+                    onShowAllImages = {
+                        navController.navigate(ImageListGraph.ImageListRoute(route.id)) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
             }
 
