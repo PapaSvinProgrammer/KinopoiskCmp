@@ -12,11 +12,11 @@ import com.mordva.movie.domain.HandleRatedMovieAction
 import com.mordva.movie.domain.HandleViewedAction
 import com.mordva.movie.domain.HandleWillWatchAction
 import com.mordva.movie.domain.UnionPersonsAndPersonMovie
+import com.mordva.movie.domain.model.PersonMovieScreenObject
 import com.mordva.movie.presentation.groupPerson.GroupPersonViewModel
 import com.mordva.movie.presentation.movie.MovieViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModel
-import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val movieModule = module {
@@ -43,7 +43,16 @@ val movieModule = module {
             blockedRepository = get(),
         )
     }
-    viewModelOf(::GroupPersonViewModel)
+
+    viewModel { (persons: List<PersonMovieScreenObject>) ->
+        GroupPersonViewModel(
+            persons = persons,
+            getPersonByFilter = get(),
+            groupPersonsByProfession = get(),
+            unionPersonsAndPersonMovie = get(),
+        )
+    }
+
     factoryOf(::FilterCollection)
     factoryOf(::FilterPersonsLikeActors)
     factoryOf(::FilterPersonsLikeSupport)

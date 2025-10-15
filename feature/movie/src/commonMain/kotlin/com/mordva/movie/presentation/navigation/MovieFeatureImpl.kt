@@ -1,7 +1,6 @@
 package com.mordva.movie.presentation.navigation
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.Key.Companion.P
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -103,8 +102,8 @@ class MovieFeatureImpl : FeatureApi {
                 val route = it.toRoute<WatchabilityListRoute>()
 
                 WatchabilityListScreen(
-                    navController = navController,
-                    watchability = route.watchability
+                    watchability = route.watchability,
+                    onBackClick = { navController.popBackStack() }
                 )
             }
 
@@ -114,12 +113,18 @@ class MovieFeatureImpl : FeatureApi {
                 )
             ) {
                 val route = it.toRoute<GroupPersonRoute>()
-                val viewModel: GroupPersonViewModel = koinViewModel()
+                val viewModel: GroupPersonViewModel = koinViewModel {
+                    parametersOf(route.persons)
+                }
 
                 GroupPersonsScreen(
-                    navController = navController,
                     viewModel = viewModel,
-                    list = route.persons
+                    onBackClick = { navController.popBackStack() },
+                    onPersonClick = { person ->
+                        navController.navigate(PersonGraph.PersonRoute(person.id)) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
             }
         }

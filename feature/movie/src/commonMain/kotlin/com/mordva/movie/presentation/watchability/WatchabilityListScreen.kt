@@ -21,7 +21,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.mordva.movie.domain.model.WatchabilityScreenObject
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
@@ -32,8 +31,8 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WatchabilityListScreen(
-    navController: NavController,
-    watchability: WatchabilityScreenObject
+    watchability: WatchabilityScreenObject,
+    onBackClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -42,7 +41,7 @@ fun WatchabilityListScreen(
                     TitleTopBarText(stringResource(Resources.Strings.WhereCanWatch))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = PlatformResources.Icons.ArrowBack,
                             contentDescription = null

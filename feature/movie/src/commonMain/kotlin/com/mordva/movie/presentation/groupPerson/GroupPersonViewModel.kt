@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 internal class GroupPersonViewModel(
+    persons: List<PersonMovieScreenObject>,
     private val getPersonByFilter: GetPersonLittleById,
     private val groupPersonsByProfession: GroupPersonsByProfession,
     private val unionPersonsAndPersonMovie: UnionPersonsAndPersonMovie
@@ -21,7 +22,11 @@ internal class GroupPersonViewModel(
     private val _uiState = MutableStateFlow(GroupUiState.Loading as GroupUiState)
     val uiState = _uiState.asStateFlow()
 
-    fun getGroupedPersons(persons: List<PersonMovieScreenObject>) = launchWithoutOld(GET_PERSONS) {
+    init {
+        getGroupedPersons(persons)
+    }
+
+    private fun getGroupedPersons(persons: List<PersonMovieScreenObject>) = launchWithoutOld(GET_PERSONS) {
         val responsePersons = multiRequest(persons) { person ->
             getPersonByFilter.execute(person.id)
         }

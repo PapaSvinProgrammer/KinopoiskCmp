@@ -22,12 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
-import androidx.navigation.NavController
 import com.mordva.movie.domain.model.PersonMovieExtended
 import com.mordva.movie.presentation.groupPerson.widget.GroupUiState
-import com.mordva.movie.domain.model.PersonMovieScreenObject
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.util.PrettyData
@@ -39,15 +35,11 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun GroupPersonsScreen(
-    navController: NavController,
-    list: List<PersonMovieScreenObject>,
-    viewModel: GroupPersonViewModel
+    viewModel: GroupPersonViewModel,
+    onBackClick: () -> Unit,
+    onPersonClick: (PersonMovieExtended) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
-
-    LifecycleEventEffect(Lifecycle.Event.ON_CREATE) {
-        viewModel.getGroupedPersons(list)
-    }
 
     Scaffold(
         topBar = {
@@ -56,7 +48,7 @@ internal fun GroupPersonsScreen(
                     TitleTopBarText(text = stringResource(Resources.Strings.Persons))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = PlatformResources.Icons.ArrowBack,
                             contentDescription = null
@@ -72,11 +64,7 @@ internal fun GroupPersonsScreen(
                 MainContent(
                     modifier = Modifier.padding(top = innerPadding.calculateTopPadding()),
                     map = state.data,
-                    onClick = { person ->
-//                        navController.navigate(PersonRoute(person.id)) {
-//                            launchSingleTop = true
-//                        }
-                    }
+                    onClick = onPersonClick
                 )
             }
         }

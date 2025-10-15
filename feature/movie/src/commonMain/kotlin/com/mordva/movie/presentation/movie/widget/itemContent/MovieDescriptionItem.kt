@@ -7,8 +7,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mordva.movie.presentation.movie.widget.component.MovieDescription
 import com.mordva.model.movie.Movie
+import com.mordva.util.Log
 
 internal fun LazyListScope.movieDescriptionItem(movie: Movie) {
+    Log.d("RRRR", "DESC")
     item {
         Spacer(modifier = Modifier.height(20.dp))
 
