@@ -65,7 +65,7 @@ class MovieFeatureImpl : FeatureApi {
                     onMovieClick = { movie ->
                         navController.navigate(MovieGraph.MovieRoute(movie.id))
                     },
-                    onShowAllPersons = { persons ->
+                    onShowAllPersonsClick = { persons ->
                         navController.navigate(
                             GroupPersonRoute(persons.toScreenObject())
                         ) { launchSingleTop = true }
@@ -79,14 +79,14 @@ class MovieFeatureImpl : FeatureApi {
                             launchSingleTop = true
                         }
                     },
-                    onShowAllCollections = { listId ->
+                    onShowAllCollectionsClick = { listId ->
                         navController.navigate(
                             CollectionListGraph.CollectionListRoute(listId = listId)
                         ) {
                             launchSingleTop = true
                         }
                     },
-                    onShowAllImages = {
+                    onShowAllImagesClick = {
                         navController.navigate(ImageListGraph.ImageListRoute(route.id)) {
                             launchSingleTop = true
                         }

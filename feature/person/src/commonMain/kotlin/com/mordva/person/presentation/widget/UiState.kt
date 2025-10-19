@@ -1,16 +1,16 @@
 package com.mordva.person.presentation.widget
 
 import com.mordva.model.movie.ShortMovie
-import com.mordva.ui.uiState.FactUIState
-import com.mordva.ui.uiState.MovieUIState
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.FactListUIState
+import com.mordva.ui.uiState.MovieListUIState
+import com.mordva.ui.uiState.PersonListUIState
 
 internal data class UiState(
-    val personState: PersonUIState = PersonUIState.Loading,
-    val moviesState: MovieUIState = MovieUIState.Loading,
-    val factState: FactUIState = FactUIState.Loading,
+    val personState: PersonListUIState = PersonListUIState.Loading,
+    val moviesState: MovieListUIState = MovieListUIState.Loading,
+    val factState: FactListUIState = FactListUIState.Loading,
     val countAwards: Int? = null,
-    val personSpouseState: PersonUIState = PersonUIState.Loading,
+    val personSpouseState: PersonListUIState = PersonListUIState.Loading,
     val groups: Map<String, List<ShortMovie>> = mapOf(),
     val groupsKeys: List<String> = listOf(),
     val selectedGroup: Int = 0,

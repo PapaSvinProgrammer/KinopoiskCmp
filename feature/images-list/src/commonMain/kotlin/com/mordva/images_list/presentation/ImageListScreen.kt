@@ -33,7 +33,7 @@ import com.mordva.model.image.ImageType
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
-import com.mordva.ui.uiState.ImageUIState
+import com.mordva.ui.uiState.ImageListUIState
 import com.mordva.ui.util.toAspectRatio
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.component.customDropDownList.DropDownItem
@@ -107,12 +107,12 @@ internal fun ImageListScreen(
 
 @Composable
 private fun RenderMainContent(
-    imageState: ImageUIState,
+    imageState: ImageListUIState,
     onLoadMore: () -> Unit
 ) {
     when (imageState) {
-        ImageUIState.Loading -> BasicLoadingBox()
-        is ImageUIState.Success -> {
+        ImageListUIState.Loading -> BasicLoadingBox()
+        is ImageListUIState.Success -> {
             EndlessLazyVerticalStaggeredGrid(
                 list = imageState.data,
                 columns = StaggeredGridCells.Fixed(2),

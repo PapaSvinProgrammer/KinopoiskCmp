@@ -24,6 +24,7 @@ import com.mordva.movie.domain.HandleFavoritePackageAction
 import com.mordva.movie.domain.HandleRatedMovieAction
 import com.mordva.movie.domain.HandleViewedAction
 import com.mordva.movie.domain.HandleWillWatchAction
+import com.mordva.movie.presentation.movie.widget.MovieUIState
 import com.mordva.movie.presentation.movie.widget.UIState
 import com.mordva.movie.utils.body
 import com.mordva.movieScreen.domain.model.CheckedParams
@@ -31,7 +32,6 @@ import com.mordva.movieScreen.domain.model.PackageItemParams
 import com.mordva.movieScreen.domain.model.RatedMovieActionParams
 import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
 import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
-import com.mordva.ui.uiState.MovieUIState
 import com.mordva.ui.widget.packageBottomSheet.PackageItemAction
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
@@ -91,12 +91,6 @@ internal class MovieViewModel(
     fun updateScoreSheetVisible(visible: Boolean) {
         _uiState.update {
             it.copy(scoreSheetVisible = visible)
-        }
-    }
-
-    fun updateCollapsedState(state: Boolean) {
-        _uiState.update {
-            it.copy(isCollapsed = state)
         }
     }
 
@@ -212,7 +206,7 @@ internal class MovieViewModel(
         val res = getMovieById.execute(id)
 
         res.onSuccess { movie ->
-            val state = MovieUIState.Success(listOf(movie))
+            val state = MovieUIState.Success(movie)
 
             _uiState.update {
                 it.copy(movieState = state)

@@ -8,8 +8,8 @@ import com.mordva.home.domain.GetMoviesByCompany
 import com.mordva.home.domain.GetMoviesByGenre
 import com.mordva.home.presentation.widget.UIState
 import com.mordva.home.utils.NavigationUtils
-import com.mordva.ui.uiState.CollectionUIState
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.CollectionListUIState
+import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,103 +26,103 @@ internal class HomeViewModel(
     val uiState = _uiState.asStateFlow()
 
     fun getMoviesDrama() = launchWithoutOld(GET_DRAMA_JOB) {
-        if (uiState.value.movieDramaState is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.movieDramaState is MovieListUIState.Success) return@launchWithoutOld
 
         val params = MovieParams(genre = NavigationUtils.DRAMA_GENRE)
         val res = getMoviesByGenre.execute(params)
 
         res.onSuccess { movies ->
             _uiState.update {
-                it.copy(movieDramaState = MovieUIState.Success(movies))
+                it.copy(movieDramaState = MovieListUIState.Success(movies))
             }
         }
     }
 
     fun getMoviesBoevik() = launchWithoutOld(GET_BOEVIK_JOB) {
-        if (uiState.value.movieBoevikState is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.movieBoevikState is MovieListUIState.Success) return@launchWithoutOld
 
         val params = MovieParams(genre = NavigationUtils.BOEVIK_GENRE)
         val res = getMoviesByGenre.execute(params)
 
         res.onSuccess { movies ->
             _uiState.update {
-                it.copy(movieBoevikState = MovieUIState.Success(movies))
+                it.copy(movieBoevikState = MovieListUIState.Success(movies))
             }
         }.onFailure { error ->
         }
     }
 
     fun getMoviesBest250() = launchWithoutOld(GET_BEST250_JOB) {
-        if (uiState.value.movieBest250State is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.movieBest250State is MovieListUIState.Success) return@launchWithoutOld
 
         val params = MovieParams(name = NavigationUtils.LIST250)
         val res = getMoviesByCollection.execute(params)
 
         res.onSuccess { movies ->
             _uiState.update {
-                it.copy(movieBest250State = MovieUIState.Success(movies))
+                it.copy(movieBest250State = MovieListUIState.Success(movies))
             }
         }
     }
 
     fun getMoviesBest501() = launchWithoutOld(GET_BEST501_JOB) {
-        if (uiState.value.movieBest501State is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.movieBest501State is MovieListUIState.Success) return@launchWithoutOld
 
         val params = MovieParams(name = NavigationUtils.LIST501)
         val res = getMoviesByCollection.execute(params)
 
         res.onSuccess { movies ->
             _uiState.update {
-                it.copy(movieBest501State = MovieUIState.Success(movies))
+                it.copy(movieBest501State = MovieListUIState.Success(movies))
             }
         }
     }
 
     fun getMoviesBest100() = launchWithoutOld(GET_BEST100_JOB) {
-        if (uiState.value.movieBest100State is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.movieBest100State is MovieListUIState.Success) return@launchWithoutOld
 
         val params = MovieParams(name = NavigationUtils.LIST_SCIFI)
         val res = getMoviesByCollection.execute(params)
 
         res.onSuccess { movies ->
             _uiState.update {
-                it.copy(movieBest100State = MovieUIState.Success(movies))
+                it.copy(movieBest100State = MovieListUIState.Success(movies))
             }
         }
     }
 
     fun getMoviesHBO() = launchWithoutOld(GET_HBO_JOB) {
-        if (uiState.value.movieHBOState is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.movieHBOState is MovieListUIState.Success) return@launchWithoutOld
 
         val params = MovieParams(name = NavigationUtils.HBO)
         val res = getMoviesByCompany.execute(params)
 
         res.onSuccess { movies ->
             _uiState.update {
-                it.copy(movieHBOState = MovieUIState.Success(movies))
+                it.copy(movieHBOState = MovieListUIState.Success(movies))
             }
         }
     }
 
     fun getMoviesNetflix() = launchWithoutOld(GET_NETFLIX_JOB) {
-        if (uiState.value.movieNetflixState is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.movieNetflixState is MovieListUIState.Success) return@launchWithoutOld
 
         val params = MovieParams(name = NavigationUtils.NETFLIX)
         val res = getMoviesByCompany.execute(params)
 
         res.onSuccess { movies ->
             _uiState.update {
-                it.copy(movieNetflixState = MovieUIState.Success(movies))
+                it.copy(movieNetflixState = MovieListUIState.Success(movies))
             }
         }
     }
 
     fun getCollections() = launchWithoutOld(GET_COLLECTIONS_JOB) {
-        if (uiState.value.collectionState is CollectionUIState.Success) return@launchWithoutOld
+        if (uiState.value.collectionState is CollectionListUIState.Success) return@launchWithoutOld
 
         getCollectionAll.execute(1).onSuccess { collections ->
             _uiState.update {
-                it.copy(collectionState = CollectionUIState.Success(collections))
+                it.copy(collectionState = CollectionListUIState.Success(collections))
             }
         }
     }

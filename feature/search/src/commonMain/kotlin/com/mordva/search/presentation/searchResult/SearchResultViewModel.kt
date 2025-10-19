@@ -3,7 +3,7 @@ package com.mordva.search.presentation.searchResult
 import androidx.lifecycle.ViewModel
 import com.mordva.domain.usecase.movie.GetMovieByFilter
 import com.mordva.search.presentation.searchResult.widget.ResultUiState
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.util.Constants
 import com.mordva.util.launchWithoutOld
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,13 +17,13 @@ internal class SearchResultViewModel(
     val state = _state.asStateFlow()
 
     fun getMovies(queryParameters: List<Pair<String, String>>) = launchWithoutOld(GET_MOVIES_JOB) {
-        if (state.value.movieState is MovieUIState.Success) return@launchWithoutOld
+        if (state.value.movieState is MovieListUIState.Success) return@launchWithoutOld
 
         val res = getMovieByFilter.execute(queryParameters)
 
         res.onSuccess { movies ->
             _state.update {
-                it.copy(movieState = MovieUIState.Success(movies))
+                it.copy(movieState = MovieListUIState.Success(movies))
             }
         }
     }
@@ -42,11 +42,11 @@ internal class SearchResultViewModel(
         val res = getMovieByFilter.execute(newQuery)
 
         res.onSuccess { movies ->
-            val newList = (state.value.movieState as MovieUIState.Success).data.toMutableList()
+            val newList = (state.value.movieState as MovieListUIState.Success).data.toMutableList()
             newList.addAll(movies)
 
             _state.update {
-                it.copy(movieState = MovieUIState.Success(newList))
+                it.copy(movieState = MovieListUIState.Success(newList))
             }
         }
     }

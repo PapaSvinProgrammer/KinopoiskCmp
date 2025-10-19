@@ -15,14 +15,14 @@ import androidx.compose.ui.unit.dp
 import com.mordva.model.History
 import com.mordva.model.SearchItem
 import com.mordva.ui.theme.Resources
-import com.mordva.ui.uiState.SearchUIState
+import com.mordva.ui.uiState.SearchListUIState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SearchBarContent(
     query: String,
     searchHistoryList: List<History>,
-    movieSearchState: SearchUIState,
+    movieSearchState: SearchListUIState,
     selectedItem: Int,
     onSelectItem: (Int) -> Unit,
     onDeleteHistoryItem: (Int) -> Unit,
@@ -75,14 +75,14 @@ fun SearchBarContent(
 
 @Composable
 private fun RenderSearchResult(
-    state: SearchUIState,
+    state: SearchListUIState,
     onClick: (SearchItem) -> Unit,
     onLoadMore: () -> Unit,
 ) {
     when (state) {
-        SearchUIState.Error -> ErrorSearchContent()
-        SearchUIState.Loading -> LoadingSearchContent()
-        is SearchUIState.Success -> {
+        SearchListUIState.Error -> ErrorSearchContent()
+        SearchListUIState.Loading -> LoadingSearchContent()
+        is SearchListUIState.Success -> {
             SearchContent(
                 list = state.data,
                 onClick = onClick,

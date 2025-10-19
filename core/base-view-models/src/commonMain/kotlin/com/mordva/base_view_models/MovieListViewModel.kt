@@ -2,7 +2,7 @@ package com.mordva.base_view_models
 
 import androidx.lifecycle.ViewModel
 import com.mordva.domain.usecase.movie.GetMovieByFilter
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.util.Constants
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
@@ -14,16 +14,16 @@ class MovieListViewModel(
 ) : ViewModel() {
     private var page = 1
 
-    private val _movieUIState = MutableStateFlow(MovieUIState.Loading as MovieUIState)
-    val moviesState: StateFlow<MovieUIState> = _movieUIState
+    private val _movieListUIState = MutableStateFlow(MovieListUIState.Loading as MovieListUIState)
+    val moviesState: StateFlow<MovieListUIState> = _movieListUIState
 
     fun getMovies(queryParameters: List<Pair<String, String>>) = launchWithoutOld(GET_MOVIES_JOB) {
-        if (moviesState.value is MovieUIState.Success) return@launchWithoutOld
+        if (moviesState.value is MovieListUIState.Success) return@launchWithoutOld
 
         val res = getMovieByFilter.execute(queryParameters)
 
         res.onSuccess {
-            _movieUIState.value = MovieUIState.Success(it)
+            _movieListUIState.value = MovieListUIState.Success(it)
         }
     }
 
@@ -38,11 +38,11 @@ class MovieListViewModel(
         val res = getMovieByFilter.execute(query)
 
         res.onSuccess {
-            val temp = (moviesState.value as MovieUIState.Success)
+            val temp = (moviesState.value as MovieListUIState.Success)
                 .data
                 .toMutableList()
             temp.addAll(it)
-            _movieUIState.value = MovieUIState.Success(temp)
+            _movieListUIState.value = MovieListUIState.Success(temp)
         }
     }
 

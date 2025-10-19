@@ -1,15 +1,15 @@
 package com.mordva.home.presentation.widget
 
-import com.mordva.ui.uiState.CollectionUIState
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.CollectionListUIState
+import com.mordva.ui.uiState.MovieListUIState
 
 internal data class UIState(
-    val movieDramaState: MovieUIState = MovieUIState.Loading,
-    val movieBoevikState: MovieUIState = MovieUIState.Loading,
-    val movieBest250State: MovieUIState = MovieUIState.Loading,
-    val movieBest501State: MovieUIState = MovieUIState.Loading,
-    val movieBest100State: MovieUIState = MovieUIState.Loading,
-    val movieHBOState: MovieUIState = MovieUIState.Loading,
-    val movieNetflixState: MovieUIState = MovieUIState.Loading,
-    val collectionState: CollectionUIState = CollectionUIState.Loading,
+    val movieDramaState: MovieListUIState = MovieListUIState.Loading,
+    val movieBoevikState: MovieListUIState = MovieListUIState.Loading,
+    val movieBest250State: MovieListUIState = MovieListUIState.Loading,
+    val movieBest501State: MovieListUIState = MovieListUIState.Loading,
+    val movieBest100State: MovieListUIState = MovieListUIState.Loading,
+    val movieHBOState: MovieListUIState = MovieListUIState.Loading,
+    val movieNetflixState: MovieListUIState = MovieListUIState.Loading,
+    val collectionState: CollectionListUIState = CollectionListUIState.Loading,
 )

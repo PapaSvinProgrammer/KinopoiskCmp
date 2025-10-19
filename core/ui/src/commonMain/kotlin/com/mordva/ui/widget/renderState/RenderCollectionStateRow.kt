@@ -3,7 +3,7 @@ package com.mordva.ui.widget.renderState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.mordva.model.image.CollectionMovie
-import com.mordva.ui.uiState.CollectionUIState
+import com.mordva.ui.uiState.CollectionListUIState
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.CollectionCard
@@ -12,13 +12,13 @@ import com.mordva.ui.widget.shimmer.ShimmerCollectionRow
 
 @Composable
 fun RenderCollectionStateRow(
-    state: CollectionUIState,
+    state: CollectionListUIState,
     title: String,
     onClick: (CollectionMovie) -> Unit,
     onShowAll: () -> Unit
 ) {
     when (state) {
-        is CollectionUIState.Success -> {
+        is CollectionListUIState.Success -> {
             MainCollectionRow(
                 collectionMovies = state.data,
                 title = title,

@@ -8,9 +8,9 @@ import com.mordva.domain.usecase.person.GetPersonById
 import com.mordva.model.movie.ShortMovie
 import com.mordva.person.domain.GroupShortMovie
 import com.mordva.person.presentation.widget.UiState
-import com.mordva.ui.uiState.FactUIState
-import com.mordva.ui.uiState.MovieUIState
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.FactListUIState
+import com.mordva.ui.uiState.MovieListUIState
+import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.util.Constants
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
@@ -43,17 +43,17 @@ internal class PersonViewModel(
     }
 
     fun getPerson(id: Int) = launchWithoutOld(GET_PERSON_JOB) {
-        if (uiState.value.personState is PersonUIState.Success) return@launchWithoutOld
+        if (uiState.value.personState is PersonListUIState.Success) return@launchWithoutOld
 
         val res = getPersonById.execute(id)
 
         res.onSuccess { person ->
             _uiState.update {
-                it.copy(personState = PersonUIState.Success(listOf(person)))
+                it.copy(personState = PersonListUIState.Success(listOf(person)))
             }
 
             _uiState.update {
-                it.copy(factState = FactUIState.Success(person.facts))
+                it.copy(factState = FactListUIState.Success(person.facts))
             }
 
             getGroups(person.movies)
@@ -61,7 +61,7 @@ internal class PersonViewModel(
     }
 
     fun getMovies(personId: Int) = launchWithoutOld(GET_MOVIES_JOB) {
-        if (uiState.value.moviesState is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.moviesState is MovieListUIState.Success) return@launchWithoutOld
 
         val query = listOf(
             Constants.SORT_FIELD to Constants.RATING_KP_FIELD,
@@ -74,7 +74,7 @@ internal class PersonViewModel(
         res.onSuccess { movies ->
 
             _uiState.update {
-                it.copy(moviesState = MovieUIState.Success(movies))
+                it.copy(moviesState = MovieListUIState.Success(movies))
             }
         }
     }
@@ -94,7 +94,7 @@ internal class PersonViewModel(
     }
 
     fun getSpouses(list: List<Int>) = launchWithoutOld(GET_SPOUSES) {
-        if (uiState.value.personSpouseState is PersonUIState.Success) return@launchWithoutOld
+        if (uiState.value.personSpouseState is PersonListUIState.Success) return@launchWithoutOld
 
         val temp = multiRequest(list.map { it.toString() }) {
             getPersonById.execute(it.toInt())
@@ -102,7 +102,7 @@ internal class PersonViewModel(
 
         if (temp.isNotEmpty()) {
             _uiState.update {
-                it.copy(personSpouseState = PersonUIState.Success(temp))
+                it.copy(personSpouseState = PersonListUIState.Success(temp))
             }
         }
     }

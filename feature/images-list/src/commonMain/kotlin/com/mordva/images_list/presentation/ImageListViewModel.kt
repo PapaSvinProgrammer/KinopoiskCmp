@@ -6,7 +6,7 @@ import com.mordva.images_list.domain.model.ImagesParams
 import com.mordva.images_list.presentation.widget.UIState
 import com.mordva.images_list.util.getData
 import com.mordva.model.image.ImageType
-import com.mordva.ui.uiState.ImageUIState
+import com.mordva.ui.uiState.ImageListUIState
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -53,7 +53,7 @@ internal class ImageListViewModel(
 
         getMovieImages.execute(params).onSuccess { imageList ->
             _state.update {
-                it.copy(imagesState = ImageUIState.Success(imageList))
+                it.copy(imagesState = ImageListUIState.Success(imageList))
             }
         }
     }
@@ -72,7 +72,7 @@ internal class ImageListViewModel(
             new.addAll(imageList)
 
             _state.update {
-                it.copy(imagesState = ImageUIState.Success(new))
+                it.copy(imagesState = ImageListUIState.Success(new))
             }
         }
     }

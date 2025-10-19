@@ -19,7 +19,7 @@ import com.mordva.base_view_models.MovieListViewModel
 import com.mordva.model.movie.Movie
 import com.mordva.navigation.MovieGraph
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.lazyComponent.EndlessLazyVerticalGrid
 import com.mordva.ui.widget.listItems.MovieFillCard
@@ -67,14 +67,14 @@ internal fun HomeDetailListScreen(
 
 @Composable
 private fun RenderMovieState(
-    state: MovieUIState,
+    state: MovieListUIState,
     modifier: Modifier,
     onLoadMore: () -> Unit,
     onClick: (Movie) -> Unit
 ) {
     when (state) {
-        MovieUIState.Loading -> BasicLoadingBox()
-        is MovieUIState.Success -> MainMovieContent(
+        MovieListUIState.Loading -> BasicLoadingBox()
+        is MovieListUIState.Success -> MainMovieContent(
             list = state.data,
             modifier = modifier,
             onLoadMore = onLoadMore,

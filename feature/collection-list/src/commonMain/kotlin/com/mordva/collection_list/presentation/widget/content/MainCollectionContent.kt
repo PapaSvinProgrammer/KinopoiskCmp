@@ -6,14 +6,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.mordva.navigation.MovieListGraph
-import com.mordva.ui.uiState.CollectionUIState
+import com.mordva.ui.uiState.CollectionListUIState
 import com.mordva.util.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainCollectionContent(
     modifier: Modifier = Modifier,
-    collectionState: CollectionUIState,
+    collectionState: CollectionListUIState,
     navController: NavController,
     onLoadMore: () -> Unit = {}
 ) {

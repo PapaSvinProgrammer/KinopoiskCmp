@@ -6,22 +6,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mordva.model.movie.Movie
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.ui.widget.lazyComponent.EndlessLazyColumn
 import com.mordva.ui.widget.listItems.MovieListCard
 import com.mordva.ui.widget.shimmer.ShimmerMovieDetailList
 
 @Composable
 internal fun RenderResult(
-    state: MovieUIState,
+    state: MovieListUIState,
     modifier: Modifier,
     onClick: (Movie) -> Unit,
     onSettingsClick: (Movie) -> Unit,
     onLoadMore: () -> Unit
 ) {
     when (state) {
-        MovieUIState.Loading -> ShimmerMovieDetailList(modifier)
-        is MovieUIState.Success -> {
+        MovieListUIState.Loading -> ShimmerMovieDetailList(modifier)
+        is MovieListUIState.Success -> {
             MainPersonContent(
                 modifier = modifier,
                 list = state.data,

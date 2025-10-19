@@ -5,12 +5,12 @@ import androidx.navigation.NavController
 import com.mordva.navigation.CollectionListGraph
 import com.mordva.search.presentation.searchScreen.util.navigateToMovieList
 import com.mordva.ui.theme.Resources
-import com.mordva.ui.uiState.CollectionUIState
+import com.mordva.ui.uiState.CollectionListUIState
 import com.mordva.ui.widget.renderState.RenderCollectionStateRow
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.collectionsItemContent(
-    state: CollectionUIState,
+    state: CollectionListUIState,
     navController: NavController,
     get: () -> Unit
 ) {

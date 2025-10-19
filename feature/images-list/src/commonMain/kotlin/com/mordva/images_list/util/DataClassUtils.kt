@@ -1,10 +1,10 @@
 package com.mordva.images_list.util
 
 import com.mordva.model.image.Poster
-import com.mordva.ui.uiState.ImageUIState
+import com.mordva.ui.uiState.ImageListUIState
 
-internal fun ImageUIState.getData(): List<Poster> {
-    return (this as? ImageUIState.Success)?.data ?: listOf()
+internal fun ImageListUIState.getData(): List<Poster> {
+    return (this as? ImageListUIState.Success)?.data ?: listOf()
 }
 
 internal fun isLongImage(height: Int?, width: Int?): Boolean {

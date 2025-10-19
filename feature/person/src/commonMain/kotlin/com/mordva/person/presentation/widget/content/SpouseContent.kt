@@ -14,13 +14,13 @@ import androidx.compose.ui.unit.sp
 import com.mordva.model.person.Spouse
 import com.mordva.person.presentation.widget.listItem.SpouseCard
 import com.mordva.ui.theme.Resources
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.PersonListUIState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun SpouseContent(
     spouses: List<Spouse>,
-    state: PersonUIState,
+    state: PersonListUIState,
     onClick: (Int) -> Unit
 ) {
     Row(
@@ -38,7 +38,7 @@ internal fun SpouseContent(
                 .weight(1f)
         )
 
-        (state as? PersonUIState.Success)?.let {
+        (state as? PersonListUIState.Success)?.let {
             if (it.data.isEmpty()) {
                 Text(
                     text = "-",

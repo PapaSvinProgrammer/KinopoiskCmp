@@ -6,7 +6,6 @@ import com.mordva.model.image.Poster
 import com.mordva.model.local.RatedMovie
 import com.mordva.model.movie.Comment
 import com.mordva.model.person.PersonMovie
-import com.mordva.ui.uiState.MovieUIState
 import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
 
 internal data class UIState(
@@ -26,7 +25,6 @@ internal data class UIState(
     val packageSheetVisible: Boolean = false,
     val currentMovieRating: Int = -1,
     val selectedFact: String = "",
-    val isCollapsed: Boolean = false,
     val isWillWatch: Boolean = false,
     val isViewed: Boolean = false,
     val isBlocked: Boolean = false,

@@ -19,7 +19,7 @@ import com.mordva.navigation.PersonGraph
 import com.mordva.person.presentation.widget.content.SpouseContent
 import com.mordva.person.presentation.widget.render.RenderPersonDetailState
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.ui.widget.other.TitleTopBarText
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +36,7 @@ internal fun PersonDetailScreen(
     }
 
     LaunchedEffect(uiState.personState) {
-        (uiState.personState as? PersonUIState.Success)?.data?.let { persons ->
+        (uiState.personState as? PersonListUIState.Success)?.data?.let { persons ->
             viewModel.getSpouses(persons.first().spouses.map { it.id })
         }
     }
@@ -46,7 +46,7 @@ internal fun PersonDetailScreen(
             CenterAlignedTopAppBar(
                 title = {
                     TitleTopBarText(
-                        text = (uiState.personState as? PersonUIState.Success)
+                        text = (uiState.personState as? PersonListUIState.Success)
                             ?.data
                             ?.first()
                             ?.name ?: ""
@@ -66,7 +66,7 @@ internal fun PersonDetailScreen(
         Column(modifier = Modifier.padding(innerPadding)) {
             RenderPersonDetailState(uiState.personState)
 
-            (uiState.personState as? PersonUIState.Success)?.data?.let { data ->
+            (uiState.personState as? PersonListUIState.Success)?.data?.let { data ->
                 if (data.first().spouses.isEmpty()) return@Scaffold
 
                 SpouseContent(

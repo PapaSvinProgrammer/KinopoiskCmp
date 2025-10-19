@@ -39,7 +39,7 @@ import com.mordva.navigation.MovieListGraph
 import com.mordva.person.presentation.navigation.PersonDetailRoute
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.ui.widget.bottomSheets.FactSheet
 import com.mordva.ui.widget.listItems.ShortMovieListItem
 import com.mordva.ui.widget.other.TitleTopBarText
@@ -73,7 +73,7 @@ internal fun PersonScreen(
     LaunchedEffect(index, firstOffset) {
         if (index == 0) {
             if (firstOffset > 150) {
-                topBarTitle = (uiState.personState as? PersonUIState.Success)
+                topBarTitle = (uiState.personState as? PersonListUIState.Success)
                     ?.data
                     ?.first()
                     ?.name ?: ""
@@ -154,7 +154,7 @@ internal fun PersonScreen(
                             MovieListGraph.MovieListRoute(
                                 queryParameters = query,
                                 title = "Фильмы: ${
-                                    (uiState.personState as PersonUIState.Success)
+                                    (uiState.personState as PersonListUIState.Success)
                                         .data
                                         .first()
                                         .name
@@ -227,12 +227,12 @@ internal fun PersonScreen(
 
 @Composable
 private fun RenderPersonContent(
-    state: PersonUIState,
+    state: PersonListUIState,
     onClickDetail: () -> Unit
 ) {
     when (state) {
-        PersonUIState.Loading -> ShimmerPersonContent()
-        is PersonUIState.Success -> {
+        PersonListUIState.Loading -> ShimmerPersonContent()
+        is PersonListUIState.Success -> {
             MainPersonContent(
                 person = state.data.first(),
                 onClickDetail = onClickDetail

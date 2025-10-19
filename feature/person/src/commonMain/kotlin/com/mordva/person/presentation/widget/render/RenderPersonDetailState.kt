@@ -5,16 +5,16 @@ import com.mordva.person.presentation.widget.content.BirthdayDeathContent
 import com.mordva.person.presentation.widget.listItem.DetailInfoListItem
 import com.mordva.model.person.Person
 import com.mordva.ui.theme.Resources
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.ui.util.PrettyData
 import com.mordva.ui.widget.shimmer.ShimmerPersonDetail
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-internal fun RenderPersonDetailState(state: PersonUIState) {
+internal fun RenderPersonDetailState(state: PersonListUIState) {
     when (state) {
-        PersonUIState.Loading -> ShimmerPersonDetail()
-        is PersonUIState.Success -> {
+        PersonListUIState.Loading -> ShimmerPersonDetail()
+        is PersonListUIState.Success -> {
             MainPersonDetailContent(person = state.data.first())
         }
     }

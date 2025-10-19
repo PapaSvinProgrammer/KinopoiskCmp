@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mordva.model.person.Person
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.ui.widget.lazyComponent.EndlessLazyColumn
 import com.mordva.ui.widget.listItems.PersonListItem
 import com.mordva.ui.widget.shimmer.ShimmerMovieDetailList
@@ -20,13 +20,13 @@ import com.mordva.ui.widget.shimmer.ShimmerMovieDetailList
 @Composable
 internal fun RenderPersonResult(
     modifier: Modifier,
-    state: PersonUIState,
+    state: PersonListUIState,
     onLoadMore: () -> Unit,
     onClick: (Person) -> Unit
 ) {
     when (state) {
-        PersonUIState.Loading -> ShimmerMovieDetailList(modifier)
-        is PersonUIState.Success -> {
+        PersonListUIState.Loading -> ShimmerMovieDetailList(modifier)
+        is PersonListUIState.Success -> {
             MainPersonContent(
                 modifier = modifier,
                 list = state.data,

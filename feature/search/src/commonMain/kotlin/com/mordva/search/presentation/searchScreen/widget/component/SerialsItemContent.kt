@@ -9,13 +9,13 @@ import androidx.navigation.NavController
 import com.mordva.navigation.MovieGraph
 import com.mordva.navigation.MovieListGraph
 import com.mordva.ui.theme.Resources
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.ui.widget.renderState.RenderMovieStateRow
 import com.mordva.util.Constants
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.serialsItemContent(
-    state: MovieUIState,
+    state: MovieListUIState,
     navController: NavController,
     get: () -> Unit
 ) {

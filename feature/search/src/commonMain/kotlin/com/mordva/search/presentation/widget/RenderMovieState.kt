@@ -9,17 +9,17 @@ import com.mordva.ui.widget.lazyComponent.EndlessLazyColumn
 import com.mordva.ui.widget.listItems.MovieDetailCard
 import com.mordva.ui.widget.shimmer.ShimmerMovieDetailList
 import com.mordva.model.movie.Movie
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.MovieListUIState
 
 @Composable
 internal fun RenderMovieState(
     modifier: Modifier,
-    state: MovieUIState,
+    state: MovieListUIState,
     onClick: (Movie) -> Unit,
     loadMore: () -> Unit
 ) {
     when (state) {
-        is MovieUIState.Success -> {
+        is MovieListUIState.Success -> {
             MainPersonContent(
                 modifier = modifier,
                 movies = state.data,

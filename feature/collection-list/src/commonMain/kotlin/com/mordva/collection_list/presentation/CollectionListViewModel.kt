@@ -7,7 +7,7 @@ import com.mordva.domain.usecase.collection.GetCollectionAll
 import com.mordva.domain.usecase.collection.GetCollectionByCategory
 import com.mordva.domain.usecase.collection.GetCollectionBySlug
 import com.mordva.domain.usecase.collection.model.CollectionParams
-import com.mordva.ui.uiState.CollectionUIState
+import com.mordva.ui.uiState.CollectionListUIState
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import com.mordva.util.multiRequest
@@ -28,7 +28,7 @@ internal class CollectionListViewModel(
 
         getCollectionAll.execute(page).onSuccess { collections ->
             _state.update {
-                it.copy(collectionState = CollectionUIState.Success(collections))
+                it.copy(collectionState = CollectionListUIState.Success(collections))
             }
         }
     }
@@ -42,7 +42,7 @@ internal class CollectionListViewModel(
             temp.addAll(collections)
 
             _state.update {
-                it.copy(collectionState = CollectionUIState.Success(temp))
+                it.copy(collectionState = CollectionListUIState.Success(temp))
             }
         }
     }
@@ -54,7 +54,7 @@ internal class CollectionListViewModel(
 
         getCollectionByCategory.execute(params).onSuccess { collections ->
             _state.update {
-                it.copy(collectionState = CollectionUIState.Success(collections))
+                it.copy(collectionState = CollectionListUIState.Success(collections))
             }
         }
     }
@@ -72,7 +72,7 @@ internal class CollectionListViewModel(
             temp.addAll(collections)
 
             _state.update {
-                it.copy(collectionState = CollectionUIState.Success(temp))
+                it.copy(collectionState = CollectionListUIState.Success(temp))
             }
         }
     }
@@ -83,7 +83,7 @@ internal class CollectionListViewModel(
         }
 
         _state.update {
-            it.copy(collectionState = CollectionUIState.Success(temp))
+            it.copy(collectionState = CollectionListUIState.Success(temp))
         }
     }
 

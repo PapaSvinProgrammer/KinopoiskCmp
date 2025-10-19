@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.mordva.model.image.Poster
 import com.mordva.ui.theme.Resources
-import com.mordva.ui.uiState.ImageUIState
+import com.mordva.ui.uiState.ImageListUIState
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.LastItemCard
@@ -21,14 +21,14 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun RenderImagesStateRow(
-    state: ImageUIState,
+    state: ImageListUIState,
     title: String,
     onClick: (Poster) -> Unit,
     onShowAll: () -> Unit
 ) {
     when (state) {
-        ImageUIState.Loading -> ShimmerMovieRow()
-        is ImageUIState.Success -> {
+        ImageListUIState.Loading -> ShimmerMovieRow()
+        is ImageListUIState.Success -> {
             MainImageContent(
                 title = title,
                 list = state.data,

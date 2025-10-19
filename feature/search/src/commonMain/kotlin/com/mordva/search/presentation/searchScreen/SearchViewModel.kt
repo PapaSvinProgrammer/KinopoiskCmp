@@ -10,12 +10,11 @@ import com.mordva.model.SearchItem
 import com.mordva.search.domain.LoadMoreByName
 import com.mordva.search.domain.SearchByName
 import com.mordva.search.domain.model.RequestParams
-import com.mordva.search.presentation.searchScreen.util.toHistory
 import com.mordva.search.presentation.searchScreen.widget.UiState
-import com.mordva.ui.uiState.CollectionUIState
-import com.mordva.ui.uiState.MovieUIState
-import com.mordva.ui.uiState.PersonUIState
-import com.mordva.ui.uiState.SearchUIState
+import com.mordva.ui.uiState.CollectionListUIState
+import com.mordva.ui.uiState.MovieListUIState
+import com.mordva.ui.uiState.PersonListUIState
+import com.mordva.ui.uiState.SearchListUIState
 import com.mordva.util.Constants
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
@@ -51,7 +50,7 @@ internal class SearchViewModel(
     }
 
     fun getCollections() = launchWithoutOld(GET_COLLECTIONS_JOB) {
-        if (uiState.value.collectionsState is CollectionUIState.Success) return@launchWithoutOld
+        if (uiState.value.collectionsState is CollectionListUIState.Success) return@launchWithoutOld
 
         val params = CollectionParams(category = "Фильмы")
 
@@ -59,13 +58,13 @@ internal class SearchViewModel(
 
         res.onSuccess { collections ->
             _uiState.update {
-                it.copy(collectionsState = CollectionUIState.Success(collections))
+                it.copy(collectionsState = CollectionListUIState.Success(collections))
             }
         }
     }
 
     fun getActorByPopularityMovies() = launchWithoutOld(GET_ACTORS_JOB) {
-        if (uiState.value.personState is PersonUIState.Success) return@launchWithoutOld
+        if (uiState.value.personState is PersonListUIState.Success) return@launchWithoutOld
 
         val queryParameters = listOf(
             Constants.SORT_FIELD to Constants.MOVIES_RATING_FIELD,
@@ -76,13 +75,13 @@ internal class SearchViewModel(
 
         res.onSuccess { actors ->
             _uiState.update {
-                it.copy(personState = PersonUIState.Success(actors))
+                it.copy(personState = PersonListUIState.Success(actors))
             }
         }
     }
 
     fun getTopSerials() = launchWithoutOld(GET_SERIALS_JOB) {
-        if (uiState.value.topSerialsState is MovieUIState.Success) return@launchWithoutOld
+        if (uiState.value.topSerialsState is MovieListUIState.Success) return@launchWithoutOld
 
         val queryParameters = listOf(
             Constants.IS_SERIES_FIELD to Constants.TRUE,
@@ -94,7 +93,7 @@ internal class SearchViewModel(
 
         res.onSuccess { serials ->
             _uiState.update {
-                it.copy(topSerialsState = MovieUIState.Success(serials))
+                it.copy(topSerialsState = MovieListUIState.Success(serials))
             }
         }
     }
@@ -102,7 +101,7 @@ internal class SearchViewModel(
     fun search() = launchWithoutOld(SEARCH_JOB) {
         _uiState.update {
             it.copy(
-                searchState = SearchUIState.Loading,
+                searchState = SearchListUIState.Loading,
                 page = 1
             )
         }
@@ -115,7 +114,7 @@ internal class SearchViewModel(
 
         searchByName.execute(params).onSuccess { items ->
             _uiState.update {
-                it.copy(searchState = SearchUIState.Success(items))
+                it.copy(searchState = SearchListUIState.Success(items))
             }
         }
     }
@@ -130,21 +129,21 @@ internal class SearchViewModel(
         )
 
         loadMoreByName.execute(params).onSuccess { items ->
-            val temp = (uiState.value.searchState as SearchUIState.Success)
+            val temp = (uiState.value.searchState as SearchListUIState.Success)
                 .data
                 .toMutableList()
 
             temp.addAll(items)
 
             _uiState.update {
-                it.copy(searchState = SearchUIState.Success(temp))
+                it.copy(searchState = SearchListUIState.Success(temp))
             }
         }
     }
 
     fun clearSearchResult() {
         _uiState.update {
-            it.copy(searchState = SearchUIState.Error)
+            it.copy(searchState = SearchListUIState.Error)
         }
     }
 
