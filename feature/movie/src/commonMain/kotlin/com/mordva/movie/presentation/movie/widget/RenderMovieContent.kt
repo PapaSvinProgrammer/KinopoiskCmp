@@ -82,7 +82,7 @@ internal fun RenderMovieContent(
                 )
 
                 LazyColumn(state = scrollState) {
-                    item {
+                    item(key = 1) {
                         ExpandedContent(
                             movie = state.data,
                             isCustomRating = uiState.isRatedMovieState?.rating,

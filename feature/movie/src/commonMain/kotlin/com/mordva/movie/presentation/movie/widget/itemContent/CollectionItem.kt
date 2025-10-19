@@ -23,7 +23,7 @@ internal fun LazyListScope.collectionsItem(
 ) {
     if (data.isEmpty()) return
 
-    item {
+    item(key = 12) {
         Spacer(modifier = Modifier.height(30.dp))
 
         TitleRow(

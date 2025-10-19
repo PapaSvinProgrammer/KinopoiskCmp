@@ -7,7 +7,7 @@ import com.mordva.movie.presentation.movie.widget.component.SeasonDescription
 import com.mordva.model.movie.Movie
 
 internal fun LazyListScope.seasonDescriptionItem(movie: Movie) {
-    item {
+    item(key = 3) {
         if (movie.isSeries == false) return@item
 
         movie.seasonsInfo?.let { seasonsInfo ->

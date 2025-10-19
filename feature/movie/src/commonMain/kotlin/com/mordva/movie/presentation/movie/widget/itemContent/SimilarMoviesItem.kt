@@ -19,7 +19,7 @@ internal fun LazyListScope.similarMoviesItem(
     similarMovies: List<Movie>,
     onClick: (Movie) -> Unit,
 ) {
-    item {
+    item(key = 16) {
         if (similarMovies.isEmpty()) return@item
 
         Spacer(modifier = Modifier.height(20.dp))

@@ -24,7 +24,7 @@ internal fun LazyListScope.imagesItem(
 ) {
     if (images.isEmpty()) return
 
-    item {
+    item(key = 11) {
         TitleRow(title = stringResource(Resources.Strings.Images)) {
             onShowAll()
         }

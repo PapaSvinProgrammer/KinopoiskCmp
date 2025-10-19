@@ -12,7 +12,7 @@ internal fun LazyListScope.watchabilityItem(
 ) {
     if (items.isEmpty()) return
 
-    item {
+    item(key = 4) {
         WatchabilityDescription(
             modifier = Modifier.clickable(onClick = onWatchabilityClick),
             count = items.size

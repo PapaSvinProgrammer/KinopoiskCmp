@@ -19,7 +19,7 @@ internal fun LazyListScope.ratingCardLargeItem(
     movie: Movie,
     onClick: () -> Unit,
 ) {
-    item {
+    item(key = 5) {
         RatingCardLarge(
             modifier = Modifier.padding(horizontal = 15.dp),
             title = stringResource(Resources.Strings.RatingKinopoisk),
@@ -29,7 +29,7 @@ internal fun LazyListScope.ratingCardLargeItem(
         )
     }
 
-    item {
+    item(key = 6) {
         movie.rating?.let {
             RatingMovieContentRow(
                 contentPadding = PaddingValues(horizontal = 15.dp, vertical = 10.dp),

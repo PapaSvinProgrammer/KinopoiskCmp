@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 internal fun LazyListScope.factsItem(facts: List<Fact>) {
     if (facts.isEmpty()) return
 
-    item {
+    item(key = 13) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(

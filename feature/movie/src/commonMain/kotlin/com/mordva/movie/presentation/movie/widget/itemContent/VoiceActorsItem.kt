@@ -20,7 +20,7 @@ internal fun LazyListScope.voiceActorsItem(
 ) {
     if (voiceActors.isEmpty()) return
 
-    item {
+    item(key = 9) {
         TitleRow(
             title = stringResource(Resources.Strings.VoiceActors),
             onClick = onShowAllPersons

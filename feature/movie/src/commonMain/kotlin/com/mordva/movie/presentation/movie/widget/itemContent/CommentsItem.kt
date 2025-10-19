@@ -15,7 +15,7 @@ import org.jetbrains.compose.resources.stringResource
 internal fun LazyListScope.commentsItem(comments: List<Comment>) {
     if (comments.isEmpty()) return
 
-    item {
+    item(key = 10) {
         TitleRow(title = stringResource(Resources.Strings.Review)) {}
 
         DefaultLazyRow(

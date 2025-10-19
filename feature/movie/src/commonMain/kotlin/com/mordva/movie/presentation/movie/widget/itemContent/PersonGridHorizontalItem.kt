@@ -17,7 +17,7 @@ internal fun LazyListScope.personGridHorizontalItem(
 ) {
     if (actors.isEmpty()) return
 
-    item {
+    item(key = 7) {
         TitleRow(
             title = stringResource(Resources.Strings.Actors),
             onClick = onClick

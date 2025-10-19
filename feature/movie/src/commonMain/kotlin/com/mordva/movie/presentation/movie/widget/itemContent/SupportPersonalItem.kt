@@ -17,7 +17,7 @@ internal fun LazyListScope.supportPersonalItem(
 ) {
     if (supportPersonal.isEmpty()) return
 
-    item {
+    item(key = 8) {
         TitleRow(
             title = stringResource(Resources.Strings.SupportPersonal),
             onClick = onShowAllPersons

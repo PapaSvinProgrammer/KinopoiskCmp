@@ -19,7 +19,7 @@ internal fun LazyListScope.premierItem(premiere: Premiere?) {
         return
     }
 
-    item {
+    item(key = 14) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(

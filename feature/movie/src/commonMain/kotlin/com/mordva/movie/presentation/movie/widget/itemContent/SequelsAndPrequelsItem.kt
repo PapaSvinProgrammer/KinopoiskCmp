@@ -19,7 +19,7 @@ internal fun LazyListScope.sequelsAndPrequelsItem(
     list: List<Movie>,
     onClick: (Movie) -> Unit,
 ) {
-    item {
+    item(key = 15) {
         if (list.isEmpty()) return@item
 
         Spacer(modifier = Modifier.height(20.dp))

@@ -12,6 +12,7 @@ import com.mordva.navigation.CustomNavType
 import com.mordva.navigation.FeatureApi
 import com.mordva.navigation.MovieGraph
 import com.mordva.navigation.MovieListGraph
+import com.mordva.navigation.MovieScreenType
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.reflect.typeOf
@@ -27,7 +28,8 @@ class MovieListFeatureImpl : FeatureApi {
         ) {
             composable<MovieListGraph.MovieListRoute>(
                 typeMap = mapOf(
-                    typeOf<ArrayList<Pair<String, String>>>() to CustomNavType.ListTypePair
+                    typeOf<ArrayList<Pair<String, String>>>() to CustomNavType.ListTypePair,
+                    typeOf<MovieScreenType>() to CustomNavType.MovieScreenType,
                 )
             ) {
                 val route = it.toRoute<MovieListGraph.MovieListRoute>()
