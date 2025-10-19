@@ -1,10 +1,10 @@
 package com.mordva.home.utils
 
 import androidx.navigation.NavController
-import com.mordva.home.presentation.navigation.HomeDetailListRoute
 import com.mordva.util.Constants
 import com.mordva.model.image.CollectionMovie
 import com.mordva.navigation.MovieListGraph
+import com.mordva.navigation.MovieScreenType
 
 internal object NavigationUtils {
     const val DRAMA_GENRE = "драма"
@@ -40,39 +40,42 @@ internal object NavigationUtils {
         )
 
         navigate(
-            HomeDetailListRoute(
+            MovieListGraph.MovieListRoute(
                 title = title,
-                queryParameters = query
+                queryParameters = query,
+                screenType = MovieScreenType.LARGE,
             )
         ) { launchSingleTop = true }
     }
 
     fun NavController.navigateToHomeDetailByLists(title: String, slug: String) {
-        val queryParameters = listOf(
+        val query = listOf(
             Constants.SORT_FIELD to Constants.RATING_KP_FIELD,
             Constants.SORT_TYPE to Constants.SORT_DESC,
             Constants.LISTS_FIELD to slug
         )
 
         navigate(
-            HomeDetailListRoute(
+            MovieListGraph.MovieListRoute(
                 title = title,
-                queryParameters = queryParameters
+                queryParameters = query,
+                screenType = MovieScreenType.LARGE,
             )
         ) { launchSingleTop = true }
     }
 
     fun NavController.navigateToHomeDetailByNetwork(title: String, slug: String) {
-        val queryParameters = listOf(
+        val query = listOf(
             Constants.SORT_FIELD to Constants.RATING_KP_FIELD,
             Constants.SORT_TYPE to Constants.SORT_DESC,
             Constants.NETWORK_ITEMS_NAME to slug
         )
 
         navigate(
-            HomeDetailListRoute(
+            MovieListGraph.MovieListRoute(
                 title = title,
-                queryParameters = queryParameters
+                queryParameters = query,
+                screenType = MovieScreenType.LARGE,
             )
         ) { launchSingleTop = true }
     }

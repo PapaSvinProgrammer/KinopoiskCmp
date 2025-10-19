@@ -1,4 +1,4 @@
-package com.mordva.movie_list
+package com.mordva.movie_list.widget
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
@@ -6,22 +6,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mordva.model.movie.Movie
-import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.ui.widget.lazyComponent.EndlessLazyColumn
 import com.mordva.ui.widget.listItems.MovieListCard
 import com.mordva.ui.widget.shimmer.ShimmerMovieDetailList
+import com.mordva.util.ListUIState
 
 @Composable
-internal fun RenderResult(
-    state: MovieListUIState,
+internal fun RenderRowContent(
+    state: ListUIState<Movie>,
     modifier: Modifier,
     onClick: (Movie) -> Unit,
     onSettingsClick: (Movie) -> Unit,
     onLoadMore: () -> Unit
 ) {
     when (state) {
-        MovieListUIState.Loading -> ShimmerMovieDetailList(modifier)
-        is MovieListUIState.Success -> {
+        is ListUIState.Error<*> -> {}
+        is ListUIState.Loading<*> -> ShimmerMovieDetailList(modifier)
+        is ListUIState.Success<Movie> -> {
             MainPersonContent(
                 modifier = modifier,
                 list = state.data,

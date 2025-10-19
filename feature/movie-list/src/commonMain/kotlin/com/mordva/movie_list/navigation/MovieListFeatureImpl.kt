@@ -6,12 +6,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
-import com.mordva.base_view_models.MovieListViewModel
 import com.mordva.movie_list.MovieListScreen
+import com.mordva.movie_list.MovieListViewModel
 import com.mordva.navigation.CustomNavType
 import com.mordva.navigation.FeatureApi
+import com.mordva.navigation.MovieGraph
 import com.mordva.navigation.MovieListGraph
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 import kotlin.reflect.typeOf
 
 class MovieListFeatureImpl : FeatureApi {
@@ -29,13 +31,20 @@ class MovieListFeatureImpl : FeatureApi {
                 )
             ) {
                 val route = it.toRoute<MovieListGraph.MovieListRoute>()
-                val viewModel: MovieListViewModel = koinViewModel()
+                val viewModel: MovieListViewModel = koinViewModel {
+                    parametersOf(route.title, route.queryParameters)
+                }
 
                 MovieListScreen(
-                    navController = navController,
                     viewModel = viewModel,
-                    title = route.title,
-                    queryParameters = route.queryParameters
+                    type = route.screenType,
+                    onBackClick = { navController.popBackStack() },
+                    onSettingsClick = {},
+                    onMovieClick = { movie ->
+                        navController.navigate(MovieGraph.MovieRoute(movie.id)) {
+                            launchSingleTop = true
+                        }
+                    },
                 )
             }
         }

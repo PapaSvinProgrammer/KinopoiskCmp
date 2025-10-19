@@ -18,12 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import com.mordva.base_view_models.MovieListViewModel
-import com.mordva.navigation.MovieGraph
+import com.mordva.model.movie.Movie
+import com.mordva.movie_list.widget.RenderLargeContent
+import com.mordva.movie_list.widget.RenderRowContent
+import com.mordva.navigation.MovieScreenType
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.other.TitleTopBarText
@@ -31,20 +30,18 @@ import com.mordva.ui.widget.other.TitleTopBarText
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MovieListScreen(
-    navController: NavController,
     viewModel: MovieListViewModel,
-    title: String,
-    queryParameters: List<Pair<String, String>>
+    type: MovieScreenType,
+    onBackClick: () -> Unit,
+    onSettingsClick: (Movie) -> Unit,
+    onMovieClick: (Movie) -> Unit,
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val scrollBehavior =
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
     val isCollapsed by remember {
         derivedStateOf { scrollBehavior.state.collapsedFraction > 0.5 }
     }
-    val moviesState by viewModel.moviesState.collectAsStateWithLifecycle()
-
-    LifecycleEventEffect(Lifecycle.Event.ON_START) {
-        viewModel.getMovies(queryParameters)
-    }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -52,12 +49,12 @@ internal fun MovieListScreen(
             LargeTopAppBar(
                 title = {
                     TopBarText(
-                        text = title,
+                        text = uiState.anyState.title,
                         isCollapsed = isCollapsed
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = PlatformResources.Icons.ArrowBack,
                             contentDescription = null
@@ -71,17 +68,26 @@ internal fun MovieListScreen(
             )
         }
     ) { innerPadding ->
-        RenderResult(
-            state = moviesState,
-            modifier = Modifier.padding(innerPadding),
-            onClick = {
-                navController.navigate(MovieGraph.MovieRoute(it.id)) {
-                    launchSingleTop = true
-                }
-            },
-            onSettingsClick = {},
-            onLoadMore = { viewModel.loadMoreMovies(queryParameters) }
-        )
+        when (type) {
+            MovieScreenType.ROW -> {
+                RenderRowContent(
+                    state = uiState.listState,
+                    modifier = Modifier.padding(innerPadding),
+                    onClick = onMovieClick,
+                    onSettingsClick = onSettingsClick,
+                    onLoadMore = { viewModel.loadMoreItems() }
+                )
+            }
+
+            MovieScreenType.LARGE -> {
+                RenderLargeContent(
+                    state = uiState.listState,
+                    modifier = Modifier.padding(innerPadding),
+                    onClick = onMovieClick,
+                    onLoadMore = { viewModel.loadMoreItems() }
+                )
+            }
+        }
     }
 }
 
