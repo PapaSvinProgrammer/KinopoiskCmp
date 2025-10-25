@@ -18,7 +18,7 @@ import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.collectionCategoryListItemContent(
-    navController: NavController
+    onCollectionClick: (String) -> Unit,
 ) {
     item {
         Text(
@@ -34,19 +34,15 @@ internal fun LazyListScope.collectionCategoryListItemContent(
                 .padding(horizontal = 15.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            collectionCategoryList.forEach {
+            collectionCategoryList.forEach { category ->
                 SuggestionChip(
                     label = {
                         Text(
-                            text = it,
+                            text = category,
                             fontSize = Typography.bodySmall.fontSize
                         )
                     },
-                    onClick = {
-                        navController.navigate(
-                            CollectionListGraph.CollectionListRoute(it)
-                        )
-                    }
+                    onClick = { onCollectionClick(category) }
                 )
             }
         }

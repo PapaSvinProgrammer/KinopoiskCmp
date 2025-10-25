@@ -5,19 +5,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.mordva.navigation.MovieGraph
-import com.mordva.navigation.MovieListGraph
+import com.mordva.model.movie.Movie
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.ui.widget.renderState.RenderMovieStateRow
-import com.mordva.util.Constants
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.serialsItemContent(
     state: MovieListUIState,
-    navController: NavController,
-    get: () -> Unit
+    get: () -> Unit,
+    onMovieClick: (Movie) -> Unit,
+    onShowAll: (String) -> Unit,
 ) {
     item {
         val title = stringResource(Resources.Strings.PopularSerials)
@@ -26,23 +24,8 @@ internal fun LazyListScope.serialsItemContent(
         RenderMovieStateRow(
             state = state,
             title = title,
-            onClick = {
-                navController.navigate(MovieGraph.MovieRoute(it.id))
-            },
-            onShowAll = {
-                val queryParams = listOf(
-                    Constants.IS_SERIES_FIELD to Constants.TRUE,
-                    Constants.SORT_FIELD to Constants.RATING_KP_FIELD,
-                    Constants.SORT_TYPE to Constants.SORT_DESC
-                )
-
-                navController.navigate(
-                    MovieListGraph.MovieListRoute(
-                        title = title,
-                        queryParameters = queryParams
-                    )
-                )
-            }
+            onClick = onMovieClick,
+            onShowAll = { onShowAll(title) }
         )
         Spacer(modifier = Modifier.height(130.dp))
     }

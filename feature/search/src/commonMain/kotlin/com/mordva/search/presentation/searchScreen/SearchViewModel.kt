@@ -1,11 +1,11 @@
 package com.mordva.search.presentation.searchScreen
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mordva.domain.repository.HistoryRepository
 import com.mordva.domain.usecase.collection.GetCollectionByCategory
 import com.mordva.domain.usecase.collection.model.CollectionParams
 import com.mordva.domain.usecase.movie.GetMovieByFilter
-import com.mordva.domain.usecase.person.GetPersonByFilter
 import com.mordva.model.SearchItem
 import com.mordva.search.domain.LoadMoreByName
 import com.mordva.search.domain.SearchByName
@@ -13,18 +13,20 @@ import com.mordva.search.domain.model.RequestParams
 import com.mordva.search.presentation.searchScreen.widget.UiState
 import com.mordva.ui.uiState.CollectionListUIState
 import com.mordva.ui.uiState.MovieListUIState
-import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.ui.uiState.SearchListUIState
 import com.mordva.util.Constants
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 
 internal class SearchViewModel(
     private val getCollectionByCategory: GetCollectionByCategory,
-    private val getPersonByFilter: GetPersonByFilter,
     private val getMovieByFilter: GetMovieByFilter,
     private val searchByName: SearchByName,
     private val loadMoreByName: LoadMoreByName,
@@ -33,11 +35,24 @@ internal class SearchViewModel(
     private val _uiState = MutableStateFlow(UiState())
     val uiState = _uiState.asStateFlow()
 
+    init {
+        _uiState
+            .map { it.query }
+            .distinctUntilChanged()
+            .onEach { search() }
+            .launchIn(viewModelScope)
+    }
+
     fun updateQuery(text: String) {
         _uiState.update { it.copy(query = text) }
     }
 
-    fun updateExpanded(state: Boolean) {
+    fun onShowSearchBar(state: Boolean) {
+        if (!state) {
+            _uiState.update { it.copy(query = "") }
+            _uiState.update { it.copy(searchState = SearchListUIState.Error) }
+        }
+
         _uiState.update {
             it.copy(isExpanded = state)
         }
@@ -46,6 +61,14 @@ internal class SearchViewModel(
     fun updateSelectedSearchIndex(index: Int) {
         _uiState.update {
             it.copy(selectedSearchIndex = index)
+        }
+    }
+
+    fun onClear() {
+        if (uiState.value.query.isEmpty()) {
+            onShowSearchBar(false)
+        } else {
+            updateQuery("")
         }
     }
 
@@ -59,23 +82,6 @@ internal class SearchViewModel(
         res.onSuccess { collections ->
             _uiState.update {
                 it.copy(collectionsState = CollectionListUIState.Success(collections))
-            }
-        }
-    }
-
-    fun getActorByPopularityMovies() = launchWithoutOld(GET_ACTORS_JOB) {
-        if (uiState.value.personState is PersonListUIState.Success) return@launchWithoutOld
-
-        val queryParameters = listOf(
-            Constants.SORT_FIELD to Constants.MOVIES_RATING_FIELD,
-            Constants.SORT_TYPE to Constants.SORT_DESC
-        )
-
-        val res = getPersonByFilter.execute(queryParameters)
-
-        res.onSuccess { actors ->
-            _uiState.update {
-                it.copy(personState = PersonListUIState.Success(actors))
             }
         }
     }
@@ -141,12 +147,6 @@ internal class SearchViewModel(
         }
     }
 
-    fun clearSearchResult() {
-        _uiState.update {
-            it.copy(searchState = SearchListUIState.Error)
-        }
-    }
-
     fun insertSearchHistoryItem(searchItem: SearchItem) = launchWithoutOld(INSERT_HISTORY_JOB) {
 //        historyRepository.insert(searchItem.toHistory())
     }
@@ -162,7 +162,6 @@ internal class SearchViewModel(
 
     private companion object {
         const val GET_COLLECTIONS_JOB = "get_collections"
-        const val GET_ACTORS_JOB = "get_actors_by_popularity"
         const val GET_SERIALS_JOB = "get_top_serials"
         const val INSERT_HISTORY_JOB = "insert_search_history"
         const val DELETE_HISTORY_JOB = "delete_search_history"
