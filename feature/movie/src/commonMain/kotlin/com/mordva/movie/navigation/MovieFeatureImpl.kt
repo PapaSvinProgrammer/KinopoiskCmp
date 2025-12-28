@@ -1,4 +1,4 @@
-package com.mordva.movie.presentation.navigation
+package com.mordva.movie.navigation
 
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder

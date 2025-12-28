@@ -14,6 +14,7 @@ import com.mordva.navigation.MovieGraph
 import com.mordva.navigation.MovieListGraph
 import com.mordva.navigation.PersonGraph
 import com.mordva.navigation.SearchGraph
+import com.mordva.search.di.SearchSettingsScope
 import com.mordva.search.presentation.search_screen.SearchScreen
 import com.mordva.search.presentation.search_screen.SearchViewModel
 import com.mordva.search.presentation.search_screen.state.SearchScreenEvent
@@ -24,9 +25,13 @@ import com.mordva.search.presentation.search_settings.widget.SearchSettingsScree
 import com.mordva.search.presentation.search_settings_list.SearchSettingsListScreen
 import com.mordva.search.presentation.search_settings_list.SearchSettingsListViewModel
 import com.mordva.util.Constants
+import com.mordva.util.rememberNavScope
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.core.qualifier.named
 
 class SearchFeatureImpl : FeatureApi {
+    @OptIn(KoinExperimentalAPI::class)
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
         navController: NavHostController,
@@ -44,8 +49,13 @@ class SearchFeatureImpl : FeatureApi {
                 )
             }
 
-            composable<SearchSettingsRoute> {
-                val viewModel: SearchSettingsViewModel = koinViewModel()
+            composable<SearchSettingsRoute> { entry ->
+                val scope = rememberNavScope(
+                    entry = entry,
+                    qualifier = named<SearchSettingsScope>()
+                )
+
+                val viewModel: SearchSettingsViewModel = koinViewModel(scope = scope)
 
                 SearchSettingsScreen(
                     viewModel = viewModel,
@@ -53,12 +63,20 @@ class SearchFeatureImpl : FeatureApi {
                 )
             }
 
-            composable<SearchSettingsListRoute> {
-                val route = it.toRoute<SearchSettingsListRoute>()
-                val viewModel: SearchSettingsListViewModel = koinViewModel()
+            composable<SearchSettingsListRoute> { entry ->
+                val parentEntry = remember(entry) {
+                    navController.getBackStackEntry<SearchSettingsRoute>()
+                }
+
+                val scope = rememberNavScope(
+                    entry = parentEntry,
+                    qualifier = named<SearchSettingsScope>()
+                )
+
+                val viewModel: SearchSettingsListViewModel = koinViewModel(scope = scope)
 
                 SearchSettingsListScreen(
-                    type = route.type,
+                    type = entry.toRoute<SearchSettingsListRoute>().type,
                     viewModel = viewModel,
                     onBackClick = { navController.popBackStack() }
                 )

@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
@@ -44,6 +46,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.core.model)
+            implementation(compose.runtime)
             implementation(libs.koin.core)
             implementation(libs.kotlin.stdlib)
             implementation(libs.navigation.compose)

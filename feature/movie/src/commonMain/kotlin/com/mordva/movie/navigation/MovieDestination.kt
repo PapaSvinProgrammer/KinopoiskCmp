@@ -1,4 +1,4 @@
-package com.mordva.movie.presentation.navigation
+package com.mordva.movie.navigation
 
 import com.mordva.movie.domain.model.PersonMovieScreenObject
 import com.mordva.movie.domain.model.WatchabilityScreenObject

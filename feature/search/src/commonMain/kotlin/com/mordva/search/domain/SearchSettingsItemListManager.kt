@@ -4,7 +4,7 @@ import com.mordva.domain.repository.CategoryRepository
 import com.mordva.model.category.ItemName
 import com.mordva.search.presentation.search_settings.widget.SearchSettingsListState
 import com.mordva.search.presentation.search_settings_list.SearchSettingsListType
-import com.mordva.ui.widget.navigation.BottomBarItems.items
+import com.mordva.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -12,12 +12,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.withContext
 
 internal class SearchSettingsItemListManager(
     private val categoryRepository: CategoryRepository,
@@ -85,16 +82,29 @@ internal class SearchSettingsItemListManager(
     }
 
     fun reset() {
-
+        checkedGenres.value = mapOf()
+        checkedCountries.value = mapOf()
     }
 
-    suspend fun getCountries() {
+    fun setCurrentType(type: SearchSettingsListType) {
+        currentType.value = type
+    }
+
+    suspend fun getCheckedGenres(): List<ItemName> = withContext(Dispatchers.Default) {
+        checkedGenres.value.filter { it.value }.map { it.key }
+    }
+
+    suspend fun getCheckedCountries(): List<ItemName> = withContext(Dispatchers.Default) {
+        checkedCountries.value.filter { it.value }.map { it.key }
+    }
+
+    suspend fun initCountries() {
         categoryRepository.getCounties().onSuccess { data ->
             countries.value = data
         }
     }
 
-    suspend fun getGenres() {
+    suspend fun initGenres() {
         categoryRepository.getGenres().onSuccess { data ->
             genres.value = data
         }

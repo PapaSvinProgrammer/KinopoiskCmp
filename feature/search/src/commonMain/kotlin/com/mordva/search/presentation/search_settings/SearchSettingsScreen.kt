@@ -39,6 +39,7 @@ import com.mordva.ui.theme.Resources.StringArray.optionsCategory
 import com.mordva.ui.theme.Resources.StringArray.optionsSortType
 import com.mordva.ui.theme.Spacer
 import com.mordva.ui.widget.other.TitleTopBarText
+import com.mordva.util.ObserveAsEvents
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -50,6 +51,13 @@ internal fun SearchSettingsScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    ObserveAsEvents(viewModel.uiEvents) {
+        when (it) {
+            SearchSettingsScreenEvent.GoBack -> eventHandler(SearchSettingsScreenEvent.GoBack)
+            is ShowSearchSettingsList -> eventHandler(ShowSearchSettingsList(it.type))
+        }
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -57,7 +65,7 @@ internal fun SearchSettingsScreen(
                     TitleTopBarText(text = stringResource(Resources.Strings.SearchSettings))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { eventHandler(SearchSettingsScreenEvent.GoBack) }) {
+                    IconButton(onClick = { viewModel.onBackClicked() }) {
                         Icon(
                             imageVector = PlatformResources.Icons.ArrowBack,
                             contentDescription = null
@@ -89,11 +97,11 @@ internal fun SearchSettingsScreen(
             )
 
             DetailSettingsContent(
-                genresResult = listOf(),
-                countriesResult = listOf(),
+                checkedGenres = uiState.checkedGenres,
+                checkedCountries = uiState.checkedCountries,
                 yearResult = uiState.yearFilter,
-                onCountryClick = { eventHandler(ShowSearchSettingsList(COUNTRY)) },
-                onGenreClick = { eventHandler(ShowSearchSettingsList(GENRE)) },
+                onCountryClick = { viewModel.updateCurrentListType(COUNTRY) },
+                onGenreClick = { viewModel.updateCurrentListType(GENRE) },
                 onYearClick = { viewModel.updateVisibleYearPicker(true) }
             )
 

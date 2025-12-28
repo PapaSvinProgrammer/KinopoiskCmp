@@ -6,7 +6,7 @@ import com.mordva.util.BaseViewModel
 
 internal class SearchSettingsListViewModel(
     private val searchSettingsItemListManager: SearchSettingsItemListManager,
-) : BaseViewModel() {
+) : BaseViewModel<Unit>() {
     val state = searchSettingsItemListManager.state
 
     fun reset() {

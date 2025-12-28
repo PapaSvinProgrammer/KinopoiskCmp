@@ -8,11 +8,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel<Event> : ViewModel() {
     private val jobs = mutableMapOf<String, Job>()
+    private val _uiEvents = Channel<Event>()
+    val uiEvents = _uiEvents.receiveAsFlow()
+
+    protected fun sendEvent(event: Event) {
+        viewModelScope.launch { _uiEvents.send(event) }
+    }
 
     protected fun launchWithoutOld(
         key: String = DEFAULT_KEY,
