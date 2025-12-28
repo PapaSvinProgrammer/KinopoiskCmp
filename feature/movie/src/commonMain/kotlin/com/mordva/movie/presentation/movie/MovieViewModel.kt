@@ -33,6 +33,7 @@ import com.mordva.movieScreen.domain.model.RatedMovieActionParams
 import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
 import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
 import com.mordva.ui.widget.packageBottomSheet.PackageItemAction
+import com.mordva.util.Log
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import com.mordva.util.multiRequest
@@ -328,6 +329,7 @@ internal class MovieViewModel(
 
     override fun onCleared() {
         cancelAllJobs()
+        Log.d("RRRR", "MOVIE CLEAR")
         super.onCleared()
     }
 

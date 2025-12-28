@@ -167,6 +167,7 @@ import kinopoiskcmp.core.ui.generated.resources.where_can_watch
 import kinopoiskcmp.core.ui.generated.resources.will_watching
 import kinopoiskcmp.core.ui.generated.resources.year
 import kinopoiskcmp.core.ui.generated.resources.your_movie_on
+import org.jetbrains.compose.resources.stringResource
 
 object Resources {
     object Icons {
@@ -340,5 +341,19 @@ object Resources {
         val NotChange = Res.string.not_change
         val DeleteRating = Res.string.delete_rating
         val ChangeRating = Res.string.change_rating
+    }
+
+    object StringArray {
+        val optionsCategory = listOf(
+            Strings.All,
+            Strings.Movies,
+            Strings.Serials,
+        )
+
+        val optionsSortType = listOf(
+            Strings.ByRatingShort,
+            Strings.ByPopularShort,
+            Strings.ByDateShort,
+        )
     }
 }

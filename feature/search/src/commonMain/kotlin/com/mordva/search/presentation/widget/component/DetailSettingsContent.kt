@@ -12,6 +12,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.mordva.search.presentation.widget.row.CategoryRow
 import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Spacer
 import com.mordva.ui.util.ConvertData
 import org.jetbrains.compose.resources.stringResource
 
@@ -26,12 +27,12 @@ internal fun DetailSettingsContent(
 ) {
     Column(
         modifier = Modifier
-            .padding(horizontal = 15.dp, vertical = 30.dp)
+            .padding(horizontal = Spacer.M16, vertical = Spacer.M30)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainer,
-                shape = RoundedCornerShape(10.dp)
+                shape = RoundedCornerShape(Spacer.M10)
             )
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(Spacer.M10))
     ) {
         CategoryRow(
             index = 0,

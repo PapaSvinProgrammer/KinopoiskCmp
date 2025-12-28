@@ -23,7 +23,7 @@ import com.mordva.otp.presentation.navigatoin.OtpFeatureImpl
 import com.mordva.person.presentation.navigation.PersonFeatureImpl
 import com.mordva.person_podium.navigation.PersonPodiumListFeatureImpl
 import com.mordva.profile.navigation.ProfileFeatureImpl
-import com.mordva.search.presentation.navigation.SearchFeatureImpl
+import com.mordva.search.navigation.SearchFeatureImpl
 import com.mordva.settings.presentation.navigation.SettingsFeatureImpl
 import com.mordva.ui.theme.MovieAppTheme
 import com.mordva.ui.util.InitCoil
