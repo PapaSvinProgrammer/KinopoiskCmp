@@ -46,7 +46,8 @@ data object MovieListGraph : RootGraph {
     @Serializable
     data class MovieListRoute(
         val title: String,
-        val queryParameters: List<Pair<String, String>>
+        val queryParameters: List<Pair<String, String>>,
+        val screenType: MovieScreenType = MovieScreenType.ROW,
     )
 }
 
@@ -103,4 +104,10 @@ data object SettingsGraph : RootGraph {
 
     @Serializable
     data object SupportRoute
+}
+
+@Serializable
+data object ImageListGraph : RootGraph {
+    @Serializable
+    data class ImageListRoute(val movieId: Int)
 }

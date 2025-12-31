@@ -14,10 +14,12 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun <T> DefaultLazyRow(
-    modifier: Modifier = Modifier,
     list: List<T>,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(horizontal = 15.dp),
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(10.dp),
     key: ((item: T) -> Any)? = null,
-    lastItemCard: @Composable () -> Unit,
+    lastItemCard: @Composable () -> Unit = {},
     content: @Composable (T) -> Unit
 ) {
     val listState = rememberLazyListState()
@@ -25,8 +27,8 @@ fun <T> DefaultLazyRow(
 
     LazyRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(horizontal = 15.dp),
+        horizontalArrangement = horizontalArrangement,
+        contentPadding = contentPadding,
         state = listState,
         flingBehavior = flingBehavior
     ) {

@@ -12,16 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import com.mordva.model.image.CollectionMovie
-import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
-import org.jetbrains.compose.resources.painterResource
+import com.mordva.ui.widget.listItems.poster.SquareImage
 
 @Composable
 fun CollectionListItem(
@@ -35,11 +32,8 @@ fun CollectionListItem(
         leadingContent = leadingIcon,
         headlineContent = {
             Row {
-                AsyncImage(
+                SquareImage(
                     model = collectionMovie.cover?.url,
-                    error = painterResource(Resources.Icons.Image),
-                    contentDescription = null,
-                    contentScale = ContentScale.FillBounds,
                     modifier = Modifier
                         .size(size)
                         .clip(RoundedCornerShape(5.dp))

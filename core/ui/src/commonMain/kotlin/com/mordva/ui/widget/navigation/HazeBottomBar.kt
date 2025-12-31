@@ -27,7 +27,6 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -66,12 +65,6 @@ fun HazeBottomBar(
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
     var selectedTab by remember { mutableIntStateOf(0) }
-
-    LaunchedEffect(currentRoute) {
-        currentRoute?.let {
-            //selectedTab = routeList.indexOf(it)
-        }
-    }
 
     AnimatedVisibility(
         visible = visible,
@@ -205,7 +198,7 @@ private fun NavigationBottomTabs(
     ) {
         Row(modifier = Modifier.fillMaxSize()) {
             tabs.forEach { tab ->
-                val isSelected = false //currentRoute == tab.route::class.java.canonicalName
+                val isSelected = false
 
                 val alpha by animateFloatAsState(
                     targetValue = if (isSelected) 1f else .35f

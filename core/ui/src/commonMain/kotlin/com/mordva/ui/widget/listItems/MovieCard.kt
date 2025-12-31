@@ -4,8 +4,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,17 +20,73 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.model.movie.Movie
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
+import com.mordva.ui.util.PosterType
 import com.mordva.ui.widget.chips.RatingChip
+import com.mordva.ui.widget.listItems.poster.StandardImageLarge
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun MovieCard(
-    movie: Movie,
-    modifier: Modifier = Modifier.width(160.dp).height(260.dp),
+fun MovieFillCard(
+    modifier: Modifier = Modifier,
+    name: String,
+    image: String,
+    rating: Float? = null,
+    top250: Int? = null,
     onClick: () -> Unit = {}
+) {
+    BasicContent(
+        modifier = modifier,
+        textModifier = Modifier.fillMaxWidth(),
+        name = name,
+        rating = rating,
+        top250 = top250,
+        onClick = onClick,
+        posterContent = {
+            AsyncImage(
+                model = image,
+                error = painterResource(Resources.Icons.Movie),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .aspectRatio(PosterType.STANDARD.ratio)
+                    .clip(RoundedCornerShape(10.dp))
+            )
+        }
+    )
+}
+
+@Composable
+fun MovieCard(
+    modifier: Modifier = Modifier,
+    name: String,
+    image: String,
+    rating: Float? = null,
+    top250: Int? = null,
+    onClick: () -> Unit = {}
+) {
+    BasicContent(
+        modifier = modifier,
+        textModifier = Modifier.width(140.dp),
+        name = name,
+        rating = rating,
+        top250 = top250,
+        onClick = onClick,
+        posterContent = { StandardImageLarge(image) }
+    )
+}
+
+@Composable
+private fun BasicContent(
+    modifier: Modifier = Modifier,
+    textModifier: Modifier = Modifier,
+    name: String,
+    rating: Float? = null,
+    top250: Int? = null,
+    onClick: () -> Unit = {},
+    posterContent: @Composable () -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -40,31 +97,27 @@ fun MovieCard(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            AsyncImage(
-                model = movie.poster?.url,
-                error = painterResource(Resources.Icons.Movie),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(10.dp)).weight(5f)
-            )
+            posterContent()
 
             Text(
-                text = movie.name ?: "",
+                text = name,
                 fontWeight = FontWeight.Medium,
                 fontSize = Typography.bodySmall.fontSize,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(vertical = 10.dp).weight(1f)
+                minLines = 2,
+                maxLines = 2,
+                modifier = textModifier.padding(vertical = 10.dp)
             )
         }
 
-        RatingChip(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(5.dp),
-            rating = movie.rating?.kp ?: 0f,
-            top = movie.top250
-        )
+        rating?.let { value ->
+            RatingChip(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(5.dp),
+                rating = value,
+                top = top250
+            )
+        }
     }
 }

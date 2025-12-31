@@ -6,23 +6,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.mordva.model.movie.Fact
 import com.mordva.ui.theme.Typography
-import com.mordva.ui.uiState.FactUIState
+import com.mordva.ui.uiState.FactListUIState
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.FactCard
 import com.mordva.ui.widget.shimmer.ShimmerFactRow
 
 @Composable
 fun RenderFactStateRow(
-    state: FactUIState,
+    state: FactListUIState,
     title: String,
     onClick: (Fact) -> Unit
 ) {
     when (state) {
-        FactUIState.Loading -> ShimmerFactRow()
-        is FactUIState.Success -> {
+        FactListUIState.Loading -> ShimmerFactRow()
+        is FactListUIState.Success -> {
             MainFactRowContent(
                 list = state.data,
                 title = title,

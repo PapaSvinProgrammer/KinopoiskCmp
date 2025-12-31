@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mordva.model.person.Person
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.LastItemCard
@@ -13,14 +13,14 @@ import com.mordva.ui.widget.shimmer.ShimmerMovieRow
 
 @Composable
 fun RenderPersonRowState(
-    state: PersonUIState,
+    state: PersonListUIState,
     title: String,
     onClick: (Person) -> Unit,
     onShowAll: () -> Unit
 ) {
     when (state) {
-        PersonUIState.Loading -> ShimmerMovieRow()
-        is PersonUIState.Success -> {
+        PersonListUIState.Loading -> ShimmerMovieRow()
+        is PersonListUIState.Success -> {
             PersonRow(
                 persons = state.data,
                 title = title,

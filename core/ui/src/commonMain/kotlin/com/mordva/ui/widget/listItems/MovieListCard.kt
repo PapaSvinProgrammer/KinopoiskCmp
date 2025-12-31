@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -17,18 +16,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import com.mordva.model.movie.Movie
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
-import com.mordva.ui.widget.chips.RatingChip
 import com.mordva.ui.util.ConvertData
+import com.mordva.ui.widget.chips.RatingChip
+import com.mordva.ui.widget.listItems.poster.StandardImageMedium
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -44,21 +41,10 @@ fun MovieListCard(
             .padding(15.dp)
     ) {
         Box {
-            AsyncImage(
-                model = movie.poster?.url,
-                contentDescription = null,
-                error = painterResource(Resources.Icons.Image),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .height(130.dp)
-                    .width(90.dp)
-                    .clip(RoundedCornerShape(10.dp))
-            )
+            StandardImageMedium(movie.poster?.url)
 
             RatingChip(
-                modifier = Modifier
-                    .padding(5.dp)
-                    .clip(RoundedCornerShape(10.dp)),
+                modifier = Modifier.padding(5.dp),
                 rating = movie.rating?.kp ?: 0f,
                 top = movie.top250,
                 fontSize = Typography.bodySmall.fontSize
@@ -70,6 +56,7 @@ fun MovieListCard(
         Box(
             modifier = Modifier
                 .height(130.dp)
+                .weight(1f)
                 .fillMaxWidth()
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
@@ -127,7 +114,7 @@ private fun getAlternativeName(movie: Movie): String {
 private fun DetailInfoContent(movie: Movie) {
     Text(
         text = movie.countries.joinToString(", ") { it.name },
-        fontSize = Typography.bodyMedium.fontSize,
+        fontSize = Typography.bodySmall.fontSize,
         fontWeight = FontWeight.Medium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         overflow = TextOverflow.Ellipsis,
@@ -136,7 +123,7 @@ private fun DetailInfoContent(movie: Movie) {
 
     Text(
         text = movie.genres.joinToString(", ") { it.name },
-        fontSize = Typography.bodyMedium.fontSize,
+        fontSize = Typography.bodySmall.fontSize,
         fontWeight = FontWeight.Medium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         overflow = TextOverflow.Ellipsis,

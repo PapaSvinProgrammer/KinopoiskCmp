@@ -2,7 +2,7 @@ package com.mordva.base_view_models
 
 import androidx.lifecycle.ViewModel
 import com.mordva.domain.usecase.person.GetPersonByFilter
-import com.mordva.ui.uiState.PersonUIState
+import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.util.Constants
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
@@ -14,18 +14,18 @@ class PersonListViewModel(
 ) : ViewModel() {
     private var page = 1
 
-    private val _personState = MutableStateFlow(PersonUIState.Loading as PersonUIState)
-    val personState: StateFlow<PersonUIState> = _personState
+    private val _personState = MutableStateFlow(PersonListUIState.Loading as PersonListUIState)
+    val personState: StateFlow<PersonListUIState> = _personState
 
     fun getPersons(
         queryParameters: List<Pair<String, String>>
     ) = launchWithoutOld(GET_PERSONS_JOB) {
-        if (personState.value is PersonUIState.Success) return@launchWithoutOld
+        if (personState.value is PersonListUIState.Success) return@launchWithoutOld
 
         val res = getPersonByFilter.execute(queryParameters)
 
         res.onSuccess {
-            _personState.value = PersonUIState.Success(it)
+            _personState.value = PersonListUIState.Success(it)
         }
     }
 
@@ -40,13 +40,13 @@ class PersonListViewModel(
         val res = getPersonByFilter.execute(newQuery)
 
         res.onSuccess {
-            val newRes = (personState.value as PersonUIState.Success)
+            val newRes = (personState.value as PersonListUIState.Success)
                 .data
                 .toMutableList()
 
             newRes.addAll(it)
 
-            _personState.value = PersonUIState.Success(newRes)
+            _personState.value = PersonListUIState.Success(newRes)
         }
     }
 

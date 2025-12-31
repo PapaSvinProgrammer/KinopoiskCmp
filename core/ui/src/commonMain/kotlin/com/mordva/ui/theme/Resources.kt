@@ -3,19 +3,23 @@ package com.mordva.ui.theme
 import kinopoiskcmp.core.ui.generated.resources.Res
 import kinopoiskcmp.core.ui.generated.resources.about_app
 import kinopoiskcmp.core.ui.generated.resources.actors
+import kinopoiskcmp.core.ui.generated.resources.add_in_will_watch
 import kinopoiskcmp.core.ui.generated.resources.advise_watch
 import kinopoiskcmp.core.ui.generated.resources.all
 import kinopoiskcmp.core.ui.generated.resources.all_collections
 import kinopoiskcmp.core.ui.generated.resources.all_facts
+import kinopoiskcmp.core.ui.generated.resources.all_images
 import kinopoiskcmp.core.ui.generated.resources.alternative_icon
 import kinopoiskcmp.core.ui.generated.resources.any1
 import kinopoiskcmp.core.ui.generated.resources.any2
 import kinopoiskcmp.core.ui.generated.resources.app_name
 import kinopoiskcmp.core.ui.generated.resources.award
 import kinopoiskcmp.core.ui.generated.resources.awards
+import kinopoiskcmp.core.ui.generated.resources.backdrop
 import kinopoiskcmp.core.ui.generated.resources.best_movies_and_serials
 import kinopoiskcmp.core.ui.generated.resources.birth_place
 import kinopoiskcmp.core.ui.generated.resources.birthday
+import kinopoiskcmp.core.ui.generated.resources.blocked
 import kinopoiskcmp.core.ui.generated.resources.by_alphabet
 import kinopoiskcmp.core.ui.generated.resources.by_date
 import kinopoiskcmp.core.ui.generated.resources.by_date_short
@@ -23,6 +27,7 @@ import kinopoiskcmp.core.ui.generated.resources.by_popular_short
 import kinopoiskcmp.core.ui.generated.resources.by_rating_short
 import kinopoiskcmp.core.ui.generated.resources.cancel
 import kinopoiskcmp.core.ui.generated.resources.categories
+import kinopoiskcmp.core.ui.generated.resources.change_rating
 import kinopoiskcmp.core.ui.generated.resources.chat_with_support
 import kinopoiskcmp.core.ui.generated.resources.cinema
 import kinopoiskcmp.core.ui.generated.resources.code_password
@@ -32,11 +37,14 @@ import kinopoiskcmp.core.ui.generated.resources.collections
 import kinopoiskcmp.core.ui.generated.resources.confidentiality
 import kinopoiskcmp.core.ui.generated.resources.count_awards
 import kinopoiskcmp.core.ui.generated.resources.countries
+import kinopoiskcmp.core.ui.generated.resources.cover
 import kinopoiskcmp.core.ui.generated.resources.dark
 import kinopoiskcmp.core.ui.generated.resources.data_and_memory
 import kinopoiskcmp.core.ui.generated.resources.death
 import kinopoiskcmp.core.ui.generated.resources.death_place
 import kinopoiskcmp.core.ui.generated.resources.decor
+import kinopoiskcmp.core.ui.generated.resources.delete_from_will_watch
+import kinopoiskcmp.core.ui.generated.resources.delete_rating
 import kinopoiskcmp.core.ui.generated.resources.details
 import kinopoiskcmp.core.ui.generated.resources.disable_pin_code
 import kinopoiskcmp.core.ui.generated.resources.dubbing_actor
@@ -46,7 +54,10 @@ import kinopoiskcmp.core.ui.generated.resources.enter_with_pin_code_description
 import kinopoiskcmp.core.ui.generated.resources.entry
 import kinopoiskcmp.core.ui.generated.resources.evaluate
 import kinopoiskcmp.core.ui.generated.resources.facts_title
+import kinopoiskcmp.core.ui.generated.resources.favorite_films
 import kinopoiskcmp.core.ui.generated.resources.filmography
+import kinopoiskcmp.core.ui.generated.resources.filter_images_title
+import kinopoiskcmp.core.ui.generated.resources.frame
 import kinopoiskcmp.core.ui.generated.resources.genres
 import kinopoiskcmp.core.ui.generated.resources.growth
 import kinopoiskcmp.core.ui.generated.resources.ic_bookmark_add
@@ -59,6 +70,10 @@ import kinopoiskcmp.core.ui.generated.resources.ic_dark
 import kinopoiskcmp.core.ui.generated.resources.ic_duck
 import kinopoiskcmp.core.ui.generated.resources.ic_face
 import kinopoiskcmp.core.ui.generated.resources.ic_filter
+import kinopoiskcmp.core.ui.generated.resources.ic_folder_eye
+import kinopoiskcmp.core.ui.generated.resources.ic_folder_eye_fill
+import kinopoiskcmp.core.ui.generated.resources.ic_folder_star
+import kinopoiskcmp.core.ui.generated.resources.ic_folder_star_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_home_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_image
 import kinopoiskcmp.core.ui.generated.resources.ic_keyboard_arrow_right
@@ -68,11 +83,15 @@ import kinopoiskcmp.core.ui.generated.resources.ic_light
 import kinopoiskcmp.core.ui.generated.resources.ic_more_horiz
 import kinopoiskcmp.core.ui.generated.resources.ic_more_vert
 import kinopoiskcmp.core.ui.generated.resources.ic_movie
+import kinopoiskcmp.core.ui.generated.resources.ic_new_folder
 import kinopoiskcmp.core.ui.generated.resources.ic_person_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_search
 import kinopoiskcmp.core.ui.generated.resources.ic_share
 import kinopoiskcmp.core.ui.generated.resources.ic_star
+import kinopoiskcmp.core.ui.generated.resources.ic_stop
+import kinopoiskcmp.core.ui.generated.resources.ic_stop_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_tune
+import kinopoiskcmp.core.ui.generated.resources.ic_visibility
 import kinopoiskcmp.core.ui.generated.resources.ic_visibility_off
 import kinopoiskcmp.core.ui.generated.resources.icon_app
 import kinopoiskcmp.core.ui.generated.resources.images
@@ -84,6 +103,7 @@ import kinopoiskcmp.core.ui.generated.resources.light
 import kinopoiskcmp.core.ui.generated.resources.more
 import kinopoiskcmp.core.ui.generated.resources.movies
 import kinopoiskcmp.core.ui.generated.resources.nomination
+import kinopoiskcmp.core.ui.generated.resources.not_change
 import kinopoiskcmp.core.ui.generated.resources.not_found
 import kinopoiskcmp.core.ui.generated.resources.notifications_and_sounds
 import kinopoiskcmp.core.ui.generated.resources.other
@@ -92,6 +112,7 @@ import kinopoiskcmp.core.ui.generated.resources.persons
 import kinopoiskcmp.core.ui.generated.resources.popular_names
 import kinopoiskcmp.core.ui.generated.resources.popular_serials
 import kinopoiskcmp.core.ui.generated.resources.professions
+import kinopoiskcmp.core.ui.generated.resources.promo
 import kinopoiskcmp.core.ui.generated.resources.rating
 import kinopoiskcmp.core.ui.generated.resources.rating_critics
 import kinopoiskcmp.core.ui.generated.resources.rating_imdb
@@ -109,6 +130,7 @@ import kinopoiskcmp.core.ui.generated.resources.reset
 import kinopoiskcmp.core.ui.generated.resources.reset_pin_code
 import kinopoiskcmp.core.ui.generated.resources.review
 import kinopoiskcmp.core.ui.generated.resources.save_settings
+import kinopoiskcmp.core.ui.generated.resources.screenshot
 import kinopoiskcmp.core.ui.generated.resources.search_hint
 import kinopoiskcmp.core.ui.generated.resources.search_result
 import kinopoiskcmp.core.ui.generated.resources.search_settings
@@ -117,9 +139,11 @@ import kinopoiskcmp.core.ui.generated.resources.select
 import kinopoiskcmp.core.ui.generated.resources.select_date
 import kinopoiskcmp.core.ui.generated.resources.sequals_and_prequals
 import kinopoiskcmp.core.ui.generated.resources.serials
+import kinopoiskcmp.core.ui.generated.resources.set_rating
 import kinopoiskcmp.core.ui.generated.resources.settings
 import kinopoiskcmp.core.ui.generated.resources.sex
 import kinopoiskcmp.core.ui.generated.resources.share
+import kinopoiskcmp.core.ui.generated.resources.shooting
 import kinopoiskcmp.core.ui.generated.resources.show
 import kinopoiskcmp.core.ui.generated.resources.show_all
 import kinopoiskcmp.core.ui.generated.resources.similar_movies
@@ -128,6 +152,7 @@ import kinopoiskcmp.core.ui.generated.resources.sorting_by
 import kinopoiskcmp.core.ui.generated.resources.spoilers_description
 import kinopoiskcmp.core.ui.generated.resources.spoilers_title
 import kinopoiskcmp.core.ui.generated.resources.spouse
+import kinopoiskcmp.core.ui.generated.resources.still
 import kinopoiskcmp.core.ui.generated.resources.support_personal
 import kinopoiskcmp.core.ui.generated.resources.system_theme
 import kinopoiskcmp.core.ui.generated.resources.theme
@@ -135,10 +160,14 @@ import kinopoiskcmp.core.ui.generated.resources.total_movies
 import kinopoiskcmp.core.ui.generated.resources.unknown
 import kinopoiskcmp.core.ui.generated.resources.vibration
 import kinopoiskcmp.core.ui.generated.resources.vibration_description
+import kinopoiskcmp.core.ui.generated.resources.viewed
 import kinopoiskcmp.core.ui.generated.resources.voice_actors
+import kinopoiskcmp.core.ui.generated.resources.wallpaper
 import kinopoiskcmp.core.ui.generated.resources.where_can_watch
 import kinopoiskcmp.core.ui.generated.resources.will_watching
 import kinopoiskcmp.core.ui.generated.resources.year
+import kinopoiskcmp.core.ui.generated.resources.your_movie_on
+import org.jetbrains.compose.resources.stringResource
 
 object Resources {
     object Icons {
@@ -160,6 +189,7 @@ object Resources {
         val Search = Res.drawable.ic_search
         val Share = Res.drawable.ic_share
         val Star = Res.drawable.ic_star
+        val StarFill = Res.drawable.ic_star
         val Tune = Res.drawable.ic_tune
         val VisibilityOff = Res.drawable.ic_visibility_off
         val LauncherDefault = Res.drawable.ic_launcher_default
@@ -167,6 +197,14 @@ object Resources {
         val Check = Res.drawable.ic_check
         val KeyboardArrowRight = Res.drawable.ic_keyboard_arrow_right
         val MoreVert = Res.drawable.ic_more_vert
+        val FolderStar = Res.drawable.ic_folder_star
+        val FolderStarFill = Res.drawable.ic_folder_star_fill
+        val FolderEye = Res.drawable.ic_folder_eye
+        val FolderEyeFill = Res.drawable.ic_folder_eye_fill
+        val Visibility = Res.drawable.ic_visibility
+        val Stop = Res.drawable.ic_stop
+        val StopFill = Res.drawable.ic_stop_fill
+        val NewFolder = Res.drawable.ic_new_folder
     }
 
     object Strings {
@@ -283,5 +321,39 @@ object Resources {
         val Collection = Res.string.collection
         val SequalsAndPrequals = Res.string.sequals_and_prequals
         val Sex = Res.string.sex
+        val AllImages = Res.string.all_images
+        val Backdrop = Res.string.backdrop
+        val Cover = Res.string.cover
+        val Frame = Res.string.frame
+        val Promo = Res.string.promo
+        val Screenshot = Res.string.screenshot
+        val Shooting = Res.string.shooting
+        val Still = Res.string.still
+        val Wallpaper = Res.string.wallpaper
+        val FilterImagesTitle = Res.string.filter_images_title
+        val DeleteFromWillWatch = Res.string.delete_from_will_watch
+        val AddInWillWatch = Res.string.add_in_will_watch
+        val FavoriteFilms = Res.string.favorite_films
+        val Viewed = Res.string.viewed
+        val Blocked = Res.string.blocked
+        val YourMovieOn = Res.string.your_movie_on
+        val SetRating = Res.string.set_rating
+        val NotChange = Res.string.not_change
+        val DeleteRating = Res.string.delete_rating
+        val ChangeRating = Res.string.change_rating
+    }
+
+    object StringArray {
+        val optionsCategory = listOf(
+            Strings.All,
+            Strings.Movies,
+            Strings.Serials,
+        )
+
+        val optionsSortType = listOf(
+            Strings.ByRatingShort,
+            Strings.ByPopularShort,
+            Strings.ByDateShort,
+        )
     }
 }

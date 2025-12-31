@@ -14,11 +14,26 @@ import kotlinx.coroutines.launch
 
 private val jobsMap = mutableMapOf<ViewModel, MutableMap<String, WeakRef<Job>>>()
 
-private val exceptionHandler = CoroutineExceptionHandler { context, throwable ->
-    println("Unhandled exception in job '${context.job}': ${throwable.message}")
+fun ViewModel.launchWithoutOld(
+    key: String = "default",
+    dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    block: suspend CoroutineScope.() -> Unit
+) {
+    cancelJob(key)
+
+    val supervisorJob = SupervisorJob(parent = viewModelScope.coroutineContext[Job])
+    val context = dispatcher + supervisorJob + exceptionHandler
+
+    val newJob = viewModelScope.launch(context) {
+        block()
+    }
+
+    jobsMap.getOrPut(this) {
+        mutableMapOf()
+    }[key] = WeakRef(newJob)
 }
 
-fun ViewModel.launchWithoutOld(
+fun ViewModel.launchWithoutOldJob(
     key: String = "default",
     dispatcher: CoroutineDispatcher = Dispatchers.IO,
     block: suspend CoroutineScope.() -> Unit

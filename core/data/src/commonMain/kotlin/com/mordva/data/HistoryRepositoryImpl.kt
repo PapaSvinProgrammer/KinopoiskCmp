@@ -6,8 +6,8 @@ import com.mordva.model.History
 internal class HistoryRepositoryImpl(
     //private val service: HistoryService
 ) : HistoryRepository {
-    override suspend fun insert(history: History) {
-        //service.insert(history)
+    override suspend fun insert(history: com.mordva.model.local.History) {
+
     }
 
     override suspend fun delete(id: Int) {

@@ -3,7 +3,7 @@ package com.mordva.ui.widget.renderState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.mordva.model.movie.Movie
-import com.mordva.ui.uiState.MovieUIState
+import com.mordva.ui.uiState.MovieListUIState
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.LastItemCard
@@ -12,13 +12,13 @@ import com.mordva.ui.widget.shimmer.ShimmerMovieRow
 
 @Composable
 fun RenderMovieStateRow(
-    state: MovieUIState,
+    state: MovieListUIState,
     title: String,
     onClick: (Movie) -> Unit,
     onShowAll: () -> Unit
 ) {
     when (state) {
-        is MovieUIState.Success -> {
+        is MovieListUIState.Success -> {
             MainMovieRow(
                 title = title,
                 movies = state.data,
@@ -47,14 +47,17 @@ private fun MainMovieRow(
         key = { it.id },
         lastItemCard = {
             LastItemCard(
-                width = 160.dp,
-                height = 260.dp,
+                width = 140.dp,
+                height = 190.dp,
                 onClick = onShowAll
             )
         },
         content = {
             MovieCard(
-                movie = it,
+                name = it.name ?: "",
+                image = it.poster?.url ?: "",
+                rating = it.rating?.kp,
+                top250 = it.top250,
                 onClick = { onCLick(it) }
             )
         }
