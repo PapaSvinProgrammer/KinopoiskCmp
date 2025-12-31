@@ -63,10 +63,5 @@ kotlin {
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-            implementation(libs.androidx.junit.ktx)
-        }
     }
 }

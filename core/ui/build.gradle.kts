@@ -55,10 +55,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
         }
 
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }

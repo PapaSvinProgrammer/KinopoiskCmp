@@ -52,10 +52,5 @@ kotlin {
             implementation(libs.multiplatform.settings.coroutines)
             implementation(libs.koin.core)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-            implementation(libs.androidx.junit.ktx)
-        }
     }
 }

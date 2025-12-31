@@ -2,14 +2,13 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
+//    alias(libs.plugins.ksp)
+//    alias(libs.plugins.androidx.room)
 }
 
 kotlin {
-
     androidLibrary {
-        namespace = "com.mordva.util"
+        namespace = "com.mordva.sqlite"
         compileSdk = 36
         minSdk = 26
 
@@ -23,7 +22,8 @@ kotlin {
         }
     }
 
-    val xcfName = "core:utilKit"
+
+    val xcfName = "core:sqliteKit"
 
     iosX64 {
         binaries.framework {
@@ -44,20 +44,22 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            api(projects.core.model)
-            implementation(compose.runtime)
-            implementation(libs.koin.core)
-            implementation(libs.kotlin.stdlib)
-            implementation(libs.navigation.compose)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.kotlinx.datetime)
+        commonMain {
+            dependencies {
+                implementation(projects.core.model)
+                implementation(projects.core.domain)
+                implementation(libs.multiplatform.settings.coroutines)
+                implementation(libs.multiplatform.settings.datastore)
+                implementation(libs.multiplatform.settings)
+                implementation(libs.androidx.room.runtime)
+                implementation(libs.androidx.sqlite.bundled)
+            }
         }
 
-        iosMain.dependencies {
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.ktor.client.darwin)
+        androidMain {
+            dependencies {
+                implementation(libs.androidx.datastore.preferences)
+            }
         }
     }
 }

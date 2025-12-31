@@ -67,19 +67,5 @@ kotlin {
                 implementation(libs.androidx.lifecycle.runtimeCompose)
             }
         }
-
-        commonTest {
-            dependencies {
-                implementation(libs.kotlin.test)
-            }
-        }
-
-        getByName("androidDeviceTest") {
-            dependencies {
-                implementation(libs.androidx.runner)
-                implementation(libs.androidx.core)
-                implementation(libs.androidx.testExt.junit)
-            }
-        }
     }
 }
