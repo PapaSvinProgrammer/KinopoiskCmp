@@ -30,10 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mordva.model.category.ItemName
-import com.mordva.search.presentation.search_settings.SearchSettingsViewModel
-import com.mordva.search.presentation.search_settings.widget.SearchSettingsUiState
 import com.mordva.search.presentation.widget.component.DefaultCustomSearchBar
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
@@ -55,7 +52,7 @@ internal fun SearchSettingsListScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    TitleTopBarText(text = type.name)
+                    TitleTopBarText(text = stringResource(type.title))
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
@@ -170,4 +167,9 @@ private fun BoxScope.SuccessButton(
             fontWeight = FontWeight.Bold
         )
     }
+}
+
+private val SearchSettingsListType.title get() = when (this) {
+    SearchSettingsListType.GENRE -> Resources.Strings.Genres
+    SearchSettingsListType.COUNTRY -> Resources.Strings.Countries
 }
