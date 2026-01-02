@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import com.mordva.model.category.ItemName
+import com.mordva.domain.model.category.ItemName
 import com.mordva.search.presentation.widget.row.CategoryRow
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Spacer

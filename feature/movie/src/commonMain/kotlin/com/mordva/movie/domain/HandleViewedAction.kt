@@ -1,8 +1,8 @@
 package com.mordva.movie.domain
 
+import com.mordva.domain.model.local.PackageParams
 import com.mordva.domain.repository.ViewedRepository
-import com.mordva.model.local.PackageParams
-import com.mordva.movieScreen.domain.model.CheckedParams
+import com.mordva.movie.domain.model.CheckedParams
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

@@ -1,6 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.person.Person
+import com.mordva.domain.model.person.Person
 
 interface PersonRepository {
     suspend fun getPersonById(personId: Int): Result<Person>

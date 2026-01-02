@@ -1,8 +1,8 @@
 package com.mordva.domain.usecase.movie
 
+import com.mordva.domain.model.image.Poster
 import com.mordva.domain.repository.ImageRepository
 import com.mordva.domain.usecase.movie.model.MovieParams
-import com.mordva.model.image.Poster
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

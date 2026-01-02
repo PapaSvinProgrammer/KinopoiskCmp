@@ -7,7 +7,7 @@ import com.mordva.awards_list.domain.LoadMoreAwards
 import com.mordva.awards_list.domain.model.RequestParams
 import com.mordva.awards_list.presentation.widget.UiState
 import com.mordva.awards_list.presentation.widget.bottomSheet.AwardsFilterType
-import com.mordva.model.person.NominationAward
+import com.mordva.domain.model.person.NominationAward
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import kotlinx.coroutines.flow.MutableStateFlow

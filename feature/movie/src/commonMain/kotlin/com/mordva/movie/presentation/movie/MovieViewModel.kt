@@ -1,6 +1,10 @@
 package com.mordva.movie.presentation.movie
 
 import androidx.lifecycle.ViewModel
+import com.mordva.bottomsheet.packageBottomSheet.PackageItemAction
+import com.mordva.domain.model.PackageType
+import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.person.PersonMovie
 import com.mordva.domain.repository.BlockedRepository
 import com.mordva.domain.repository.FavoritePackageRepository
 import com.mordva.domain.repository.RatedMovieRepository
@@ -12,9 +16,6 @@ import com.mordva.domain.usecase.comment.model.CommentParams
 import com.mordva.domain.usecase.movie.GetMovieById
 import com.mordva.domain.usecase.movie.GetMovieImages
 import com.mordva.domain.usecase.movie.model.MovieParams
-import com.mordva.model.PackageType
-import com.mordva.model.movie.Movie
-import com.mordva.model.person.PersonMovie
 import com.mordva.movie.domain.FilterCollection
 import com.mordva.movie.domain.FilterPersonsLikeActors
 import com.mordva.movie.domain.FilterPersonsLikeSupport
@@ -24,16 +25,14 @@ import com.mordva.movie.domain.HandleFavoritePackageAction
 import com.mordva.movie.domain.HandleRatedMovieAction
 import com.mordva.movie.domain.HandleViewedAction
 import com.mordva.movie.domain.HandleWillWatchAction
+import com.mordva.movie.presentation.movie.widget.MovieState
 import com.mordva.movie.presentation.movie.widget.MovieUIState
-import com.mordva.movie.presentation.movie.widget.UIState
 import com.mordva.movie.utils.body
-import com.mordva.movieScreen.domain.model.CheckedParams
-import com.mordva.movieScreen.domain.model.PackageItemParams
-import com.mordva.movieScreen.domain.model.RatedMovieActionParams
-import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
-import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
-import com.mordva.ui.widget.packageBottomSheet.PackageItemAction
-import com.mordva.util.Log
+import com.mordva.movie.domain.model.CheckedParams
+import com.mordva.movie.domain.model.PackageItemParams
+import com.mordva.movie.domain.model.RatedMovieActionParams
+import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.RatedMovieState
+import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import com.mordva.util.multiRequest
@@ -44,6 +43,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
+import kotlin.collections.toMutableMap
 
 internal class MovieViewModel(
     private val movieId: Int,
@@ -65,9 +65,8 @@ internal class MovieViewModel(
     private val favoritePackageRepository: FavoritePackageRepository,
     private val viewedRepository: ViewedRepository,
     private val blockedRepository: BlockedRepository,
-//    private val movieLocalService: MovieLocalService
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(UIState())
+    private val _uiState = MutableStateFlow(MovieUIState())
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -207,7 +206,7 @@ internal class MovieViewModel(
         val res = getMovieById.execute(id)
 
         res.onSuccess { movie ->
-            val state = MovieUIState.Success(movie)
+            val state = MovieState.Success(movie)
 
             _uiState.update {
                 it.copy(movieState = state)
@@ -329,7 +328,6 @@ internal class MovieViewModel(
 
     override fun onCleared() {
         cancelAllJobs()
-        Log.d("RRRR", "MOVIE CLEAR")
         super.onCleared()
     }
 

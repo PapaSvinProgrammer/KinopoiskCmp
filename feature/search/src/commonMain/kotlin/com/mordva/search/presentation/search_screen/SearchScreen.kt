@@ -68,7 +68,7 @@ internal fun SearchScreen(
             verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             collectionsItemContent(
-                state = uiState.collectionsState,
+//                state = uiState.collectionsState,
                 onShowAll = { eventHandler(SearchScreenEvent.ShowCollectionAll) },
                 onCollectionClick = { eventHandler(SearchScreenEvent.ShowMovieList(it)) },
             )
@@ -78,7 +78,7 @@ internal fun SearchScreen(
             }
 
             serialsItemContent(
-                state = uiState.topSerialsState,
+//                state = uiState.topSerialsState,
                 onShowAll = { eventHandler(SearchScreenEvent.ShowAllMovies(it)) },
                 onMovieClick = { eventHandler(SearchScreenEvent.ShowMovie(it)) }
             )

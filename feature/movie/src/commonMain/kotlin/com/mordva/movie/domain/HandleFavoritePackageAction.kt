@@ -1,11 +1,11 @@
 package com.mordva.movie.domain
 
+import com.mordva.bottomsheet.packageBottomSheet.PackageItemAction
+import com.mordva.domain.model.PackageType
+import com.mordva.domain.model.local.PackageParams
 import com.mordva.domain.repository.FavoritePackageRepository
 import com.mordva.domain.repository.WillWatchPackageRepository
-import com.mordva.model.PackageType
-import com.mordva.model.local.PackageParams
-import com.mordva.movieScreen.domain.model.PackageItemParams
-import com.mordva.ui.widget.packageBottomSheet.PackageItemAction
+import com.mordva.movie.domain.model.PackageItemParams
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

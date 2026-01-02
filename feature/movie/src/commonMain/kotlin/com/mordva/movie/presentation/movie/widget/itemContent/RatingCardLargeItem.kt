@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.model.movie.Movie
-import com.mordva.model.totalValue.Rating
-import com.mordva.model.totalValue.Votes
+import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.totalValue.Rating
+import com.mordva.domain.model.totalValue.Votes
 import com.mordva.movie.presentation.movie.widget.component.RatingMovieContentRow
 import com.mordva.movie.presentation.movie.widget.listItem.RatingCardLarge
 import com.mordva.ui.theme.Resources

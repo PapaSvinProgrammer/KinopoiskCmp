@@ -11,7 +11,7 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.model.person.PersonMovie
+import com.mordva.domain.model.person.PersonMovie
 import com.mordva.movie.presentation.movie.widget.listItem.PersonMovieListItem
 
 @Composable

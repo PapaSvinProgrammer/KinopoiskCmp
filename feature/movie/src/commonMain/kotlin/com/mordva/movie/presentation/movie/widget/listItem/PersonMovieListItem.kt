@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.model.person.PersonMovie
+import com.mordva.domain.model.person.PersonMovie
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource

@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.movie.Movie
 import com.mordva.ui.util.ConvertData
 import com.mordva.ui.util.PrettyData
 
@@ -22,7 +22,11 @@ internal fun ExpandedContent(
     onShare: () -> Unit,
     onMore: () -> Unit
 ) {
-    val date = ConvertData.convertDateCreated(movie.year, movie.releaseYears)
+    val date = ConvertData.convertDateCreated(
+        year = movie.year,
+        start = movie.releaseYears.firstOrNull()?.start,
+        end = movie.releaseYears.firstOrNull()?.end
+    )
     val genres = movie.genres.take(2).joinToString(", ") { it.name }
     val countries = movie.countries.take(2).joinToString(", ") { it.name }
     var length = PrettyData.getPrettyLength(movie.movieLength ?: 0)

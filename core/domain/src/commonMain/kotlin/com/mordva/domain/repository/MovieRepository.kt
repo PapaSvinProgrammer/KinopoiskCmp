@@ -1,6 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.movie.Movie
 
 interface MovieRepository {
     suspend fun getMovieByFilter(

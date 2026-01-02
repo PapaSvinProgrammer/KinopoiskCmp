@@ -1,7 +1,7 @@
 package com.mordva.domain.usecase.studio
 
+import com.mordva.domain.model.movie.Studio
 import com.mordva.domain.repository.StudioRepository
-import com.mordva.model.movie.Studio
 import com.mordva.util.Constants.PAGE_FIELD
 import com.mordva.util.Constants.SORT_DESC
 import com.mordva.util.Constants.SORT_FIELD

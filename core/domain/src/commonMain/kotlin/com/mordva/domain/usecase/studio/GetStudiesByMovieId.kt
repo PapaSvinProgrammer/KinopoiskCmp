@@ -1,8 +1,8 @@
 package com.mordva.domain.usecase.studio
 
+import com.mordva.domain.model.movie.Studio
 import com.mordva.domain.repository.StudioRepository
 import com.mordva.domain.usecase.studio.model.StudioParams
-import com.mordva.model.movie.Studio
 import com.mordva.util.Constants.MOVIES_ID
 import com.mordva.util.Constants.PAGE_FIELD
 import com.mordva.util.Constants.SORT_DESC

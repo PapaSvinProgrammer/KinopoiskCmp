@@ -1,11 +1,11 @@
 package com.mordva.network.external
 
-import com.mordva.model.image.CollectionMovie
+import com.mordva.network.external.model.image.CollectionDto
 
 interface CollectionService {
     suspend fun getCollectionByFilter(
         queryParameters: List<Pair<String, String>>
-    ): Result<List<CollectionMovie>>
+    ): Result<List<CollectionDto>>
 
-    suspend fun getCollectionBySlug(slug: String): Result<CollectionMovie>
+    suspend fun getCollectionBySlug(slug: String): Result<CollectionDto>
 }

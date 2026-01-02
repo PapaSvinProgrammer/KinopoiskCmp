@@ -2,14 +2,17 @@ package com.mordva.sqlite
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mordva.sqlite.internal.AppDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
+internal fun getDatabase(): AppDatabase {
+    return getDatabaseBuilder().build()
+}
+
 internal fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
-    val dbFilePath = documentDirectory() + "/my_room.db"
+    val dbFilePath = documentDirectory() + "/kinopoisk_cmp.db"
     return Room.databaseBuilder<AppDatabase>(
         name = dbFilePath,
     )

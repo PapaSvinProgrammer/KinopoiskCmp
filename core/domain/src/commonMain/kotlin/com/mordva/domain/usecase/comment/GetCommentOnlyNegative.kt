@@ -1,12 +1,12 @@
 package com.mordva.domain.usecase.comment
 
-import com.mordva.domain.repository.CommentRepository
-import com.mordva.domain.usecase.comment.model.CommentParams
-import com.mordva.model.movie.Comment
 import com.mordva.util.Constants.MOVIE_ID_FIELD
 import com.mordva.util.Constants.NEGATIVE_VALUE
 import com.mordva.util.Constants.PAGE_FIELD
 import com.mordva.util.Constants.TYPE_FIELD
+import com.mordva.domain.model.movie.Comment
+import com.mordva.domain.repository.CommentRepository
+import com.mordva.domain.usecase.comment.model.CommentParams
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

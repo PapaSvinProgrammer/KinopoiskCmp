@@ -12,10 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.model.History
-import com.mordva.model.SearchItem
+import com.mordva.domain.model.SearchItem
+import com.mordva.domain.model.local.History
 import com.mordva.ui.theme.Resources
-import com.mordva.ui.uiState.SearchListUIState
+import com.mordva.search.presentation.search_screen.state.SearchListUIState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

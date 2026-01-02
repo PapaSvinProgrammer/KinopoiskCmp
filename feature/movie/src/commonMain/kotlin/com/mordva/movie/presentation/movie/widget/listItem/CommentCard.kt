@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.mordva.model.movie.Comment
+import com.mordva.domain.model.movie.Comment
 import com.mordva.ui.theme.Green
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.FormatDate

@@ -26,14 +26,14 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
+import com.mordva.domain.model.image.ImageType
 import com.mordva.images_list.util.imageTypeDropDownItems
 import com.mordva.images_list.util.isLongImage
 import com.mordva.images_list.util.toStringResource
-import com.mordva.model.image.ImageType
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
-import com.mordva.ui.uiState.ImageListUIState
+import com.mordva.images_list.presentation.widget.ImageListState
 import com.mordva.ui.util.toAspectRatio
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.component.customDropDownList.DropDownItem
@@ -107,12 +107,12 @@ internal fun ImageListScreen(
 
 @Composable
 private fun RenderMainContent(
-    imageState: ImageListUIState,
+    imageState: ImageListState,
     onLoadMore: () -> Unit
 ) {
     when (imageState) {
-        ImageListUIState.Loading -> BasicLoadingBox()
-        is ImageListUIState.Success -> {
+        ImageListState.Loading -> BasicLoadingBox()
+        is ImageListState.Success -> {
             EndlessLazyVerticalStaggeredGrid(
                 list = imageState.data,
                 columns = StaggeredGridCells.Fixed(2),

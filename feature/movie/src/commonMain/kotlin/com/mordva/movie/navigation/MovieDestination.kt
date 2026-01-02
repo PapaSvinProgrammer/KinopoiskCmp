@@ -13,3 +13,6 @@ internal data class WatchabilityListRoute(
 internal data class GroupPersonRoute(
     val persons: List<PersonMovieScreenObject>
 )
+
+@Serializable
+internal data object HomeRoute

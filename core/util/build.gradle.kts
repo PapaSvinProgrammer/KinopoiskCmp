@@ -45,7 +45,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.core.model)
             implementation(compose.runtime)
             implementation(libs.koin.core)
             implementation(libs.kotlin.stdlib)

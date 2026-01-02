@@ -1,7 +1,7 @@
 package com.mordva.domain.usecase.movie
 
+import com.mordva.domain.model.movie.Movie
 import com.mordva.domain.repository.MovieRepository
-import com.mordva.model.movie.Movie
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

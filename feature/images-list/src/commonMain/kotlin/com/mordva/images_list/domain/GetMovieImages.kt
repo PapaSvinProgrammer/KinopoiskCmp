@@ -1,10 +1,10 @@
 package com.mordva.images_list.domain
 
+import com.mordva.domain.model.image.ImageType
+import com.mordva.domain.model.image.MovieImageParams
+import com.mordva.domain.model.image.Poster
 import com.mordva.domain.repository.ImageRepository
 import com.mordva.images_list.domain.model.ImagesParams
-import com.mordva.model.image.ImageType
-import com.mordva.model.image.MovieImageParams
-import com.mordva.model.image.Poster
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

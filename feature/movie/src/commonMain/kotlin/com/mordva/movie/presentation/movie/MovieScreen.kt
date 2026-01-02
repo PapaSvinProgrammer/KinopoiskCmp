@@ -14,19 +14,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mordva.model.image.CollectionMovie
-import com.mordva.model.movie.Movie
-import com.mordva.model.movie.Watchability
-import com.mordva.model.person.PersonMovie
-import com.mordva.movie.presentation.movie.widget.RenderMovieContent
+import com.mordva.bottomsheet.packageBottomSheet.PackageBottomSheet
+import com.mordva.domain.model.image.CollectionMovie
+import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.movie.Watchability
+import com.mordva.domain.model.person.PersonMovie
+import com.mordva.movie.presentation.movie.widget.component.RenderMovieContent
 import com.mordva.movie.presentation.movie.widget.moreBottomSheet.MoreBottomSheet
 import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.ScoreBottomSheet
 import com.mordva.movie.utils.body
 import com.mordva.movie.utils.handleSnackBarSate
 import com.mordva.movie.utils.rememberCollapsedState
-import com.mordva.movieScreen.presentation.movie.widget.moreBottomSheet.MoreSheetAction
+import com.mordva.movie.presentation.movie.widget.moreBottomSheet.MoreSheetAction
 import com.mordva.ui.widget.bottomSheets.FactSheet
-import com.mordva.ui.widget.packageBottomSheet.PackageBottomSheet
 import kotlinx.coroutines.launch
 
 @Composable

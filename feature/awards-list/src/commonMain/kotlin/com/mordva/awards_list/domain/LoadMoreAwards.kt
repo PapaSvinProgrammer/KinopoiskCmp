@@ -2,8 +2,8 @@ package com.mordva.awards_list.domain
 
 import com.mordva.awards_list.domain.model.RequestParams
 import com.mordva.awards_list.presentation.widget.bottomSheet.AwardsFilterType
+import com.mordva.domain.model.person.NominationAward
 import com.mordva.domain.repository.AwardRepository
-import com.mordva.model.person.NominationAward
 import com.mordva.util.Constants.MOVIE_ID_FIELD
 import com.mordva.util.Constants.NOM_AWARD_TITLE_FIELD
 import com.mordva.util.Constants.NOM_AWARD_YEAR_FIELD

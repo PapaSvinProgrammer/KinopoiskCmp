@@ -1,6 +1,6 @@
 package com.mordva.search.presentation.search_settings.widget
 
-import com.mordva.model.category.ItemName
+import com.mordva.domain.model.category.ItemName
 
 internal data class SearchSettingsListState(
     val query: String = "",

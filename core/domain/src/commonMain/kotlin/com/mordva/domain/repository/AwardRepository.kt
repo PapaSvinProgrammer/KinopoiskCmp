@@ -1,6 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.person.NominationAward
+import com.mordva.domain.model.person.NominationAward
 
 interface AwardRepository {
     suspend fun getMovieAwards(

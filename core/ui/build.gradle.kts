@@ -37,7 +37,6 @@ kotlin {
         }
 
         commonMain.dependencies {
-            api(projects.core.model)
             api(projects.core.navigation)
             api(projects.core.util)
 

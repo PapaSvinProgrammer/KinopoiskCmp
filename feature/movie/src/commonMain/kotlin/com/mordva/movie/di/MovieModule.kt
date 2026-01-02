@@ -14,9 +14,15 @@ import com.mordva.movie.domain.HandleWillWatchAction
 import com.mordva.movie.domain.UnionPersonsAndPersonMovie
 import com.mordva.movie.domain.model.PersonMovieScreenObject
 import com.mordva.movie.presentation.groupPerson.GroupPersonViewModel
+import com.mordva.movie.domain.GetMoviesByCollection
+import com.mordva.movie.domain.GetMoviesByCompany
+import com.mordva.movie.domain.GetMoviesByGenre
+import com.mordva.movie.presentation.home.HomeViewModel
 import com.mordva.movie.presentation.movie.MovieViewModel
+import com.mordva.movie.presentation.movie_list.MovieListViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val movieModule = module {
@@ -53,6 +59,19 @@ val movieModule = module {
         )
     }
 
+    viewModel { (title: String, query: List<Pair<String, String>>) ->
+        MovieListViewModel(
+            title = title,
+            queryParameters = query,
+            getMovieByFilter = get(),
+        )
+    }
+
+    viewModelOf(::HomeViewModel)
+
+    factoryOf(::GetMoviesByCollection)
+    factoryOf(::GetMoviesByCompany)
+    factoryOf(::GetMoviesByGenre)
     factoryOf(::FilterCollection)
     factoryOf(::FilterPersonsLikeActors)
     factoryOf(::FilterPersonsLikeSupport)

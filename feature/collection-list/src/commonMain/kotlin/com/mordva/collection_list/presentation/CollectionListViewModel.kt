@@ -7,7 +7,7 @@ import com.mordva.domain.usecase.collection.GetCollectionAll
 import com.mordva.domain.usecase.collection.GetCollectionByCategory
 import com.mordva.domain.usecase.collection.GetCollectionBySlug
 import com.mordva.domain.usecase.collection.model.CollectionParams
-import com.mordva.ui.uiState.CollectionListUIState
+import com.mordva.collection_list.presentation.widget.CollectionListUIState
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import com.mordva.util.multiRequest

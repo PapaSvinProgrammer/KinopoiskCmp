@@ -1,12 +1,10 @@
 package com.mordva.network.internal.service
 
-import com.mordva.model.movie.Comment
 import com.mordva.network.external.CommentService
+import com.mordva.network.external.model.Docs
+import com.mordva.network.external.model.movie.CommentDto
 import com.mordva.network.internal.core.LIMIT_API_COUNT
 import com.mordva.network.internal.core.safeCall
-import com.mordva.network.internal.mapper.toDomain
-import com.mordva.network.internal.model.image.Docs
-import com.mordva.network.internal.model.movie.CommentDto
 import com.mordva.util.Constants.LIMIT_FIELD
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -16,7 +14,7 @@ internal class CommentServiceImpl(
 ) : CommentService {
     override suspend fun getCommentsByFilter(
         queryParameters: List<Pair<String, String>>
-    ): Result<List<Comment>> {
+    ): Result<List<CommentDto>> {
         return safeCall<Docs<CommentDto>> {
             client.get("v1.4/review") {
                 url {
@@ -24,8 +22,6 @@ internal class CommentServiceImpl(
                     queryParameters.forEach { parameters.append(it.first, it.second) }
                 }
             }
-        }.map { doc ->
-            doc.docs.map { it.toDomain() }
-        }
+        }.map { it.docs }
     }
 }

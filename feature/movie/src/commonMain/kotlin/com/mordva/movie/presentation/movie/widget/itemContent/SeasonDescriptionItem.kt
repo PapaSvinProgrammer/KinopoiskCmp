@@ -3,8 +3,8 @@ package com.mordva.movie.presentation.movie.widget.itemContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
+import com.mordva.domain.model.movie.Movie
 import com.mordva.movie.presentation.movie.widget.component.SeasonDescription
-import com.mordva.model.movie.Movie
 
 internal fun LazyListScope.seasonDescriptionItem(movie: Movie) {
     item(key = 3) {

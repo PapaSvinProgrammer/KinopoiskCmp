@@ -1,12 +1,12 @@
 package com.mordva.images_list.presentation
 
 import androidx.lifecycle.ViewModel
+import com.mordva.domain.model.image.ImageType
 import com.mordva.images_list.domain.GetMovieImages
 import com.mordva.images_list.domain.model.ImagesParams
-import com.mordva.images_list.presentation.widget.UIState
+import com.mordva.images_list.presentation.widget.ImageListUIState
 import com.mordva.images_list.util.getData
-import com.mordva.model.image.ImageType
-import com.mordva.ui.uiState.ImageListUIState
+import com.mordva.images_list.presentation.widget.ImageListState
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.update
 internal class ImageListViewModel(
     private val getMovieImages: GetMovieImages
 ) : ViewModel() {
-    private val _state = MutableStateFlow(UIState())
+    private val _state = MutableStateFlow(ImageListUIState())
     val state = _state.asStateFlow()
 
     fun updateImageTypes(type: ImageType) {
@@ -53,7 +53,7 @@ internal class ImageListViewModel(
 
         getMovieImages.execute(params).onSuccess { imageList ->
             _state.update {
-                it.copy(imagesState = ImageListUIState.Success(imageList))
+                it.copy(imagesState = ImageListState.Success(imageList))
             }
         }
     }
@@ -72,7 +72,7 @@ internal class ImageListViewModel(
             new.addAll(imageList)
 
             _state.update {
-                it.copy(imagesState = ImageListUIState.Success(new))
+                it.copy(imagesState = ImageListState.Success(new))
             }
         }
     }

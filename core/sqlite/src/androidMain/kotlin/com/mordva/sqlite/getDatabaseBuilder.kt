@@ -3,7 +3,10 @@ package com.mordva.sqlite
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mordva.sqlite.internal.AppDatabase
+
+internal fun getDatabase(ctx: Context): AppDatabase {
+    return getDatabaseBuilder(ctx).build()
+}
 
 internal fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<AppDatabase> {
     val appContext = context.applicationContext

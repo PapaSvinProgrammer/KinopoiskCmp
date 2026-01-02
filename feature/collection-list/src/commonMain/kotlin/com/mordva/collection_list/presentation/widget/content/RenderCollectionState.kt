@@ -2,8 +2,8 @@ package com.mordva.collection_list.presentation.widget.content
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mordva.model.image.CollectionMovie
-import com.mordva.ui.uiState.CollectionListUIState
+import com.mordva.collection_list.presentation.widget.CollectionListUIState
+import com.mordva.domain.model.image.CollectionMovie
 import com.mordva.ui.widget.shimmer.ShimmerMovieDetailList
 
 @Composable

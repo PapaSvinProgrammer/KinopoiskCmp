@@ -42,13 +42,9 @@ kotlin {
     }
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(projects.core.model)
-                implementation(projects.core.util)
-                implementation(libs.androidx.lifecycle.viewmodelCompose)
-                implementation(libs.androidx.lifecycle.runtimeCompose)
-            }
+        commonMain.dependencies {
+            implementation(projects.core.util)
+            implementation(libs.kotlinx.coroutines.core)
         }
     }
 }

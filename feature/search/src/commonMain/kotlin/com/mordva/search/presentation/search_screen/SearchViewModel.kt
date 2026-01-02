@@ -2,18 +2,17 @@ package com.mordva.search.presentation.search_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mordva.domain.model.SearchItem
 import com.mordva.domain.repository.HistoryRepository
 import com.mordva.domain.usecase.collection.GetCollectionByCategory
 import com.mordva.domain.usecase.collection.model.CollectionParams
 import com.mordva.domain.usecase.movie.GetMovieByFilter
-import com.mordva.model.SearchItem
 import com.mordva.search.domain.LoadMoreByName
 import com.mordva.search.domain.SearchByName
 import com.mordva.search.domain.model.RequestParams
-import com.mordva.search.presentation.search_screen.state.UiState
-import com.mordva.ui.uiState.CollectionListUIState
-import com.mordva.ui.uiState.MovieListUIState
-import com.mordva.ui.uiState.SearchListUIState
+import com.mordva.search.presentation.search_screen.state.SearchUiState
+import com.mordva.search.presentation.search_screen.state.SearchListUIState
+import com.mordva.search.presentation.search_screen.util.toHistory
 import com.mordva.util.Constants
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
@@ -32,7 +31,7 @@ internal class SearchViewModel(
     private val loadMoreByName: LoadMoreByName,
     private val historyRepository: HistoryRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(UiState())
+    private val _uiState = MutableStateFlow(SearchUiState())
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -119,7 +118,7 @@ internal class SearchViewModel(
     }
 
     fun insertSearchHistoryItem(searchItem: SearchItem) = launchWithoutOld(INSERT_HISTORY_JOB) {
-//        historyRepository.insert(searchItem.toHistory())
+        historyRepository.insert(searchItem.toHistory())
     }
 
     fun deleteSearchHistoryItem(id: Int) = launchWithoutOld(DELETE_HISTORY_JOB) {
@@ -129,12 +128,12 @@ internal class SearchViewModel(
     private fun getCollections() = launchWithoutOld(GET_COLLECTIONS_JOB) {
         val params = CollectionParams(category = "Фильмы")
         val res = getCollectionByCategory.execute(params)
-
-        res.onSuccess { collections ->
-            _uiState.update {
-                it.copy(collectionsState = CollectionListUIState.Success(collections))
-            }
-        }
+//
+//        res.onSuccess { collections ->
+//            _uiState.update {
+//                it.copy(collectionsState = CollectionListUIState.Success(collections))
+//            }
+//        }
     }
 
     private fun getTopSerials() = launchWithoutOld(GET_SERIALS_JOB) {
@@ -146,11 +145,11 @@ internal class SearchViewModel(
 
         val res = getMovieByFilter.execute(queryParameters)
 
-        res.onSuccess { serials ->
-            _uiState.update {
-                it.copy(topSerialsState = MovieListUIState.Success(serials))
-            }
-        }
+//        res.onSuccess { serials ->
+//            _uiState.update {
+//                it.copy(topSerialsState = MovieListUIState.Success(serials))
+//            }
+//        }
     }
 
     override fun onCleared() {

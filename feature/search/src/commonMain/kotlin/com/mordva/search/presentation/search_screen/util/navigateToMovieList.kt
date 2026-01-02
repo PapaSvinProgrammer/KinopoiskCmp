@@ -1,7 +1,7 @@
 package com.mordva.search.presentation.search_screen.util
 
 import androidx.navigation.NavController
-import com.mordva.model.image.CollectionMovie
+import com.mordva.domain.model.image.CollectionMovie
 import com.mordva.navigation.MovieListGraph
 import com.mordva.util.Constants
 

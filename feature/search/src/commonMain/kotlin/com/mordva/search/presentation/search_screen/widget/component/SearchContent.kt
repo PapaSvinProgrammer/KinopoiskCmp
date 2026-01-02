@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.model.History
-import com.mordva.model.SearchItem
+import com.mordva.domain.model.SearchItem
+import com.mordva.domain.model.local.History
 import com.mordva.search.presentation.search_screen.util.toSearchItem
 import com.mordva.search.presentation.search_screen.widget.listItem.SearchHistoryMovieCard
 import com.mordva.search.presentation.search_screen.widget.listItem.SearchItemCard

@@ -2,8 +2,12 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
-//    alias(libs.plugins.ksp)
-//    alias(libs.plugins.androidx.room)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.room)
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 kotlin {
@@ -46,20 +50,16 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.core.model)
-                implementation(projects.core.domain)
-                implementation(libs.multiplatform.settings.coroutines)
-                implementation(libs.multiplatform.settings.datastore)
-                implementation(libs.multiplatform.settings)
+                implementation(libs.koin.core)
                 implementation(libs.androidx.room.runtime)
                 implementation(libs.androidx.sqlite.bundled)
             }
         }
-
-        androidMain {
-            dependencies {
-                implementation(libs.androidx.datastore.preferences)
-            }
-        }
     }
+}
+
+dependencies {
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
 }

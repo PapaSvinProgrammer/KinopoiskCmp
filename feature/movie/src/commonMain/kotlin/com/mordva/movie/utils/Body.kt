@@ -1,8 +1,8 @@
 package com.mordva.movie.utils
 
-import com.mordva.model.movie.Movie
-import com.mordva.movie.presentation.movie.widget.MovieUIState
+import com.mordva.domain.model.movie.Movie
+import com.mordva.movie.presentation.movie.widget.MovieState
 
-internal fun MovieUIState.body(): Movie {
-    return (this as? MovieUIState.Success)?.data ?: Movie()
+internal fun MovieState.body(): Movie {
+    return (this as? MovieState.Success)?.data ?: Movie()
 }

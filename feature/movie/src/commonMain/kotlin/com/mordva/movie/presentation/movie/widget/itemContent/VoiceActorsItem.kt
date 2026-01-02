@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.model.person.PersonMovie
+import com.mordva.domain.model.person.PersonMovie
 import com.mordva.movie.presentation.movie.widget.listItem.SupportPersonCard
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.widget.component.TitleRow

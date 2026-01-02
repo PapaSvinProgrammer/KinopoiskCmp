@@ -1,10 +1,10 @@
 package com.mordva.search.presentation.search_screen.util
 
-import com.mordva.model.History
-import com.mordva.model.SearchItem
-import com.mordva.model.movie.Movie
-import com.mordva.model.person.Person
-import com.mordva.model.totalValue.ReleaseYears
+import com.mordva.domain.model.SearchItem
+import com.mordva.domain.model.local.History
+import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.person.Person
+import com.mordva.domain.model.totalValue.ReleaseYears
 import com.mordva.ui.util.ConvertData
 import kotlin.jvm.JvmName
 
@@ -26,7 +26,13 @@ fun Movie.toSearchItem(): SearchItem {
         id = this.id,
         isMovie = true,
         name = this.name ?: "",
-        alternativeName = ConvertData.getAlternativeNameForMovie(this),
+        alternativeName = ConvertData.getAlternativeNameForMovie(
+            alternativeName = alternativeName,
+            year = year,
+            genres = genres.map { it.name },
+            start = releaseYears.firstOrNull()?.start,
+            end = releaseYears.firstOrNull()?.end
+        ),
         year = this.year ?: 0,
         releaseYears = this.releaseYears.firstOrNull() ?: ReleaseYears(null, null),
         poster = this.poster?.url ?: "",

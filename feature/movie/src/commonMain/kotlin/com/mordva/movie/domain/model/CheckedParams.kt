@@ -1,4 +1,4 @@
-package com.mordva.movieScreen.domain.model
+package com.mordva.movie.domain.model
 
 internal data class CheckedParams(
     val isChecked: Boolean,

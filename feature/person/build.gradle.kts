@@ -32,7 +32,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.ui)
             implementation(projects.core.domain)
-            implementation(projects.core.baseViewModels)
 
             implementation(libs.bundles.coil)
             implementation(libs.bundles.koin)

@@ -54,9 +54,10 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.core.model)
-                implementation(projects.core.network)
+                api(projects.core.network)
+                api(projects.core.sqlite)
                 implementation(projects.core.domain)
+                implementation(libs.koin.core)
                 implementation(libs.multiplatform.settings.coroutines)
                 implementation(libs.multiplatform.settings.datastore)
                 implementation(libs.multiplatform.settings)

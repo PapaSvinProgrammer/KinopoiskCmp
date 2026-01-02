@@ -1,6 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.image.CollectionMovie
+import com.mordva.domain.model.image.CollectionMovie
 
 interface CollectionRepository {
     suspend fun getCollections(

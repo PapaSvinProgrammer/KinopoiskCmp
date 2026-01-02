@@ -1,10 +1,9 @@
 package com.mordva.domain.usecase.person
 
+import com.mordva.domain.model.person.Person
 import com.mordva.domain.repository.PersonRepository
 import com.mordva.domain.usecase.person.model.PersonParams
-import com.mordva.model.person.Person
 import com.mordva.util.UseCase
-import com.mordva.util.error.ClientException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
@@ -13,7 +12,7 @@ class SearchPerson(
 ) : UseCase<PersonParams, Result<List<Person>>>(Dispatchers.IO) {
     override suspend fun run(params: PersonParams): Result<List<Person>> {
         if (params.q.length < 3 || params.page <= 0) {
-            return Result.failure(ClientException())
+            return Result.failure(Exception())
         }
 
         return personRepository.searchPersonByName(

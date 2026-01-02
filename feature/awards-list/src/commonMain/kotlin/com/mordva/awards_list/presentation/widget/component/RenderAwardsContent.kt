@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.model.person.NominationAward
+import com.mordva.domain.model.person.NominationAward
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.lazyComponent.EndlessLazyColumn
 

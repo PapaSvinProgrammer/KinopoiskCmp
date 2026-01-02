@@ -2,9 +2,9 @@ package com.mordva.movie.domain
 
 import com.mordva.domain.repository.RatedMovieRepository
 import com.mordva.movie.utils.toRatedMovie
-import com.mordva.movieScreen.domain.model.RatedMovieActionParams
-import com.mordva.movieScreen.domain.model.RatedMovieParams
-import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
+import com.mordva.movie.domain.model.RatedMovieActionParams
+import com.mordva.movie.domain.model.RatedMovieParams
+import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

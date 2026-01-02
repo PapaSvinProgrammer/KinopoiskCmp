@@ -31,6 +31,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.ui)
+            implementation(projects.core.domain)
 
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.navigation.compose)

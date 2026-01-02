@@ -9,9 +9,6 @@ import kotlinx.serialization.Serializable
 sealed interface RootGraph
 
 @Serializable
-data object HomeGraph : RootGraph
-
-@Serializable
 data object FavoriteGraph : RootGraph
 
 @Serializable
@@ -104,6 +101,9 @@ data object SettingsGraph : RootGraph {
 
     @Serializable
     data object SupportRoute
+
+    @Serializable
+    data object AboutAppRoute
 }
 
 @Serializable

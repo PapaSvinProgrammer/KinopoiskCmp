@@ -1,7 +1,7 @@
 package com.mordva.movie.domain
 
+import com.mordva.domain.model.person.Person
 import com.mordva.domain.repository.PersonRepository
-import com.mordva.model.person.Person
 import com.mordva.util.Constants
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers

@@ -1,6 +1,6 @@
-package com.mordva.movieScreen.domain.model
+package com.mordva.movie.domain.model
 
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.movie.Movie
 
 internal class RatedMovieParams(
     val movie: Movie,

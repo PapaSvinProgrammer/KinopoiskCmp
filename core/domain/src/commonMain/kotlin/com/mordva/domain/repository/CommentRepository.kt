@@ -1,6 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.movie.Comment
+import com.mordva.domain.model.movie.Comment
 
 interface CommentRepository {
     suspend fun getCommentsByFilter(

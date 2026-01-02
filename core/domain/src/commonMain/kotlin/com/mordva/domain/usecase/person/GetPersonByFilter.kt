@@ -1,7 +1,7 @@
 package com.mordva.domain.usecase.person
 
+import com.mordva.domain.model.person.Person
 import com.mordva.domain.repository.PersonRepository
-import com.mordva.model.person.Person
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

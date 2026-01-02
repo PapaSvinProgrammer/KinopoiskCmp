@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.model.SearchItem
+import com.mordva.domain.model.SearchItem
 import com.mordva.ui.widget.listItems.poster.StandardImageSmall
 import com.mordva.ui.widget.other.RatingText
 

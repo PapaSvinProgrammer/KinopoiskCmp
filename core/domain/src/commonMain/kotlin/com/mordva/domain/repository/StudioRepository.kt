@@ -1,6 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.movie.Studio
+import com.mordva.domain.model.movie.Studio
 
 interface StudioRepository {
     suspend fun getStudies(

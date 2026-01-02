@@ -12,7 +12,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.model.totalValue.Premiere
+import com.mordva.domain.model.totalValue.Premiere
 import com.mordva.movie.presentation.movie.widget.listItem.PremiereCard
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.util.FormatDate

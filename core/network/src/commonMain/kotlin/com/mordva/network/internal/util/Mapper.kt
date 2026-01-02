@@ -1,17 +1,17 @@
 package com.mordva.network.internal.util
 
-import com.mordva.model.image.ImageType
+import com.mordva.network.external.model.image.ImageTypeKtor
 
-internal fun ImageType.toKtorString(): String {
+internal fun ImageTypeKtor.toKtorString(): String {
     return when (this) {
-        ImageType.ALL -> ""
-        ImageType.BACKDROP -> "backdrops"
-        ImageType.COVER -> "cover"
-        ImageType.FRAME -> "frame"
-        ImageType.PROMO -> "promo"
-        ImageType.SCREENSHOT -> "screenshot"
-        ImageType.SHOOTING -> "shooting"
-        ImageType.STILL -> "still"
-        ImageType.WALLPAPER -> "wallpaper"
+        ImageTypeKtor.ALL -> ""
+        ImageTypeKtor.BACKDROP -> "backdrops"
+        ImageTypeKtor.COVER -> "cover"
+        ImageTypeKtor.FRAME -> "frame"
+        ImageTypeKtor.PROMO -> "promo"
+        ImageTypeKtor.SCREENSHOT -> "screenshot"
+        ImageTypeKtor.SHOOTING -> "shooting"
+        ImageTypeKtor.STILL -> "still"
+        ImageTypeKtor.WALLPAPER -> "wallpaper"
     }
 }

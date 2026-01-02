@@ -44,19 +44,12 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
             implementation(libs.ktor.client.okhttp)
         }
 
         commonMain.dependencies {
-            implementation(projects.core.model)
             implementation(projects.core.util)
-
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
-            api(libs.koin.core)
+            implementation(libs.koin.core)
             implementation(libs.bundles.ktor)
         }
 

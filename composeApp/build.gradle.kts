@@ -5,12 +5,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.androidx.room)
     alias(libs.plugins.ksp)
-}
-
-room {
-    schemaDirectory("$projectDir/schemas")
 }
 
 kotlin {
@@ -42,23 +37,20 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.data)
             implementation(projects.core.network)
+            implementation(projects.core.navigation)
             implementation(projects.core.security)
             implementation(projects.core.ui)
             implementation(projects.core.domain)
 
             implementation(projects.feature.profile)
-            implementation(projects.feature.home)
-            implementation(projects.feature.aboutApp)
             implementation(projects.feature.awardsList)
             implementation(projects.feature.search)
             implementation(projects.feature.favorite)
             implementation(projects.feature.collectionList)
-            implementation(projects.feature.movieList)
             implementation(projects.feature.movie)
             implementation(projects.feature.awardsList)
             implementation(projects.feature.otp)
             implementation(projects.feature.person)
-            implementation(projects.feature.personPodium)
             implementation(projects.feature.settings)
             implementation(projects.feature.imagesList)
 
@@ -106,9 +98,6 @@ android {
 }
 
 dependencies {
-    add("kspAndroid", libs.androidx.room.compiler)
-    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
-    add("kspIosArm64", libs.androidx.room.compiler)
     debugImplementation(compose.uiTooling)
 }
 

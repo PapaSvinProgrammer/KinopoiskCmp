@@ -1,7 +1,8 @@
 package com.mordva.data
 
+import com.mordva.data.mapper.toDomain
+import com.mordva.domain.model.movie.Movie
 import com.mordva.domain.repository.MovieRepository
-import com.mordva.model.movie.Movie
 import com.mordva.network.external.MovieService
 
 internal class MovieRepositoryImpl(
@@ -10,11 +11,11 @@ internal class MovieRepositoryImpl(
     override suspend fun getMovieByFilter(
         queryParameters: List<Pair<String, String>>
     ): Result<List<Movie>> {
-        return service.getMoviesByFilter(queryParameters)
+        return service.getMoviesByFilter(queryParameters).map { it.toDomain() }
     }
 
     override suspend fun getMovieById(movieId: Int): Result<Movie> {
-        return service.getMovieById(movieId)
+        return service.getMovieById(movieId).map { it.toDomain() }
     }
 
     override suspend fun search(
@@ -24,6 +25,6 @@ internal class MovieRepositoryImpl(
         return service.searchMovieByName(
             page = page,
             q = q
-        )
+        ).map { it.toDomain() }
     }
 }

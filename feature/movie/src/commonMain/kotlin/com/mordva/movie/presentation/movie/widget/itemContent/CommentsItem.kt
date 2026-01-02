@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.model.movie.Comment
+import com.mordva.domain.model.movie.Comment
 import com.mordva.movie.presentation.movie.widget.listItem.CommentCard
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.widget.component.TitleRow

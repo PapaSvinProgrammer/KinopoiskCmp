@@ -1,13 +1,11 @@
 package com.mordva.network.internal.service
 
-import com.mordva.model.image.MovieImageParams
-import com.mordva.model.image.Poster
 import com.mordva.network.external.ImageService
 import com.mordva.network.internal.core.LIMIT_API_COUNT
 import com.mordva.network.internal.core.safeCall
-import com.mordva.network.internal.mapper.toDomain
-import com.mordva.network.internal.model.image.Docs
-import com.mordva.network.internal.model.image.PosterDto
+import com.mordva.network.external.model.Docs
+import com.mordva.network.external.model.image.MovieImageParamsDto
+import com.mordva.network.external.model.image.PosterDto
 import com.mordva.network.internal.util.toKtorString
 import com.mordva.util.Constants.LIMIT_FIELD
 import com.mordva.util.Constants.MOVIE_ID_FIELD
@@ -19,7 +17,7 @@ import io.ktor.client.request.get
 internal class ImageServiceImpl(
     private val client: HttpClient
 ) : ImageService {
-    override suspend fun getMovieImages(movieId: Int, page: Int): Result<List<Poster>> {
+    override suspend fun getMovieImages(movieId: Int, page: Int): Result<List<PosterDto>> {
         return safeCall<Docs<PosterDto>> {
             client.get("v1.4/image") {
                 url {
@@ -28,12 +26,10 @@ internal class ImageServiceImpl(
                     parameters.append(MOVIE_ID_FIELD, movieId.toString())
                 }
             }
-        }.map { doc ->
-            doc.docs.map { it.toDomain() }
-        }
+        }.map { doc -> doc.docs }
     }
 
-    override suspend fun getMoviesImagesByType(params: MovieImageParams): Result<List<Poster>> {
+    override suspend fun getMoviesImagesByType(params: MovieImageParamsDto): Result<List<PosterDto>> {
         return safeCall<Docs<PosterDto>> {
             client.get("v1.4/image") {
                 url {
@@ -43,8 +39,6 @@ internal class ImageServiceImpl(
                     params.types.forEach { parameters.append(TYPE_FIELD, it.toKtorString()) }
                 }
             }
-        }.map { doc ->
-            doc.docs.map { it.toDomain() }
-        }
+        }.map { doc -> doc.docs }
     }
 }

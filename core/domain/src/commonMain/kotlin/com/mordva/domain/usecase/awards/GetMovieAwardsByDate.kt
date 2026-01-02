@@ -1,14 +1,14 @@
 package com.mordva.domain.usecase.awards
 
-import com.mordva.domain.repository.AwardRepository
-import com.mordva.domain.usecase.awards.model.AwardParams
-import com.mordva.model.person.NominationAward
 import com.mordva.util.Constants.MOVIE_ID_FIELD
 import com.mordva.util.Constants.NOM_AWARD_YEAR_FIELD
 import com.mordva.util.Constants.PAGE_FIELD
 import com.mordva.util.Constants.SORT_DESC
 import com.mordva.util.Constants.SORT_FIELD
 import com.mordva.util.Constants.SORT_TYPE
+import com.mordva.domain.model.person.NominationAward
+import com.mordva.domain.repository.AwardRepository
+import com.mordva.domain.usecase.awards.model.AwardParams
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

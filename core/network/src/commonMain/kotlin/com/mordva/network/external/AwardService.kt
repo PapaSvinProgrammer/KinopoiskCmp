@@ -1,13 +1,13 @@
 package com.mordva.network.external
 
-import com.mordva.model.person.NominationAward
+import com.mordva.network.external.model.person.NominationAwardDto
 
 interface AwardService {
     suspend fun getPersonAwardsByFilter(
         queryParameters: List<Pair<String, String>>
-    ): Result<List<NominationAward>>
+    ): Result<List<NominationAwardDto>>
 
     suspend fun getMovieAwardsByFilter(
         queryParameters: List<Pair<String, String>>
-    ): Result<List<NominationAward>>
+    ): Result<List<NominationAwardDto>>
 }

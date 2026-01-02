@@ -33,7 +33,7 @@ fun Modifier.animatedBorder(
     easing: Easing = LinearEasing
 ): Modifier {
     val brush = Brush.sweepGradient(colors = borderColors)
-    val infiniteTransition = rememberInfiniteTransition(label = "animatedBorder")
+    val infiniteTransition = rememberInfiniteTransition()
 
     val angle by infiniteTransition.animateFloat(
         initialValue = 0f,
@@ -41,8 +41,7 @@ fun Modifier.animatedBorder(
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = animationDurationInMillis, easing = easing),
             repeatMode = RepeatMode.Restart
-        ),
-        label = "angleAnimation"
+        )
     )
 
     return this

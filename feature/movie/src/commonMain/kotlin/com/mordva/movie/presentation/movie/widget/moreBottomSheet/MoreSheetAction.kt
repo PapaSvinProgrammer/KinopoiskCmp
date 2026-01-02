@@ -1,4 +1,4 @@
-package com.mordva.movieScreen.presentation.movie.widget.moreBottomSheet
+package com.mordva.movie.presentation.movie.widget.moreBottomSheet
 
 internal sealed interface MoreSheetAction {
     data object AddInFolder : MoreSheetAction

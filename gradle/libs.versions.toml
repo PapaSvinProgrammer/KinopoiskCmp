@@ -27,8 +27,11 @@ uriKmp = "0.0.21"
 room = "2.8.4"
 sqlite = "2.6.2"
 ksp = "2.3.4"
+coroutines = "1.10.2"
 
 [libraries]
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
 # --- Test ---
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
