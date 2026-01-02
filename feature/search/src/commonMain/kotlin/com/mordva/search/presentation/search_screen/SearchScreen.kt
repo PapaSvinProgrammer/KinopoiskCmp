@@ -2,7 +2,10 @@ package com.mordva.search.presentation.search_screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,12 +16,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mordva.search.presentation.search_screen.state.SearchBodyContentState
 import com.mordva.search.presentation.search_screen.state.SearchScreenEvent
+import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.ShowAllMovies
+import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.ShowCollectionAll
+import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.ShowCollectionList
+import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.ShowItemContent
+import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.ShowMovie
+import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.ShowMovieList
+import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.ShowSettings
+import com.mordva.search.presentation.search_screen.util.toRenderRowItem
 import com.mordva.search.presentation.search_screen.widget.component.SearchBarContent
 import com.mordva.search.presentation.search_screen.widget.component.collectionCategoryListItemContent
-import com.mordva.search.presentation.search_screen.widget.component.collectionsItemContent
-import com.mordva.search.presentation.search_screen.widget.component.serialsItemContent
+import com.mordva.ui.theme.Resources
 import com.mordva.ui.widget.component.CustomSearchBar
+import com.mordva.ui.widget.renderState.renderCollectionRow
+import com.mordva.ui.widget.renderState.renderMovieRow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,7 +41,7 @@ internal fun SearchScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Box {
+    Box(modifier = Modifier.fillMaxSize()) {
         CustomSearchBar(
             modifier = Modifier.align(Alignment.TopCenter),
             expanded = uiState.isExpanded,
@@ -38,7 +51,7 @@ internal fun SearchScreen(
             onSearch = { viewModel.onShowSearchBar(false) },
             onOpen = { viewModel.onShowSearchBar(true) },
             onClose = { viewModel.onShowSearchBar(false) },
-            onSettings = { eventHandler(SearchScreenEvent.ShowSettings) },
+            onSettings = { eventHandler(ShowSettings) },
             onClear = { viewModel.onClear() },
             content = {
                 SearchBarContent(
@@ -49,7 +62,7 @@ internal fun SearchScreen(
                     onDeleteHistoryItem = { viewModel.deleteSearchHistoryItem(it) },
                     onClick = {
                         viewModel.insertSearchHistoryItem(it)
-                        eventHandler(SearchScreenEvent.ShowItemContent(it))
+                        eventHandler(ShowItemContent(it))
                     },
                     onLoadMore = { viewModel.loadMore() },
                     onSelectItem = {
@@ -60,28 +73,41 @@ internal fun SearchScreen(
             },
         )
 
-        LazyColumn(
-            modifier = Modifier
-                .padding(top = 140.dp)
-                .navigationBarsPadding()
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(5.dp)
-        ) {
-            collectionsItemContent(
-//                state = uiState.collectionsState,
-                onShowAll = { eventHandler(SearchScreenEvent.ShowCollectionAll) },
-                onCollectionClick = { eventHandler(SearchScreenEvent.ShowMovieList(it)) },
-            )
+        when (val state = uiState.bodyContentState) {
+            is SearchBodyContentState.Success -> {
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(top = 120.dp)
+                        .navigationBarsPadding()
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
+                    renderCollectionRow(
+                        title = Resources.Strings.AdviseWatch,
+                        list = state.collections.toRenderRowItem(),
+                        onClick = { eventHandler(ShowMovieList(it)) },
+                        onShowAll = { eventHandler(ShowCollectionAll) }
+                    )
 
-            collectionCategoryListItemContent {
-                eventHandler(SearchScreenEvent.ShowCollectionList(it))
+                    collectionCategoryListItemContent {
+                        eventHandler(ShowCollectionList(it))
+                    }
+
+                    renderMovieRow(
+                        title = Resources.Strings.PopularSerials,
+                        list = state.topSerials.toRenderRowItem(),
+                        onClick = { eventHandler(ShowMovie(it)) },
+                        onShowAll = { eventHandler(ShowAllMovies("")) }
+                    )
+
+                    item {
+                        Spacer(modifier = Modifier.height(100.dp))
+                    }
+                }
             }
 
-            serialsItemContent(
-//                state = uiState.topSerialsState,
-                onShowAll = { eventHandler(SearchScreenEvent.ShowAllMovies(it)) },
-                onMovieClick = { eventHandler(SearchScreenEvent.ShowMovie(it)) }
-            )
+            SearchBodyContentState.Error -> Unit
+            SearchBodyContentState.Loading -> Unit
         }
     }
 }

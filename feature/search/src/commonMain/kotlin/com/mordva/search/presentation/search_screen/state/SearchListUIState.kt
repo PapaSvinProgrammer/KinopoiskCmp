@@ -9,3 +9,7 @@ interface SearchListUIState {
     data object Loading : SearchListUIState
     data object Error : SearchListUIState
 }
+
+internal fun SearchListUIState.body(): List<SearchItem> {
+    return (this as? SearchListUIState.Success)?.data ?: listOf()
+}

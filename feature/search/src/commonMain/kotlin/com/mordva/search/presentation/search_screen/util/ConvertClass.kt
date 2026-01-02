@@ -1,14 +1,17 @@
 package com.mordva.search.presentation.search_screen.util
 
 import com.mordva.domain.model.SearchItem
+import com.mordva.domain.model.image.CollectionMovie
 import com.mordva.domain.model.local.History
 import com.mordva.domain.model.movie.Movie
 import com.mordva.domain.model.person.Person
 import com.mordva.domain.model.totalValue.ReleaseYears
 import com.mordva.ui.util.ConvertData
+import com.mordva.ui.widget.renderState.RenderStateRowItemCollection
+import com.mordva.ui.widget.renderState.RenderStateRowItemMovie
 import kotlin.jvm.JvmName
 
-fun SearchItem.toHistory(): History {
+internal fun SearchItem.toHistory(): History {
     return History(
         movieId = this.id,
         name = this.name,
@@ -21,7 +24,7 @@ fun SearchItem.toHistory(): History {
     )
 }
 
-fun Movie.toSearchItem(): SearchItem {
+internal fun Movie.toSearchItem(): SearchItem {
     return SearchItem(
         id = this.id,
         isMovie = true,
@@ -40,7 +43,7 @@ fun Movie.toSearchItem(): SearchItem {
     )
 }
 
-fun Person.toSearchItem(): SearchItem {
+internal fun Person.toSearchItem(): SearchItem {
     return SearchItem(
         id = this.id,
         isMovie = false,
@@ -54,7 +57,7 @@ fun Person.toSearchItem(): SearchItem {
 }
 
 @JvmName(name = "movieToSearchItemList")
-fun List<Movie>.toSearchItemList(): List<SearchItem> {
+internal fun List<Movie>.toSearchItemList(): List<SearchItem> {
     val res = ArrayList<SearchItem>()
 
     this.forEach {
@@ -65,7 +68,7 @@ fun List<Movie>.toSearchItemList(): List<SearchItem> {
 }
 
 @JvmName(name = "personToSearchItemList")
-fun List<Person>.toSearchItemList(): List<SearchItem> {
+internal fun List<Person>.toSearchItemList(): List<SearchItem> {
     val res = ArrayList<SearchItem>()
 
     this.forEach {
@@ -75,7 +78,7 @@ fun List<Person>.toSearchItemList(): List<SearchItem> {
     return res
 }
 
-fun History.toSearchItem(): SearchItem {
+internal fun History.toSearchItem(): SearchItem {
     val releaseYears = ReleaseYears(
         start = this.start,
         end = this.end
@@ -90,5 +93,25 @@ fun History.toSearchItem(): SearchItem {
         poster = this.poster,
         isMovie = this.isMovie,
         rating = 0f
+    )
+}
+
+@JvmName("listCollectionMovieToRenderItemCollection")
+internal fun List<CollectionMovie>.toRenderRowItem() = map {
+    RenderStateRowItemCollection(
+        id = it,
+        title = it.name ?: "",
+        image = it.cover?.url ?: ""
+    )
+}
+
+@JvmName("listMovieToRenderItemMovie")
+internal fun List<Movie>.toRenderRowItem() = map {
+    RenderStateRowItemMovie(
+        id = it,
+        title = it.name ?: "",
+        image = it.poster?.url ?: "",
+        rating = it.rating?.kp,
+        top250 = it.top250
     )
 }

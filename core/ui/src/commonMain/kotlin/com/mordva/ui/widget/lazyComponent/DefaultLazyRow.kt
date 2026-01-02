@@ -19,7 +19,7 @@ fun <T> DefaultLazyRow(
     contentPadding: PaddingValues = PaddingValues(horizontal = 15.dp),
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(10.dp),
     key: ((item: T) -> Any)? = null,
-    lastItemCard: @Composable () -> Unit = {},
+    lastItemCard: (@Composable () -> Unit)? = null,
     content: @Composable (T) -> Unit
 ) {
     val listState = rememberLazyListState()
@@ -39,8 +39,8 @@ fun <T> DefaultLazyRow(
             content(it)
         }
 
-        item {
-            lastItemCard()
+        lastItemCard?.let {
+            item { it.invoke() }
         }
     }
 }
