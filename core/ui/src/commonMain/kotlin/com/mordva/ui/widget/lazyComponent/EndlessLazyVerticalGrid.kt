@@ -13,14 +13,14 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.mordva.ui.theme.DsSpacer
 
 @Composable
 fun <T> EndlessLazyVerticalGrid(
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 15.dp),
-    verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(15.dp),
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(10.dp),
+    contentPadding: PaddingValues = PaddingValues(horizontal = DsSpacer.M16),
+    verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(DsSpacer.M16),
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(DsSpacer.M10),
     columns: GridCells = GridCells.Fixed(2),
     gridState: LazyGridState = rememberLazyGridState(),
     list: List<T>,

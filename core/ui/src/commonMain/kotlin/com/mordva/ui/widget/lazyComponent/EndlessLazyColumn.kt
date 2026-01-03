@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 fun <T: Any> EndlessLazyColumn(
     modifier: Modifier = Modifier,
     listState: LazyListState = rememberLazyListState(),
-    contentPadding: PaddingValues = PaddingValues(0.dp),
+    contentPadding: PaddingValues = PaddingValues(),
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     items: List<T>,
     key: ((index: Int, item: T) -> Any)? = null,

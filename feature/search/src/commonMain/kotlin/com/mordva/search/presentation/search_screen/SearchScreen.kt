@@ -27,9 +27,11 @@ import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.Show
 import com.mordva.search.presentation.search_screen.state.SearchScreenEvent.ShowSettings
 import com.mordva.search.presentation.search_screen.util.toRenderRowItem
 import com.mordva.search.presentation.search_screen.widget.component.SearchBarContent
+import com.mordva.search.presentation.search_screen.widget.component.SearchScreenLoadingContent
 import com.mordva.search.presentation.search_screen.widget.component.collectionCategoryListItemContent
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.widget.component.CustomSearchBar
+import com.mordva.ui.widget.component.ErrorScreen
 import com.mordva.ui.widget.renderState.renderCollectionRow
 import com.mordva.ui.widget.renderState.renderMovieRow
 
@@ -106,8 +108,8 @@ internal fun SearchScreen(
                 }
             }
 
-            SearchBodyContentState.Error -> Unit
-            SearchBodyContentState.Loading -> Unit
+            SearchBodyContentState.Error -> ErrorScreen()
+            SearchBodyContentState.Loading -> SearchScreenLoadingContent()
         }
     }
 }

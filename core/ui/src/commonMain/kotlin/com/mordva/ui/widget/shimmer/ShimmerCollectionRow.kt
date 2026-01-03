@@ -14,13 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.mordva.ui.theme.DsSpacer
 
 @Composable
 fun ShimmerCollectionRow() {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(horizontal = 15.dp)
+        horizontalArrangement = Arrangement.spacedBy(DsSpacer.M10),
+        contentPadding = PaddingValues(horizontal = DsSpacer.M16)
     ) {
         items(3) {
             ShimmerCollectionCard()
@@ -33,7 +34,7 @@ fun ShimmerCollectionCard() {
     Box(
         modifier = Modifier
             .size(180.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(DsSpacer.M10))
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -42,12 +43,12 @@ fun ShimmerCollectionCard() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(RoundedCornerShape(DsSpacer.M10))
                     .weight(5f)
                     .shimmerEffect()
             )
 
-            ShimmerText(modifier = Modifier.padding(vertical = 10.dp))
+            ShimmerText(modifier = Modifier.padding(vertical = DsSpacer.M10))
         }
     }
 }

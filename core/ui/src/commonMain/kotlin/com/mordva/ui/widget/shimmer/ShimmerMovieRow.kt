@@ -15,13 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.mordva.ui.theme.DsSpacer
 
 @Composable
 fun ShimmerMovieRow() {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(horizontal = 15.dp)
+        horizontalArrangement = Arrangement.spacedBy(DsSpacer.M10),
+        contentPadding = PaddingValues(horizontal = DsSpacer.M16)
     ) {
         items(3) {
             ShimmerMovieCard()
@@ -35,7 +36,7 @@ fun ShimmerMovieCard() {
         modifier = Modifier
             .width(160.dp)
             .height(260.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(DsSpacer.M10))
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -44,12 +45,12 @@ fun ShimmerMovieCard() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(RoundedCornerShape(DsSpacer.M10))
                     .weight(5f)
                     .shimmerEffect()
             )
 
-            ShimmerText(modifier = Modifier.padding(vertical = 10.dp))
+            ShimmerText(modifier = Modifier.padding(vertical = DsSpacer.M10))
         }
     }
 }

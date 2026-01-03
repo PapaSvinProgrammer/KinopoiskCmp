@@ -13,8 +13,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.movie.ShortMovie
+import com.mordva.ui.theme.DsSpacer
 
 @Composable
 internal fun CategoriesHeader(
@@ -27,8 +27,8 @@ internal fun CategoriesHeader(
         modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background),
-        contentPadding = PaddingValues(horizontal = 15.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        contentPadding = PaddingValues(horizontal = DsSpacer.M16),
+        horizontalArrangement = Arrangement.spacedBy(DsSpacer.M10)
     ) {
         items(keys.size) { index ->
             val item = keys[index]
@@ -69,7 +69,7 @@ private fun LabelContent(
             color = MaterialTheme.colorScheme.onBackground
         )
 
-        Spacer(modifier = Modifier.width(5.dp))
+        Spacer(modifier = Modifier.width(DsSpacer.M5))
 
         Text(
             text = count

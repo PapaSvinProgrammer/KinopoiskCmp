@@ -15,8 +15,8 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.mordva.ui.theme.DsSpacer
+import com.mordva.ui.theme.DsTextSize
 import com.mordva.ui.theme.Gold
 import com.mordva.ui.theme.Green
 import com.mordva.ui.theme.Resources
@@ -74,7 +74,7 @@ private fun EliteBox(
 ) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(DsSpacer.M10))
             .background(Gold)
     ) {
         Icon(
@@ -82,9 +82,9 @@ private fun EliteBox(
             contentDescription = null,
             tint = Color.Black,
             modifier = Modifier
-                .size(15.dp)
+                .size(DsSpacer.M15)
                 .align(Alignment.CenterStart)
-                .padding(start = 5.dp)
+                .padding(start = DsSpacer.M5)
                 .scale(scaleX = -1f, scaleY = 1f)
         )
 
@@ -93,10 +93,10 @@ private fun EliteBox(
             fontWeight = FontWeight.Bold,
             fontSize = fontSize,
             color = Color.Black,
-            lineHeight = 10.sp,
+            lineHeight = DsTextSize.M10,
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(horizontal = 15.dp, vertical = 3.dp)
+                .padding(horizontal = DsSpacer.M16, vertical = DsSpacer.M3)
         )
 
         Icon(
@@ -104,9 +104,9 @@ private fun EliteBox(
             contentDescription = null,
             tint = Color.Black,
             modifier = Modifier
-                .size(15.dp)
+                .size(DsSpacer.M15)
                 .align(Alignment.CenterEnd)
-                .padding(end = 5.dp)
+                .padding(end = DsSpacer.M5)
         )
     }
 }
@@ -120,7 +120,7 @@ private fun DefaultBox(
 ) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(DsSpacer.M10))
             .background(color)
     ) {
         Text(
@@ -128,10 +128,10 @@ private fun DefaultBox(
             fontWeight = FontWeight.Bold,
             fontSize = fontSize,
             color = Color.White,
-            lineHeight = 10.sp,
+            lineHeight = DsTextSize.M10,
             modifier = Modifier.padding(
-                horizontal = 8.dp,
-                vertical = 3.dp
+                horizontal = DsSpacer.M8,
+                vertical = DsSpacer.M3
             )
         )
     }
