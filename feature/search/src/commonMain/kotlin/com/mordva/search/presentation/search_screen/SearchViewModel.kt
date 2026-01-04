@@ -19,7 +19,7 @@ import com.mordva.search.presentation.search_screen.state.SearchUiState
 import com.mordva.search.presentation.search_screen.state.body
 import com.mordva.search.presentation.search_screen.state.extractError
 import com.mordva.search.presentation.search_screen.state.extractInit
-import com.mordva.search.presentation.search_screen.util.toHistory
+import com.mordva.search.util.toHistory
 import com.mordva.util.BaseViewModel
 import com.mordva.util.Constants
 import com.mordva.util.cancelAllJobs

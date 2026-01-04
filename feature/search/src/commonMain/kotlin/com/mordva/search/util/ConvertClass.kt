@@ -1,4 +1,4 @@
-package com.mordva.search.presentation.search_screen.util
+package com.mordva.search.util
 
 import com.mordva.domain.model.SearchItem
 import com.mordva.domain.model.image.CollectionMovie

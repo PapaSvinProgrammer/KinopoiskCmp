@@ -12,6 +12,7 @@ object DsSpacer {
     val M16 = 16.dp
     val M30 = 30.dp
     val M70 = 70.dp
+    val M100 = 100.dp
 }
 
 object DsTextSize {

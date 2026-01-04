@@ -4,7 +4,7 @@ import com.mordva.domain.model.SearchItem
 import com.mordva.domain.repository.MovieRepository
 import com.mordva.domain.repository.PersonRepository
 import com.mordva.search.domain.model.RequestParams
-import com.mordva.search.presentation.search_screen.util.toSearchItemList
+import com.mordva.search.util.toSearchItemList
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

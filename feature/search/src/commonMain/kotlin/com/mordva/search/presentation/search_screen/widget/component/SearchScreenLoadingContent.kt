@@ -6,15 +6,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.widget.shimmer.ShimmerCollectionRow
 import com.mordva.ui.widget.shimmer.ShimmerMovieRow
 
 @Composable
-internal fun SearchScreenLoadingContent() {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Spacer(modifier = Modifier.height(120.dp))
+internal fun SearchScreenLoadingContent(
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier.fillMaxSize()) {
         ShimmerCollectionRow()
         Spacer(modifier = Modifier.height(DsSpacer.M16))
         ShimmerMovieRow()

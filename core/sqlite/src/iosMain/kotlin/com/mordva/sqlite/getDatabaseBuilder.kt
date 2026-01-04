@@ -2,6 +2,7 @@ package com.mordva.sqlite
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
@@ -13,9 +14,10 @@ internal fun getDatabase(): AppDatabase {
 
 internal fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
     val dbFilePath = documentDirectory() + "/kinopoisk_cmp.db"
-    return Room.databaseBuilder<AppDatabase>(
-        name = dbFilePath,
-    )
+    val builder = Room.databaseBuilder<AppDatabase>(name = dbFilePath)
+        .setDriver(BundledSQLiteDriver())
+
+    return builder
 }
 
 @OptIn(ExperimentalForeignApi::class)

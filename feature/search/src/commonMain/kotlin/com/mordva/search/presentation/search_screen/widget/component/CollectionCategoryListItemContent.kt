@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.search.presentation.search_screen.util.collectionCategoryList
+import com.mordva.search.util.collectionCategoryList
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.stringResource

@@ -12,7 +12,7 @@ object CustomNavType {
     val MovieScreenType = typeObject<MovieScreenType>()
 }
 
-private inline fun <reified T> typeObject() = object : NavType<T>(
+inline fun <reified T> typeObject() = object : NavType<T>(
     isNullableAllowed = false
 ) {
     override fun put(bundle: SavedState, key: String, value: T) {
