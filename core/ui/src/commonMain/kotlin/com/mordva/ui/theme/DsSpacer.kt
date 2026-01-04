@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 object DsSpacer {
+    val ZERO = 0.dp
     val M3 = 3.dp
     val M5 = 5.dp
     val M8 = 8.dp

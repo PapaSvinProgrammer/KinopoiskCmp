@@ -10,18 +10,17 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
+import com.mordva.ui.theme.DsSpacer
 
 fun Modifier.measureHeightOnce(onMeasured: (Dp) -> Unit) = composed {
     val density = LocalDensity.current
     val onMeasuredState by rememberUpdatedState(onMeasured)
-    var measured by remember { mutableStateOf(false) }
+    var height by remember { mutableStateOf<Dp?>(null) }
 
     onGloballyPositioned { coords ->
-        if (!measured) {
-            measured = true
-            onMeasuredState(
-                with(density) { coords.size.height.toDp() }
-            )
+        if (height == null) {
+            height = with(density) { coords.size.height.toDp() }
+            onMeasuredState(height ?: DsSpacer.ZERO)
         }
     }
 }
