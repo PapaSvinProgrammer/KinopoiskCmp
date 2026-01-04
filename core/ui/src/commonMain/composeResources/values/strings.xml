@@ -140,4 +140,5 @@
     <string name="filter_images_title">Выберете, что хотите найти</string>
     <string name="blocked">Неинтересно</string>
     <string name="viewed">Просмотрен</string>
+    <string name="error_description">Что-то пошло не так. Попробуйте зайти позже</string>
 </resources>

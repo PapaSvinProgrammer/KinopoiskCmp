@@ -76,37 +76,7 @@ internal fun SearchScreen(
         )
 
         when (val state = uiState.bodyContentState) {
-            is SearchBodyContentState.Success -> {
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(top = 120.dp)
-                        .navigationBarsPadding()
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(5.dp)
-                ) {
-                    renderCollectionRow(
-                        title = Resources.Strings.AdviseWatch,
-                        list = state.collections.toRenderRowItem(),
-                        onClick = { eventHandler(ShowMovieList(it)) },
-                        onShowAll = { eventHandler(ShowCollectionAll) }
-                    )
-
-                    collectionCategoryListItemContent {
-                        eventHandler(ShowCollectionList(it))
-                    }
-
-                    renderMovieRow(
-                        title = Resources.Strings.PopularSerials,
-                        list = state.topSerials.toRenderRowItem(),
-                        onClick = { eventHandler(ShowMovie(it)) },
-                        onShowAll = { eventHandler(ShowAllMovies("")) }
-                    )
-
-                    item {
-                        Spacer(modifier = Modifier.height(100.dp))
-                    }
-                }
-            }
+            is SearchBodyContentState.Success -> ErrorScreen()
 
             SearchBodyContentState.Error -> ErrorScreen()
             SearchBodyContentState.Loading -> SearchScreenLoadingContent()
