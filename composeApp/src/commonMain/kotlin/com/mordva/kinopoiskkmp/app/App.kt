@@ -56,11 +56,11 @@ fun App() {
             containerColor = MaterialTheme.colorScheme.background,
             snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
             bottomBar = {
-                HazeBottomBar(
-                    tabs = BottomBarItems.items,
-                    navController = navController,
-                    visible = true
-                )
+//                HazeBottomBar(
+//                    tabs = BottomBarItems.items,
+//                    navController = navController,
+//                    visible = true
+//                )
             }
         ) { paddingValues ->
             AppNavigation(

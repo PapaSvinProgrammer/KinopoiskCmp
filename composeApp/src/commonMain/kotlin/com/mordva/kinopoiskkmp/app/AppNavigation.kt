@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.mordva.navigation.FeatureApi
+import com.mordva.navigation.MovieGraph
 import com.mordva.navigation.SearchGraph
 
 @Composable
@@ -16,7 +17,7 @@ fun AppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = SearchGraph,
+        startDestination = MovieGraph,
         modifier = modifier
     ) {
         list.forEach {

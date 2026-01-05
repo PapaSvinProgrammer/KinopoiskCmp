@@ -2,6 +2,9 @@ package com.mordva.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,5 +21,25 @@ fun <T> ObserveAsEvents(flow: Flow<T>, onEvent: (T) -> Unit) {
                 flow.collect(onEvent)
             }
         }
+    }
+}
+
+@Composable
+fun windowHeightPercent(percent: Float = 1f): Dp {
+    val density = LocalDensity.current
+    val windowInfo = LocalWindowInfo.current
+
+    return with(density) {
+        (windowInfo.containerSize.height * percent).toDp()
+    }
+}
+
+@Composable
+fun windowWidthPercent(percent: Float = 1f): Dp {
+    val density = LocalDensity.current
+    val windowInfo = LocalWindowInfo.current
+
+    return with(density) {
+        (windowInfo.containerSize.width * percent).toDp()
     }
 }

@@ -54,6 +54,9 @@ data object MovieGraph : RootGraph {
     data class MovieRoute(
         val id: Int
     )
+
+    @Serializable
+    data object RandomMovieRoute
 }
 
 @Serializable

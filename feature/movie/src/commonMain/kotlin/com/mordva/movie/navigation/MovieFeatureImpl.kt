@@ -16,6 +16,7 @@ import com.mordva.movie.presentation.movie.MovieScreen
 import com.mordva.movie.presentation.movie.MovieViewModel
 import com.mordva.movie.presentation.movie_list.MovieListScreen
 import com.mordva.movie.presentation.movie_list.MovieListViewModel
+import com.mordva.movie.presentation.randommovie.RandomMovieScreen
 import com.mordva.movie.presentation.watchability.WatchabilityListScreen
 import com.mordva.movie.utils.PersonMovieListScreenObjectType
 import com.mordva.movie.utils.WatchabilityType
@@ -40,7 +41,7 @@ class MovieFeatureImpl : FeatureApi {
         modifier: Modifier
     ) {
         navGraphBuilder.navigation<MovieGraph>(
-            startDestination = HomeRoute
+            startDestination = MovieGraph.RandomMovieRoute
         ) {
             composable<MovieGraph.MovieRoute> {
                 val route = it.toRoute<MovieGraph.MovieRoute>()
@@ -132,6 +133,10 @@ class MovieFeatureImpl : FeatureApi {
                         }
                     }
                 )
+            }
+
+            composable<MovieGraph.RandomMovieRoute> {
+                RandomMovieScreen()
             }
 
             composable<MovieListGraph.MovieListRoute>(
