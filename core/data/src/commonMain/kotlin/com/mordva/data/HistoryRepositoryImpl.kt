@@ -1,11 +1,12 @@
 package com.mordva.data
 
+import com.mordva.data.mapper.toDomain
 import com.mordva.data.mapper.toWillWatchPackageEntity
 import com.mordva.domain.model.local.History
 import com.mordva.domain.repository.HistoryRepository
 import com.mordva.sqlite.entities.history.HistoryDao
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 internal class HistoryRepositoryImpl(
     private val dao: HistoryDao
@@ -19,6 +20,8 @@ internal class HistoryRepositoryImpl(
     }
 
     override fun getAll(): Flow<List<History>> {
-        return flowOf()
+        return dao.getAll().map { list ->
+            list.map { it.toDomain() }
+        }
     }
 }

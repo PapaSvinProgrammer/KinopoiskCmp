@@ -56,11 +56,13 @@ internal class SearchViewModel(
         isExpandedState,
         selectedSearchIndex,
         contentState,
-    ) { query, isExpanded, selectedSearchIndex, content ->
+        historyRepository.getAll(),
+    ) { query, isExpanded, selectedSearchIndex, content, history ->
         SearchUiState(
             query = query,
             isExpanded = isExpanded,
             selectedSearchIndex = selectedSearchIndex,
+            searchHistory = history,
             searchState = content.searchState,
             bodyContentState = createSearchBodyContent(content)
         )

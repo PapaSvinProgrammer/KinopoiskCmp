@@ -67,7 +67,7 @@ internal fun SearchScreen(
             SearchBarContent(
                 query = uiState.query,
                 movieSearchState = uiState.searchState,
-                searchHistoryList = listOf(),
+                searchHistoryList = uiState.searchHistory,
                 selectedItem = uiState.selectedSearchIndex,
                 onDeleteHistoryItem = { viewModel.deleteSearchHistoryItem(it) },
                 onClick = {
