@@ -1,16 +1,14 @@
 package com.mordva.person.presentation.person
 
 import com.mordva.domain.model.movie.ShortMovie
-import com.mordva.domain.usecase.awards.GetPersonAwardsByDate
-import com.mordva.domain.usecase.awards.model.AwardParams
-import com.mordva.domain.usecase.movie.GetMovieByFilter
-import com.mordva.domain.usecase.person.GetPersonById
+import com.mordva.domain.repository.PersonRepository
+import com.mordva.person.domain.GetPersonAwardsByDate
 import com.mordva.person.domain.GroupShortMovie
+import com.mordva.person.domain.model.AwardParams
 import com.mordva.person.presentation.person.widget.FactListUIState
 import com.mordva.person.presentation.person.widget.PersonListUIState
 import com.mordva.person.presentation.person.widget.PersonUiState
 import com.mordva.util.BaseViewModel
-import com.mordva.util.Constants
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.multiRequest
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,10 +16,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 internal class PersonViewModel(
-    private val getPersonById: GetPersonById,
-    private val getMovieByFilter: GetMovieByFilter,
     private val getPersonAwardsByDate: GetPersonAwardsByDate,
-    private val groupShortMovie: GroupShortMovie
+    private val groupShortMovie: GroupShortMovie,
+    private val personRepository: PersonRepository,
 ) : BaseViewModel<Unit>() {
     private val _uiState = MutableStateFlow(PersonUiState())
     val uiState = _uiState.asStateFlow()
@@ -41,7 +38,7 @@ internal class PersonViewModel(
     }
 
     fun getPerson(id: Int) = launchWithoutOld(GET_PERSON_JOB) {
-        val res = getPersonById.execute(id)
+        val res = personRepository.getPersonById(id)
 
         res.onSuccess { person ->
             _uiState.update {
@@ -91,7 +88,7 @@ internal class PersonViewModel(
         if (uiState.value.personSpouseState is PersonListUIState.Success) return@launchWithoutOld
 
         val temp = multiRequest(list.map { it.toString() }) {
-            getPersonById.execute(it.toInt())
+            personRepository.getPersonById(it.toInt())
         }
 
         if (temp.isNotEmpty()) {

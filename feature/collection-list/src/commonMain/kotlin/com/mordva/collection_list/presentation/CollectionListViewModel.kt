@@ -1,15 +1,13 @@
 package com.mordva.collection_list.presentation
 
-import androidx.lifecycle.ViewModel
 import com.mordva.collection_list.presentation.util.toMutableCollectionList
+import com.mordva.collection_list.presentation.widget.CollectionListUIState
 import com.mordva.collection_list.presentation.widget.UiState
+import com.mordva.domain.repository.CollectionRepository
 import com.mordva.domain.usecase.collection.GetCollectionAll
 import com.mordva.domain.usecase.collection.GetCollectionByCategory
-import com.mordva.domain.usecase.collection.GetCollectionBySlug
 import com.mordva.domain.usecase.collection.model.CollectionParams
-import com.mordva.collection_list.presentation.widget.CollectionListUIState
-import com.mordva.util.cancelAllJobs
-import com.mordva.util.launchWithoutOld
+import com.mordva.util.BaseViewModel
 import com.mordva.util.multiRequest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,8 +16,8 @@ import kotlinx.coroutines.flow.update
 internal class CollectionListViewModel(
     private val getCollectionAll: GetCollectionAll,
     private val getCollectionByCategory: GetCollectionByCategory,
-    private val getCollectionBySlug: GetCollectionBySlug
-) : ViewModel() {
+    private val collectionRepository: CollectionRepository,
+) : BaseViewModel<Unit>() {
     private val _state = MutableStateFlow(UiState())
     val state = _state.asStateFlow()
 
@@ -79,17 +77,12 @@ internal class CollectionListViewModel(
 
     fun getCollectionsByListId(list: List<String>) = launchWithoutOld(GET_BY_LIST_ID_JOB) {
         val temp = multiRequest(list) { slug ->
-            getCollectionBySlug.execute(slug)
+            collectionRepository.getCollectionBySlug(slug)
         }
 
         _state.update {
             it.copy(collectionState = CollectionListUIState.Success(temp))
         }
-    }
-
-    override fun onCleared() {
-        cancelAllJobs()
-        super.onCleared()
     }
 
     private companion object {

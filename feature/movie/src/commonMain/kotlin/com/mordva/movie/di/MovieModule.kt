@@ -1,22 +1,22 @@
 package com.mordva.movie.di
 
-import com.mordva.movie.domain.FilterCollection
-import com.mordva.movie.domain.FilterPersonsLikeActors
-import com.mordva.movie.domain.FilterPersonsLikeSupport
-import com.mordva.movie.domain.FilterPersonsLikeVoiceActors
-import com.mordva.movie.domain.GetPersonLittleById
-import com.mordva.movie.domain.GroupPersonsByProfession
-import com.mordva.movie.domain.HandleBlockedAction
-import com.mordva.movie.domain.HandleFavoritePackageAction
-import com.mordva.movie.domain.HandleRatedMovieAction
-import com.mordva.movie.domain.HandleViewedAction
-import com.mordva.movie.domain.HandleWillWatchAction
-import com.mordva.movie.domain.UnionPersonsAndPersonMovie
+import com.mordva.movie.domain.GetPersonOptimizedById
+import com.mordva.movie.domain.comment.GetCommentByDate
+import com.mordva.movie.domain.comment.GetCommentByType
+import com.mordva.movie.domain.comment.GetCommentOnlyNegative
+import com.mordva.movie.domain.comment.GetCommentOnlyNeutral
+import com.mordva.movie.domain.comment.GetCommentOnlyPositive
+import com.mordva.movie.domain.handle.HandleBlockedAction
+import com.mordva.movie.domain.handle.HandleFavoritePackageAction
+import com.mordva.movie.domain.handle.HandleRatedMovieAction
+import com.mordva.movie.domain.handle.HandleViewedAction
+import com.mordva.movie.domain.handle.HandleWillWatchAction
 import com.mordva.movie.domain.model.PersonMovieScreenObject
 import com.mordva.movie.presentation.groupPerson.GroupPersonViewModel
-import com.mordva.movie.domain.GetMoviesByCollection
-import com.mordva.movie.domain.GetMoviesByCompany
-import com.mordva.movie.domain.GetMoviesByGenre
+import com.mordva.movie.domain.movie.GetMoviesByCollection
+import com.mordva.movie.domain.movie.GetMoviesByCompany
+import com.mordva.movie.domain.movie.GetMoviesByGenre
+import com.mordva.movie.domain.studio.GetStudiesByMovieId
 import com.mordva.movie.presentation.home.HomeViewModel
 import com.mordva.movie.presentation.movie.MovieViewModel
 import com.mordva.movie.presentation.movie_list.MovieListViewModel
@@ -29,14 +29,7 @@ val movieModule = module {
     viewModel { (movieId: Int) ->
         MovieViewModel(
             movieId = movieId,
-            getMovieById = get(),
-            getMovieImages = get(),
-            getCollectionBySlug = get(),
             getCommentByDate = get(),
-            filterCollection = get(),
-            filterPersonsLikeVoiceActors = get(),
-            filterPersonsLikeActors = get(),
-            filterPersonsLikeSupport = get(),
             ratedMovieRepository = get(),
             willWatchPackageRepository = get(),
             handleWillWatchAction = get(),
@@ -47,6 +40,9 @@ val movieModule = module {
             favoritePackageRepository = get(),
             viewedRepository = get(),
             blockedRepository = get(),
+            movieRepository = get(),
+            imageRepository = get(),
+            collectionRepository = get(),
         )
     }
 
@@ -54,8 +50,6 @@ val movieModule = module {
         GroupPersonViewModel(
             persons = persons,
             getPersonByFilter = get(),
-            groupPersonsByProfession = get(),
-            unionPersonsAndPersonMovie = get(),
         )
     }
 
@@ -63,7 +57,7 @@ val movieModule = module {
         MovieListViewModel(
             title = title,
             queryParameters = query,
-            getMovieByFilter = get(),
+            movieRepository = get(),
         )
     }
 
@@ -72,16 +66,17 @@ val movieModule = module {
     factoryOf(::GetMoviesByCollection)
     factoryOf(::GetMoviesByCompany)
     factoryOf(::GetMoviesByGenre)
-    factoryOf(::FilterCollection)
-    factoryOf(::FilterPersonsLikeActors)
-    factoryOf(::FilterPersonsLikeSupport)
-    factoryOf(::FilterPersonsLikeVoiceActors)
-    factoryOf(::GetPersonLittleById)
-    factoryOf(::GroupPersonsByProfession)
-    factoryOf(::UnionPersonsAndPersonMovie)
+    factoryOf(::GetPersonOptimizedById)
     factoryOf(::HandleBlockedAction)
     factoryOf(::HandleFavoritePackageAction)
     factoryOf(::HandleRatedMovieAction)
     factoryOf(::HandleViewedAction)
     factoryOf(::HandleWillWatchAction)
+    factoryOf(::GetCommentByDate)
+    factoryOf(::GetCommentByType)
+    factoryOf(::GetCommentOnlyNegative)
+    factoryOf(::GetCommentOnlyNeutral)
+    factoryOf(::GetCommentOnlyPositive)
+    factoryOf(::GetStudiesByMovieId)
+    factoryOf(::GetStudiesByMovieId)
 }

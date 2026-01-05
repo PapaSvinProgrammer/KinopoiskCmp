@@ -1,7 +1,7 @@
 package com.mordva.movie.presentation.movie_list
 
 import com.mordva.domain.model.movie.Movie
-import com.mordva.domain.usecase.movie.GetMovieByFilter
+import com.mordva.domain.repository.MovieRepository
 import com.mordva.movie.presentation.movie_list.widget.MovieListUiState
 import com.mordva.util.Constants
 import com.mordva.util.ListViewModel
@@ -9,7 +9,7 @@ import com.mordva.util.ListViewModel
 internal class MovieListViewModel(
     private val title: String,
     private val queryParameters: List<Pair<String, String>>,
-    private val getMovieByFilter: GetMovieByFilter
+    private val movieRepository: MovieRepository,
 ) : ListViewModel<Movie, MovieListUiState>(MovieListUiState()) {
     init {
         updateAnyState { it.copy(title = title) }
@@ -19,6 +19,6 @@ internal class MovieListViewModel(
     override suspend fun getItems(page: Int): Result<List<Movie>> {
         val query = queryParameters.toMutableList()
         query.add(Constants.PAGE_FIELD to page.toString())
-        return getMovieByFilter.execute(query)
+        return movieRepository.getMovieByFilter(query)
     }
 }

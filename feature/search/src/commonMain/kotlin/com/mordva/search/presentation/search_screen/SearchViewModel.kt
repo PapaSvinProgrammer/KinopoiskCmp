@@ -3,9 +3,9 @@ package com.mordva.search.presentation.search_screen
 import androidx.lifecycle.viewModelScope
 import com.mordva.domain.model.SearchItem
 import com.mordva.domain.repository.HistoryRepository
+import com.mordva.domain.repository.MovieRepository
 import com.mordva.domain.usecase.collection.GetCollectionByCategory
 import com.mordva.domain.usecase.collection.model.CollectionParams
-import com.mordva.domain.usecase.movie.GetMovieByFilter
 import com.mordva.search.domain.LoadMoreByName
 import com.mordva.search.domain.SearchByName
 import com.mordva.search.domain.model.RequestParams
@@ -22,7 +22,6 @@ import com.mordva.search.presentation.search_screen.state.extractInit
 import com.mordva.search.util.toHistory
 import com.mordva.util.BaseViewModel
 import com.mordva.util.Constants
-import com.mordva.util.cancelAllJobs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -32,15 +31,15 @@ import kotlinx.coroutines.flow.stateIn
 
 internal class SearchViewModel(
     private val getCollectionByCategory: GetCollectionByCategory,
-    private val getMovieByFilter: GetMovieByFilter,
     private val searchByName: SearchByName,
     private val loadMoreByName: LoadMoreByName,
-    private val historyRepository: HistoryRepository
+    private val historyRepository: HistoryRepository,
+    private val movieRepository: MovieRepository,
 ) : BaseViewModel<SearchScreenEvent>() {
     private val page = MutableStateFlow(0)
     private val queryState = MutableStateFlow("")
     private val isExpandedState = MutableStateFlow(false)
-    private val selectedSearchIndex = MutableStateFlow(1)
+    private val selectedSearchIndex = MutableStateFlow(0)
     private val movieState = MutableStateFlow<SearchMovieState>(SearchMovieState.Init)
     private val collectionState = MutableStateFlow<SearchCollectionState>(SearchCollectionState.Init)
     private val searchState = MutableStateFlow<SearchListUIState>(SearchListUIState.Loading)
@@ -148,6 +147,8 @@ internal class SearchViewModel(
 
         res.onSuccess { collections ->
             collectionState.value = SearchCollectionState.Success(collections)
+        }.onFailure {
+            collectionState.value = SearchCollectionState.Error
         }
     }
 
@@ -158,10 +159,12 @@ internal class SearchViewModel(
             Constants.SORT_TYPE to Constants.SORT_DESC
         )
 
-        val res = getMovieByFilter.execute(queryParameters)
+        val res = movieRepository.getMovieByFilter(queryParameters)
 
         res.onSuccess { serials ->
             movieState.value = SearchMovieState.Success(serials)
+        }.onFailure {
+            movieState.value = SearchMovieState.Error
         }
     }
 
@@ -172,11 +175,6 @@ internal class SearchViewModel(
             collections = content.collectionState.body(),
             topSerials = content.movieState.body(),
         )
-    }
-
-    override fun onCleared() {
-        cancelAllJobs()
-        super.onCleared()
     }
 
     private companion object {

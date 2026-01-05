@@ -2,10 +2,10 @@ package com.mordva.movie.presentation.home
 
 import androidx.lifecycle.ViewModel
 import com.mordva.domain.usecase.collection.GetCollectionAll
-import com.mordva.domain.usecase.movie.model.MovieParams
-import com.mordva.movie.domain.GetMoviesByCollection
-import com.mordva.movie.domain.GetMoviesByCompany
-import com.mordva.movie.domain.GetMoviesByGenre
+import com.mordva.movie.domain.model.MovieParams
+import com.mordva.movie.domain.movie.GetMoviesByCollection
+import com.mordva.movie.domain.movie.GetMoviesByCompany
+import com.mordva.movie.domain.movie.GetMoviesByGenre
 import com.mordva.movie.presentation.home.widget.HomeUIState
 import com.mordva.movie.presentation.home.utils.NavigationUtils
 import com.mordva.movie.presentation.movie_list.widget.MovieListState

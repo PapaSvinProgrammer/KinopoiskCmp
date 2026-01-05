@@ -19,13 +19,9 @@ import com.mordva.movie.presentation.home.utils.NavigationUtils
 import com.mordva.movie.presentation.home.utils.NavigationUtils.navigateToHomeDetailByGenre
 import com.mordva.movie.presentation.home.utils.NavigationUtils.navigateToHomeDetailByLists
 import com.mordva.movie.presentation.home.utils.NavigationUtils.navigateToHomeDetailByNetwork
-import com.mordva.movie.presentation.home.utils.NavigationUtils.navigateToMovieFromCollection
-import com.mordva.navigation.CollectionListGraph
-import com.mordva.navigation.MovieGraph
-import com.mordva.ui.theme.Resources
-import com.mordva.ui.widget.other.TopBarIconApp
 import com.mordva.movie.presentation.home.widget.RenderMovieStateRow
-import org.jetbrains.compose.resources.stringResource
+import com.mordva.navigation.MovieGraph
+import com.mordva.ui.widget.other.TopBarIconApp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

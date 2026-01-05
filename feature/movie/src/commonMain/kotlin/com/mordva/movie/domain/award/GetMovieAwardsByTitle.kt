@@ -1,0 +1,29 @@
+package com.mordva.movie.domain.award
+
+import com.mordva.util.Constants.MOVIE_ID_FIELD
+import com.mordva.util.Constants.NOM_AWARD_TITLE_FIELD
+import com.mordva.util.Constants.PAGE_FIELD
+import com.mordva.util.Constants.SORT_ASC
+import com.mordva.util.Constants.SORT_FIELD
+import com.mordva.util.Constants.SORT_TYPE
+import com.mordva.domain.model.person.NominationAward
+import com.mordva.domain.repository.AwardRepository
+import com.mordva.movie.domain.model.AwardParams
+import com.mordva.util.UseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+
+internal class GetMovieAwardsByTitle(
+    private val awardRepository: AwardRepository
+) : UseCase<AwardParams, Result<List<NominationAward>>>(Dispatchers.IO) {
+    override suspend fun run(params: AwardParams): Result<List<NominationAward>> {
+        val queryParameters = listOf(
+            MOVIE_ID_FIELD to params.id.toString(),
+            PAGE_FIELD to params.page.toString(),
+            SORT_FIELD to NOM_AWARD_TITLE_FIELD,
+            SORT_TYPE to SORT_ASC
+        )
+
+        return awardRepository.getMovieAwards(queryParameters)
+    }
+}
