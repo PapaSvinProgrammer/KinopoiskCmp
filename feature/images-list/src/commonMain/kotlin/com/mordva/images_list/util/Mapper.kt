@@ -17,5 +17,3 @@ internal fun ImageType.toStringResource(): StringResource {
         ImageType.WALLPAPER -> Strings.Wallpaper
     }
 }
-
-internal fun Set<ImageType>.toStringResource() = map { it.toStringResource() }

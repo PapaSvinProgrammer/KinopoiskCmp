@@ -42,7 +42,7 @@ internal fun CreateOtpScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     val focusRequesters = remember {
-        List(OtpViewModel.Companion.DEFAULT_LENGTH) {
+        List(OtpViewModel.DEFAULT_LENGTH) {
             FocusRequester()
         }
     }
@@ -50,7 +50,7 @@ internal fun CreateOtpScreen(
 
     var isRepeatInput by remember { mutableStateOf(false) }
     var localCode: List<Int?> by remember {
-        mutableStateOf((1..OtpViewModel.Companion.DEFAULT_LENGTH).map { null })
+        mutableStateOf((1..OtpViewModel.DEFAULT_LENGTH).map { null })
     }
 
     LaunchedEffect(focusRequesters) {
