@@ -10,8 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -44,7 +45,7 @@ fun CustomSearchBar(
                 onExpandedChange = onExpandedChange,
                 placeholder = {
                     Text(
-                        text = stringResource(Resources.Strings.SearchHint),
+                        text = stringResource(Strings.SearchHint),
                         maxLines = 1,
                         fontSize = Typography.bodyMedium.fontSize,
                         overflow = TextOverflow.Ellipsis
@@ -78,9 +79,9 @@ internal fun LeadingIcon(
     onOpen: () -> Unit
 ) {
     val icon = if (expanded)
-        PlatformResources.Icons.ArrowBack
+        PlatformResources.PlatformIcons.ArrowBack
     else
-        PlatformResources.Icons.Search
+        PlatformResources.PlatformIcons.Search
 
     IconButton(
         onClick = { if (expanded) onClose() else onOpen() }
@@ -99,9 +100,9 @@ internal fun TrailingIcon(
     onClear: () -> Unit
 ) {
     val icon = if (expanded)
-        painterResource(Resources.Icons.Close)
+        painterResource(Icons.Close)
     else
-        painterResource(Resources.Icons.Tune)
+        painterResource(Icons.Tune)
 
     IconButton(onClick = { if (expanded) onClear() else onSettings() }) {
         Icon(

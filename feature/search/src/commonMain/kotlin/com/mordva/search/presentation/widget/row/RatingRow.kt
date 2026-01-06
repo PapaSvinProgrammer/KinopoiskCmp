@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.ConvertData
 import org.jetbrains.compose.resources.stringResource
 
@@ -28,7 +28,7 @@ internal fun RatingRow(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = stringResource(Resources.Strings.Rating),
+            text = stringResource(Strings.Rating),
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface

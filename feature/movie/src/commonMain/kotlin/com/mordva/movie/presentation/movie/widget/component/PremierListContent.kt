@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.totalValue.Premiere
 import com.mordva.movie.presentation.movie.widget.listItem.PremiereCard
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.FormatDate
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -55,11 +55,11 @@ private fun Premiere.toMap(): Map<String, String?> {
 
 private fun String.toNormalText(): StringResource {
     return when (this) {
-        "bluray" -> Resources.Strings.ReleaseBluRay
-        "digital" -> Resources.Strings.ReleaseDigital
-        "dvd" -> Resources.Strings.ReleaseDvd
-        "russia" -> Resources.Strings.ReleaseRussia
-        "world" -> Resources.Strings.ReleaseWorld
-        else -> Resources.Strings.Unknown
+        "bluray" -> Strings.ReleaseBluRay
+        "digital" -> Strings.ReleaseDigital
+        "dvd" -> Strings.ReleaseDvd
+        "russia" -> Strings.ReleaseRussia
+        "world" -> Strings.ReleaseWorld
+        else -> Strings.Unknown
     }
 }

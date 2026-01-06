@@ -17,7 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -33,10 +34,10 @@ internal fun ExpandedNavigationBar(
     Row {
         NavigationTab(
             painter = if (customRating != null)
-                painterResource(Resources.Icons.StarFill)
+                painterResource(Icons.StarFill)
             else
-                painterResource(Resources.Icons.Star),
-            title = stringResource(Resources.Strings.Evaluate),
+                painterResource(Icons.Star),
+            title = stringResource(Strings.Evaluate),
             clickable = onEvaluate,
             color = if (customRating != null)
                 MaterialTheme.colorScheme.primary
@@ -46,10 +47,10 @@ internal fun ExpandedNavigationBar(
 
         NavigationTab(
             painter = if (!isWillWatchPackage)
-                painterResource(Resources.Icons.BookmarkAdd)
+                painterResource(Icons.BookmarkAdd)
             else
-                painterResource(Resources.Icons.BookmarkFill),
-            title = stringResource(Resources.Strings.WillWatching),
+                painterResource(Icons.BookmarkFill),
+            title = stringResource(Strings.WillWatching),
             clickable = onAddIntoFuturePackage,
             color = if (isWillWatchPackage)
                 MaterialTheme.colorScheme.primary
@@ -58,14 +59,14 @@ internal fun ExpandedNavigationBar(
         )
 
         NavigationTab(
-            painter = painterResource(Resources.Icons.Share),
-            title = stringResource(Resources.Strings.Share),
+            painter = painterResource(Icons.Share),
+            title = stringResource(Strings.Share),
             clickable = onShare
         )
 
         NavigationTab(
-            painter = painterResource(Resources.Icons.MoreHoriz),
-            title = stringResource(Resources.Strings.More),
+            painter = painterResource(Icons.MoreHoriz),
+            title = stringResource(Strings.More),
             clickable = onMore
         )
     }

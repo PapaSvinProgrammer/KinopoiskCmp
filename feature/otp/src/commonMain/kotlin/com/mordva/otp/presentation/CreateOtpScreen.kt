@@ -28,7 +28,7 @@ import androidx.navigation.NavController
 import com.mordva.otp.presentation.widget.content.MainOtpContent
 import com.mordva.otp.utils.actionHandler
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.other.TitleTopBarText
 import org.jetbrains.compose.resources.stringResource
 
@@ -97,12 +97,12 @@ internal fun CreateOtpScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    TitleTopBarText(text = stringResource(Resources.Strings.CodePassword))
+                    TitleTopBarText(text = stringResource(Strings.CodePassword))
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }
@@ -140,7 +140,7 @@ internal fun CreateOtpScreen(
             ) {
                 MainOtpContent(
                     state = state,
-                    hint = stringResource(Resources.Strings.RepeatPassword),
+                    hint = stringResource(Strings.RepeatPassword),
                     focusRequesters = focusRequesters,
                     onAction = { action ->
                         if (state.isValid == false) {

@@ -15,7 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -27,7 +28,7 @@ fun TopBarIconApp() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(Resources.Icons.LauncherForeground),
+            painter = painterResource(Icons.LauncherForeground),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.size(56.dp)
@@ -36,7 +37,7 @@ fun TopBarIconApp() {
         Spacer(modifier = Modifier.width(15.dp))
 
         Text(
-            text = stringResource(Resources.Strings.AppName),
+            text = stringResource(Strings.AppName),
             fontWeight = FontWeight.Bold,
             fontSize = Typography.titleMedium.fontSize,
             lineHeight = 13.sp,

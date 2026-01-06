@@ -9,10 +9,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import com.mordva.domain.model.category.ItemName
+import com.mordva.model.category.ItemName
 import com.mordva.search.presentation.widget.row.CategoryRow
-import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.DsSpacer
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.ConvertData
 import org.jetbrains.compose.resources.stringResource
 
@@ -36,9 +36,9 @@ internal fun DetailSettingsContent(
     ) {
         CategoryRow(
             index = 0,
-            s = stringResource(Resources.Strings.Genres),
+            s = stringResource(Strings.Genres),
             list = checkedGenres.map { it.name },
-            defaultDescription = stringResource(Resources.Strings.Any1),
+            defaultDescription = stringResource(Strings.Any1),
             onCountryClick = onCountryClick,
             onGenreClick = onGenreClick,
             onYearClick = onYearClick
@@ -48,9 +48,9 @@ internal fun DetailSettingsContent(
 
         CategoryRow(
             index = 1,
-            s = stringResource(Resources.Strings.Countries),
+            s = stringResource(Strings.Countries),
             list = checkedCountries.map { it.name },
-            defaultDescription = stringResource(Resources.Strings.Any1),
+            defaultDescription = stringResource(Strings.Any1),
             onCountryClick = onCountryClick,
             onGenreClick = onGenreClick,
             onYearClick = onYearClick
@@ -60,7 +60,7 @@ internal fun DetailSettingsContent(
 
         CategoryRow(
             index = 2,
-            s = stringResource(Resources.Strings.Year),
+            s = stringResource(Strings.Year),
             defaultDescription = ConvertData.convertYearRange(yearResult.first, yearResult.second),
             onCountryClick = onCountryClick,
             onGenreClick = onGenreClick,

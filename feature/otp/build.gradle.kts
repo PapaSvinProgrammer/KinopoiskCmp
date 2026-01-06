@@ -38,12 +38,6 @@ kotlin {
             implementation(libs.bundles.koin)
             implementation(libs.bundles.composeFeature)
             implementation(libs.uri.kmp)
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
         }
     }
 }

@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.component.CheckRow
 import org.jetbrains.compose.resources.stringResource
 
@@ -28,19 +28,19 @@ internal fun AwardsFilterSheet(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = stringResource(Resources.Strings.Sort),
+                text = stringResource(Strings.Sort),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
 
             CheckRow(
-                title = stringResource(Resources.Strings.ByAlphabet),
+                title = stringResource(Strings.ByAlphabet),
                 isCheck = current == AwardsFilterType.BY_TITLE,
                 modifier = Modifier.clickable { onClick(AwardsFilterType.BY_TITLE) }
             )
 
             CheckRow(
-                title = stringResource(Resources.Strings.ByDate),
+                title = stringResource(Strings.ByDate),
                 isCheck = current == AwardsFilterType.BY_DATE,
                 modifier = Modifier.clickable { onClick(AwardsFilterType.BY_DATE) }
             )

@@ -24,7 +24,7 @@ import com.mordva.ui.theme.ColorGradient1
 import com.mordva.ui.theme.ColorGradient2
 import com.mordva.ui.theme.ColorGradient3
 import com.mordva.ui.theme.ColorGradient4
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.other.animatedBorder
 import org.jetbrains.compose.resources.painterResource
@@ -102,7 +102,7 @@ private fun ColumnScope.ProfileContent(
     ) {
         Image(
             modifier = Modifier.size(80.dp),
-            painter = painterResource(Resources.Icons.Duck),
+            painter = painterResource(Icons.Duck),
             contentDescription = null
         )
     }

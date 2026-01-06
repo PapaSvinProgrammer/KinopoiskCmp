@@ -75,7 +75,7 @@ internal fun RenderMovieContent(
                     navigationIcon = {
                         IconButton(onClick = onBackClick) {
                             Icon(
-                                imageVector = PlatformResources.Icons.ArrowBack,
+                                imageVector = PlatformResources.PlatformIcons.ArrowBack,
                                 contentDescription = null
                             )
                         }

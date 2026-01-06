@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -22,31 +23,29 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "core:uiKit"
+            baseName = "feature:homeKit"
             isStatic = true
         }
     }
 
     sourceSets {
+        androidMain.dependencies {}
         commonMain.dependencies {
-            api(projects.core.ui)
-            api(projects.core.util)
-            api(projects.core.domain)
+            implementation(projects.core.ui)
+            implementation(projects.core.domain)
+            implementation(projects.core.baseViewModels)
 
-            implementation(libs.coil.compose)
-            implementation(libs.coil.compose.core)
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.composeFeature)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
 
 android {
-    namespace = "org.mordva.ui"
+    namespace = "org.mordva.home"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

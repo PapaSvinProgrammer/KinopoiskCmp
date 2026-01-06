@@ -30,6 +30,7 @@ import com.mordva.navigation.MovieListGraph
 import com.mordva.navigation.MovieScreenType
 import com.mordva.navigation.PersonGraph
 import com.mordva.util.Constants
+import com.mordva.util.Log
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.reflect.typeOf

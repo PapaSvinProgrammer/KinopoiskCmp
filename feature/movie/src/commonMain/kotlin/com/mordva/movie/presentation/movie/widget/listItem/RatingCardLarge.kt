@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.PrettyData
 import com.mordva.ui.widget.other.RatingText
 import org.jetbrains.compose.resources.stringResource
@@ -79,7 +79,7 @@ internal fun RatingCardLarge(
                     onClick = onClick
                 ) {
                     Text(
-                        text = stringResource(Resources.Strings.Evaluate),
+                        text = stringResource(Strings.Evaluate),
                         fontSize = 16.sp
                     )
                 }

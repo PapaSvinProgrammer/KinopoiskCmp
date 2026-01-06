@@ -3,7 +3,7 @@ package com.mordva.ui.theme
 import androidx.compose.ui.graphics.vector.ImageVector
 
 expect object PlatformResources {
-    object Icons {
+    object PlatformIcons {
         val ArrowBack: ImageVector
         val Search: ImageVector
     }

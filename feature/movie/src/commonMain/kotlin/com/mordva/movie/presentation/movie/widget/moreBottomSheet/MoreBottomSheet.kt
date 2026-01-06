@@ -22,8 +22,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.domain.model.movie.Movie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.movie.Movie
+import com.mordva.movieScreen.presentation.movie.widget.moreBottomSheet.MoreSheetAction
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.ConvertData
 import com.mordva.ui.widget.listItems.poster.StandardImageSmall
@@ -52,7 +54,7 @@ internal fun MoreBottomSheet(
             colors = ListItemDefaults.colors(MaterialTheme.colorScheme.surfaceContainerLow),
             leadingContent = {
                 Icon(
-                    painter = painterResource(Resources.Icons.NewFolder),
+                    painter = painterResource(Icons.NewFolder),
                     contentDescription = null
                 )
             },
@@ -75,9 +77,9 @@ internal fun MoreBottomSheet(
             leadingContent = {
                 Icon(
                     painter = if (isBlocked)
-                        painterResource(Resources.Icons.StopFill)
+                        painterResource(Icons.StopFill)
                     else
-                        painterResource(Resources.Icons.Stop),
+                        painterResource(Icons.Stop),
                     tint = if (isBlocked)
                         MaterialTheme.colorScheme.primary
                     else
@@ -87,7 +89,7 @@ internal fun MoreBottomSheet(
             },
             headlineContent = {
                 Text(
-                    text = stringResource(Resources.Strings.Blocked),
+                    text = stringResource(Strings.Blocked),
                     fontSize = Typography.bodyMedium.fontSize
                 )
             }
@@ -104,9 +106,9 @@ internal fun MoreBottomSheet(
             leadingContent = {
                 Icon(
                     painter = if (isViewed)
-                        painterResource(Resources.Icons.VisibilityOff)
+                        painterResource(Icons.VisibilityOff)
                     else
-                        painterResource(Resources.Icons.Visibility),
+                        painterResource(Icons.Visibility),
                     tint = if (isViewed)
                         MaterialTheme.colorScheme.primary
                     else
@@ -116,7 +118,7 @@ internal fun MoreBottomSheet(
             },
             headlineContent = {
                 Text(
-                    text = stringResource(Resources.Strings.Viewed),
+                    text = stringResource(Strings.Viewed),
                     fontSize = Typography.bodyMedium.fontSize
                 )
             }
@@ -148,8 +150,7 @@ private fun TopSheetContent(movie: Movie) {
             Text(
                 text = ConvertData.convertDateCreated(
                     year = movie.year,
-                    start = movie.releaseYears.firstOrNull()?.start,
-                    end = movie.releaseYears.firstOrNull()?.end
+                    releaseYears = movie.releaseYears
                 ),
                 fontSize = Typography.bodyMedium.fontSize,
                 color = MaterialTheme.colorScheme.onSurfaceVariant

@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mordva.search.presentation.search_screen.widget.lazyComponent.InfiniteCircularList
 import com.mordva.search.presentation.search_screen.widget.lazyComponent.calculateTargetIndex
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.FormatDate
 import com.mordva.util.Constants.LAST_YEAR
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ fun YearPickerDialog(
     val scrollStateEnd = rememberLazyListState(0)
 
     AlertDialog(
-        title = { Text(text = stringResource(Resources.Strings.SelectDate)) },
+        title = { Text(text = stringResource(Strings.SelectDate)) },
         text = {
             Row(
                 modifier = Modifier
@@ -85,7 +85,7 @@ fun YearPickerDialog(
             TextButton(
                 onClick = { onConfirm(startResult, endResult) }
             ) {
-                Text(text = stringResource(Resources.Strings.Select))
+                Text(text = stringResource(Strings.Select))
             }
         },
         dismissButton = {
@@ -100,7 +100,7 @@ fun YearPickerDialog(
                         scrollStateEnd.scrollToItem(target)
                     }
                 }
-            ) { Text(text = stringResource(Resources.Strings.Reset)) }
+            ) { Text(text = stringResource(Strings.Reset)) }
         },
         onDismissRequest = onDismiss
     )

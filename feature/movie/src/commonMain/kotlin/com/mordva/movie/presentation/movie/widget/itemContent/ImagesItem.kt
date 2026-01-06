@@ -9,8 +9,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.domain.model.image.Poster
-import com.mordva.ui.theme.Resources
+import com.mordva.model.image.Poster
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.toAspectRatio
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
@@ -25,7 +26,7 @@ internal fun LazyListScope.imagesItem(
     if (images.isEmpty()) return
 
     item(key = 11) {
-        TitleRow(title = stringResource(Resources.Strings.Images)) {
+        TitleRow(title = stringResource(Strings.Images)) {
             onShowAll()
         }
 
@@ -44,7 +45,7 @@ internal fun LazyListScope.imagesItem(
                 model = poster.url,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                error = painterResource(Resources.Icons.Image),
+                error = painterResource(Icons.Image),
                 modifier = Modifier
                     .height(160.dp)
                     .clip(RoundedCornerShape(10.dp))

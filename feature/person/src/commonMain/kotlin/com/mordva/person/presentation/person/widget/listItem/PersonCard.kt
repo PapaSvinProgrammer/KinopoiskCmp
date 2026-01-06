@@ -1,4 +1,4 @@
-package com.mordva.person.presentation.person.widget.listItem
+package com.mordva.ui.widget.listItems
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,8 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.domain.model.person.Person
-import com.mordva.ui.theme.Resources
+import com.mordva.model.person.Person
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 
@@ -41,7 +41,7 @@ fun PersonCard(
         ) {
             AsyncImage(
                 model = person.photo,
-                error = painterResource(Resources.Icons.Face),
+                error = painterResource(Icons.Face),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

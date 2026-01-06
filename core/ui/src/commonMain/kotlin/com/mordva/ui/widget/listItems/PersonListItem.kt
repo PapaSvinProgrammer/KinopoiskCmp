@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.FormatDate
 import com.mordva.ui.util.PrettyData
@@ -169,7 +169,7 @@ private fun BottomContent(
 @Composable
 private fun BoxScope.TrailingIcon() {
     Icon(
-        painter = painterResource(Resources.Icons.KeyboardArrowRight),
+        painter = painterResource(Icons.KeyboardArrowRight),
         contentDescription = null,
         modifier = Modifier.align(Alignment.CenterEnd),
         tint = MaterialTheme.colorScheme.onSurfaceVariant

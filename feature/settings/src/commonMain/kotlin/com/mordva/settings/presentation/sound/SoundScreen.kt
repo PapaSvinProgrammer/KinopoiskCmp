@@ -18,7 +18,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mordva.settings.presentation.widget.row.TwinTitleRow
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.other.TitleTopBarText
 import org.jetbrains.compose.resources.stringResource
 
@@ -34,12 +34,12 @@ internal fun SoundScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    TitleTopBarText(text = stringResource(Resources.Strings.NotificationsAndSounds))
+                    TitleTopBarText(text = stringResource(Strings.NotificationsAndSounds))
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }
@@ -61,8 +61,8 @@ internal fun SoundScreen(
             TwinTitleRow(
                 checked = uiState.vibrationSwitch,
                 onClick = { viewModel.updateVibrationSwitch(it) },
-                subtitle = stringResource(Resources.Strings.Vibration),
-                description = stringResource(Resources.Strings.VibrationDescription)
+                subtitle = stringResource(Strings.Vibration),
+                description = stringResource(Strings.VibrationDescription)
             )
         }
     }

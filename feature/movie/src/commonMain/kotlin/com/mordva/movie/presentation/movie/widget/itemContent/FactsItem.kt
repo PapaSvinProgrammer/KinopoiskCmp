@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.domain.model.movie.Fact
-import com.mordva.ui.theme.Resources
+import com.mordva.model.movie.Fact
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.FactCard
 import org.jetbrains.compose.resources.stringResource
@@ -22,7 +22,7 @@ internal fun LazyListScope.factsItem(facts: List<Fact>) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = stringResource(Resources.Strings.FactsTitle),
+            text = stringResource(Strings.FactsTitle),
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(15.dp)

@@ -10,7 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.util.PosterType
 import org.jetbrains.compose.resources.painterResource
 
@@ -22,7 +22,7 @@ fun BasicImageView(
     AsyncImage(
         model = model,
         contentDescription = null,
-        error = painterResource(Resources.Icons.Image),
+        error = painterResource(Icons.Image),
         contentScale = ContentScale.Crop,
         modifier = modifier
     )

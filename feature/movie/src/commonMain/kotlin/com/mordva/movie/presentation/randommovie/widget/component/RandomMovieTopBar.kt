@@ -1,4 +1,4 @@
-package com.mordva.movie.presentation.randommovie
+package com.mordva.movie.presentation.randommovie.widget.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -11,8 +11,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.mordva.ui.theme.Resources
-import com.mordva.ui.theme.Spacer
+import com.mordva.movie.presentation.randommovie.widget.RandomMovieAction
+import com.mordva.ui.theme.DsSpacer
+import com.mordva.ui.theme.Icons
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -25,20 +26,20 @@ internal fun RandomMovieTopBar(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
             .statusBarsPadding()
-            .height(Spacer.M64)
+            .height(DsSpacer.M64)
             .fillMaxWidth()
-            .padding(horizontal = Spacer.M4)
+            .padding(horizontal = DsSpacer.M4)
     ) {
         IconButton(onClick = { onAction(RandomMovieAction.GoBack) }) {
             Icon(
-                painter = painterResource(Resources.Icons.Close),
+                painter = painterResource(Icons.Close),
                 contentDescription = null,
             )
         }
 
         IconButton(onClick = { onAction(RandomMovieAction.Refresh) }) {
             Icon(
-                painter = painterResource(Resources.Icons.Refresh),
+                painter = painterResource(Icons.Settings),
                 contentDescription = null,
             )
         }

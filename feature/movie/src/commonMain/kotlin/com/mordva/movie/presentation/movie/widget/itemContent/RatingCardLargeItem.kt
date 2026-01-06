@@ -12,7 +12,7 @@ import com.mordva.domain.model.totalValue.Rating
 import com.mordva.domain.model.totalValue.Votes
 import com.mordva.movie.presentation.movie.widget.component.RatingMovieContentRow
 import com.mordva.movie.presentation.movie.widget.listItem.RatingCardLarge
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.ratingCardLargeItem(
@@ -22,7 +22,7 @@ internal fun LazyListScope.ratingCardLargeItem(
     item(key = 5) {
         RatingCardLarge(
             modifier = Modifier.padding(horizontal = 15.dp),
-            title = stringResource(Resources.Strings.RatingKinopoisk),
+            title = stringResource(Strings.RatingKinopoisk),
             rating = movie.rating?.kp ?: 0f,
             votes = movie.votes?.kp ?: 0,
             onClick = onClick,

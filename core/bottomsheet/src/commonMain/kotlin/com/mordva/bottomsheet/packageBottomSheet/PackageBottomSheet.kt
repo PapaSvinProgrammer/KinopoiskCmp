@@ -1,4 +1,4 @@
-package com.mordva.bottomsheet.packageBottomSheet
+package com.mordva.ui.widget.packageBottomSheet
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -12,10 +12,11 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mordva.domain.model.PackageType
-import com.mordva.domain.model.movie.Movie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.PackageType
+import com.mordva.model.movie.Movie
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
+import com.mordva.ui.widget.listItems.SearchItemCard
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -30,11 +31,11 @@ fun PackageBottomSheet(
 ) {
     val listItems = listOf(
         PackageItem(
-            title = stringResource(Resources.Strings.FavoriteFilms),
+            title = stringResource(Strings.FavoriteFilms),
             type = PackageType.FAVORITE
         ),
         PackageItem(
-            title = stringResource(Resources.Strings.WillWatching),
+            title = stringResource(Strings.WillWatching),
             type = PackageType.WILL_WATCH
         )
     )

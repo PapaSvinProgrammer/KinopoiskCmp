@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -66,7 +66,7 @@ internal fun DefaultCustomSearchBar(
             cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
             decorationBox = { innerTextField ->
                 if (query.isEmpty()) {
-                    Text(stringResource(Resources.Strings.InputValue))
+                    Text(stringResource(Strings.InputValue))
                 }
 
                 innerTextField()
@@ -88,7 +88,7 @@ internal fun DefaultCustomSearchBar(
                 }
             ) {
                 Text(
-                    text = stringResource(Resources.Strings.Cancel),
+                    text = stringResource(Strings.Cancel),
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }

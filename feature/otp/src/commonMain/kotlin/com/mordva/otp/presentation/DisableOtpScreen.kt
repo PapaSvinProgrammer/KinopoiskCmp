@@ -21,7 +21,7 @@ import androidx.navigation.NavController
 import com.mordva.otp.presentation.widget.content.MainOtpContent
 import com.mordva.otp.utils.actionHandler
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.other.TitleTopBarText
 import org.jetbrains.compose.resources.stringResource
 
@@ -78,12 +78,12 @@ internal fun DisableOtpScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    TitleTopBarText(text = stringResource(Resources.Strings.ResetPinCode))
+                    TitleTopBarText(text = stringResource(Strings.ResetPinCode))
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }

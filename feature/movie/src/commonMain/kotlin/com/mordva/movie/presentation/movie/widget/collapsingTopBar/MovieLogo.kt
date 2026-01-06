@@ -9,7 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 
@@ -39,7 +39,7 @@ internal fun MovieLogo(url: String?, name: String) {
 private fun RenderPng(url: String?) {
     AsyncImage(
         model = url,
-        error = painterResource(Resources.Icons.Movie),
+        error = painterResource(Icons.Movie),
         contentDescription = null,
         modifier = Modifier.padding(horizontal = 55.dp)
     )
@@ -49,7 +49,7 @@ private fun RenderPng(url: String?) {
 private fun RenderSvg(url: String?) {
     AsyncImage(
         model = url,
-        error = painterResource(Resources.Icons.Movie),
+        error = painterResource(Icons.Movie),
         contentDescription = null,
         modifier = Modifier.padding(horizontal = 55.dp)
     )

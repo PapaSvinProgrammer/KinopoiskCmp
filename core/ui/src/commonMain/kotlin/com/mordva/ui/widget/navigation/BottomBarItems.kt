@@ -10,7 +10,7 @@ import com.mordva.ui.theme.ColorGradient1
 import com.mordva.ui.theme.ColorGradient2
 import com.mordva.ui.theme.ColorGradient3
 import com.mordva.ui.theme.ColorGradient4
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import org.jetbrains.compose.resources.DrawableResource
 
 sealed class BottomBarTab(
@@ -21,28 +21,28 @@ sealed class BottomBarTab(
 ) {
     data object Account: BottomBarTab(
         title = "Профиль",
-        icon = Resources.Icons.PersonFill,
+        icon = Icons.PersonFill,
         color = ColorGradient1,
         route = ProfileGraph
     )
 
     data object Home: BottomBarTab(
         title = "Главная",
-        icon = Resources.Icons.HomeFill,
+        icon = Icons.HomeFill,
         color = ColorGradient2,
         route = MovieGraph
     )
 
     data object Search: BottomBarTab(
         title = "Поиск",
-        icon = Resources.Icons.Search,
+        icon = Icons.Search,
         color = ColorGradient3,
         route = SearchGraph
     )
 
     data object Favorite: BottomBarTab(
         title = "Избранное",
-        icon = Resources.Icons.BookmarkFill,
+        icon = Icons.BookmarkFill,
         color = ColorGradient4,
         route = FavoriteGraph
     )

@@ -34,10 +34,10 @@ import com.mordva.search.presentation.search_settings_list.SearchSettingsListTyp
 import com.mordva.search.presentation.widget.component.DetailSettingsContent
 import com.mordva.search.presentation.widget.row.RatingRow
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
-import com.mordva.ui.theme.Resources.StringArray.optionsCategory
-import com.mordva.ui.theme.Resources.StringArray.optionsSortType
 import com.mordva.ui.theme.DsSpacer
+import com.mordva.ui.theme.StringArray.optionsCategory
+import com.mordva.ui.theme.StringArray.optionsSortType
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.other.TitleTopBarText
 import com.mordva.util.ObserveAsEvents
 import org.jetbrains.compose.resources.StringResource
@@ -62,12 +62,12 @@ internal fun SearchSettingsScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    TitleTopBarText(text = stringResource(Resources.Strings.SearchSettings))
+                    TitleTopBarText(text = stringResource(Strings.SearchSettings))
                 },
                 navigationIcon = {
                     IconButton(onClick = { viewModel.onBackClicked() }) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }
@@ -75,7 +75,7 @@ internal fun SearchSettingsScreen(
                 actions = {
                     TextButton(onClick = { viewModel.resetAllSettings() }) {
                         Text(
-                            text = stringResource(Resources.Strings.Reset),
+                            text = stringResource(Strings.Reset),
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }
@@ -112,7 +112,7 @@ internal fun SearchSettingsScreen(
 
             Spacer(modifier = Modifier.height(DsSpacer.M16))
             Text(
-                text = stringResource(Resources.Strings.SortingBy),
+                text = stringResource(Strings.SortingBy),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface,

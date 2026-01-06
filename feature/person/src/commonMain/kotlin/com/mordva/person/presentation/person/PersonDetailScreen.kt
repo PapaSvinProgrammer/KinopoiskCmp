@@ -55,7 +55,7 @@ internal fun PersonDetailScreen(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }

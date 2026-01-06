@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.util.PosterType
 import org.jetbrains.compose.resources.painterResource
 
@@ -17,7 +17,7 @@ fun SquareImage(
     AsyncImage(
         model = model,
         contentDescription = null,
-        error = painterResource(Resources.Icons.Image),
+        error = painterResource(Icons.Image),
         contentScale = ContentScale.FillBounds,
         modifier = modifier.rotate(PosterType.SQUARE.ratio)
     )

@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.person.PersonMovie
 import com.mordva.movie.presentation.movie.widget.listItem.SupportPersonCard
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.LastItemCard
@@ -22,7 +22,7 @@ internal fun LazyListScope.voiceActorsItem(
 
     item(key = 9) {
         TitleRow(
-            title = stringResource(Resources.Strings.VoiceActors),
+            title = stringResource(Strings.VoiceActors),
             onClick = onShowAllPersons
         )
 

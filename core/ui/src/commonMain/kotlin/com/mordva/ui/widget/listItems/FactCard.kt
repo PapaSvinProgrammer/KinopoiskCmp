@@ -25,7 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -82,19 +83,19 @@ private fun SpoilerContent() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                painter = painterResource(Resources.Icons.VisibilityOff),
+                painter = painterResource(Icons.VisibilityOff),
                 contentDescription = null
             )
 
             Spacer(modifier = Modifier.height(5.dp))
 
             Text(
-                text = stringResource(Resources.Strings.SpoilersTitle),
+                text = stringResource(Strings.SpoilersTitle),
                 fontSize = 13.sp
             )
 
             Text(
-                text = stringResource(Resources.Strings.SpoilersDescription),
+                text = stringResource(Strings.SpoilersDescription),
                 fontSize = 13.sp
             )
         }

@@ -15,8 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.domain.model.SearchItem
-import com.mordva.ui.theme.Resources
+import com.mordva.model.SearchItem
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.widget.listItems.poster.StandardImageSmall
 import org.jetbrains.compose.resources.painterResource
 
@@ -54,7 +54,7 @@ fun SearchHistoryMovieCard(
                     onClick = onRemove
                 ) {
                     Icon(
-                        painter = painterResource(Resources.Icons.Close),
+                        painter = painterResource(Icons.Close),
                         contentDescription = null
                     )
                 }

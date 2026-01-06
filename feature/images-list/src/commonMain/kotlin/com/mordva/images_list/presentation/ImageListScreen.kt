@@ -31,7 +31,7 @@ import com.mordva.images_list.util.imageTypeDropDownItems
 import com.mordva.images_list.util.isLongImage
 import com.mordva.images_list.util.toStringResource
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.images_list.presentation.widget.ImageListState
 import com.mordva.ui.util.toAspectRatio
@@ -58,11 +58,11 @@ internal fun ImageListScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { TitleTopBarText(stringResource(Resources.Strings.AllImages)) },
+                title = { TitleTopBarText(stringResource(Strings.AllImages)) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }
@@ -83,7 +83,7 @@ internal fun ImageListScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = stringResource(Resources.Strings.FilterImagesTitle),
+                    text = stringResource(Strings.FilterImagesTitle),
                     fontSize = Typography.bodyMedium.fontSize
                 )
 

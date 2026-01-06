@@ -12,6 +12,7 @@ junit = "4.13.2"
 kotlin = "2.2.20"
 kotlinStdlib = "2.2.20"
 kotlinxDatetime = "0.7.1"
+material3 = "1.9.0-alpha04"
 runner = "1.7.0"
 core = "1.7.0"
 ktor = "3.3.3"
@@ -65,6 +66,7 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
 # --- KMP Settings ---
+material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
 multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
 multiplatform-settings-datastore = { module = "com.russhwolf:multiplatform-settings-datastore", version.ref = "multiplatformSettings" }

@@ -19,7 +19,7 @@ import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.theme.DsTextSize
 import com.mordva.ui.theme.Gold
 import com.mordva.ui.theme.Green
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.ConvertData
 import org.jetbrains.compose.resources.painterResource
@@ -78,7 +78,7 @@ private fun EliteBox(
             .background(Gold)
     ) {
         Icon(
-            painter = painterResource(Resources.Icons.Branch),
+            painter = painterResource(Icons.Branch),
             contentDescription = null,
             tint = Color.Black,
             modifier = Modifier
@@ -100,7 +100,7 @@ private fun EliteBox(
         )
 
         Icon(
-            painter = painterResource(Resources.Icons.Branch),
+            painter = painterResource(Icons.Branch),
             contentDescription = null,
             tint = Color.Black,
             modifier = Modifier

@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.totalValue.Rating
 import com.mordva.domain.model.totalValue.Votes
 import com.mordva.movie.presentation.movie.widget.listItem.RatingCard
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -24,7 +24,7 @@ internal fun RatingMovieContentRow(
         item {
             if (rating.imdb.isCorrectRating()) {
                 RatingCard(
-                    title = stringResource(Resources.Strings.RatingImdb),
+                    title = stringResource(Strings.RatingImdb),
                     rating = rating.imdb ?: 0f,
                     votes = votes.imdb ?: 0
                 )
@@ -34,7 +34,7 @@ internal fun RatingMovieContentRow(
         item {
             if (rating.filmCritics.isCorrectRating()) {
                 RatingCard(
-                    title = stringResource(Resources.Strings.RatingCritics),
+                    title = stringResource(Strings.RatingCritics),
                     rating = rating.filmCritics ?: 0f,
                     votes = votes.filmCritics ?: 0
                 )
@@ -44,7 +44,7 @@ internal fun RatingMovieContentRow(
         item {
             if (rating.russianFilmCritics.isCorrectRating()) {
                 RatingCard(
-                    title = stringResource(Resources.Strings.RatingRussianCritics),
+                    title = stringResource(Strings.RatingRussianCritics),
                     rating = rating.russianFilmCritics ?: 0f,
                     votes = votes.russianFilmCritics ?: 0
                 )

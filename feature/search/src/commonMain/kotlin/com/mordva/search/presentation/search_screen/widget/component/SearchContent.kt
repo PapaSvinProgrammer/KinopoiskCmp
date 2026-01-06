@@ -22,7 +22,7 @@ import com.mordva.domain.model.local.History
 import com.mordva.search.util.toSearchItem
 import com.mordva.search.presentation.search_screen.widget.listItem.SearchHistoryMovieCard
 import com.mordva.search.presentation.search_screen.widget.listItem.SearchItemCard
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.lazyComponent.EndlessLazyColumn
 import org.jetbrains.compose.resources.stringResource
 
@@ -61,7 +61,7 @@ fun ErrorSearchContent() {
         )
 
         Text(
-            text = stringResource(Resources.Strings.NotFound),
+            text = stringResource(Strings.NotFound),
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
         )

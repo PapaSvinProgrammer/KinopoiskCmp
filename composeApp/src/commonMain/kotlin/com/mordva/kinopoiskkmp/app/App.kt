@@ -23,8 +23,6 @@ import com.mordva.search.navigation.SearchFeatureImpl
 import com.mordva.settings.navigation.SettingsFeatureImpl
 import com.mordva.ui.theme.MovieAppTheme
 import com.mordva.ui.util.InitCoil
-import com.mordva.ui.widget.navigation.BottomBarItems
-import com.mordva.ui.widget.navigation.HazeBottomBar
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

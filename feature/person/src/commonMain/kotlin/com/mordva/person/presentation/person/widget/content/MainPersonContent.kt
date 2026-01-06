@@ -1,4 +1,4 @@
-package com.mordva.person.presentation.person.widget.content
+package com.mordva.person.presentation.widget.content
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,8 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.domain.model.person.Person
-import com.mordva.ui.theme.Resources
+import com.mordva.model.person.Person
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.listItems.poster.StandardImageLarge
 import com.mordva.ui.widget.other.BirthdayDepthContent
@@ -66,7 +66,7 @@ internal fun MainPersonContent(
                 contentPadding = PaddingValues(0.dp),
                 onClick = onClickDetail
             ) {
-                Text(text = stringResource(Resources.Strings.Details))
+                Text(text = stringResource(Strings.Details))
             }
         }
     }

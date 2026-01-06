@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.stringResource
 
@@ -49,7 +49,7 @@ internal fun MovieDescription(
         )
 
         Text(
-            text = stringResource(Resources.Strings.ShowAll),
+            text = stringResource(Strings.ShowAll),
             fontSize = Typography.bodyMedium.fontSize,
             fontWeight = FontWeight.Normal,
             color = MaterialTheme.colorScheme.primary

@@ -8,7 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -41,9 +42,9 @@ fun AwardListItem(
 
                 Text(
                     text = if (winning)
-                        stringResource(Resources.Strings.Award)
+                        stringResource(Strings.Award)
                     else
-                        stringResource(Resources.Strings.Nomination),
+                        stringResource(Strings.Nomination),
                     fontWeight = FontWeight.Medium,
                     fontSize = Typography.bodyMedium.fontSize,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -52,7 +53,7 @@ fun AwardListItem(
         },
         trailingContent = {
             Icon(
-                painter = painterResource(Resources.Icons.KeyboardArrowRight),
+                painter = painterResource(Icons.KeyboardArrowRight),
                 contentDescription = null
             )
         }

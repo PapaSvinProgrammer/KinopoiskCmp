@@ -1,4 +1,4 @@
-package com.mordva.person.presentation.person.widget.content
+package com.mordva.person.presentation.widget.content
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.domain.model.person.Spouse
-import com.mordva.person.presentation.person.widget.PersonListUIState
-import com.mordva.person.presentation.person.widget.listItem.SpouseCard
-import com.mordva.ui.theme.Resources
+import com.mordva.model.person.Spouse
+import com.mordva.person.presentation.widget.listItem.SpouseCard
+import com.mordva.ui.theme.Strings
+import com.mordva.ui.uiState.PersonListUIState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -29,7 +29,7 @@ internal fun SpouseContent(
             .padding(15.dp)
     ) {
         Text(
-            text = stringResource(Resources.Strings.Spouse),
+            text = stringResource(Strings.Spouse),
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,

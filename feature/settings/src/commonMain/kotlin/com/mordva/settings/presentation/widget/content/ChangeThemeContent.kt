@@ -14,7 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mordva.settings.presentation.widget.card.ThemeCard
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -24,7 +25,7 @@ internal fun ChangeThemeContent(
     onChangeTheme: (Int) -> Unit
 ) {
     Text(
-        text = stringResource(Resources.Strings.Theme),
+        text = stringResource(Strings.Theme),
         fontWeight = FontWeight.Bold,
         fontSize = 17.sp
     )
@@ -37,23 +38,23 @@ internal fun ChangeThemeContent(
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         ThemeCard(
-            text = stringResource(Resources.Strings.SystemTheme),
-            icon = painterResource(Resources.Icons.Brightness),
+            text = stringResource(Strings.SystemTheme),
+            icon = painterResource(Icons.Brightness),
             width = 130.dp,
             onClick = { onChangeTheme(1) },
             isFocus = themeState == 1
         )
 
         ThemeCard(
-            text = stringResource(Resources.Strings.Dark),
-            icon = painterResource(Resources.Icons.Dark),
+            text = stringResource(Strings.Dark),
+            icon = painterResource(Icons.Dark),
             onClick = { onChangeTheme(2) },
             isFocus = themeState == 2
         )
 
         ThemeCard(
-            text = stringResource(Resources.Strings.Light),
-            icon = painterResource(Resources.Icons.Light),
+            text = stringResource(Strings.Light),
+            icon = painterResource(Icons.Light),
             isFocus = themeState == 3,
             onClick = { onChangeTheme(3) }
         )

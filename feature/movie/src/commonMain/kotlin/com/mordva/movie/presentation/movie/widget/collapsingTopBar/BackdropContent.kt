@@ -11,8 +11,8 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.domain.model.movie.Movie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.movie.Movie
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.widget.component.FadingDefaults
 import com.mordva.ui.widget.component.fadingEdge
 import org.jetbrains.compose.resources.painterResource
@@ -32,7 +32,7 @@ internal fun BackdropContent(scrollState: LazyListState, movie: Movie) {
     if (movie.backdrop?.url.isCorrectUrl() && movie.logo?.url.isCorrectUrl()) {
         AsyncImage(
             model = movie.backdrop?.url,
-            error = painterResource(Resources.Icons.Movie),
+            error = painterResource(Icons.Movie),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier

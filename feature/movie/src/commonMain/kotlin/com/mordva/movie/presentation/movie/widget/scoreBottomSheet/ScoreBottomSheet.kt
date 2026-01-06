@@ -26,9 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.domain.model.local.RatedMovie
-import com.mordva.domain.model.movie.Movie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.local.RatedMovie
+import com.mordva.model.movie.Movie
+import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
+import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.ConvertData
 import com.mordva.ui.widget.component.ScorePicker
@@ -97,13 +99,13 @@ internal fun ScoreBottomSheet(
                 }
             ) {
                 val text = if (initialValue == null && scoreValue != null) {
-                    stringResource(Resources.Strings.SetRating)
+                    stringResource(Strings.SetRating)
                 } else if (initialValue == null) {
-                    stringResource(Resources.Strings.NotChange)
+                    stringResource(Strings.NotChange)
                 } else if (scoreValue == null) {
-                    stringResource(Resources.Strings.DeleteRating)
+                    stringResource(Strings.DeleteRating)
                 } else {
-                    stringResource(Resources.Strings.ChangeRating)
+                    stringResource(Strings.ChangeRating)
                 }
 
                 Text(
@@ -142,7 +144,7 @@ private fun ColumnScope.RenderRatedMovieList(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(15.dp),
-                text = stringResource(Resources.Strings.YourMovieOn, currentRating),
+                text = stringResource(Strings.YourMovieOn, currentRating),
                 fontSize = Typography.bodyLarge.fontSize,
                 fontWeight = FontWeight.Medium
             )
@@ -164,7 +166,7 @@ private fun ColumnScope.RenderRatedMovieList(
 @Composable
 private fun TopHeadlineContent(movie: Movie) {
     Text(
-        text = stringResource(Resources.Strings.Evaluate),
+        text = stringResource(Strings.Evaluate),
         fontSize = Typography.bodyMedium.fontSize
     )
 
@@ -183,8 +185,7 @@ private fun TopHeadlineContent(movie: Movie) {
     Text(
         text = ConvertData.convertDateCreated(
             year = movie.year,
-            start = movie.releaseYears.firstOrNull()?.start,
-            end = movie.releaseYears.firstOrNull()?.end
+            releaseYears = movie.releaseYears
         ),
         fontSize = Typography.bodyMedium.fontSize,
         color = MaterialTheme.colorScheme.onSurfaceVariant

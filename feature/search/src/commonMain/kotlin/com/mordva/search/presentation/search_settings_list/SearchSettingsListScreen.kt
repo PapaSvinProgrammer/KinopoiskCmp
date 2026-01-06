@@ -32,8 +32,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mordva.domain.model.category.ItemName
 import com.mordva.search.presentation.widget.component.DefaultCustomSearchBar
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.other.TitleTopBarText
 import org.jetbrains.compose.resources.painterResource
@@ -57,7 +58,7 @@ internal fun SearchSettingsListScreen(
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }
@@ -67,7 +68,7 @@ internal fun SearchSettingsListScreen(
                         onClick = { viewModel.reset() }
                     ) {
                         Text(
-                            text = stringResource(Resources.Strings.Reset),
+                            text = stringResource(Strings.Reset),
                             color = MaterialTheme.colorScheme.onSurface,
                         )
                     }
@@ -137,7 +138,7 @@ private fun MainLazyColumn(
                 trailingContent = {
                     if (checked[item] == true) {
                         Icon(
-                            painter = painterResource(Resources.Icons.Check),
+                            painter = painterResource(Icons.Check),
                             contentDescription = null
                         )
                     }
@@ -162,7 +163,7 @@ private fun BoxScope.SuccessButton(
         onClick = onClick
     ) {
         Text(
-            text = stringResource(Resources.Strings.Show),
+            text = stringResource(Strings.Show),
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
         )
@@ -170,6 +171,6 @@ private fun BoxScope.SuccessButton(
 }
 
 private val SearchSettingsListType.title get() = when (this) {
-    SearchSettingsListType.GENRE -> Resources.Strings.Genres
-    SearchSettingsListType.COUNTRY -> Resources.Strings.Countries
+    SearchSettingsListType.GENRE -> Strings.Genres
+    SearchSettingsListType.COUNTRY -> Strings.Countries
 }

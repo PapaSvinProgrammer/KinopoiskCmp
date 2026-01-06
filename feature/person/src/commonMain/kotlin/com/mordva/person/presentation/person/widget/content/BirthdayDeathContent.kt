@@ -1,4 +1,4 @@
-package com.mordva.person.presentation.person.widget.content
+package com.mordva.person.presentation.widget.content
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.person.presentation.person.widget.listItem.DetailInfoListItem
-import com.mordva.ui.theme.Resources
+import com.mordva.person.presentation.widget.listItem.DetailInfoListItem
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.FormatDate
 import com.mordva.ui.util.PrettyData
 import com.mordva.ui.widget.other.PrettyAgeContent
@@ -30,11 +30,11 @@ internal fun BirthdayDeathContent(
         val prettyDeath = FormatDate.formatDate(death)
 
         DetailInfoListItem(
-            header = stringResource(Resources.Strings.Birthday),
+            header = stringResource(Strings.Birthday),
             trailing = prettyBirthday
         )
 
-        CustomDetailInfo(stringResource(Resources.Strings.Death)) {
+        CustomDetailInfo(stringResource(Strings.Death)) {
             PrettyAgeContent(
                 modifier = Modifier.weight(2f),
                 fontWeight = FontWeight.Medium,
@@ -49,7 +49,7 @@ internal fun BirthdayDeathContent(
     birthday?.let {
         val prettyBirthday = FormatDate.formatDate(birthday)
 
-        CustomDetailInfo(stringResource(Resources.Strings.Birthday)) {
+        CustomDetailInfo(stringResource(Strings.Birthday)) {
             PrettyAgeContent(
                 modifier = Modifier.weight(2f),
                 date = prettyBirthday,

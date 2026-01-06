@@ -12,7 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.PrettyData
 import org.jetbrains.compose.resources.painterResource
@@ -36,7 +37,7 @@ internal fun SeasonDescription(
     ) {
         Column {
             Text(
-                text = stringResource(Resources.Strings.SeasonsSeries),
+                text = stringResource(Strings.SeasonsSeries),
                 fontSize = Typography.bodyLarge.fontSize,
                 fontWeight = FontWeight.Bold
             )
@@ -48,7 +49,7 @@ internal fun SeasonDescription(
         }
 
         Icon(
-            painter = painterResource(Resources.Icons.KeyboardArrowRight),
+            painter = painterResource(Icons.KeyboardArrowRight),
             contentDescription = null
         )
     }

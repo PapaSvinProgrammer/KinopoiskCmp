@@ -8,9 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.domain.model.totalValue.Premiere
 import com.mordva.movie.presentation.movie.widget.component.PremierListContent
-import com.mordva.ui.theme.Resources
+import com.mordva.model.totalValue.Premiere
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.stringResource
 
@@ -23,7 +23,7 @@ internal fun LazyListScope.premierItem(premiere: Premiere?) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = stringResource(Resources.Strings.Rental),
+            text = stringResource(Strings.Rental),
             fontSize = Typography.titleMedium.fontSize,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(15.dp)

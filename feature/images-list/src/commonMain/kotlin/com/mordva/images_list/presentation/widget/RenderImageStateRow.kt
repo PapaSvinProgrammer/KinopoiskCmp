@@ -1,4 +1,4 @@
-package com.mordva.images_list.presentation.widget
+package com.mordva.ui.widget.renderState
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
@@ -10,8 +10,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.domain.model.image.Poster
-import com.mordva.ui.theme.Resources
+import com.mordva.model.image.Poster
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.uiState.ImageListUIState
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.LastItemCard
@@ -20,14 +21,14 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun RenderImagesStateRow(
-    state: ImageListState,
+    state: ImageListUIState,
     title: String,
     onClick: (Poster) -> Unit,
     onShowAll: () -> Unit
 ) {
     when (state) {
-        ImageListState.Loading -> ShimmerMovieRow()
-        is ImageListState.Success -> {
+        ImageListUIState.Loading -> ShimmerMovieRow()
+        is ImageListUIState.Success -> {
             MainImageContent(
                 title = title,
                 list = state.data,
@@ -64,7 +65,7 @@ private fun MainImageContent(
         AsyncImage(
             model = it.url,
             contentDescription = null,
-            error = painterResource(Resources.Icons.Image),
+            error = painterResource(Icons.Image),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .height(130.dp)

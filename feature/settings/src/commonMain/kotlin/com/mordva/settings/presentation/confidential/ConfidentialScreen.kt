@@ -30,7 +30,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mordva.navigation.OtpGraph
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.other.TitleTopBarText
 import io.github.alexzhirkevich.compottie.LottieCompositionSpec
@@ -59,13 +59,13 @@ internal fun ConfidentialScreen(
             CenterAlignedTopAppBar(
                 title = {
                     TitleTopBarText(
-                        text = stringResource(Resources.Strings.Confidentiality)
+                        text = stringResource(Strings.Confidentiality)
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }
@@ -134,7 +134,7 @@ private fun EnableAuthPassword(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = stringResource(Resources.Strings.EnablePinCode),
+            text = stringResource(Strings.EnablePinCode),
             fontSize = Typography.bodyMedium.fontSize,
             fontWeight = FontWeight.Normal,
             modifier = Modifier.padding(10.dp)
@@ -159,7 +159,7 @@ private fun DisableAuthPassword(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = stringResource(Resources.Strings.DisablePinCode),
+            text = stringResource(Strings.DisablePinCode),
             fontSize = Typography.bodyMedium.fontSize,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.padding(10.dp)

@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.mordva.movie.domain.model.PersonMovieExtended
 import com.mordva.movie.presentation.groupPerson.widget.GroupUiState
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.PrettyData
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.listItems.PersonListItem
@@ -45,12 +45,12 @@ internal fun GroupPersonsScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    TitleTopBarText(text = stringResource(Resources.Strings.Persons))
+                    TitleTopBarText(text = stringResource(Strings.Persons))
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }

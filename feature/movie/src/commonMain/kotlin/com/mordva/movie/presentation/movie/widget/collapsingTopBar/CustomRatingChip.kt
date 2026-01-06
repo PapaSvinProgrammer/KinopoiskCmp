@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.widget.other.toRatingColor
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -35,7 +35,7 @@ internal fun CustomRatingChip(rating: Int = 10) {
             modifier = Modifier
                 .size(20.dp)
                 .padding(start = 5.dp),
-            painter = painterResource(Resources.Icons.StarFill),
+            painter = painterResource(Icons.StarFill),
             contentDescription = null,
             tint = Color.White
         )

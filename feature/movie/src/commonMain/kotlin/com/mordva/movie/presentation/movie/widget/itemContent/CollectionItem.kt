@@ -10,8 +10,8 @@ import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mordva.domain.model.image.CollectionMovie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.image.CollectionMovie
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.listItems.CollectionListItem
 import org.jetbrains.compose.resources.stringResource
@@ -27,7 +27,7 @@ internal fun LazyListScope.collectionsItem(
         Spacer(modifier = Modifier.height(30.dp))
 
         TitleRow(
-            title = stringResource(Resources.Strings.InLists),
+            title = stringResource(Strings.InLists),
             onClick = onShowAll
         )
 
@@ -39,11 +39,10 @@ internal fun LazyListScope.collectionsItem(
                 if (item.cover?.url == null) return@items
 
                 CollectionListItem(
-                    imageUrl = item.cover?.url,
-                    text = item.name.toString(),
+                    collectionMovie = item,
                     modifier = Modifier
                         .width(300.dp)
-                        .clickable { onClick(item) },
+                        .clickable { onClick(item) }
                 )
             }
         }

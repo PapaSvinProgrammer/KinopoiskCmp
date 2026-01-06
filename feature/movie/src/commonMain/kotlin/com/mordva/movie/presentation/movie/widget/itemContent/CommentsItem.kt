@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.movie.Comment
 import com.mordva.movie.presentation.movie.widget.listItem.CommentCard
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import org.jetbrains.compose.resources.stringResource
@@ -16,7 +16,7 @@ internal fun LazyListScope.commentsItem(comments: List<Comment>) {
     if (comments.isEmpty()) return
 
     item(key = 10) {
-        TitleRow(title = stringResource(Resources.Strings.Review)) {}
+        TitleRow(title = stringResource(Strings.Review)) {}
 
         DefaultLazyRow(
             list = comments,

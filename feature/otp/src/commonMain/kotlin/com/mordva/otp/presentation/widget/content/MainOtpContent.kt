@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.mordva.otp.presentation.widget.state.OtpAction
 import com.mordva.otp.presentation.widget.state.UiState
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -23,7 +23,7 @@ internal fun MainOtpContent(
     onAction: (OtpAction) -> Unit,
     modifier: Modifier = Modifier,
     isError: Boolean,
-    hint: String = stringResource(Resources.Strings.InputPinCode)
+    hint: String = stringResource(Strings.InputPinCode)
 ) {
     Column(
         modifier = modifier

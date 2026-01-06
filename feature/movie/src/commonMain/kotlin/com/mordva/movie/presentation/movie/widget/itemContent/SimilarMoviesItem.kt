@@ -8,8 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.domain.model.movie.Movie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.movie.Movie
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.MovieCard
@@ -25,7 +25,7 @@ internal fun LazyListScope.similarMoviesItem(
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = stringResource(Resources.Strings.SimilarMovies),
+            text = stringResource(Strings.SimilarMovies),
             fontSize = Typography.titleMedium.fontSize,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(15.dp)

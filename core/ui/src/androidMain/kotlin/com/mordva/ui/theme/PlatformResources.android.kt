@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
 actual object PlatformResources {
-    actual object Icons {
+    actual object PlatformIcons {
         actual val ArrowBack: ImageVector
             get() {
                 if (_ArrowBackAndroid != null) {

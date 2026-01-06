@@ -1,4 +1,4 @@
-package com.mordva.movie.presentation.movie.widget.listItem
+package com.mordva.ui.widget.listItems
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,8 +20,8 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.mordva.domain.model.movie.Movie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.movie.Movie
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.ConvertData
 import com.mordva.ui.widget.chips.RatingChip
@@ -69,7 +69,7 @@ fun MovieListCard(
                 onClick = onSettingsClick
             ) {
                 Icon(
-                    painter = painterResource(Resources.Icons.MoreVert),
+                    painter = painterResource(Icons.MoreVert),
                     contentDescription = null,
                     modifier = Modifier.rotate(90f)
                 )
@@ -105,11 +105,7 @@ private fun getAlternativeName(movie: Movie): String {
         if (it.isNotEmpty()) res += "$it, "
     }
 
-    res += ConvertData.convertDateCreated(
-        year = movie.year,
-        start = movie.releaseYears.firstOrNull()?.start,
-        end = movie.releaseYears.firstOrNull()?.end,
-    )
+    res += ConvertData.convertDateCreated(movie.year, movie.releaseYears)
 
     return res
 }

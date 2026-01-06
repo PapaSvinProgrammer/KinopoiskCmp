@@ -20,7 +20,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -49,7 +50,7 @@ fun LastItemCard(
                 modifier = Modifier.size(48.dp)
             ) {
                 Icon(
-                    painter = painterResource(Resources.Icons.KeyboardArrowRight),
+                    painter = painterResource(Icons.KeyboardArrowRight),
                     contentDescription = null
                 )
             }
@@ -57,7 +58,7 @@ fun LastItemCard(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = stringResource(Resources.Strings.ShowAll),
+                text = stringResource(Strings.ShowAll),
                 fontWeight = FontWeight.Medium,
                 fontSize = Typography.bodyMedium.fontSize
             )

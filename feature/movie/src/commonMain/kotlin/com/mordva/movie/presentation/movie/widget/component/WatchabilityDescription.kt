@@ -13,7 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -32,7 +33,7 @@ internal fun WatchabilityDescription(
     ) {
         Column {
             Text(
-                text = stringResource(Resources.Strings.WhereCanWatch),
+                text = stringResource(Strings.WhereCanWatch),
                 fontWeight = FontWeight.Bold,
                 fontSize = Typography.bodyLarge.fontSize
             )
@@ -45,7 +46,7 @@ internal fun WatchabilityDescription(
         }
 
         Icon(
-            painter = painterResource(Resources.Icons.KeyboardArrowRight),
+            painter = painterResource(Icons.KeyboardArrowRight),
             contentDescription = null
         )
     }

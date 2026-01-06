@@ -1,4 +1,4 @@
-package com.mordva.movie.presentation.home
+package com.mordva.home.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
@@ -15,13 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.mordva.movie.presentation.home.utils.NavigationUtils
-import com.mordva.movie.presentation.home.utils.NavigationUtils.navigateToHomeDetailByGenre
-import com.mordva.movie.presentation.home.utils.NavigationUtils.navigateToHomeDetailByLists
-import com.mordva.movie.presentation.home.utils.NavigationUtils.navigateToHomeDetailByNetwork
-import com.mordva.movie.presentation.home.widget.RenderMovieStateRow
+import com.mordva.home.utils.NavigationUtils
+import com.mordva.home.utils.NavigationUtils.navigateToHomeDetailByGenre
+import com.mordva.home.utils.NavigationUtils.navigateToHomeDetailByLists
+import com.mordva.home.utils.NavigationUtils.navigateToHomeDetailByNetwork
+import com.mordva.home.utils.NavigationUtils.navigateToMovieFromCollection
+import com.mordva.navigation.CollectionListGraph
 import com.mordva.navigation.MovieGraph
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.other.TopBarIconApp
+import com.mordva.ui.widget.renderState.RenderCollectionStateRow
+import com.mordva.ui.widget.renderState.RenderMovieStateRow
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,18 +53,18 @@ internal fun HomeScreen(
         ) {
             item {
                 viewModel.getCollections()
-//                RenderCollectionStateRow(
-//                    state = uiState.collectionState,
-//                    title = stringResource(Resources.Strings.Collections),
-//                    onClick = {
-//                        navController.navigateToMovieFromCollection(it)
-//                    },
-//                    onShowAll = {
-//                        navController.navigate(CollectionListGraph.CollectionListRoute()) {
-//                            launchSingleTop = true
-//                        }
-//                    }
-//                )
+                RenderCollectionStateRow(
+                    state = uiState.collectionState,
+                    title = stringResource(Strings.Collections),
+                    onClick = {
+                        navController.navigateToMovieFromCollection(it)
+                    },
+                    onShowAll = {
+                        navController.navigate(CollectionListGraph.CollectionListRoute()) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
             }
 
             item {

@@ -4,7 +4,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.person.PersonMovie
 import com.mordva.movie.presentation.movie.widget.listItem.SupportPersonCard
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.LastItemCard
@@ -19,7 +19,7 @@ internal fun LazyListScope.supportPersonalItem(
 
     item(key = 8) {
         TitleRow(
-            title = stringResource(Resources.Strings.SupportPersonal),
+            title = stringResource(Strings.SupportPersonal),
             onClick = onShowAllPersons
         )
 

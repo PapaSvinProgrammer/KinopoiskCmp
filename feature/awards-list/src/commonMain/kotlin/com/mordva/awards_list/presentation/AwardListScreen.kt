@@ -15,8 +15,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mordva.awards_list.presentation.widget.bottomSheet.AwardsFilterSheet
 import com.mordva.awards_list.presentation.widget.component.RenderAwardsContent
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.PlatformResources
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.widget.other.TitleTopBarText
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -35,12 +36,12 @@ internal fun AwardListScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    TitleTopBarText(text = stringResource(Resources.Strings.Awards))
+                    TitleTopBarText(text = stringResource(Strings.Awards))
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = PlatformResources.Icons.ArrowBack,
+                            imageVector = PlatformResources.PlatformIcons.ArrowBack,
                             contentDescription = null
                         )
                     }
@@ -48,7 +49,7 @@ internal fun AwardListScreen(
                 actions = {
                     IconButton(onClick = { viewModel.updateVisibleBottomSheet(true) }) {
                         Icon(
-                            painter = painterResource(Resources.Icons.Filter),
+                            painter = painterResource(Icons.Filter),
                             contentDescription = null
                         )
                     }

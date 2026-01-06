@@ -10,8 +10,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.domain.model.movie.Movie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.movie.Movie
+import com.mordva.ui.theme.Icons
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -28,7 +28,7 @@ internal fun ContentWithoutBackdrop(
 
     AsyncImage(
         model = movie.poster?.url,
-        error = painterResource(Resources.Icons.Movie),
+        error = painterResource(Icons.Movie),
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = Modifier

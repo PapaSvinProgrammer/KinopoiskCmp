@@ -18,8 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.domain.model.person.PersonMovie
-import com.mordva.ui.theme.Resources
+import com.mordva.model.person.PersonMovie
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 
@@ -40,7 +40,7 @@ internal fun PersonMovieListItem(
         AsyncImage(
             model = person.photo,
             contentDescription = null,
-            error = painterResource(Resources.Icons.Image),
+            error = painterResource(Icons.Image),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .height(80.dp)

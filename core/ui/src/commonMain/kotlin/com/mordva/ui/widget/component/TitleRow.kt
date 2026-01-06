@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 
@@ -39,7 +39,7 @@ fun TitleRow(
         )
 
         Icon(
-            painter = painterResource(Resources.Icons.KeyboardArrowRight),
+            painter = painterResource(Icons.KeyboardArrowRight),
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
