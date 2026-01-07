@@ -1,7 +1,5 @@
 package com.mordva.ui.util
 
-import com.mordva.model.movie.Movie
-import com.mordva.model.totalValue.ReleaseYears
 import com.mordva.util.Constants
 import kotlin.math.round
 import kotlin.math.roundToInt
@@ -55,40 +53,38 @@ object ConvertData {
         return "с $start по $end"
     }
 
-    fun getAlternativeNameForMovie(movie: Movie): String {
-        movie.alternativeName?.let {
-            return it
-        }
-
-        val year = convertDateCreated(movie.year, movie.releaseYears)
+    fun getAlternativeNameForMovie(
+        alternativeName: String?,
+        year: Int?,
+        genres: List<String>,
+        start: Int?,
+        end: Int?
+    ): String {
+        alternativeName?.let { return it }
+        val year = convertDateCreated(year, start, end)
 
         if (year.isNotEmpty()) {
             return year
         }
 
-        if (movie.genres.isNotEmpty()) {
-            return movie.genres.joinToString(", ") { it.name }
+        if (genres.isNotEmpty()) {
+            return genres.joinToString(", ")
         }
 
         return ""
     }
 
-    fun convertDateCreated(year: Int?, releaseYears: List<ReleaseYears>): String {
-        if (releaseYears.isNotEmpty()) {
-            val start = releaseYears[0].start
-            val end = releaseYears[0].end
+    fun convertDateCreated(year: Int?, start: Int?, end: Int?): String {
+        if (start == end) {
+            return start.toString()
+        }
 
-            if (start == end) {
-                return start.toString()
+        start?.let {
+            if (end == null) {
+                return "$start-..."
             }
 
-            start?.let {
-                if (end == null) {
-                    return "$start-..."
-                }
-
-                return "$start-$end"
-            }
+            return "$start-$end"
         }
 
         year?.let {

@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.model.image.CollectionMovie
+import com.mordva.domain.model.image.CollectionMovie
 import com.mordva.ui.widget.lazyComponent.EndlessLazyColumn
 import com.mordva.ui.widget.listItems.CollectionListItem
 
@@ -34,7 +34,8 @@ internal fun SuccessCollectionContent(
                 )
             },
             size = 75.dp,
-            collectionMovie = item
+            imageUrl = item.cover?.url,
+            text = item.name.toString()
         )
     }
 }

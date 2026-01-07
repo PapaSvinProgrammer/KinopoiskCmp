@@ -1,7 +1,7 @@
 package com.mordva.search.presentation.search_settings.widget
 
 import androidx.compose.runtime.Immutable
-import com.mordva.model.category.ItemName
+import com.mordva.domain.model.category.ItemName
 import com.mordva.ui.util.FormatDate
 import com.mordva.util.Constants
 

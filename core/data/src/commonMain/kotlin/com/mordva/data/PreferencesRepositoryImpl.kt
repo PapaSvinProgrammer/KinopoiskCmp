@@ -33,9 +33,9 @@ internal class PreferencesRepositoryImpl(
         return settings.getBooleanFlow(AUTH_STATE, false)
     }
 
-    companion object {
-        private const val THEME_STATE = "theme_state"
-        private const val ENTRY_STATE = "entry_state"
-        private const val AUTH_STATE = "auth_state"
+    private companion object {
+        const val THEME_STATE = "theme_state"
+        const val ENTRY_STATE = "entry_state"
+        const val AUTH_STATE = "auth_state"
     }
 }

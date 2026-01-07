@@ -9,7 +9,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.model.image.Poster
+import com.mordva.domain.model.image.Poster
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.util.toAspectRatio
 import com.mordva.ui.widget.component.TitleRow

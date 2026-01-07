@@ -1,6 +1,5 @@
 package com.mordva.network.internal.core
 
-import com.mordva.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.HttpRequestRetry
@@ -38,7 +37,7 @@ fun provideHttpClient(engine: HttpClientEngine): HttpClient {
             level = LogLevel.ALL
             logger = object : Logger {
                 override fun log(message: String) {
-                    Log.d("Ktor", message)
+//                    Log.d("Ktor", message)
                 }
             }
         }

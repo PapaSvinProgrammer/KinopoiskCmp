@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.mordva.navigation.MovieListGraph
-import com.mordva.ui.uiState.CollectionListUIState
+import com.mordva.collection_list.presentation.widget.CollectionListUIState
 import com.mordva.util.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)

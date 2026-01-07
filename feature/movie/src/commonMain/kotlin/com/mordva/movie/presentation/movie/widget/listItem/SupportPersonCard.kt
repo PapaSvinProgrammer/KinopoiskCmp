@@ -17,7 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.mordva.model.person.PersonMovie
+import com.mordva.domain.model.person.PersonMovie
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.listItems.poster.StandardImageSmall
 

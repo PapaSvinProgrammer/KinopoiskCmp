@@ -2,7 +2,7 @@ package com.mordva.ui.widget.navigation
 
 import androidx.compose.ui.graphics.Color
 import com.mordva.navigation.FavoriteGraph
-import com.mordva.navigation.HomeGraph
+import com.mordva.navigation.MovieGraph
 import com.mordva.navigation.ProfileGraph
 import com.mordva.navigation.RootGraph
 import com.mordva.navigation.SearchGraph
@@ -30,7 +30,7 @@ sealed class BottomBarTab(
         title = "Главная",
         icon = Resources.Icons.HomeFill,
         color = ColorGradient2,
-        route = HomeGraph
+        route = MovieGraph
     )
 
     data object Search: BottomBarTab(

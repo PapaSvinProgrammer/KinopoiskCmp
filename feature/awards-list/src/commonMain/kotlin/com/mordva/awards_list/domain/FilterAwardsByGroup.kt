@@ -1,6 +1,6 @@
 package com.mordva.awards_list.domain
 
-import com.mordva.model.person.NominationAward
+import com.mordva.domain.model.person.NominationAward
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 

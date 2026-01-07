@@ -15,14 +15,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import com.mordva.ui.theme.DsSpacer
 
 @Composable
 fun <T> EndlessLazyVerticalStaggeredGrid(
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 15.dp),
-    verticalItemSpacing: Dp = 10.dp,
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(10.dp),
+    contentPadding: PaddingValues = PaddingValues(horizontal = DsSpacer.M16),
+    verticalItemSpacing: Dp = DsSpacer.M10,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(DsSpacer.M10),
     columns: StaggeredGridCells = StaggeredGridCells.Fixed(2),
     gridState: LazyStaggeredGridState = rememberLazyStaggeredGridState(),
     list: List<T>,
@@ -36,7 +36,9 @@ fun <T> EndlessLazyVerticalStaggeredGrid(
     }
 
     LaunchedEffect(reachBottom) {
-        if (reachBottom) { onLoadMore() }
+        if (reachBottom) {
+            onLoadMore()
+        }
     }
 
     LazyVerticalStaggeredGrid(

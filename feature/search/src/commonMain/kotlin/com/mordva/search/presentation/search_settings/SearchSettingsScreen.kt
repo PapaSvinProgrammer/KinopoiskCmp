@@ -37,7 +37,7 @@ import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources
 import com.mordva.ui.theme.Resources.StringArray.optionsCategory
 import com.mordva.ui.theme.Resources.StringArray.optionsSortType
-import com.mordva.ui.theme.Spacer
+import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.widget.other.TitleTopBarText
 import com.mordva.util.ObserveAsEvents
 import org.jetbrains.compose.resources.StringResource
@@ -88,7 +88,7 @@ internal fun SearchSettingsScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            Spacer(modifier = Modifier.height(Spacer.M16))
+            Spacer(modifier = Modifier.height(DsSpacer.M16))
 
             SegmentedButton(
                 selectedIndex = uiState.selectedCategoryIndex,
@@ -110,13 +110,13 @@ internal fun SearchSettingsScreen(
                 onChange = { viewModel.updateRatingSliderPosition(it) }
             )
 
-            Spacer(modifier = Modifier.height(Spacer.M16))
+            Spacer(modifier = Modifier.height(DsSpacer.M16))
             Text(
                 text = stringResource(Resources.Strings.SortingBy),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(Spacer.M16)
+                modifier = Modifier.padding(DsSpacer.M16)
             )
 
             SegmentedButton(
@@ -147,7 +147,7 @@ private fun ColumnScope.SegmentedButton(
     SingleChoiceSegmentedButtonRow(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacer.M16)
+            .padding(horizontal = DsSpacer.M16)
             .align(Alignment.CenterHorizontally)
     ) {
         list.forEachIndexed { index, item ->
@@ -163,7 +163,7 @@ private fun ColumnScope.SegmentedButton(
                 shape = SegmentedButtonDefaults.itemShape(
                     index = index,
                     count = list.size,
-                    baseShape = RoundedCornerShape(Spacer.M10)
+                    baseShape = RoundedCornerShape(DsSpacer.M10)
                 ),
                 onClick = { onClick(index) }
             )

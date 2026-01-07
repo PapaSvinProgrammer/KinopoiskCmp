@@ -1,12 +1,11 @@
 package com.mordva.search.domain
 
+import com.mordva.domain.model.SearchItem
 import com.mordva.domain.repository.MovieRepository
 import com.mordva.domain.repository.PersonRepository
-import com.mordva.model.SearchItem
 import com.mordva.search.domain.model.RequestParams
-import com.mordva.search.presentation.search_screen.util.toSearchItemList
+import com.mordva.search.util.toSearchItemList
 import com.mordva.util.UseCase
-import com.mordva.util.error.ClientException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
@@ -18,7 +17,7 @@ internal class LoadMoreByName(
         return when (params.selectedIndex) {
             0 -> loadMoreMovieByName(params.q, params.page)
             1 -> loadMorePersonByName(params.q, params.page)
-            else -> Result.failure(ClientException())
+            else -> Result.failure(Exception())
         }
     }
 

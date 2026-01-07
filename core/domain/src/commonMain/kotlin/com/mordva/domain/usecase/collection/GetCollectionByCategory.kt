@@ -1,11 +1,11 @@
 package com.mordva.domain.usecase.collection
 
-import com.mordva.domain.repository.CollectionRepository
-import com.mordva.domain.usecase.collection.model.CollectionParams
-import com.mordva.model.image.CollectionMovie
-import com.mordva.util.UseCase
 import com.mordva.util.Constants.CATEGORY_FIELD
 import com.mordva.util.Constants.PAGE_FIELD
+import com.mordva.domain.model.image.CollectionMovie
+import com.mordva.domain.repository.CollectionRepository
+import com.mordva.domain.usecase.collection.model.CollectionParams
+import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 

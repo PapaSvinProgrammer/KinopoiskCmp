@@ -1,12 +1,10 @@
 package com.mordva.network.internal.service
 
-import com.mordva.model.movie.Movie
 import com.mordva.network.external.MovieService
 import com.mordva.network.internal.core.LIMIT_API_COUNT
 import com.mordva.network.internal.core.safeCall
-import com.mordva.network.internal.mapper.toDomain
-import com.mordva.network.internal.model.image.Docs
-import com.mordva.network.internal.model.movie.MovieDto
+import com.mordva.network.external.model.Docs
+import com.mordva.network.external.model.movie.MovieDto
 import com.mordva.util.Constants.LIMIT_FIELD
 import com.mordva.util.Constants.NAME_FIELD
 import com.mordva.util.Constants.NOT_NULL_FIELD
@@ -18,13 +16,13 @@ import io.ktor.client.request.get
 internal class MovieServiceImpl(
     private val client: HttpClient
 ) : MovieService {
-    override suspend fun getMovieById(movieId: Int): Result<Movie> {
+    override suspend fun getMovieById(movieId: Int): Result<MovieDto> {
         return safeCall<MovieDto> {
             client.get("v1.4/movie/$movieId")
-        }.map { it.toDomain() }
+        }
     }
 
-    override suspend fun searchMovieByName(page: Int, q: String): Result<List<Movie>> {
+    override suspend fun searchMovieByName(page: Int, q: String): Result<List<MovieDto>> {
         return safeCall<Docs<MovieDto>> {
             client.get("v1.4/movie/search") {
                 url {
@@ -33,14 +31,12 @@ internal class MovieServiceImpl(
                     parameters.append(QUERY_FIELD, q)
                 }
             }
-        }.map { doc ->
-            doc.docs.map { it.toDomain() }
-        }
+        }.map { doc -> doc.docs }
     }
 
     override suspend fun getMoviesByFilter(
         queryParameters: List<Pair<String, String>>
-    ): Result<List<Movie>> {
+    ): Result<List<MovieDto>> {
         return safeCall<Docs<MovieDto>> {
             client.get("v1.4/movie") {
                 url {
@@ -49,8 +45,6 @@ internal class MovieServiceImpl(
                     queryParameters.forEach { parameters.append(it.first, it.second) }
                 }
             }
-        }.map { doc ->
-            doc.docs.map { it.toDomain() }
-        }
+        }.map { doc -> doc.docs }
     }
 }

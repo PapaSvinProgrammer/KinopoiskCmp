@@ -52,6 +52,7 @@ import kinopoiskcmp.core.ui.generated.resources.enable_pin_code
 import kinopoiskcmp.core.ui.generated.resources.enter_with_pin_code
 import kinopoiskcmp.core.ui.generated.resources.enter_with_pin_code_description
 import kinopoiskcmp.core.ui.generated.resources.entry
+import kinopoiskcmp.core.ui.generated.resources.error_description
 import kinopoiskcmp.core.ui.generated.resources.evaluate
 import kinopoiskcmp.core.ui.generated.resources.facts_title
 import kinopoiskcmp.core.ui.generated.resources.favorite_films
@@ -88,6 +89,7 @@ import kinopoiskcmp.core.ui.generated.resources.ic_person_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_search
 import kinopoiskcmp.core.ui.generated.resources.ic_share
 import kinopoiskcmp.core.ui.generated.resources.ic_star
+import kinopoiskcmp.core.ui.generated.resources.ic_star_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_stop
 import kinopoiskcmp.core.ui.generated.resources.ic_stop_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_tune
@@ -139,6 +141,7 @@ import kinopoiskcmp.core.ui.generated.resources.select
 import kinopoiskcmp.core.ui.generated.resources.select_date
 import kinopoiskcmp.core.ui.generated.resources.sequals_and_prequals
 import kinopoiskcmp.core.ui.generated.resources.serials
+import kinopoiskcmp.core.ui.generated.resources.server_error
 import kinopoiskcmp.core.ui.generated.resources.set_rating
 import kinopoiskcmp.core.ui.generated.resources.settings
 import kinopoiskcmp.core.ui.generated.resources.sex
@@ -167,7 +170,6 @@ import kinopoiskcmp.core.ui.generated.resources.where_can_watch
 import kinopoiskcmp.core.ui.generated.resources.will_watching
 import kinopoiskcmp.core.ui.generated.resources.year
 import kinopoiskcmp.core.ui.generated.resources.your_movie_on
-import org.jetbrains.compose.resources.stringResource
 
 object Resources {
     object Icons {
@@ -189,7 +191,7 @@ object Resources {
         val Search = Res.drawable.ic_search
         val Share = Res.drawable.ic_share
         val Star = Res.drawable.ic_star
-        val StarFill = Res.drawable.ic_star
+        val StarFill = Res.drawable.ic_star_fill
         val Tune = Res.drawable.ic_tune
         val VisibilityOff = Res.drawable.ic_visibility_off
         val LauncherDefault = Res.drawable.ic_launcher_default
@@ -205,6 +207,10 @@ object Resources {
         val Stop = Res.drawable.ic_stop
         val StopFill = Res.drawable.ic_stop_fill
         val NewFolder = Res.drawable.ic_new_folder
+    }
+
+    object Image {
+        val ServerError = Res.drawable.server_error
     }
 
     object Strings {
@@ -341,6 +347,7 @@ object Resources {
         val NotChange = Res.string.not_change
         val DeleteRating = Res.string.delete_rating
         val ChangeRating = Res.string.change_rating
+        val ErrorScreenDescription = Res.string.error_description
     }
 
     object StringArray {

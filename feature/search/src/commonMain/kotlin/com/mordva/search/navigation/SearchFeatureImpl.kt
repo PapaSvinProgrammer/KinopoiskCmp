@@ -18,17 +18,20 @@ import com.mordva.search.di.SearchSettingsScope
 import com.mordva.search.presentation.search_screen.SearchScreen
 import com.mordva.search.presentation.search_screen.SearchViewModel
 import com.mordva.search.presentation.search_screen.state.SearchScreenEvent
-import com.mordva.search.presentation.search_screen.util.navigateToMovieList
+import com.mordva.search.util.navigateToMovieList
 import com.mordva.search.presentation.search_settings.SearchSettingsScreen
 import com.mordva.search.presentation.search_settings.SearchSettingsViewModel
 import com.mordva.search.presentation.search_settings.widget.SearchSettingsScreenEvent
 import com.mordva.search.presentation.search_settings_list.SearchSettingsListScreen
+import com.mordva.search.presentation.search_settings_list.SearchSettingsListType
 import com.mordva.search.presentation.search_settings_list.SearchSettingsListViewModel
+import com.mordva.search.util.SearchNavType
 import com.mordva.util.Constants
 import com.mordva.util.rememberNavScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.qualifier.named
+import kotlin.reflect.typeOf
 
 class SearchFeatureImpl : FeatureApi {
     @OptIn(KoinExperimentalAPI::class)
@@ -63,7 +66,11 @@ class SearchFeatureImpl : FeatureApi {
                 )
             }
 
-            composable<SearchSettingsListRoute> { entry ->
+            composable<SearchSettingsListRoute>(
+                typeMap = mapOf(
+                    typeOf<SearchSettingsListType>() to SearchNavType.SearchListType
+                )
+            ) { entry ->
                 val parentEntry = remember(entry) {
                     navController.getBackStackEntry<SearchSettingsRoute>()
                 }

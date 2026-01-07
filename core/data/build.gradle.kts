@@ -54,32 +54,19 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.core.model)
-                implementation(projects.core.network)
+                api(projects.core.network)
+                api(projects.core.sqlite)
                 implementation(projects.core.domain)
+                implementation(libs.koin.core)
                 implementation(libs.multiplatform.settings.coroutines)
                 implementation(libs.multiplatform.settings.datastore)
                 implementation(libs.multiplatform.settings)
             }
         }
 
-        commonTest {
-            dependencies {
-                implementation(libs.kotlin.test)
-            }
-        }
-
         androidMain {
             dependencies {
                 implementation(libs.androidx.datastore.preferences)
-            }
-        }
-
-        getByName("androidDeviceTest") {
-            dependencies {
-                implementation(libs.androidx.runner)
-                implementation(libs.androidx.core)
-                implementation(libs.androidx.testExt.junit)
             }
         }
     }

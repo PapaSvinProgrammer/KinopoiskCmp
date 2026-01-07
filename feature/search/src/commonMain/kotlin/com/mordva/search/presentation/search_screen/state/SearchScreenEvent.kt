@@ -1,8 +1,8 @@
 package com.mordva.search.presentation.search_screen.state
 
-import com.mordva.model.SearchItem
-import com.mordva.model.image.CollectionMovie
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.SearchItem
+import com.mordva.domain.model.image.CollectionMovie
+import com.mordva.domain.model.movie.Movie
 
 internal sealed interface SearchScreenEvent {
     data object ShowSettings : SearchScreenEvent

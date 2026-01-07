@@ -1,10 +1,9 @@
 package com.mordva.search.domain
 
+import com.mordva.domain.model.category.ItemName
 import com.mordva.domain.repository.CategoryRepository
-import com.mordva.model.category.ItemName
 import com.mordva.search.presentation.search_settings.widget.SearchSettingsListState
 import com.mordva.search.presentation.search_settings_list.SearchSettingsListType
-import com.mordva.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -15,6 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.withContext
+import kotlin.collections.toMutableMap
 
 internal class SearchSettingsItemListManager(
     private val categoryRepository: CategoryRepository,

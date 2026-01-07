@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.mordva.model.totalValue.Rating
-import com.mordva.model.totalValue.Votes
+import com.mordva.domain.model.totalValue.Rating
+import com.mordva.domain.model.totalValue.Votes
 import com.mordva.movie.presentation.movie.widget.listItem.RatingCard
 import com.mordva.ui.theme.Resources
 import org.jetbrains.compose.resources.stringResource

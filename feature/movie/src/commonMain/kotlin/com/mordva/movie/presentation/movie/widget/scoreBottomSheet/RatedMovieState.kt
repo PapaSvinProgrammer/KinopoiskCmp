@@ -1,6 +1,6 @@
-package com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet
+package com.mordva.movie.presentation.movie.widget.scoreBottomSheet
 
-import com.mordva.model.local.RatedMovie
+import com.mordva.domain.model.local.RatedMovie
 
 internal sealed interface RatedMovieState {
     data object Init : RatedMovieState

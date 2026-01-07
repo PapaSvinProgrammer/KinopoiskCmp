@@ -1,6 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.movie.Movie
 
 interface MovieRepository {
     suspend fun getMovieByFilter(
@@ -13,4 +13,6 @@ interface MovieRepository {
         q: String,
         page: Int = 1
     ): Result<List<Movie>>
+
+    suspend fun save(movie: Movie)
 }

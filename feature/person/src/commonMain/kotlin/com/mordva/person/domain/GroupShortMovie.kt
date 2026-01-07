@@ -1,6 +1,6 @@
 package com.mordva.person.domain
 
-import com.mordva.model.movie.ShortMovie
+import com.mordva.domain.model.movie.ShortMovie
 import com.mordva.util.UseCase
 import kotlinx.coroutines.Dispatchers
 

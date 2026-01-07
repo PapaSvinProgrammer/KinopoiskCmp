@@ -15,8 +15,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.mordva.navigation.MovieGraph
 import com.mordva.otp.presentation.widget.content.MainOtpContent
-import com.mordva.navigation.HomeGraph
 import com.mordva.otp.utils.actionHandler
 
 @Composable
@@ -40,7 +40,7 @@ internal fun DefaultOtpScreen(
 
     LaunchedEffect(state.isValid) {
         if (state.isValid == true) {
-            navController.navigate(HomeGraph) {
+            navController.navigate(MovieGraph) {
                 launchSingleTop = true
                 popUpTo(navController.graph.id)
             }

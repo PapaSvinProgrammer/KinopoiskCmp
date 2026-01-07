@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.mordva.ui.theme.DsSpacer
 
 @Composable
 fun ShimmerMovieDetailList(modifier: Modifier = Modifier) {
@@ -38,18 +39,18 @@ fun ShimmerMovieDetailCard() {
             modifier = Modifier
                 .height(100.dp)
                 .width(80.dp)
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(DsSpacer.M10))
                 .shimmerEffect()
         )
 
-        Spacer(modifier = Modifier.width(15.dp))
+        Spacer(modifier = Modifier.width(DsSpacer.M15))
 
         Box(modifier = Modifier.fillMaxSize()) {
             ShimmerNameContent()
 
             Column(modifier = Modifier.align(Alignment.BottomStart)) {
                 ShimmerText(width = 110.dp)
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(DsSpacer.M8))
                 ShimmerOtherInfoContent()
             }
         }

@@ -1,0 +1,24 @@
+package com.mordva.movie.domain.movie
+
+import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.repository.MovieRepository
+import com.mordva.movie.domain.model.MovieParams
+import com.mordva.util.Constants
+import com.mordva.util.UseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+
+internal class GetMoviesByCollection(
+    private val movieRepository: MovieRepository
+) : UseCase<MovieParams, Result<List<Movie>>>(Dispatchers.IO) {
+    override suspend fun run(params: MovieParams): Result<List<Movie>> {
+        val queryParameters = listOf(
+            Constants.PAGE_FIELD to params.page.toString(),
+            Constants.SORT_FIELD to Constants.RATING_KP_FIELD,
+            Constants.SORT_TYPE to Constants.SORT_DESC,
+            Constants.LISTS_FIELD to params.name
+        )
+
+        return movieRepository.getMovieByFilter(queryParameters)
+    }
+}

@@ -1,7 +1,8 @@
 package com.mordva.data
 
+import com.mordva.data.mapper.toDomain
+import com.mordva.domain.model.movie.Comment
 import com.mordva.domain.repository.CommentRepository
-import com.mordva.model.movie.Comment
 import com.mordva.network.external.CommentService
 
 internal class CommentRepositoryImpl(
@@ -10,6 +11,6 @@ internal class CommentRepositoryImpl(
     override suspend fun getCommentsByFilter(
         queryParameters: List<Pair<String, String>>
     ): Result<List<Comment>> {
-        return service.getCommentsByFilter(queryParameters)
+        return service.getCommentsByFilter(queryParameters).map { it.toDomain() }
     }
 }

@@ -1,7 +1,7 @@
-package com.mordva.movieScreen.domain.model
+package com.mordva.movie.domain.model
 
-import com.mordva.model.movie.Movie
-import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
+import com.mordva.domain.model.movie.Movie
+import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
 
 internal data class RatedMovieActionParams(
     val scoreSheetAction: ScoreSheetAction,

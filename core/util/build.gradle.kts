@@ -45,7 +45,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.core.model)
             implementation(compose.runtime)
             implementation(libs.koin.core)
             implementation(libs.kotlin.stdlib)
@@ -58,10 +57,6 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.kotlinx.datetime)
             implementation(libs.ktor.client.darwin)
-        }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }

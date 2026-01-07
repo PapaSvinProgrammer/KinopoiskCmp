@@ -30,7 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mordva.model.category.ItemName
+import com.mordva.domain.model.category.ItemName
 import com.mordva.search.presentation.widget.component.DefaultCustomSearchBar
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Resources

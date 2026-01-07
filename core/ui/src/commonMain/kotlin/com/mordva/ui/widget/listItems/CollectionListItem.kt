@@ -16,14 +16,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.mordva.model.image.CollectionMovie
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.listItems.poster.SquareImage
 
 @Composable
 fun CollectionListItem(
     modifier: Modifier = Modifier,
-    collectionMovie: CollectionMovie,
+    imageUrl: String?,
+    text: String,
     size: Dp = 55.dp,
     leadingIcon: (@Composable () -> Unit)? = null
 ) {
@@ -33,7 +33,7 @@ fun CollectionListItem(
         headlineContent = {
             Row {
                 SquareImage(
-                    model = collectionMovie.cover?.url,
+                    model = imageUrl,
                     modifier = Modifier
                         .size(size)
                         .clip(RoundedCornerShape(5.dp))
@@ -43,7 +43,7 @@ fun CollectionListItem(
 
                 Text(
                     modifier = Modifier.align(Alignment.CenterVertically),
-                    text = collectionMovie.name.toString(),
+                    text = text,
                     fontSize = Typography.bodyMedium.fontSize,
                     fontWeight = FontWeight.Medium,
                     maxLines = 2,

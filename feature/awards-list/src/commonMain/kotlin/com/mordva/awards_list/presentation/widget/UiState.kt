@@ -1,7 +1,7 @@
 package com.mordva.awards_list.presentation.widget
 
 import com.mordva.awards_list.presentation.widget.bottomSheet.AwardsFilterType
-import com.mordva.model.person.NominationAward
+import com.mordva.domain.model.person.NominationAward
 
 internal data class UiState(
     val currentFilterType: AwardsFilterType = AwardsFilterType.BY_DATE,

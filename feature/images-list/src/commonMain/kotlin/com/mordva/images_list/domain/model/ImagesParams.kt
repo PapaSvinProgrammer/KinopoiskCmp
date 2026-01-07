@@ -1,6 +1,6 @@
 package com.mordva.images_list.domain.model
 
-import com.mordva.model.image.ImageType
+import com.mordva.domain.model.image.ImageType
 
 internal data class ImagesParams(
     val movieId: Int,

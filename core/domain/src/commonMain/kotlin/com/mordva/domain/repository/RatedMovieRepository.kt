@@ -1,6 +1,6 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.local.RatedMovie
+import com.mordva.domain.model.local.RatedMovie
 import kotlinx.coroutines.flow.Flow
 
 interface RatedMovieRepository {

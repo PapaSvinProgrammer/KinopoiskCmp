@@ -1,74 +1,101 @@
 package com.mordva.search.presentation.search_screen
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mordva.domain.model.SearchItem
 import com.mordva.domain.repository.HistoryRepository
+import com.mordva.domain.repository.MovieRepository
 import com.mordva.domain.usecase.collection.GetCollectionByCategory
 import com.mordva.domain.usecase.collection.model.CollectionParams
-import com.mordva.domain.usecase.movie.GetMovieByFilter
-import com.mordva.model.SearchItem
 import com.mordva.search.domain.LoadMoreByName
 import com.mordva.search.domain.SearchByName
 import com.mordva.search.domain.model.RequestParams
-import com.mordva.search.presentation.search_screen.state.UiState
-import com.mordva.ui.uiState.CollectionListUIState
-import com.mordva.ui.uiState.MovieListUIState
-import com.mordva.ui.uiState.SearchListUIState
+import com.mordva.search.presentation.search_screen.state.SearchBodyContentState
+import com.mordva.search.presentation.search_screen.state.SearchCollectionMovieContentState
+import com.mordva.search.presentation.search_screen.state.SearchCollectionState
+import com.mordva.search.presentation.search_screen.state.SearchListUIState
+import com.mordva.search.presentation.search_screen.state.SearchMovieState
+import com.mordva.search.presentation.search_screen.state.SearchScreenEvent
+import com.mordva.search.presentation.search_screen.state.SearchUiState
+import com.mordva.search.presentation.search_screen.state.body
+import com.mordva.search.presentation.search_screen.state.extractError
+import com.mordva.search.presentation.search_screen.state.extractInit
+import com.mordva.search.util.toHistory
+import com.mordva.util.BaseViewModel
 import com.mordva.util.Constants
-import com.mordva.util.cancelAllJobs
-import com.mordva.util.launchWithoutOld
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.stateIn
 
 internal class SearchViewModel(
     private val getCollectionByCategory: GetCollectionByCategory,
-    private val getMovieByFilter: GetMovieByFilter,
     private val searchByName: SearchByName,
     private val loadMoreByName: LoadMoreByName,
-    private val historyRepository: HistoryRepository
-) : ViewModel() {
-    private val _uiState = MutableStateFlow(UiState())
-    val uiState = _uiState.asStateFlow()
+    private val historyRepository: HistoryRepository,
+    private val movieRepository: MovieRepository,
+) : BaseViewModel<SearchScreenEvent>() {
+    private val page = MutableStateFlow(0)
+    private val queryState = MutableStateFlow("")
+    private val isExpandedState = MutableStateFlow(false)
+    private val selectedSearchIndex = MutableStateFlow(0)
+    private val movieState = MutableStateFlow<SearchMovieState>(SearchMovieState.Init)
+    private val collectionState = MutableStateFlow<SearchCollectionState>(SearchCollectionState.Init)
+    private val searchState = MutableStateFlow<SearchListUIState>(SearchListUIState.Loading)
+
+    private val contentState = combine(
+        movieState,
+        collectionState,
+        searchState,
+        ::SearchCollectionMovieContentState
+    )
+
+    val uiState = combine(
+        queryState,
+        isExpandedState,
+        selectedSearchIndex,
+        contentState,
+        historyRepository.getAll(),
+    ) { query, isExpanded, selectedSearchIndex, content, history ->
+        SearchUiState(
+            query = query,
+            isExpanded = isExpanded,
+            selectedSearchIndex = selectedSearchIndex,
+            searchHistory = history,
+            searchState = content.searchState,
+            bodyContentState = createSearchBodyContent(content)
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = SearchUiState()
+    )
 
     init {
         getTopSerials()
         getCollections()
 
-        _uiState
-            .map { it.query }
-            .distinctUntilChanged()
+        queryState
             .onEach { search() }
             .launchIn(viewModelScope)
     }
 
     fun updateQuery(text: String) {
-        _uiState.update { it.copy(query = text) }
+        queryState.value = text
     }
 
     fun onShowSearchBar(state: Boolean) {
-        if (!state) {
-            _uiState.update { it.copy(query = "") }
-            _uiState.update { it.copy(searchState = SearchListUIState.Error) }
-        }
-
-        _uiState.update {
-            it.copy(isExpanded = state)
-        }
+        queryState.value = ""
+        isExpandedState.value = state
     }
 
     fun updateSelectedSearchIndex(index: Int) {
-        _uiState.update {
-            it.copy(selectedSearchIndex = index)
-        }
+        selectedSearchIndex.value = index
     }
 
     fun onClear() {
-        if (uiState.value.query.isEmpty()) {
+        if (queryState.value.isEmpty()) {
             onShowSearchBar(false)
         } else {
             updateQuery("")
@@ -76,50 +103,40 @@ internal class SearchViewModel(
     }
 
     fun search() = launchWithoutOld(SEARCH_JOB) {
-        _uiState.update {
-            it.copy(
-                searchState = SearchListUIState.Loading,
-                page = 1
-            )
-        }
+        searchState.value = SearchListUIState.Loading
+        page.value = 1
 
         val params = RequestParams(
-            selectedIndex = uiState.value.selectedSearchIndex,
-            q = uiState.value.query,
-            page = uiState.value.page
+            selectedIndex = selectedSearchIndex.value,
+            q = queryState.value,
+            page = page.value
         )
 
-        searchByName.execute(params).onSuccess { items ->
-            _uiState.update {
-                it.copy(searchState = SearchListUIState.Success(items))
+        searchByName.execute(params)
+            .onSuccess { items ->
+                searchState.value = SearchListUIState.Success(items)
+            }.onFailure {
+                searchState.value = SearchListUIState.Error
             }
-        }
     }
 
     fun loadMore() = launchWithoutOld(SEARCH_JOB) {
-        _uiState.update { it.copy(page = it.page + 1) }
+        page.value += 1
 
         val params = RequestParams(
-            selectedIndex = uiState.value.selectedSearchIndex,
-            q = uiState.value.query,
-            page = uiState.value.page
+            selectedIndex = selectedSearchIndex.value,
+            q = queryState.value,
+            page = page.value,
         )
 
         loadMoreByName.execute(params).onSuccess { items ->
-            val temp = (uiState.value.searchState as SearchListUIState.Success)
-                .data
-                .toMutableList()
-
-            temp.addAll(items)
-
-            _uiState.update {
-                it.copy(searchState = SearchListUIState.Success(temp))
-            }
+            val temp = searchState.value.body() + items
+            searchState.value = SearchListUIState.Success(temp)
         }
     }
 
     fun insertSearchHistoryItem(searchItem: SearchItem) = launchWithoutOld(INSERT_HISTORY_JOB) {
-//        historyRepository.insert(searchItem.toHistory())
+        historyRepository.insert(searchItem.toHistory())
     }
 
     fun deleteSearchHistoryItem(id: Int) = launchWithoutOld(DELETE_HISTORY_JOB) {
@@ -131,9 +148,9 @@ internal class SearchViewModel(
         val res = getCollectionByCategory.execute(params)
 
         res.onSuccess { collections ->
-            _uiState.update {
-                it.copy(collectionsState = CollectionListUIState.Success(collections))
-            }
+            collectionState.value = SearchCollectionState.Success(collections)
+        }.onFailure {
+            collectionState.value = SearchCollectionState.Error
         }
     }
 
@@ -144,18 +161,22 @@ internal class SearchViewModel(
             Constants.SORT_TYPE to Constants.SORT_DESC
         )
 
-        val res = getMovieByFilter.execute(queryParameters)
+        val res = movieRepository.getMovieByFilter(queryParameters)
 
         res.onSuccess { serials ->
-            _uiState.update {
-                it.copy(topSerialsState = MovieListUIState.Success(serials))
-            }
+            movieState.value = SearchMovieState.Success(serials)
+        }.onFailure {
+            movieState.value = SearchMovieState.Error
         }
     }
 
-    override fun onCleared() {
-        cancelAllJobs()
-        super.onCleared()
+    private fun createSearchBodyContent(content: SearchCollectionMovieContentState) = when {
+        content.extractInit() -> SearchBodyContentState.Loading
+        content.extractError() -> SearchBodyContentState.Error
+        else -> SearchBodyContentState.Success(
+            collections = content.collectionState.body(),
+            topSerials = content.movieState.body(),
+        )
     }
 
     private companion object {

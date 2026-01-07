@@ -1,12 +1,10 @@
 package com.mordva.network.internal.service
 
-import com.mordva.model.image.CollectionMovie
 import com.mordva.network.external.CollectionService
+import com.mordva.network.external.model.Docs
+import com.mordva.network.external.model.image.CollectionDto
 import com.mordva.network.internal.core.LIMIT_API_COUNT
 import com.mordva.network.internal.core.safeCall
-import com.mordva.network.internal.mapper.toDomain
-import com.mordva.network.internal.model.image.CollectionDto
-import com.mordva.network.internal.model.image.Docs
 import com.mordva.util.Constants.LIMIT_FIELD
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -16,7 +14,7 @@ internal class CollectionServiceImpl(
 ) : CollectionService {
     override suspend fun getCollectionByFilter(
         queryParameters: List<Pair<String, String>>
-    ): Result<List<CollectionMovie>> {
+    ): Result<List<CollectionDto>> {
         return safeCall<Docs<CollectionDto>> {
             client.get("v1.4/list") {
                 url {
@@ -24,14 +22,12 @@ internal class CollectionServiceImpl(
                     queryParameters.forEach { parameters.append(it.first, it.second) }
                 }
             }
-        }.map { doc ->
-            doc.docs.map { it.toDomain() }
-        }
+        }.map { it.docs }
     }
 
-    override suspend fun getCollectionBySlug(slug: String): Result<CollectionMovie> {
+    override suspend fun getCollectionBySlug(slug: String): Result<CollectionDto> {
         return safeCall<CollectionDto> {
             client.get("v1.4/list/$slug")
-        }.map { it.toDomain() }
+        }
     }
 }

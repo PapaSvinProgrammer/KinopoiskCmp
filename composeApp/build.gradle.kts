@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -13,7 +14,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -23,7 +24,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
@@ -36,23 +37,20 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.data)
             implementation(projects.core.network)
+            implementation(projects.core.navigation)
             implementation(projects.core.security)
             implementation(projects.core.ui)
             implementation(projects.core.domain)
 
             implementation(projects.feature.profile)
-            implementation(projects.feature.home)
-            implementation(projects.feature.aboutApp)
             implementation(projects.feature.awardsList)
             implementation(projects.feature.search)
             implementation(projects.feature.favorite)
             implementation(projects.feature.collectionList)
-            implementation(projects.feature.movieList)
             implementation(projects.feature.movie)
             implementation(projects.feature.awardsList)
             implementation(projects.feature.otp)
             implementation(projects.feature.person)
-            implementation(projects.feature.personPodium)
             implementation(projects.feature.settings)
             implementation(projects.feature.imagesList)
 
@@ -68,10 +66,6 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.core)
-        }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }

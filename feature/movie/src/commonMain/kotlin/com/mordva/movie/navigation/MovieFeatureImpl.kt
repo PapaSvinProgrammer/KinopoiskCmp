@@ -10,17 +10,23 @@ import com.mordva.movie.domain.model.PersonMovieScreenObject
 import com.mordva.movie.domain.model.WatchabilityScreenObject
 import com.mordva.movie.presentation.groupPerson.GroupPersonViewModel
 import com.mordva.movie.presentation.groupPerson.GroupPersonsScreen
+import com.mordva.movie.presentation.home.HomeScreen
+import com.mordva.movie.presentation.home.HomeViewModel
 import com.mordva.movie.presentation.movie.MovieScreen
 import com.mordva.movie.presentation.movie.MovieViewModel
+import com.mordva.movie.presentation.movie_list.MovieListScreen
+import com.mordva.movie.presentation.movie_list.MovieListViewModel
 import com.mordva.movie.presentation.watchability.WatchabilityListScreen
 import com.mordva.movie.utils.PersonMovieListScreenObjectType
 import com.mordva.movie.utils.WatchabilityType
 import com.mordva.movie.utils.toScreenObject
 import com.mordva.navigation.CollectionListGraph
+import com.mordva.navigation.CustomNavType
 import com.mordva.navigation.FeatureApi
 import com.mordva.navigation.ImageListGraph
 import com.mordva.navigation.MovieGraph
 import com.mordva.navigation.MovieListGraph
+import com.mordva.navigation.MovieScreenType
 import com.mordva.navigation.PersonGraph
 import com.mordva.util.Constants
 import org.koin.compose.viewmodel.koinViewModel
@@ -34,7 +40,7 @@ class MovieFeatureImpl : FeatureApi {
         modifier: Modifier
     ) {
         navGraphBuilder.navigation<MovieGraph>(
-            startDestination = MovieGraph.MovieRoute(5249436)
+            startDestination = HomeRoute
         ) {
             composable<MovieGraph.MovieRoute> {
                 val route = it.toRoute<MovieGraph.MovieRoute>()
@@ -125,6 +131,39 @@ class MovieFeatureImpl : FeatureApi {
                             launchSingleTop = true
                         }
                     }
+                )
+            }
+
+            composable<MovieListGraph.MovieListRoute>(
+                typeMap = mapOf(
+                    typeOf<ArrayList<Pair<String, String>>>() to CustomNavType.ListTypePair,
+                    typeOf<MovieScreenType>() to CustomNavType.MovieScreenType,
+                )
+            ) {
+                val route = it.toRoute<MovieListGraph.MovieListRoute>()
+                val viewModel: MovieListViewModel = koinViewModel {
+                    parametersOf(route.title, route.queryParameters)
+                }
+
+                MovieListScreen(
+                    viewModel = viewModel,
+                    type = route.screenType,
+                    onBackClick = { navController.popBackStack() },
+                    onSettingsClick = {},
+                    onMovieClick = { movie ->
+                        navController.navigate(MovieGraph.MovieRoute(movie.id)) {
+                            launchSingleTop = true
+                        }
+                    },
+                )
+            }
+
+            composable<HomeRoute> {
+                val viewModel: HomeViewModel = koinViewModel()
+
+                HomeScreen(
+                    navController = navController,
+                    viewModel = viewModel
                 )
             }
         }

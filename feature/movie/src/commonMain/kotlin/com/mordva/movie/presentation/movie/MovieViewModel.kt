@@ -1,39 +1,37 @@
 package com.mordva.movie.presentation.movie
 
 import androidx.lifecycle.ViewModel
+import com.mordva.bottomsheet.packageBottomSheet.PackageItemAction
+import com.mordva.domain.model.PackageType
+import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.person.PersonMovie
 import com.mordva.domain.repository.BlockedRepository
+import com.mordva.domain.repository.CollectionRepository
 import com.mordva.domain.repository.FavoritePackageRepository
+import com.mordva.domain.repository.ImageRepository
+import com.mordva.domain.repository.MovieRepository
 import com.mordva.domain.repository.RatedMovieRepository
 import com.mordva.domain.repository.ViewedRepository
 import com.mordva.domain.repository.WillWatchPackageRepository
-import com.mordva.domain.usecase.collection.GetCollectionBySlug
-import com.mordva.domain.usecase.comment.GetCommentByDate
-import com.mordva.domain.usecase.comment.model.CommentParams
-import com.mordva.domain.usecase.movie.GetMovieById
-import com.mordva.domain.usecase.movie.GetMovieImages
-import com.mordva.domain.usecase.movie.model.MovieParams
-import com.mordva.model.PackageType
-import com.mordva.model.movie.Movie
-import com.mordva.model.person.PersonMovie
-import com.mordva.movie.domain.FilterCollection
-import com.mordva.movie.domain.FilterPersonsLikeActors
-import com.mordva.movie.domain.FilterPersonsLikeSupport
-import com.mordva.movie.domain.FilterPersonsLikeVoiceActors
-import com.mordva.movie.domain.HandleBlockedAction
-import com.mordva.movie.domain.HandleFavoritePackageAction
-import com.mordva.movie.domain.HandleRatedMovieAction
-import com.mordva.movie.domain.HandleViewedAction
-import com.mordva.movie.domain.HandleWillWatchAction
+import com.mordva.movie.domain.comment.GetCommentByDate
+import com.mordva.movie.domain.filterCollection
+import com.mordva.movie.domain.filterPersonsLikeActors
+import com.mordva.movie.domain.filterPersonsLikeSupport
+import com.mordva.movie.domain.filterPersonsLikeVoiceActors
+import com.mordva.movie.domain.handle.HandleBlockedAction
+import com.mordva.movie.domain.handle.HandleFavoritePackageAction
+import com.mordva.movie.domain.handle.HandleRatedMovieAction
+import com.mordva.movie.domain.handle.HandleViewedAction
+import com.mordva.movie.domain.handle.HandleWillWatchAction
+import com.mordva.movie.domain.model.CheckedParams
+import com.mordva.movie.domain.model.CommentParams
+import com.mordva.movie.domain.model.PackageItemParams
+import com.mordva.movie.domain.model.RatedMovieActionParams
+import com.mordva.movie.presentation.movie.widget.MovieState
 import com.mordva.movie.presentation.movie.widget.MovieUIState
-import com.mordva.movie.presentation.movie.widget.UIState
+import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.RatedMovieState
+import com.mordva.movie.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
 import com.mordva.movie.utils.body
-import com.mordva.movieScreen.domain.model.CheckedParams
-import com.mordva.movieScreen.domain.model.PackageItemParams
-import com.mordva.movieScreen.domain.model.RatedMovieActionParams
-import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
-import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
-import com.mordva.ui.widget.packageBottomSheet.PackageItemAction
-import com.mordva.util.Log
 import com.mordva.util.cancelAllJobs
 import com.mordva.util.launchWithoutOld
 import com.mordva.util.multiRequest
@@ -47,14 +45,7 @@ import kotlinx.coroutines.flow.update
 
 internal class MovieViewModel(
     private val movieId: Int,
-    private val getMovieById: GetMovieById,
-    private val getMovieImages: GetMovieImages,
-    private val getCollectionBySlug: GetCollectionBySlug,
     private val getCommentByDate: GetCommentByDate,
-    private val filterCollection: FilterCollection,
-    private val filterPersonsLikeVoiceActors: FilterPersonsLikeVoiceActors,
-    private val filterPersonsLikeActors: FilterPersonsLikeActors,
-    private val filterPersonsLikeSupport: FilterPersonsLikeSupport,
     private val ratedMovieRepository: RatedMovieRepository,
     private val willWatchPackageRepository: WillWatchPackageRepository,
     private val handleWillWatchAction: HandleWillWatchAction,
@@ -65,15 +56,17 @@ internal class MovieViewModel(
     private val favoritePackageRepository: FavoritePackageRepository,
     private val viewedRepository: ViewedRepository,
     private val blockedRepository: BlockedRepository,
-//    private val movieLocalService: MovieLocalService
+    private val movieRepository: MovieRepository,
+    private val imageRepository: ImageRepository,
+    private val collectionRepository: CollectionRepository,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(UIState())
+    private val _uiState = MutableStateFlow(MovieUIState())
     val uiState = _uiState.asStateFlow()
 
     init {
-        getMovie(movieId)
-        getImages(movieId)
-        getComments(movieId)
+        getMovie()
+        getImages()
+        getComments()
         observeMovieState()
     }
 
@@ -190,7 +183,7 @@ internal class MovieViewModel(
         }
     }
 
-    private fun getComments(movieId: Int) = launchWithoutOld(GET_COMMENTS_JOB) {
+    private fun getComments() = launchWithoutOld(GET_COMMENTS_JOB) {
         val params = CommentParams(
             movieId = movieId,
             sort = -1
@@ -203,26 +196,23 @@ internal class MovieViewModel(
         }
     }
 
-    private fun getMovie(id: Int) = launchWithoutOld(GET_MOVIE_JOB) {
-        val res = getMovieById.execute(id)
+    private fun getMovie() = launchWithoutOld(GET_MOVIE_JOB) {
+        val res = movieRepository.getMovieById(movieId)
 
         res.onSuccess { movie ->
-            val state = MovieUIState.Success(movie)
+            val state = MovieState.Success(movie)
 
             _uiState.update {
                 it.copy(movieState = state)
             }
 
             filterActors(movie.persons)
+            movieRepository.save(movie)
         }
     }
 
-    private fun getImages(movieId: Int) = launchWithoutOld(GET_IMAGES_JOB) {
-        val params = MovieParams(
-            movieId = movieId
-        )
-
-        val res = getMovieImages.execute(params)
+    private fun getImages() = launchWithoutOld(GET_IMAGES_JOB) {
+        val res = imageRepository.getMovieImages(movieId)
 
         res.onSuccess { images ->
             _uiState.update { it.copy(images = images) }
@@ -235,14 +225,12 @@ internal class MovieViewModel(
         }
 
         val temp = multiRequest(list) {
-            getCollectionBySlug.execute(it)
+            collectionRepository.getCollectionBySlug(it)
         }
 
         if (temp.isNotEmpty()) {
-            val res = filterCollection.execute(temp)
-
             _uiState.update {
-                it.copy(collections = res)
+                it.copy(collections = temp.filterCollection())
             }
         }
     }
@@ -282,7 +270,7 @@ internal class MovieViewModel(
     }
 
     private fun getInfoForPackages() {
-        isFavoritePackage(movieId)
+        isFavoritePackage()
         getCountFavoritePackage()
         getCountWillWatchPackage()
     }
@@ -303,7 +291,7 @@ internal class MovieViewModel(
         }
     }
 
-    private fun isFavoritePackage(movieId: Int) = launchWithoutOld(IS_FAVORITE_PACKAGE_JOB) {
+    private fun isFavoritePackage() = launchWithoutOld(IS_FAVORITE_PACKAGE_JOB) {
         favoritePackageRepository.isStock(movieId).collect { moviePackage ->
             val set = uiState.value.selectedPackage.toMutableSet()
 
@@ -320,16 +308,15 @@ internal class MovieViewModel(
     private fun filterActors(list: List<PersonMovie>) = launchWithoutOld(FILTER_ACTORS_JOB) {
         _uiState.update {
             it.copy(
-                actors = filterPersonsLikeActors.execute(list),
-                voiceActors = filterPersonsLikeVoiceActors.execute(list),
-                supportPersonal = filterPersonsLikeSupport.execute(list)
+                actors = list.filterPersonsLikeActors(),
+                voiceActors = list.filterPersonsLikeVoiceActors(),
+                supportPersonal = list.filterPersonsLikeSupport(),
             )
         }
     }
 
     override fun onCleared() {
         cancelAllJobs()
-        Log.d("RRRR", "MOVIE CLEAR")
         super.onCleared()
     }
 

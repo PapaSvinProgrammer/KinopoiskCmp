@@ -29,11 +29,10 @@ kotlin {
     }
 
     sourceSets {
-        androidMain.dependencies {}
         commonMain.dependencies {
+            implementation(projects.core.bottomsheet)
             implementation(projects.core.ui)
             implementation(projects.core.domain)
-            implementation(projects.core.baseViewModels)
 
             implementation(libs.bundles.coil)
             implementation(libs.bundles.koin)
@@ -45,9 +44,6 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }

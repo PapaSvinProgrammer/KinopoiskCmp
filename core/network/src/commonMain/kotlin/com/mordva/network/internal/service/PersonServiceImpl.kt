@@ -1,12 +1,10 @@
 package com.mordva.network.internal.service
 
-import com.mordva.network.internal.mapper.toDomain
-import com.mordva.model.person.Person
 import com.mordva.network.external.PersonService
 import com.mordva.network.internal.core.LIMIT_API_COUNT
 import com.mordva.network.internal.core.safeCall
-import com.mordva.network.internal.model.image.Docs
-import com.mordva.network.internal.model.person.PersonDto
+import com.mordva.network.external.model.Docs
+import com.mordva.network.external.model.person.PersonDto
 import com.mordva.util.Constants.LIMIT_FIELD
 import com.mordva.util.Constants.PAGE_FIELD
 import com.mordva.util.Constants.QUERY_FIELD
@@ -17,16 +15,16 @@ import io.ktor.client.request.get
 internal class PersonServiceImpl(
     private val client: HttpClient
 ) : PersonService {
-    override suspend fun getPersonById(personId: Int): Result<Person> {
-        return safeCall<PersonDto>{
+    override suspend fun getPersonById(personId: Int): Result<PersonDto> {
+        return safeCall<PersonDto> {
             client.get("v1.4/person/$personId")
-        }.map { it.toDomain() }
+        }
     }
 
     override suspend fun searchPersonByName(
         q: String,
         page: Int
-    ): Result<List<Person>> {
+    ): Result<List<PersonDto>> {
         return safeCall<Docs<PersonDto>> {
             client.get("v1.4/person/search") {
                 url {
@@ -35,14 +33,12 @@ internal class PersonServiceImpl(
                     parameters.append(PAGE_FIELD, page.toString())
                 }
             }
-        }.map { doc ->
-            doc.docs.map { it.toDomain() }
-        }
+        }.map { doc -> doc.docs }
     }
 
     override suspend fun getPersonByFilter(
         queryParameters: List<Pair<String, String>>
-    ): Result<List<Person>> {
+    ): Result<List<PersonDto>> {
         val selectsList = listOf("id", "name", "enName", "photo", "sex", "birthday", "age")
 
         return safeCall<Docs<PersonDto>> {
@@ -53,8 +49,6 @@ internal class PersonServiceImpl(
                     queryParameters.forEach { parameters.append(it.first, it.second) }
                 }
             }
-        }.map { doc ->
-            doc.docs.map { it.toDomain() }
-        }
+        }.map { doc -> doc.docs }
     }
 }

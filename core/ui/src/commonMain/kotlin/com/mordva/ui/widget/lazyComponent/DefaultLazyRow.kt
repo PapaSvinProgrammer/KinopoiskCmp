@@ -10,16 +10,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.mordva.ui.theme.DsSpacer
 
 @Composable
 fun <T> DefaultLazyRow(
     list: List<T>,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 15.dp),
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(10.dp),
+    contentPadding: PaddingValues = PaddingValues(horizontal = DsSpacer.M16),
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(DsSpacer.M10),
     key: ((item: T) -> Any)? = null,
-    lastItemCard: @Composable () -> Unit = {},
+    lastItemCard: (@Composable () -> Unit)? = null,
     content: @Composable (T) -> Unit
 ) {
     val listState = rememberLazyListState()
@@ -39,8 +39,8 @@ fun <T> DefaultLazyRow(
             content(it)
         }
 
-        item {
-            lastItemCard()
+        lastItemCard?.let {
+            item { it.invoke() }
         }
     }
 }

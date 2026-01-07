@@ -1,11 +1,11 @@
 package com.mordva.movie.utils
 
-import com.mordva.model.category.WatchabilityItem
-import com.mordva.model.image.Poster
-import com.mordva.model.local.RatedMovie
-import com.mordva.model.movie.Movie
-import com.mordva.model.movie.Watchability
-import com.mordva.model.person.PersonMovie
+import com.mordva.domain.model.category.WatchabilityItem
+import com.mordva.domain.model.image.Poster
+import com.mordva.domain.model.local.RatedMovie
+import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.movie.Watchability
+import com.mordva.domain.model.person.PersonMovie
 import com.mordva.movie.domain.model.PersonMovieScreenObject
 import com.mordva.movie.domain.model.PosterScreenObject
 import com.mordva.movie.domain.model.WatchabilityItemScreenObject

@@ -1,6 +1,6 @@
 package com.mordva.search.presentation.search_settings_list
 
-import com.mordva.model.category.ItemName
+import com.mordva.domain.model.category.ItemName
 import com.mordva.search.domain.SearchSettingsItemListManager
 import com.mordva.util.BaseViewModel
 

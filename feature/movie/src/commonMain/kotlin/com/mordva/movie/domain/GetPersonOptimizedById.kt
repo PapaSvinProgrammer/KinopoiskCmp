@@ -1,0 +1,22 @@
+package com.mordva.movie.domain
+
+import com.mordva.domain.model.person.Person
+import com.mordva.domain.repository.PersonRepository
+import com.mordva.util.Constants
+import com.mordva.util.UseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+
+internal class GetPersonOptimizedById(
+    private val personRepository: PersonRepository
+) : UseCase<Int, Result<Person>>(Dispatchers.IO) {
+    override suspend fun run(params: Int): Result<Person> {
+        val queryParameters = listOf(
+            Constants.ID_FIELD to params.toString()
+        )
+
+        return personRepository
+            .getPersonByFilter(queryParameters)
+            .map { it.first() }
+    }
+}

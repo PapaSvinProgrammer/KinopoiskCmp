@@ -1,6 +1,6 @@
 package com.mordva.images_list.util
 
-import com.mordva.model.image.ImageType
+import com.mordva.domain.model.image.ImageType
 import com.mordva.ui.theme.Resources
 import org.jetbrains.compose.resources.StringResource
 

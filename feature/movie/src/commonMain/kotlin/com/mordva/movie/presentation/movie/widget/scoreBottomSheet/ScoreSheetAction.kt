@@ -1,4 +1,4 @@
-package com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet
+package com.mordva.movie.presentation.movie.widget.scoreBottomSheet
 
 internal sealed interface ScoreSheetAction {
     data class Save(val rating: Int) : ScoreSheetAction

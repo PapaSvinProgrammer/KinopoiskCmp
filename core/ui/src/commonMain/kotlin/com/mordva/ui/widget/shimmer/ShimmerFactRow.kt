@@ -12,12 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.mordva.ui.theme.DsSpacer
 
 @Composable
 fun ShimmerFactRow(modifier: Modifier = Modifier) {
     LazyRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(DsSpacer.M10),
         contentPadding = PaddingValues(horizontal = 15.dp)
     ) {
         items(2) {
@@ -25,7 +26,7 @@ fun ShimmerFactRow(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .width(300.dp)
                     .height(160.dp)
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(RoundedCornerShape(DsSpacer.M10))
                     .shimmerEffect()
             )
         }

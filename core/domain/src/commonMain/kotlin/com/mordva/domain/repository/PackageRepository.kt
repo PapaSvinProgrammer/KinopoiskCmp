@@ -1,7 +1,7 @@
 package com.mordva.domain.repository
 
-import com.mordva.model.local.MoviePackage
-import com.mordva.model.local.PackageParams
+import com.mordva.domain.model.local.MoviePackage
+import com.mordva.domain.model.local.PackageParams
 import kotlinx.coroutines.flow.Flow
 
 interface PackageRepository {
