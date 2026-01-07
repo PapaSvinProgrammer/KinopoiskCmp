@@ -11,6 +11,7 @@ import com.mordva.domain.model.movie.ShortMovie
 import com.mordva.domain.model.movie.Studio
 import com.mordva.domain.model.movie.Watchability
 import com.mordva.domain.model.person.PersonMovie
+import com.mordva.domain.model.season.Episode
 import com.mordva.domain.model.season.Season
 import com.mordva.domain.model.totalValue.Audience
 import com.mordva.domain.model.totalValue.Budget
@@ -19,13 +20,29 @@ import com.mordva.domain.model.totalValue.Rating
 import com.mordva.domain.model.totalValue.ReleaseYears
 import com.mordva.domain.model.totalValue.Votes
 import com.mordva.network.external.model.movie.CommentDto
+import com.mordva.network.external.model.movie.DistributorsDto
 import com.mordva.network.external.model.movie.FactDto
 import com.mordva.network.external.model.movie.MovieDto
-import com.mordva.network.external.model.movie.DistributorsDto
 import com.mordva.network.external.model.movie.ShortMovieDto
 import com.mordva.network.external.model.movie.StudioDto
 import com.mordva.network.external.model.movie.WatchabilityDto
 import com.mordva.sqlite.entities.movie.MovieDetails
+import com.mordva.sqlite.model.AudienceLocalDto
+import com.mordva.sqlite.model.BudgetLocalDto
+import com.mordva.sqlite.model.DistributorsLocalDto
+import com.mordva.sqlite.model.EpisodeLocalDto
+import com.mordva.sqlite.model.FactLocalDto
+import com.mordva.sqlite.model.ItemNameLocalDto
+import com.mordva.sqlite.model.MovieLocalDto
+import com.mordva.sqlite.model.PersonMovieLocalDto
+import com.mordva.sqlite.model.PosterLocalDto
+import com.mordva.sqlite.model.PremiereLocalDto
+import com.mordva.sqlite.model.RatingLocalDto
+import com.mordva.sqlite.model.ReleaseYearsLocalDto
+import com.mordva.sqlite.model.SeasonLocalDto
+import com.mordva.sqlite.model.VotesLocalDto
+import com.mordva.sqlite.model.WatchabilityItemLocalDto
+import com.mordva.sqlite.model.WatchabilityLocalDto
 import kotlin.jvm.JvmName
 
 internal fun CommentDto.toDomain(): Comment = Comment(
@@ -209,5 +226,167 @@ internal fun MovieDetails.toMovie(): Movie {
                 episodes = emptyList()
             )
         }
+    )
+}
+
+internal fun Movie.toDto(): MovieLocalDto = MovieLocalDto(
+    id = id,
+    type = type,
+    name = name,
+    rating = rating?.toDto(),
+    description = description,
+    votes = votes?.toDto(),
+    distributors = distributors?.toDto(),
+    premiere = premiere?.toDto(),
+    slogan = slogan,
+    year = year,
+    budget = budget?.toDto(),
+    poster = poster?.toDto(),
+    facts = facts.toDto(),
+    genres = genres.toDto(),
+    countries = countries.toDto(),
+    persons = persons.toDto(),
+    watchability = watchability.toDto(),
+    alternativeName = alternativeName,
+    backdrop = backdrop?.toDto(),
+    movieLength = movieLength,
+    status = status,
+    ageRating = ageRating,
+    ratingMpaa = ratingMpaa,
+    updatedAt = updatedAt,
+    shortDescription = shortDescription,
+    similarMovies = similarMovies.map { it.toDto() },
+    sequelsAndPrequels = sequelsAndPrequels.map { it.toDto() },
+    logo = logo?.toDto(),
+    top10 = top10,
+    top250 = top250,
+    audience = audience.toDto(),
+    isSeries = isSeries,
+    seriesLength = seriesLength,
+    totalSeriesLength = totalSeriesLength,
+    releaseYears = releaseYears.toDto(),
+    seasonsInfo = seasonsInfo?.toDto(),
+    lists = lists
+)
+
+internal fun Rating.toDto() = RatingLocalDto(
+    kp = kp,
+    imdb = imdb,
+    filmCritics = filmCritics,
+    russianFilmCritics = russianFilmCritics,
+)
+
+internal fun Votes.toDto() = VotesLocalDto(
+    kp = kp,
+    imdb = imdb,
+    filmCritics = filmCritics,
+    russianFilmCritics = russianFilmCritics,
+)
+
+internal fun Distributors.toDto() = DistributorsLocalDto(
+    distributor = distributor,
+    distributorRelease = distributorRelease,
+)
+
+internal fun Premiere.toDto() = PremiereLocalDto(
+    bluray = bluray,
+    digital = digital,
+    dvd = dvd,
+    russia = russia,
+    world = world
+)
+
+internal fun Budget.toDto() = BudgetLocalDto(
+    value = value,
+    currency = currency
+)
+
+internal fun Poster.toDto() = PosterLocalDto(
+    id = id,
+    height = height,
+    width = width,
+    url = url,
+    previewUrl = previewUrl
+)
+
+@JvmName("listFactToDto")
+internal fun List<Fact>.toDto() = map {
+    FactLocalDto(
+        value = it.value,
+        type = it.type,
+        spoiler = it.spoiler
+    )
+}
+
+@JvmName("listItemNameToDto")
+internal fun List<ItemName>.toDto() = map {
+    ItemNameLocalDto(
+        name = it.name,
+        slug = it.slug
+    )
+}
+
+@JvmName("listReleaseYearsToDto")
+internal fun List<ReleaseYears>.toDto() = map {
+    ReleaseYearsLocalDto(
+        start = it.start,
+        end = it.end
+    )
+}
+
+@JvmName("listSeasonToDto")
+internal fun List<Season>.toDto() = map {
+    SeasonLocalDto(
+        movieId = it.movieId,
+        number = it.number,
+        name = it.name,
+        enName = it.enName,
+        episodesCount = it.episodesCount,
+        airDate = it.airDate,
+        episodes = it.episodes.toDto()
+    )
+}
+
+@JvmName("listEpisodeToDto")
+internal fun List<Episode>.toDto() = map {
+    EpisodeLocalDto(
+        number = it.number,
+        name = it.name,
+        enName = it.enName,
+        airDate = it.airDate,
+        description = it.description,
+        enDescription = it.enDescription,
+        still = it.still?.toDto()
+    )
+}
+
+@JvmName("listAudienceToDto")
+internal fun List<Audience>.toDto() = map {
+    AudienceLocalDto(
+        count = it.count,
+        country = it.country
+    )
+}
+
+internal fun Watchability.toDto() = WatchabilityLocalDto(
+    items = items.map {
+        WatchabilityItemLocalDto(
+            name = it.name,
+            logo = it.logo?.toDto(),
+            url = it.url
+        )
+    }
+)
+
+@JvmName("listPersonMovieToDto")
+internal fun List<PersonMovie>.toDto() = map {
+    PersonMovieLocalDto(
+        id = it.id,
+        name = it.name,
+        enName = it.enName,
+        photo = it.photo,
+        description = it.description,
+        profession = it.profession,
+        enProfession = it.enProfession
     )
 }

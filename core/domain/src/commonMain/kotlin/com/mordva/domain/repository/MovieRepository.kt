@@ -13,4 +13,6 @@ interface MovieRepository {
         q: String,
         page: Int = 1
     ): Result<List<Movie>>
+
+    suspend fun save(movie: Movie)
 }

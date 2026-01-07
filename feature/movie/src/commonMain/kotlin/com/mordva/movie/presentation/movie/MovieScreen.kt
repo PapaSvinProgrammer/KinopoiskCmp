@@ -61,7 +61,7 @@ internal fun MovieScreen(
         onShowAllPersonsClick = onShowAllPersonsClick,
         onShowAllCollectionsClick = onShowAllCollectionsClick,
         onShowAllImagesClick = onShowAllImagesClick,
-        onEvaluateClick = { viewModel.updateMoreSheetVisible(true) },
+        onEvaluateClick = { viewModel.updateScoreSheetVisible(true) },
         onPackageClick = {
             viewModel.handleWillWatchAction()
             scope.launch {

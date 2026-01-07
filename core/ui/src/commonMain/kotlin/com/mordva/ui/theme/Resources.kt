@@ -89,6 +89,7 @@ import kinopoiskcmp.core.ui.generated.resources.ic_person_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_search
 import kinopoiskcmp.core.ui.generated.resources.ic_share
 import kinopoiskcmp.core.ui.generated.resources.ic_star
+import kinopoiskcmp.core.ui.generated.resources.ic_star_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_stop
 import kinopoiskcmp.core.ui.generated.resources.ic_stop_fill
 import kinopoiskcmp.core.ui.generated.resources.ic_tune
@@ -190,7 +191,7 @@ object Resources {
         val Search = Res.drawable.ic_search
         val Share = Res.drawable.ic_share
         val Star = Res.drawable.ic_star
-        val StarFill = Res.drawable.ic_star
+        val StarFill = Res.drawable.ic_star_fill
         val Tune = Res.drawable.ic_tune
         val VisibilityOff = Res.drawable.ic_visibility_off
         val LauncherDefault = Res.drawable.ic_launcher_default

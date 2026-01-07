@@ -207,6 +207,7 @@ internal class MovieViewModel(
             }
 
             filterActors(movie.persons)
+            movieRepository.save(movie)
         }
     }
 

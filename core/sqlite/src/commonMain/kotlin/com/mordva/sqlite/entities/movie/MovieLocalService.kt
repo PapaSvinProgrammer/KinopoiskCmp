@@ -9,7 +9,7 @@ import com.mordva.sqlite.utils.toGenreEntities
 import com.mordva.sqlite.utils.toMovieEntity
 import com.mordva.sqlite.utils.toSeasonEntities
 
-internal class MovieLocalService(
+class MovieLocalService(
     private val movieDao: MovieDao
 ) {
     suspend fun insert(movie: MovieLocalDto) {
