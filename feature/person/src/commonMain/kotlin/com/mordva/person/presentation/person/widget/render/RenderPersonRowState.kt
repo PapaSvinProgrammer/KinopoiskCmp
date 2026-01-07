@@ -8,7 +8,7 @@ import com.mordva.person.presentation.person.widget.PersonListUIState
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.LastItemCard
-import com.mordva.person.presentation.person.widget.listItem.PersonCard
+import com.mordva.ui.widget.listItems.PersonCard
 import com.mordva.ui.widget.shimmer.ShimmerMovieRow
 
 @Composable

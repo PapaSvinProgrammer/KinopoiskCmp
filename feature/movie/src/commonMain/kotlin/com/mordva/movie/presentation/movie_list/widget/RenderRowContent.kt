@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.movie.Movie
 import com.mordva.ui.widget.lazyComponent.EndlessLazyColumn
-import com.mordva.movie.presentation.movie.widget.listItem.MovieListCard
+import com.mordva.ui.widget.listItems.MovieListCard
 import com.mordva.ui.widget.shimmer.ShimmerMovieDetailList
 import com.mordva.util.ListUIState
 

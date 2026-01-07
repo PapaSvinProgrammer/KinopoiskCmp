@@ -22,8 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.model.movie.Movie
-import com.mordva.movieScreen.presentation.movie.widget.moreBottomSheet.MoreSheetAction
+import com.mordva.domain.model.movie.Movie
 import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
@@ -150,7 +149,8 @@ private fun TopSheetContent(movie: Movie) {
             Text(
                 text = ConvertData.convertDateCreated(
                     year = movie.year,
-                    releaseYears = movie.releaseYears
+                    start = movie.releaseYears.firstOrNull()?.start,
+                    end = movie.releaseYears.firstOrNull()?.end,
                 ),
                 fontSize = Typography.bodyMedium.fontSize,
                 color = MaterialTheme.colorScheme.onSurfaceVariant

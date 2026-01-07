@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.person.presentation.widget.listItem.DetailInfoListItem
+import com.mordva.person.presentation.person.widget.listItem.DetailInfoListItem
 import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.FormatDate
 import com.mordva.ui.util.PrettyData

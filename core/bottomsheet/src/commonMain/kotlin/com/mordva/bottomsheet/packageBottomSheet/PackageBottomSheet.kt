@@ -1,4 +1,4 @@
-package com.mordva.ui.widget.packageBottomSheet
+package com.mordva.bottomsheet.packageBottomSheet
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -12,11 +12,10 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mordva.model.PackageType
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.PackageType
+import com.mordva.domain.model.movie.Movie
 import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
-import com.mordva.ui.widget.listItems.SearchItemCard
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

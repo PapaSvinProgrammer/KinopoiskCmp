@@ -1,11 +1,11 @@
-package com.mordva.person.presentation.widget.render
+package com.mordva.person.presentation.person.widget.render
 
 import androidx.compose.runtime.Composable
+import com.mordva.domain.model.person.Person
+import com.mordva.person.presentation.person.widget.PersonListUIState
 import com.mordva.person.presentation.widget.content.BirthdayDeathContent
-import com.mordva.person.presentation.widget.listItem.DetailInfoListItem
-import com.mordva.model.person.Person
+import com.mordva.person.presentation.person.widget.listItem.DetailInfoListItem
 import com.mordva.ui.theme.Strings
-import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.ui.util.PrettyData
 import com.mordva.ui.widget.shimmer.ShimmerPersonDetail
 import org.jetbrains.compose.resources.stringResource

@@ -10,8 +10,8 @@ import com.mordva.navigation.CustomNavType
 import com.mordva.navigation.FeatureApi
 import com.mordva.navigation.PersonGraph
 import com.mordva.navigation.PersonPodiumListGraph
+import com.mordva.person.presentation.PersonScreen
 import com.mordva.person.presentation.person.PersonDetailScreen
-import com.mordva.person.presentation.person.PersonScreen
 import com.mordva.person.presentation.person.PersonViewModel
 import com.mordva.person.presentation.personpodium.PersonPodiumListScreen
 import com.mordva.person.presentation.personpodium.PersonPodiumListViewModel

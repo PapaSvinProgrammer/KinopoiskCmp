@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.movie.Movie
 import com.mordva.ui.theme.Icons
 import com.mordva.ui.widget.component.FadingDefaults
 import com.mordva.ui.widget.component.fadingEdge

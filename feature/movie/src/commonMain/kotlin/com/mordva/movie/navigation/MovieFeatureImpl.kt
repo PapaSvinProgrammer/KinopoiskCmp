@@ -6,11 +6,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
+import com.mordva.home.presentation.HomeScreen
 import com.mordva.movie.domain.model.PersonMovieScreenObject
 import com.mordva.movie.domain.model.WatchabilityScreenObject
 import com.mordva.movie.presentation.groupPerson.GroupPersonViewModel
 import com.mordva.movie.presentation.groupPerson.GroupPersonsScreen
-import com.mordva.movie.presentation.home.HomeScreen
 import com.mordva.movie.presentation.home.HomeViewModel
 import com.mordva.movie.presentation.movie.MovieScreen
 import com.mordva.movie.presentation.movie.MovieViewModel

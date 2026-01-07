@@ -11,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.model.person.Spouse
-import com.mordva.person.presentation.widget.listItem.SpouseCard
+import com.mordva.domain.model.person.Spouse
+import com.mordva.person.presentation.person.widget.PersonListUIState
+import com.mordva.person.presentation.person.widget.listItem.SpouseCard
 import com.mordva.ui.theme.Strings
-import com.mordva.ui.uiState.PersonListUIState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -26,10 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.model.local.RatedMovie
-import com.mordva.model.movie.Movie
-import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.RatedMovieState
-import com.mordva.movieScreen.presentation.movie.widget.scoreBottomSheet.ScoreSheetAction
+import com.mordva.domain.model.local.RatedMovie
+import com.mordva.domain.model.movie.Movie
 import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.ConvertData
@@ -185,7 +183,8 @@ private fun TopHeadlineContent(movie: Movie) {
     Text(
         text = ConvertData.convertDateCreated(
             year = movie.year,
-            releaseYears = movie.releaseYears
+            start = movie.releaseYears.firstOrNull()?.start,
+            end = movie.releaseYears.firstOrNull()?.end,
         ),
         fontSize = Typography.bodyMedium.fontSize,
         color = MaterialTheme.colorScheme.onSurfaceVariant

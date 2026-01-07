@@ -51,6 +51,7 @@ import kinopoiskcmp.core.ui.generated.resources.enable_pin_code
 import kinopoiskcmp.core.ui.generated.resources.enter_with_pin_code
 import kinopoiskcmp.core.ui.generated.resources.enter_with_pin_code_description
 import kinopoiskcmp.core.ui.generated.resources.entry
+import kinopoiskcmp.core.ui.generated.resources.error_description
 import kinopoiskcmp.core.ui.generated.resources.evaluate
 import kinopoiskcmp.core.ui.generated.resources.facts_title
 import kinopoiskcmp.core.ui.generated.resources.favorite_films
@@ -141,6 +142,7 @@ import kinopoiskcmp.core.ui.generated.resources.select
 import kinopoiskcmp.core.ui.generated.resources.select_date
 import kinopoiskcmp.core.ui.generated.resources.sequals_and_prequals
 import kinopoiskcmp.core.ui.generated.resources.serials
+import kinopoiskcmp.core.ui.generated.resources.server_error
 import kinopoiskcmp.core.ui.generated.resources.set_rating
 import kinopoiskcmp.core.ui.generated.resources.settings
 import kinopoiskcmp.core.ui.generated.resources.sex
@@ -342,6 +344,7 @@ object Strings {
     val WillWatching = Res.string.will_watching
     val Year = Res.string.year
     val YourMovieOn = Res.string.your_movie_on
+    val ErrorScreenDescription = Res.string.error_description
 }
 
 object StringArray {
@@ -356,4 +359,8 @@ object StringArray {
         Strings.ByPopularShort,
         Strings.ByRatingShort,
     )
+}
+
+object Images {
+    val ServerError = Res.drawable.server_error
 }

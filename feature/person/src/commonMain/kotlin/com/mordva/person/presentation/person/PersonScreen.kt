@@ -31,20 +31,20 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mordva.navigation.AwardListGraph
-import com.mordva.person.presentation.widget.content.CategoriesHeader
 import com.mordva.person.presentation.widget.content.MainPersonContent
-import com.mordva.person.presentation.widget.listItem.TotalListItem
 import com.mordva.navigation.MovieGraph
 import com.mordva.navigation.MovieListGraph
-import com.mordva.person.presentation.navigation.PersonDetailRoute
+import com.mordva.person.navigation.PersonDetailRoute
+import com.mordva.person.presentation.person.PersonViewModel
+import com.mordva.person.presentation.person.widget.PersonListUIState
+import com.mordva.person.presentation.person.widget.content.CategoriesHeader
+import com.mordva.person.presentation.person.widget.listItem.ShortMovieListItem
+import com.mordva.person.presentation.person.widget.listItem.TotalListItem
+import com.mordva.person.presentation.person.widget.render.RenderFactStateRow
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.theme.Strings
-import com.mordva.ui.uiState.PersonListUIState
 import com.mordva.ui.widget.bottomSheets.FactSheet
-import com.mordva.ui.widget.listItems.ShortMovieListItem
 import com.mordva.ui.widget.other.TitleTopBarText
-import com.mordva.ui.widget.renderState.RenderFactStateRow
-import com.mordva.ui.widget.renderState.RenderMovieStateRow
 import com.mordva.ui.widget.shimmer.ShimmerPersonContent
 import com.mordva.util.Constants
 import org.jetbrains.compose.resources.stringResource
@@ -139,30 +139,30 @@ internal fun PersonScreen(
             }
 
             item {
-                RenderMovieStateRow(
-                    state = uiState.moviesState,
-                    title = stringResource(Strings.BestMoviesAndSerials),
-                    onClick = { },
-                    onShowAll = {
-                        val query = listOf(
-                            Constants.SORT_FIELD to Constants.RATING_KP_FIELD,
-                            Constants.SORT_TYPE to Constants.SORT_DESC,
-                            Constants.PERSONS_ID_FIELD to id.toString()
-                        )
-
-                        navController.navigate(
-                            MovieListGraph.MovieListRoute(
-                                queryParameters = query,
-                                title = "Фильмы: ${
-                                    (uiState.personState as PersonListUIState.Success)
-                                        .data
-                                        .first()
-                                        .name
-                                }"
-                            )
-                        ) { launchSingleTop = true }
-                    }
-                )
+//                RenderMovieStateRow(
+//                    state = uiState.moviesState,
+//                    title = stringResource(Strings.BestMoviesAndSerials),
+//                    onClick = { },
+//                    onShowAll = {
+//                        val query = listOf(
+//                            Constants.SORT_FIELD to Constants.RATING_KP_FIELD,
+//                            Constants.SORT_TYPE to Constants.SORT_DESC,
+//                            Constants.PERSONS_ID_FIELD to id.toString()
+//                        )
+//
+//                        navController.navigate(
+//                            MovieListGraph.MovieListRoute(
+//                                queryParameters = query,
+//                                title = "Фильмы: ${
+//                                    (uiState.personState as PersonListUIState.Success)
+//                                        .data
+//                                        .first()
+//                                        .name
+//                                }"
+//                            )
+//                        ) { launchSingleTop = true }
+//                    }
+//                )
 
                 Spacer(modifier = Modifier.height(20.dp))
             }

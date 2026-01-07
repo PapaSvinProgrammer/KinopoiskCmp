@@ -17,7 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mordva.navigation.PersonGraph
 import com.mordva.person.presentation.person.widget.PersonListUIState
-import com.mordva.person.presentation.person.widget.content.SpouseContent
+import com.mordva.person.presentation.widget.content.SpouseContent
 import com.mordva.person.presentation.person.widget.render.RenderPersonDetailState
 import com.mordva.ui.theme.PlatformResources
 import com.mordva.ui.widget.other.TitleTopBarText

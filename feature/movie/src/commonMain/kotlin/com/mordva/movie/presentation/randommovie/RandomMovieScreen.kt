@@ -20,16 +20,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.mordva.model.category.ItemName
-import com.mordva.model.image.Poster
-import com.mordva.model.movie.Movie
-import com.mordva.model.totalValue.Rating
+import com.mordva.domain.model.category.ItemName
+import com.mordva.domain.model.image.Poster
+import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.totalValue.Rating
 import com.mordva.movie.presentation.randommovie.widget.RandomMovieAction
 import com.mordva.movie.presentation.randommovie.widget.component.RandomMovieBackgroundPager
 import com.mordva.movie.presentation.randommovie.widget.component.RandomMoviePager
 import com.mordva.movie.presentation.randommovie.widget.component.RandomMovieTopBar
 import com.mordva.ui.theme.Icons
 import org.jetbrains.compose.resources.painterResource
+import kotlin.collections.map
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable

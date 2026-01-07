@@ -13,7 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.mordva.ui.theme.DsSpacer
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Images
+import com.mordva.ui.theme.Strings
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -25,7 +26,7 @@ fun ErrorScreen() {
         modifier = Modifier.fillMaxSize(),
     ) {
         Image(
-            painter = painterResource(Resources.Image.ServerError),
+            painter = painterResource(Images.ServerError),
             contentDescription = null,
             modifier = Modifier
                 .padding(horizontal = DsSpacer.M70)
@@ -34,7 +35,7 @@ fun ErrorScreen() {
         Spacer(modifier = Modifier.height(DsSpacer.M30))
 
         Text(
-            text = stringResource(Resources.Strings.ErrorScreenDescription),
+            text = stringResource(Strings.ErrorScreenDescription),
             textAlign = TextAlign.Center
         )
     }

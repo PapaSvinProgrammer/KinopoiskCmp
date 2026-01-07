@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.util.lerp
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.movie.Movie
 import com.mordva.util.windowHeightPercent
 import com.mordva.util.windowWidthPercent
 import kotlin.math.absoluteValue

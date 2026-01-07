@@ -18,7 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mordva.model.person.Person
+import com.mordva.domain.model.person.Person
+import com.mordva.person.presentation.person.widget.content.AgeAndGrowthContent
 import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.listItems.poster.StandardImageLarge

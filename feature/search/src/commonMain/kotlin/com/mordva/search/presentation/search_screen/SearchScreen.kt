@@ -33,7 +33,7 @@ import com.mordva.search.presentation.search_screen.widget.component.SearchScree
 import com.mordva.search.presentation.search_screen.widget.component.collectionCategoryListItemContent
 import com.mordva.search.util.toRenderRowItem
 import com.mordva.ui.theme.DsSpacer
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.measureHeightOnce
 import com.mordva.ui.widget.component.CustomSearchBar
 import com.mordva.ui.widget.component.ErrorScreen
@@ -92,7 +92,7 @@ internal fun SearchScreen(
                     verticalArrangement = Arrangement.spacedBy(DsSpacer.M5)
                 ) {
                     renderCollectionRow(
-                        title = Resources.Strings.AdviseWatch,
+                        title = Strings.AdviseWatch,
                         list = state.collections.toRenderRowItem(),
                         onClick = { eventHandler(ShowMovieList(it)) },
                         onShowAll = { eventHandler(ShowCollectionAll) }
@@ -103,7 +103,7 @@ internal fun SearchScreen(
                     }
 
                     renderMovieRow(
-                        title = Resources.Strings.PopularSerials,
+                        title = Strings.PopularSerials,
                         list = state.topSerials.toRenderRowItem(),
                         onClick = { eventHandler(ShowMovie(it)) },
                         onShowAll = { eventHandler(ShowAllMovies("")) }

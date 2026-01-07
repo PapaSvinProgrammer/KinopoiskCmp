@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mordva.model.movie.Movie
+import com.mordva.domain.model.movie.Movie
 import com.mordva.ui.theme.Strings
 import com.mordva.ui.theme.Typography
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow

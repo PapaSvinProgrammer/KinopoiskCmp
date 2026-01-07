@@ -4,7 +4,7 @@ import com.mordva.domain.model.PackageType
 import com.mordva.domain.model.SearchItem
 import com.mordva.domain.model.movie.Movie
 import com.mordva.domain.model.totalValue.ReleaseYears
-import com.mordva.ui.theme.Resources
+import com.mordva.ui.theme.Icons
 import com.mordva.ui.util.ConvertData
 import org.jetbrains.compose.resources.DrawableResource
 
@@ -12,16 +12,16 @@ internal fun PackageType.toIcon(isSelected: Boolean): DrawableResource {
     return when (this) {
         PackageType.FAVORITE -> {
             if (isSelected)
-                Resources.Icons.FolderStarFill
+                Icons.FolderStarFill
             else
-                Resources.Icons.FolderStar
+                Icons.FolderStar
         }
 
         PackageType.WILL_WATCH -> {
             if (isSelected)
-                Resources.Icons.FolderEyeFill
+                Icons.FolderEyeFill
             else
-                Resources.Icons.FolderEye
+                Icons.FolderEye
         }
     }
 }
