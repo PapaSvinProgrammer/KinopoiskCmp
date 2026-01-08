@@ -1,5 +1,6 @@
 package com.mordva.ui.theme
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.dp
 
 object DsSpacer {
@@ -20,4 +21,8 @@ object DsSpacer {
     val M64 = 64.dp
     val M70 = 70.dp
     val M100 = 100.dp
+}
+
+object RoundedCorners {
+    val M10 = RoundedCornerShape(DsSpacer.M10)
 }

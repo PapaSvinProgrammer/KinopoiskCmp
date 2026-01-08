@@ -2,14 +2,10 @@ package com.mordva.movie.presentation.randommovie
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FloatingToolbarDefaults
-import androidx.compose.material3.FloatingToolbarDefaults.ScreenOffset
 import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,11 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.mordva.domain.model.category.ItemName
 import com.mordva.domain.model.image.Poster
 import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.person.PersonMovie
 import com.mordva.domain.model.totalValue.Rating
 import com.mordva.movie.presentation.randommovie.widget.RandomMovieAction
 import com.mordva.movie.presentation.randommovie.widget.component.RandomMovieBackgroundPager
@@ -30,11 +25,12 @@ import com.mordva.movie.presentation.randommovie.widget.component.RandomMoviePag
 import com.mordva.movie.presentation.randommovie.widget.component.RandomMovieTopBar
 import com.mordva.ui.theme.Icons
 import org.jetbrains.compose.resources.painterResource
-import kotlin.collections.map
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-internal fun RandomMovieScreen() {
+internal fun RandomMovieScreen(
+    onAction: (RandomMovieAction) -> Unit
+) {
     val moviePagerState = rememberPagerState(pageCount = { movieList.size })
     val backgroundPagerState = rememberPagerState(pageCount = { movieList.size })
 
@@ -46,7 +42,7 @@ internal fun RandomMovieScreen() {
     }
 
     Scaffold(
-        topBar = { RandomMovieTopBar(onAction = {}) },
+        topBar = { RandomMovieTopBar(onAction = onAction) },
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             RandomMovieBackgroundPager(
@@ -61,15 +57,15 @@ internal fun RandomMovieScreen() {
                 modifier = Modifier.align(Alignment.BottomCenter),
             )
 
-            RandomMovieToolbar(
-                onAction = {},
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .offset(y = -ScreenOffset)
-                    .zIndex(1f)
-                    .navigationBarsPadding()
-                    .padding(bottom = 10.dp)
-            )
+//            RandomMovieToolbar(
+//                onAction = {},
+//                modifier = Modifier
+//                    .align(Alignment.BottomCenter)
+//                    .offset(y = -ScreenOffset)
+//                    .zIndex(1f)
+//                    .navigationBarsPadding()
+//                    .padding(bottom = 10.dp)
+//            )
         }
     }
 }
@@ -129,6 +125,44 @@ val movieList = listOf(
             ItemName("Драма боевик", ""),
             ItemName("Боевик боевик", ""),
             ItemName("Длинный жанр", "")
+        ),
+        persons = listOf(
+            PersonMovie(
+                id = 1,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 2,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 3,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 4,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            )
         )
     ),
     Movie(
@@ -145,6 +179,44 @@ val movieList = listOf(
             ItemName("Драма боевик", ""),
             ItemName("Боевик боевик", ""),
             ItemName("Длинный жанр", "")
+        ),
+        persons = listOf(
+            PersonMovie(
+                id = 1,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 2,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 3,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 4,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            )
         )
     ),
     Movie(
@@ -161,6 +233,44 @@ val movieList = listOf(
             ItemName("Драма боевик", ""),
             ItemName("Боевик боевик", ""),
             ItemName("Длинный жанр", "")
+        ),
+        persons = listOf(
+            PersonMovie(
+                id = 1,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 2,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 3,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            ),
+            PersonMovie(
+                id = 4,
+                name = "Олений пенис",
+                enName = "Oleniy penis",
+                photo = "https://i.pinimg.com/originals/d1/7c/f6/d17cf6e49ad95eeb27e51bde3b157fb6.jpg",
+                description = "hui znaet",
+                profession = "zalupa ebanay",
+                enProfession = "english blyt"
+            )
         )
     )
 )

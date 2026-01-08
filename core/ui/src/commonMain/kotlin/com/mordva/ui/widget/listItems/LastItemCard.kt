@@ -30,10 +30,11 @@ import org.jetbrains.compose.resources.stringResource
 fun LastItemCard(
     onClick: () -> Unit = {},
     width: Dp,
-    height: Dp
+    height: Dp,
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .width(width)
             .height(height)
             .clip(RoundedCornerShape(10.dp))

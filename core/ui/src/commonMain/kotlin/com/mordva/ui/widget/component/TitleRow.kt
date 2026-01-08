@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
@@ -43,6 +44,35 @@ fun TitleRow(
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
+                .padding(15.dp)
+        )
+    }
+}
+
+
+@Composable
+fun TextTitleRow(
+    title: String,
+    modifier: Modifier = Modifier,
+    fontSize: TextUnit = Typography.titleMedium.fontSize,
+    fontWeight: FontWeight = FontWeight.Bold,
+    onClick: () -> Unit,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(
+                indication = null,
+                interactionSource = null,
+                onClick = onClick,
+            )
+    ) {
+        Text(
+            text = title,
+            fontSize = fontSize,
+            fontWeight = fontWeight,
+            modifier = Modifier
+                .align(Alignment.CenterStart)
                 .padding(15.dp)
         )
     }

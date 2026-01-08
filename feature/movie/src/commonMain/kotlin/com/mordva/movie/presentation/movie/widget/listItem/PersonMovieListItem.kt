@@ -25,8 +25,8 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 internal fun PersonMovieListItem(
+    person: PersonMovie,
     modifier: Modifier = Modifier,
-    person: PersonMovie
 ) {
     Row(
         modifier = modifier

@@ -1,6 +1,8 @@
 package com.mordva.movie.presentation.randommovie.widget.component
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +12,10 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.util.lerp
@@ -25,14 +31,15 @@ internal fun RandomMoviePager(
     items: List<Movie>,
     modifier: Modifier = Modifier,
 ) {
-    val itemWidth = windowWidthPercent(0.7f)
-    val itemHeight = windowHeightPercent(0.75f)
-    val fullSidePadding = (windowWidthPercent() - itemWidth) / 2f
+    val fullSidePadding = (windowWidthPercent() - windowWidthPercent(0.7f)) / 2f
+    var itemState by remember { mutableStateOf(RandomMoviePagerItemState.PAGER_ITEM) }
+
+    val animatedItemWidth = animateItemWidth(itemState)
 
     HorizontalPager(
         state = state,
         beyondViewportPageCount = 2,
-        pageSize = PageSize.Fixed(itemWidth),
+        pageSize = PageSize.Fixed(animatedItemWidth.value),
         snapPosition = SnapPosition.Center,
         contentPadding = PaddingValues(horizontal = fullSidePadding),
         modifier = modifier.fillMaxWidth()
@@ -53,18 +60,33 @@ internal fun RandomMoviePager(
         )
 
         RandomMoviePagerItem(
-            title = movieItem.name.toString(),
-            imageUrl = movieItem.poster?.url.toString(),
-            rating = movieItem.rating?.kp ?: 0f,
-            genres = movieItem.genres.map { it.name },
+            movie = movieItem,
+            state = itemState,
             modifier = Modifier
-                .width(itemWidth)
-                .height(itemHeight)
+                .width(animatedItemWidth.value)
+                .height(windowHeightPercent(0.75f))
                 .graphicsLayer {
                     scaleX = scale
                     scaleY = scale
                     this.alpha = alpha
                 }
+                .clickable {
+                    itemState = when (itemState) {
+                        RandomMoviePagerItemState.PAGER_ITEM -> RandomMoviePagerItemState.BOTTOM_SHEET_ITEM
+                        RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> RandomMoviePagerItemState.PAGER_ITEM
+                    }
+                }
         )
     }
+}
+
+@Composable
+private fun animateItemWidth(itemState: RandomMoviePagerItemState) = animateDpAsState(
+    targetValue = itemState.toItemWidth()
+)
+
+@Composable
+private fun RandomMoviePagerItemState.toItemWidth() = when (this) {
+    RandomMoviePagerItemState.PAGER_ITEM -> windowWidthPercent(0.7f)
+    RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> windowWidthPercent(1f)
 }

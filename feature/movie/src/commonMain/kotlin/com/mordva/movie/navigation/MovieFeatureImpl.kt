@@ -17,6 +17,7 @@ import com.mordva.movie.presentation.movie.MovieViewModel
 import com.mordva.movie.presentation.movie_list.MovieListScreen
 import com.mordva.movie.presentation.movie_list.MovieListViewModel
 import com.mordva.movie.presentation.randommovie.RandomMovieScreen
+import com.mordva.movie.presentation.randommovie.widget.RandomMovieAction
 import com.mordva.movie.presentation.watchability.WatchabilityListScreen
 import com.mordva.movie.utils.PersonMovieListScreenObjectType
 import com.mordva.movie.utils.WatchabilityType
@@ -136,7 +137,14 @@ class MovieFeatureImpl : FeatureApi {
             }
 
             composable<MovieGraph.RandomMovieRoute> {
-                RandomMovieScreen()
+                RandomMovieScreen(
+                    onAction = {
+                        when (it) {
+                            RandomMovieAction.GoBack -> navController.navigate(MovieGraph.MovieRoute(1171895))
+                            else -> Unit
+                        }
+                    }
+                )
             }
 
             composable<MovieListGraph.MovieListRoute>(
