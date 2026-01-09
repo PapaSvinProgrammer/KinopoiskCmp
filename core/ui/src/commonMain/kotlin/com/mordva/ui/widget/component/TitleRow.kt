@@ -2,6 +2,7 @@ package com.mordva.ui.widget.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -23,6 +24,10 @@ fun TitleRow(
     title: String,
     fontSize: TextUnit = Typography.titleMedium.fontSize,
     fontWeight: FontWeight = FontWeight.Bold,
+    contentPadding: PaddingValues = PaddingValues(
+        vertical = DsSpacer.M12,
+        horizontal = DsSpacer.M16
+    ),
     onClick: () -> Unit
 ) {
     Box(
@@ -36,7 +41,7 @@ fun TitleRow(
             fontWeight = fontWeight,
             modifier = Modifier
                 .align(Alignment.CenterStart)
-                .padding(15.dp)
+                .padding(contentPadding)
         )
 
         Icon(
@@ -44,7 +49,7 @@ fun TitleRow(
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .padding(15.dp)
+                .padding(contentPadding)
         )
     }
 }

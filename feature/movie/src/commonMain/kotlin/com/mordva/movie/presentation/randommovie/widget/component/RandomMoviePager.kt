@@ -70,7 +70,10 @@ internal fun RandomMoviePager(
                     scaleY = scale
                     this.alpha = alpha
                 }
-                .clickable {
+                .clickable(
+                    indication = null,
+                    interactionSource = null,
+                ) {
                     itemState = when (itemState) {
                         RandomMoviePagerItemState.PAGER_ITEM -> RandomMoviePagerItemState.BOTTOM_SHEET_ITEM
                         RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> RandomMoviePagerItemState.PAGER_ITEM
