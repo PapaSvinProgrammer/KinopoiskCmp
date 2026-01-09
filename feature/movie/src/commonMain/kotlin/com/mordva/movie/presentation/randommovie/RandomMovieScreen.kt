@@ -110,6 +110,37 @@ internal fun RandomMovieToolbar(
     }
 }
 
+val imagesList = listOf(
+    Poster(
+        url = "https://i.pinimg.com/originals/cf/6f/bf/cf6fbf2549485c919b6f488433e4d4ff.jpg",
+        id = "TODO()",
+        height = null,
+        width = null,
+        previewUrl = null
+    ),
+    Poster(
+        url = "https://i.pinimg.com/736x/2e/5f/de/2e5fde5464acd2ccdae2f0ff24bc23c3.jpg",
+        id = "TODO()",
+        height = null,
+        width = null,
+        previewUrl = null
+    ),
+    Poster(
+        url = "https://i.pinimg.com/originals/cf/6f/bf/cf6fbf2549485c919b6f488433e4d4ff.jpg",
+        id = "TODO()",
+        height = null,
+        width = null,
+        previewUrl = null
+    ),
+    Poster(
+        url = "https://i.pinimg.com/736x/2e/5f/de/2e5fde5464acd2ccdae2f0ff24bc23c3.jpg",
+        id = "TODO()",
+        height = null,
+        width = null,
+        previewUrl = null
+    )
+)
+
 val movieList = listOf(
     Movie(
         name = "Острые пузырьки",

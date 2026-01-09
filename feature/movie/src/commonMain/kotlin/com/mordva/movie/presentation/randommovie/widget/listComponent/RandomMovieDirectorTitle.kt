@@ -9,19 +9,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.theme.DsTextSize
-import com.mordva.ui.util.customOffset
 
 @Composable
-internal fun RandomMovieTitle(title: String, offsetY: Float) {
+internal fun RandomMovieDirectorTitle(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
-        text = title,
-        fontSize = DsTextSize.M22,
-        fontWeight = FontWeight.Bold,
+        text = "Director / $text",
+        fontSize = DsTextSize.M12,
+        fontWeight = FontWeight.Medium,
         textAlign = TextAlign.Center,
-        maxLines = 4,
+        maxLines = 1,
         overflow = TextOverflow.Ellipsis,
-        modifier = Modifier
-            .padding(horizontal = DsSpacer.M10)
-            .customOffset(yOffset = offsetY)
+        modifier = modifier.padding(horizontal = DsSpacer.M10)
     )
 }

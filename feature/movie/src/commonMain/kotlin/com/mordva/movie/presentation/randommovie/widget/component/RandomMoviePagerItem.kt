@@ -6,8 +6,10 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,13 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.movie.Movie
-import com.mordva.movie.presentation.randommovie.widget.listComponent.randomMovieAnimatedRating
-import com.mordva.movie.presentation.randommovie.widget.listComponent.randomMovieGenresRow
-import com.mordva.movie.presentation.randommovie.widget.listComponent.randomMoviePersonList
-import com.mordva.movie.presentation.randommovie.widget.listComponent.randomMoviePosterImage
-import com.mordva.movie.presentation.randommovie.widget.listComponent.randomMovieTitle
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieAnimatedRating
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieDescription
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieDirectorTitle
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieGenresRow
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMoviePersonList
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMoviePosterImage
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieTitle
 import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.theme.Strings
+import com.mordva.ui.util.customOffset
 import com.mordva.ui.util.measureWidthOnce
 import com.mordva.ui.widget.component.FadingDefaults
 import com.mordva.ui.widget.component.fadingEdge
@@ -69,16 +74,17 @@ internal fun RandomMoviePagerItem(
         }
     }
 
-    LazyColumn(
+    Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(DsSpacer.M16),
         modifier = modifier
+            .verticalScroll(rememberScrollState())
             .fadingEdge(FadingDefaults.bottomFade)
             .clip(RoundedCornerShape(60.dp))
             .background(MaterialTheme.colorScheme.surfaceContainerLow)
             .measureWidthOnce { imageWidth = it }
     ) {
-        randomMoviePosterImage(
+        RandomMoviePosterImage(
             imageUrl = movie.poster?.url.toString(),
             width = imageWidth,
             scale = imageScale.value,
@@ -87,24 +93,58 @@ internal fun RandomMoviePagerItem(
             }
         )
 
-        randomMovieTitle(
+        RandomMovieTitle(
             title = movie.name.toString(),
             offsetY = titleOffsetY.value
         )
 
-        randomMovieGenresRow(
+        RandomMovieGenresRow(
             genres = movie.genres.map { it.name },
             offsetY = titleOffsetY.value
         )
 
-        randomMovieAnimatedRating(
+        RandomMovieDirectorTitle(
+            text = "Jon Huesos",
+            modifier = Modifier.customOffset(yOffset = titleOffsetY.value)
+        )
+
+        RandomMovieAnimatedRating(
             rating = movie.rating?.kp ?: 0f,
             starOffsets = starOffsetsY
         )
 
-//        movieDescriptionItem(movie)
+        RandomMovieDescription(
+            description = "ASdsdlkjhdasklh kash kjdhaskj hdjksa hkjh kjh lkash kjash dkjahsk jhakjs dhas",
+            onClick = {},
+            modifier = Modifier.customOffset(yOffset = titleOffsetY.value)
+        )
 
-        randomMoviePersonList(
+//        seasonDescriptionItem(
+//            movie = movie,
+//            modifier = Modifier.customOffset(yOffset = titleOffsetY.value)
+//        )
+//
+//        watchabilityItem(
+//            items = state.data.watchability.items,
+//            onWatchabilityClick = { onWatchabilityClick(state.data.watchability) }
+//        )
+
+//        imagesItem(
+//            images = imagesList,
+//            onShowAll = { }
+//        )
+//
+//        sequelsAndPrequelsItem(
+//            list = state.data.sequelsAndPrequels,
+//            onClick = onMovieClick
+//        )
+//
+//        similarMoviesItem(
+//            similarMovies = state.data.similarMovies,
+//            onClick = onMovieClick
+//        )
+
+        RandomMoviePersonList(
             title = Strings.Persons,
             list = movie.persons,
             yOffset = personOffsetsY,

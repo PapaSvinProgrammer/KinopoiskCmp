@@ -6,13 +6,16 @@ import androidx.compose.ui.Modifier
 import com.mordva.domain.model.movie.Movie
 import com.mordva.movie.presentation.movie.widget.component.SeasonDescription
 
-internal fun LazyListScope.seasonDescriptionItem(movie: Movie) {
+internal fun LazyListScope.seasonDescriptionItem(
+    movie: Movie,
+    modifier: Modifier = Modifier,
+) {
     item(key = 3) {
         if (movie.isSeries == false) return@item
 
         movie.seasonsInfo?.let { seasonsInfo ->
             SeasonDescription(
-                modifier = Modifier.clickable { },
+                modifier = modifier.clickable { },
                 countSeasons = seasonsInfo.filter { it.number != 0 }.size,
                 countSeries = seasonsInfo
                     .filter { it.number != 0 }
