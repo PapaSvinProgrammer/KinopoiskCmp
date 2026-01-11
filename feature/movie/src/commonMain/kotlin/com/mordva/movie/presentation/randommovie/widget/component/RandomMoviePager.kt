@@ -42,6 +42,7 @@ internal fun RandomMoviePager(
         pageSize = PageSize.Fixed(animatedItemWidth.value),
         snapPosition = SnapPosition.Center,
         contentPadding = PaddingValues(horizontal = fullSidePadding),
+        userScrollEnabled = itemState.toBoolean(),
         modifier = modifier.fillMaxWidth()
     ) { page ->
         val movieItem = items[page]
@@ -92,4 +93,9 @@ private fun animateItemWidth(itemState: RandomMoviePagerItemState) = animateDpAs
 private fun RandomMoviePagerItemState.toItemWidth() = when (this) {
     RandomMoviePagerItemState.PAGER_ITEM -> windowWidthPercent(0.7f)
     RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> windowWidthPercent(1f)
+}
+
+private fun RandomMoviePagerItemState.toBoolean() = when (this) {
+    RandomMoviePagerItemState.PAGER_ITEM -> true
+    RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> false
 }

@@ -22,7 +22,7 @@ internal fun RandomMovieDescription(
 ) {
     Column(
         modifier = modifier
-            .padding(horizontal = DsSpacer.M10)
+            .padding(horizontal = DsSpacer.M16)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,

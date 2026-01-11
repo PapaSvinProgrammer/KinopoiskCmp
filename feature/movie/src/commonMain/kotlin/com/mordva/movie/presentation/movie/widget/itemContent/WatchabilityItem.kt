@@ -15,7 +15,8 @@ internal fun LazyListScope.watchabilityItem(
     item(key = 4) {
         WatchabilityDescription(
             modifier = Modifier.clickable(onClick = onWatchabilityClick),
-            count = items.size
+            count = items.size,
+            images = listOf()
         )
     }
 }

@@ -1,4 +1,4 @@
-package com.mordva.ui.widget.renderState
+package com.mordva.images_list.presentation.widget
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
@@ -11,12 +11,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.mordva.domain.model.image.Poster
-import com.mordva.images_list.presentation.widget.ImageListUIState
 import com.mordva.ui.theme.Icons
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
 import com.mordva.ui.widget.listItems.LastItemCard
-import com.mordva.ui.widget.shimmer.ShimmerMovieRow
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

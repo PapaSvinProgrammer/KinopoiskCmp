@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.mordva.ui.theme.DsSpacer
+import com.mordva.ui.theme.DsTextSize
 import com.mordva.ui.theme.Icons
 import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
@@ -22,8 +23,8 @@ import org.jetbrains.compose.resources.painterResource
 fun TitleRow(
     modifier: Modifier = Modifier,
     title: String,
-    fontSize: TextUnit = Typography.titleMedium.fontSize,
-    fontWeight: FontWeight = FontWeight.Bold,
+    fontSize: TextUnit = DsTextSize.M16,
+    fontWeight: FontWeight = FontWeight.Medium,
     contentPadding: PaddingValues = PaddingValues(
         vertical = DsSpacer.M12,
         horizontal = DsSpacer.M16
@@ -59,9 +60,9 @@ fun TitleRow(
 fun TextTitleRow(
     title: String,
     modifier: Modifier = Modifier,
-    fontSize: TextUnit = Typography.titleMedium.fontSize,
-    fontWeight: FontWeight = FontWeight.Bold,
-    onClick: () -> Unit,
+    fontSize: TextUnit = DsTextSize.M16,
+    fontWeight: FontWeight = FontWeight.Medium,
+    onClick: () -> Unit = {},
 ) {
     Box(
         modifier = modifier
@@ -78,7 +79,7 @@ fun TextTitleRow(
             fontWeight = fontWeight,
             modifier = Modifier
                 .align(Alignment.CenterStart)
-                .padding(15.dp)
+                .padding(horizontal = DsSpacer.M16, vertical = DsSpacer.M12)
         )
     }
 }

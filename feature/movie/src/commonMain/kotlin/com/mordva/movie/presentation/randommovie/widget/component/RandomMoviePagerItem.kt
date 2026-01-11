@@ -4,11 +4,11 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -22,13 +22,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.mordva.domain.model.movie.Movie
+import com.mordva.movie.presentation.randommovie.imagesList
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieAnimatedRating
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieDescription
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieDirectorTitle
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieGenresRow
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieImages
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMoviePersonList
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMoviePosterImage
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieSeasonDescription
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieList
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieTitle
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieWatchability
+import com.mordva.ui.theme.DsCornerShape
 import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.customOffset
@@ -38,6 +44,10 @@ import com.mordva.ui.widget.component.fadingEdge
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// Не используется LazyColumn как root контейнер, так как его спцифика начинает ломать UI.
+// Если поднять элементы и проскролить вверж, то может возникнуть ситуация, что элемениты исчезнут,
+// так как LazyColumn почистит их
+
 @Composable
 internal fun RandomMoviePagerItem(
     modifier: Modifier = Modifier,
@@ -45,7 +55,8 @@ internal fun RandomMoviePagerItem(
     state: RandomMoviePagerItemState,
 ) {
     val imageScale = remember { Animatable(1f) }
-    val titleOffsetY = remember { Animatable(0f) }
+    val topOffsetY = remember { Animatable(0f) }
+    val bottomOffsetY = remember { Animatable(0f) }
     val starOffsetsY = remember { List(5) { Animatable(0f) } }
     val personOffsetsY = remember { List(10) { Animatable(0f) } }
 
@@ -56,21 +67,27 @@ internal fun RandomMoviePagerItem(
         imageScale.animateImageScale(state)
 
         launch {
-            titleOffsetY.animateTitleOffset(state, imageHeightPx)
+            topOffsetY.animateOffsetSpring(state, imageHeightPx)
         }
 
         starOffsetsY.forEachIndexed { index, animatable ->
             launch {
                 delay(index * 60L)
-                animatable.animateOffsetYWithDelay(state, imageHeightPx)
+                animatable.animateOffsetSpring(state, imageHeightPx)
             }
         }
+
+        delay(300)
 
         personOffsetsY.forEachIndexed { index, animatable ->
             launch {
                 delay(index * 60L)
-                animatable.animateOffsetYWithDelay(state, imageHeightPx)
+                animatable.animateOffsetSpring(state, imageHeightPx)
             }
+        }
+
+        launch {
+            bottomOffsetY.animateOffsetSpring(state, imageHeightPx)
         }
     }
 
@@ -78,34 +95,32 @@ internal fun RandomMoviePagerItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(DsSpacer.M16),
         modifier = modifier
-            .verticalScroll(rememberScrollState())
             .fadingEdge(FadingDefaults.bottomFade)
-            .clip(RoundedCornerShape(60.dp))
+            .clip(DsCornerShape.M60)
             .background(MaterialTheme.colorScheme.surfaceContainerLow)
             .measureWidthOnce { imageWidth = it }
+            .verticalScroll(rememberScrollState())
     ) {
         RandomMoviePosterImage(
             imageUrl = movie.poster?.url.toString(),
             width = imageWidth,
             scale = imageScale.value,
-            onPositioned = {
-                imageHeightPx = it.size.height.toFloat()
-            }
+            onPositioned = { imageHeightPx = it.size.height.toFloat() }
         )
 
         RandomMovieTitle(
             title = movie.name.toString(),
-            offsetY = titleOffsetY.value
+            offsetY = topOffsetY.value
         )
 
         RandomMovieGenresRow(
             genres = movie.genres.map { it.name },
-            offsetY = titleOffsetY.value
+            offsetY = topOffsetY.value
         )
 
         RandomMovieDirectorTitle(
             text = "Jon Huesos",
-            modifier = Modifier.customOffset(yOffset = titleOffsetY.value)
+            modifier = Modifier.customOffset(yOffset = topOffsetY.value)
         )
 
         RandomMovieAnimatedRating(
@@ -116,33 +131,8 @@ internal fun RandomMoviePagerItem(
         RandomMovieDescription(
             description = "ASdsdlkjhdasklh kash kjdhaskj hdjksa hkjh kjh lkash kjash dkjahsk jhakjs dhas",
             onClick = {},
-            modifier = Modifier.customOffset(yOffset = titleOffsetY.value)
+            modifier = Modifier.customOffset(yOffset = topOffsetY.value)
         )
-
-//        seasonDescriptionItem(
-//            movie = movie,
-//            modifier = Modifier.customOffset(yOffset = titleOffsetY.value)
-//        )
-//
-//        watchabilityItem(
-//            items = state.data.watchability.items,
-//            onWatchabilityClick = { onWatchabilityClick(state.data.watchability) }
-//        )
-
-//        imagesItem(
-//            images = imagesList,
-//            onShowAll = { }
-//        )
-//
-//        sequelsAndPrequelsItem(
-//            list = state.data.sequelsAndPrequels,
-//            onClick = onMovieClick
-//        )
-//
-//        similarMoviesItem(
-//            similarMovies = state.data.similarMovies,
-//            onClick = onMovieClick
-//        )
 
         RandomMoviePersonList(
             title = Strings.Persons,
@@ -150,10 +140,43 @@ internal fun RandomMoviePagerItem(
             yOffset = personOffsetsY,
             onAction = { },
         )
+
+        Column {
+            RandomMovieSeasonDescription(
+                movie = movie,
+                modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+            )
+
+            RandomMovieWatchability(
+                items = movie.watchability.items,
+                onWatchabilityClick = {},
+                modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+            )
+        }
+
+        RandomMovieImages(
+            images = imagesList,
+            onAction = {},
+            modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+        )
+
+        RandomMovieList(
+            titleRes = Strings.SequalsAndPrequals,
+            list = movie.sequelsAndPrequels,
+            onClick = {},
+            modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+        )
+
+        RandomMovieList(
+            titleRes = Strings.SimilarMovies,
+            list = movie.sequelsAndPrequels,
+            onClick = {},
+            modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+        )
     }
 }
 
-private suspend fun Animatable<Float, AnimationVector1D>.animateOffsetYWithDelay(
+private suspend fun Animatable<Float, AnimationVector1D>.animateOffsetSpring(
     state: RandomMoviePagerItemState,
     yOffset: Float,
 ) = animateTo(
@@ -167,14 +190,8 @@ private suspend fun Animatable<Float, AnimationVector1D>.animateOffsetYWithDelay
 private suspend fun Animatable<Float, AnimationVector1D>.animateImageScale(
     state: RandomMoviePagerItemState
 ) = animateTo(
-    targetValue = state.toImageScaleValue()
-)
-
-private suspend fun Animatable<Float, AnimationVector1D>.animateTitleOffset(
-    state: RandomMoviePagerItemState,
-    imageHeightPx: Float,
-) = animateTo(
-    targetValue = state.toImageOffsetValue(imageHeightPx)
+    targetValue = state.toImageScaleValue(),
+    animationSpec = tween(durationMillis = 300)
 )
 
 private fun RandomMoviePagerItemState.toImageOffsetValue(imageHeightPx: Float) = when (this) {

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.mordva.ui.theme.DsTextSize
 import com.mordva.ui.theme.Icons
-import com.mordva.ui.theme.RoundedCorners
+import com.mordva.ui.theme.DsCornerShape
 import com.mordva.ui.util.PosterType
 import org.jetbrains.compose.resources.painterResource
 
@@ -39,7 +39,7 @@ internal fun PersonMovieSquare(
             modifier = Modifier
                 .width(150.dp)
                 .aspectRatio(PosterType.SQUARE.ratio)
-                .clip(RoundedCorners.M10)
+                .clip(DsCornerShape.M10)
         )
 
         Text(
