@@ -41,11 +41,12 @@ import com.mordva.ui.util.customOffset
 import com.mordva.ui.util.measureWidthOnce
 import com.mordva.ui.widget.component.FadingDefaults
 import com.mordva.ui.widget.component.fadingEdge
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 // Не используется LazyColumn как root контейнер, так как его спцифика начинает ломать UI.
-// Если поднять элементы и проскролить вверж, то может возникнуть ситуация, что элемениты исчезнут,
+// Если поднять элементы и проскролить вверх, то может возникнуть ситуация, что элемениты исчезнут,
 // так как LazyColumn почистит их
 
 @Composable
@@ -58,13 +59,17 @@ internal fun RandomMoviePagerItem(
     val topOffsetY = remember { Animatable(0f) }
     val bottomOffsetY = remember { Animatable(0f) }
     val starOffsetsY = remember { List(5) { Animatable(0f) } }
-    val personOffsetsY = remember { List(10) { Animatable(0f) } }
+    val personOffsetsY = remember { List(5) { Animatable(0f) } }
 
     var imageHeightPx by remember { mutableStateOf(0f) }
     var imageWidth by remember { mutableStateOf(0.dp) }
 
     LaunchedEffect(state) {
-        imageScale.animateImageScale(state)
+        if (state == RandomMoviePagerItemState.BOTTOM_SHEET_ITEM) {
+            imageScale.animateImageScale(state)
+        } else {
+            launch { imageScale.animateImageScale(state) }
+        }
 
         launch {
             topOffsetY.animateOffsetSpring(state, imageHeightPx)
@@ -77,7 +82,9 @@ internal fun RandomMoviePagerItem(
             }
         }
 
-        delay(300)
+        if (state == RandomMoviePagerItemState.BOTTOM_SHEET_ITEM) {
+            delay(300)
+        }
 
         personOffsetsY.forEachIndexed { index, animatable ->
             launch {
