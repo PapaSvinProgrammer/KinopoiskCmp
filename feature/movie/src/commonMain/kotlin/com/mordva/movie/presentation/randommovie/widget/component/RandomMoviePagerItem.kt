@@ -28,10 +28,10 @@ import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovi
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieDirectorTitle
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieGenresRow
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieImages
+import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieList
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMoviePersonList
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMoviePosterImage
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieSeasonDescription
-import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieList
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieTitle
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieWatchability
 import com.mordva.ui.theme.DsCornerShape
@@ -41,7 +41,6 @@ import com.mordva.ui.util.customOffset
 import com.mordva.ui.util.measureWidthOnce
 import com.mordva.ui.widget.component.FadingDefaults
 import com.mordva.ui.widget.component.fadingEdge
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
