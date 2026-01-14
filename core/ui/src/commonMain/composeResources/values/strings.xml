@@ -141,4 +141,5 @@
     <string name="blocked">Неинтересно</string>
     <string name="viewed">Просмотрен</string>
     <string name="error_description">Что-то пошло не так. Попробуйте зайти позже</string>
+    <string name="overlap_logs_count">+%1$d</string>
 </resources>

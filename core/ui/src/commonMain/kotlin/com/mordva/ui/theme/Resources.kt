@@ -110,6 +110,7 @@ import kinopoiskcmp.core.ui.generated.resources.not_change
 import kinopoiskcmp.core.ui.generated.resources.not_found
 import kinopoiskcmp.core.ui.generated.resources.notifications_and_sounds
 import kinopoiskcmp.core.ui.generated.resources.other
+import kinopoiskcmp.core.ui.generated.resources.overlap_logs_count
 import kinopoiskcmp.core.ui.generated.resources.parent_control
 import kinopoiskcmp.core.ui.generated.resources.persons
 import kinopoiskcmp.core.ui.generated.resources.popular_names
@@ -345,6 +346,7 @@ object Strings {
     val Year = Res.string.year
     val YourMovieOn = Res.string.your_movie_on
     val ErrorScreenDescription = Res.string.error_description
+    val OverlapLogsCount = Res.string.overlap_logs_count
 }
 
 object StringArray {
