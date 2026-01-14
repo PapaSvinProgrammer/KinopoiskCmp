@@ -21,7 +21,6 @@ import com.mordva.domain.model.image.Poster
 import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.theme.DsTextSize
 import com.mordva.ui.theme.Strings
-import com.mordva.ui.theme.Typography
 import com.mordva.ui.util.PosterType
 import org.jetbrains.compose.resources.stringResource
 

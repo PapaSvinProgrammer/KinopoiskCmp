@@ -25,5 +25,6 @@ object DsSpacer {
 
 object DsCornerShape {
     val M10 = RoundedCornerShape(10.dp)
+    val M12 = RoundedCornerShape(12.dp)
     val M60 = RoundedCornerShape(60.dp)
 }

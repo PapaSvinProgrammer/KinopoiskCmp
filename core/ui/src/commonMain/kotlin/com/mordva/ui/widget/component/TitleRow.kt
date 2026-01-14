@@ -12,11 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
 import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.theme.DsTextSize
 import com.mordva.ui.theme.Icons
-import com.mordva.ui.theme.Typography
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

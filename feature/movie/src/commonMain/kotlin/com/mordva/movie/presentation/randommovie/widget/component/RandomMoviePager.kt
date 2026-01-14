@@ -12,10 +12,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.util.lerp
@@ -29,10 +25,11 @@ import kotlin.math.absoluteValue
 internal fun RandomMoviePager(
     state: PagerState,
     items: List<Movie>,
+    itemState: RandomMoviePagerItemState,
     modifier: Modifier = Modifier,
+    onItemClick: () -> Unit,
 ) {
     val fullSidePadding = (windowWidthPercent() - windowWidthPercent(0.7f)) / 2f
-    var itemState by remember { mutableStateOf(RandomMoviePagerItemState.PAGER_ITEM) }
 
     val animatedItemWidth = animateItemWidth(itemState)
 
@@ -42,7 +39,6 @@ internal fun RandomMoviePager(
         pageSize = PageSize.Fixed(animatedItemWidth.value),
         snapPosition = SnapPosition.Center,
         contentPadding = PaddingValues(horizontal = fullSidePadding),
-        userScrollEnabled = itemState.toBoolean(),
         modifier = modifier.fillMaxWidth()
     ) { page ->
         val movieItem = items[page]
@@ -74,12 +70,8 @@ internal fun RandomMoviePager(
                 .clickable(
                     indication = null,
                     interactionSource = null,
-                ) {
-                    itemState = when (itemState) {
-                        RandomMoviePagerItemState.PAGER_ITEM -> RandomMoviePagerItemState.BOTTOM_SHEET_ITEM
-                        RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> RandomMoviePagerItemState.PAGER_ITEM
-                    }
-                }
+                    onClick = onItemClick,
+                )
         )
     }
 }
@@ -93,9 +85,4 @@ private fun animateItemWidth(itemState: RandomMoviePagerItemState) = animateDpAs
 private fun RandomMoviePagerItemState.toItemWidth() = when (this) {
     RandomMoviePagerItemState.PAGER_ITEM -> windowWidthPercent(0.7f)
     RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> windowWidthPercent(1f)
-}
-
-private fun RandomMoviePagerItemState.toBoolean() = when (this) {
-    RandomMoviePagerItemState.PAGER_ITEM -> true
-    RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> false
 }

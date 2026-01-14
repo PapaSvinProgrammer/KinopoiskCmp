@@ -19,7 +19,6 @@ import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.toAspectRatio
 import com.mordva.ui.widget.component.TitleRow
 import com.mordva.ui.widget.lazyComponent.DefaultLazyRow
-import com.mordva.ui.widget.listItems.LastItemCard
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
