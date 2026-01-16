@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.util.lerp
-import com.mordva.domain.model.movie.Movie
+import com.mordva.movie.presentation.randommovie.widget.RandomMovieItemState
 import com.mordva.util.windowHeightPercent
 import com.mordva.util.windowWidthPercent
 import kotlin.math.absoluteValue
@@ -24,13 +24,12 @@ import kotlin.math.absoluteValue
 @Composable
 internal fun RandomMoviePager(
     state: PagerState,
-    items: List<Movie>,
-    itemState: RandomMoviePagerItemState,
+    items: List<RandomMovieItemState>,
+    itemState: RandomMoviePagerItemType,
     modifier: Modifier = Modifier,
     onItemClick: () -> Unit,
 ) {
     val fullSidePadding = (windowWidthPercent() - windowWidthPercent(0.7f)) / 2f
-
     val animatedItemWidth = animateItemWidth(itemState)
 
     HorizontalPager(
@@ -57,7 +56,7 @@ internal fun RandomMoviePager(
         )
 
         RandomMoviePagerItem(
-            movie = movieItem,
+            itemState = movieItem,
             state = itemState,
             modifier = Modifier
                 .width(animatedItemWidth.value)
@@ -77,12 +76,12 @@ internal fun RandomMoviePager(
 }
 
 @Composable
-private fun animateItemWidth(itemState: RandomMoviePagerItemState) = animateDpAsState(
+private fun animateItemWidth(itemState: RandomMoviePagerItemType) = animateDpAsState(
     targetValue = itemState.toItemWidth()
 )
 
 @Composable
-private fun RandomMoviePagerItemState.toItemWidth() = when (this) {
-    RandomMoviePagerItemState.PAGER_ITEM -> windowWidthPercent(0.7f)
-    RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> windowWidthPercent(1f)
+private fun RandomMoviePagerItemType.toItemWidth() = when (this) {
+    RandomMoviePagerItemType.PAGER_ITEM -> windowWidthPercent(0.7f)
+    RandomMoviePagerItemType.BOTTOM_SHEET_ITEM -> windowWidthPercent(1f)
 }

@@ -20,6 +20,7 @@ import com.mordva.movie.domain.studio.GetStudiesByMovieId
 import com.mordva.movie.presentation.home.HomeViewModel
 import com.mordva.movie.presentation.movie.MovieViewModel
 import com.mordva.movie.presentation.movie_list.MovieListViewModel
+import com.mordva.movie.presentation.randommovie.RandomMovieViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -62,6 +63,7 @@ val movieModule = module {
     }
 
     viewModelOf(::HomeViewModel)
+    viewModelOf(::RandomMovieViewModel)
 
     factoryOf(::GetMoviesByCollection)
     factoryOf(::GetMoviesByCompany)

@@ -47,4 +47,16 @@ internal class MovieServiceImpl(
             }
         }.map { doc -> doc.docs }
     }
+
+    override suspend fun getRandomMovie(
+        queryParameters: List<Pair<String, String>>
+    ): Result<MovieDto> = safeCall {
+        client.get("v1.4/movie/random") {
+            url {
+                parameters.append(LIMIT_FIELD, LIMIT_API_COUNT)
+                parameters.append(NOT_NULL_FIELD, NAME_FIELD)
+                queryParameters.forEach { parameters.append(it.first, it.second) }
+            }
+        }
+    }
 }

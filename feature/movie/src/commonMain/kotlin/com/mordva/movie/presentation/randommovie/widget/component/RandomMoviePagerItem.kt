@@ -21,8 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.mordva.domain.model.movie.Movie
-import com.mordva.movie.presentation.randommovie.imagesList
+import com.mordva.movie.presentation.randommovie.widget.RandomMovieItemState
+import com.mordva.movie.presentation.randommovie.widget.getGenres
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieAnimatedRating
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieDescription
 import com.mordva.movie.presentation.randommovie.widget.listComponent.RandomMovieDirectorTitle
@@ -39,6 +39,8 @@ import com.mordva.ui.theme.DsSpacer
 import com.mordva.ui.theme.Strings
 import com.mordva.ui.util.customOffset
 import com.mordva.ui.util.measureWidthOnce
+import com.mordva.ui.widget.component.BasicLoadingBox
+import com.mordva.ui.widget.component.ErrorScreen
 import com.mordva.ui.widget.component.FadingDefaults
 import com.mordva.ui.widget.component.fadingEdge
 import kotlinx.coroutines.delay
@@ -51,8 +53,8 @@ import kotlinx.coroutines.launch
 @Composable
 internal fun RandomMoviePagerItem(
     modifier: Modifier = Modifier,
-    movie: Movie,
-    state: RandomMoviePagerItemState,
+    itemState: RandomMovieItemState,
+    state: RandomMoviePagerItemType,
 ) {
     val imageScale = remember { Animatable(1f) }
     val topOffsetY = remember { Animatable(0f) }
@@ -64,7 +66,7 @@ internal fun RandomMoviePagerItem(
     var imageWidth by remember { mutableStateOf(0.dp) }
 
     LaunchedEffect(state) {
-        if (state == RandomMoviePagerItemState.BOTTOM_SHEET_ITEM) {
+        if (state == RandomMoviePagerItemType.BOTTOM_SHEET_ITEM) {
             imageScale.animateImageScale(state)
         } else {
             launch { imageScale.animateImageScale(state) }
@@ -81,7 +83,7 @@ internal fun RandomMoviePagerItem(
             }
         }
 
-        if (state == RandomMoviePagerItemState.BOTTOM_SHEET_ITEM) {
+        if (state == RandomMoviePagerItemType.BOTTOM_SHEET_ITEM) {
             delay(300)
         }
 
@@ -97,93 +99,99 @@ internal fun RandomMoviePagerItem(
         }
     }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(DsSpacer.M16),
-        modifier = modifier
-            .fadingEdge(FadingDefaults.bottomFade)
-            .clip(DsCornerShape.M60)
-            .background(MaterialTheme.colorScheme.surfaceContainerLow)
-            .measureWidthOnce { imageWidth = it }
-            .verticalScroll(rememberScrollState())
-    ) {
-        RandomMoviePosterImage(
-            imageUrl = movie.poster?.url.toString(),
-            width = imageWidth,
-            scale = imageScale.value,
-            onPositioned = { imageHeightPx = it.size.height.toFloat() }
-        )
+    when (itemState) {
+        RandomMovieItemState.Error -> ErrorScreen()
+        RandomMovieItemState.Loading -> BasicLoadingBox()
+        is RandomMovieItemState.Success -> {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(DsSpacer.M16),
+                modifier = modifier
+                    .fadingEdge(FadingDefaults.bottomFade)
+                    .clip(DsCornerShape.M60)
+                    .background(MaterialTheme.colorScheme.surfaceContainerLow)
+                    .measureWidthOnce { imageWidth = it }
+                    .verticalScroll(rememberScrollState())
+            ) {
+                RandomMoviePosterImage(
+                    imageUrl = itemState.movie.poster?.url.toString(),
+                    width = imageWidth,
+                    scale = imageScale.value,
+                    onPositioned = { imageHeightPx = it.size.height.toFloat() }
+                )
 
-        RandomMovieTitle(
-            title = movie.name.toString(),
-            offsetY = topOffsetY.value
-        )
+                RandomMovieTitle(
+                    title = itemState.movie.name.toString(),
+                    offsetY = topOffsetY.value
+                )
 
-        RandomMovieGenresRow(
-            genres = movie.genres.map { it.name },
-            offsetY = topOffsetY.value
-        )
+                RandomMovieGenresRow(
+                    genres = itemState.getGenres(),
+                    offsetY = topOffsetY.value
+                )
 
-        RandomMovieDirectorTitle(
-            text = "Jon Huesos",
-            modifier = Modifier.customOffset(yOffset = topOffsetY.value)
-        )
+                RandomMovieDirectorTitle(
+                    text = itemState.director,
+                    modifier = Modifier.customOffset(yOffset = topOffsetY.value)
+                )
 
-        RandomMovieAnimatedRating(
-            rating = movie.rating?.kp ?: 0f,
-            starOffsets = starOffsetsY
-        )
+                RandomMovieAnimatedRating(
+                    rating = itemState.movie.rating?.kp ?: 0f,
+                    starOffsets = starOffsetsY
+                )
 
-        RandomMovieDescription(
-            description = "ASdsdlkjhdasklh kash kjdhaskj hdjksa hkjh kjh lkash kjash dkjahsk jhakjs dhas",
-            onClick = {},
-            modifier = Modifier.customOffset(yOffset = topOffsetY.value)
-        )
+                RandomMovieDescription(
+                    description = itemState.movie.description.toString(),
+                    onClick = {},
+                    modifier = Modifier.customOffset(yOffset = topOffsetY.value)
+                )
 
-        RandomMoviePersonList(
-            title = Strings.Persons,
-            list = movie.persons,
-            yOffset = personOffsetsY,
-            onAction = { },
-        )
+                RandomMoviePersonList(
+                    title = Strings.Persons,
+                    list = itemState.movie.persons,
+                    yOffset = personOffsetsY,
+                    onAction = { },
+                )
 
-        Column {
-            RandomMovieSeasonDescription(
-                movie = movie,
-                modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
-            )
+                Column {
+                    RandomMovieSeasonDescription(
+                        movie = itemState.movie,
+                        modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+                    )
 
-            RandomMovieWatchability(
-                items = movie.watchability.items,
-                onWatchabilityClick = {},
-                modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
-            )
+                    RandomMovieWatchability(
+                        items = itemState.movie.watchability.items,
+                        onWatchabilityClick = {},
+                        modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+                    )
+                }
+
+                RandomMovieImages(
+                    images = itemState.images,
+                    onAction = {},
+                    modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+                )
+
+                RandomMovieList(
+                    titleRes = Strings.SequalsAndPrequals,
+                    list = itemState.movie.sequelsAndPrequels,
+                    onClick = {},
+                    modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+                )
+
+                RandomMovieList(
+                    titleRes = Strings.SimilarMovies,
+                    list = itemState.movie.similarMovies,
+                    onClick = {},
+                    modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
+                )
+            }
         }
-
-        RandomMovieImages(
-            images = imagesList,
-            onAction = {},
-            modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
-        )
-
-        RandomMovieList(
-            titleRes = Strings.SequalsAndPrequals,
-            list = movie.sequelsAndPrequels,
-            onClick = {},
-            modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
-        )
-
-        RandomMovieList(
-            titleRes = Strings.SimilarMovies,
-            list = movie.sequelsAndPrequels,
-            onClick = {},
-            modifier = Modifier.customOffset(yOffset = bottomOffsetY.value)
-        )
     }
 }
 
 private suspend fun Animatable<Float, AnimationVector1D>.animateOffsetSpring(
-    state: RandomMoviePagerItemState,
+    state: RandomMoviePagerItemType,
     yOffset: Float,
 ) = animateTo(
     targetValue = state.toImageOffsetValue(yOffset),
@@ -194,18 +202,18 @@ private suspend fun Animatable<Float, AnimationVector1D>.animateOffsetSpring(
 )
 
 private suspend fun Animatable<Float, AnimationVector1D>.animateImageScale(
-    state: RandomMoviePagerItemState
+    state: RandomMoviePagerItemType
 ) = animateTo(
     targetValue = state.toImageScaleValue(),
     animationSpec = tween(durationMillis = 300)
 )
 
-private fun RandomMoviePagerItemState.toImageOffsetValue(imageHeightPx: Float) = when (this) {
-    RandomMoviePagerItemState.PAGER_ITEM -> 0f
-    RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> -imageHeightPx
+private fun RandomMoviePagerItemType.toImageOffsetValue(imageHeightPx: Float) = when (this) {
+    RandomMoviePagerItemType.PAGER_ITEM -> 0f
+    RandomMoviePagerItemType.BOTTOM_SHEET_ITEM -> -imageHeightPx
 }
 
-private fun RandomMoviePagerItemState.toImageScaleValue() = when (this) {
-    RandomMoviePagerItemState.PAGER_ITEM -> 1f
-    RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> 0f
+private fun RandomMoviePagerItemType.toImageScaleValue() = when (this) {
+    RandomMoviePagerItemType.PAGER_ITEM -> 1f
+    RandomMoviePagerItemType.BOTTOM_SHEET_ITEM -> 0f
 }

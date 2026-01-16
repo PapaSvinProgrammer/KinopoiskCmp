@@ -30,14 +30,14 @@ internal fun RandomMovieTopBar(
             .fillMaxWidth()
             .padding(horizontal = DsSpacer.M4)
     ) {
-        IconButton(onClick = { onAction(RandomMovieAction.GoBack) }) {
+        IconButton(onClick = { onAction(RandomMovieAction.GoBackClicked) }) {
             Icon(
                 painter = painterResource(Icons.Close),
                 contentDescription = null,
             )
         }
 
-        IconButton(onClick = { onAction(RandomMovieAction.Refresh) }) {
+        IconButton(onClick = { onAction(RandomMovieAction.RefreshDragged) }) {
             Icon(
                 painter = painterResource(Icons.Settings),
                 contentDescription = null,

@@ -44,7 +44,7 @@ import kotlin.math.absoluteValue
 @Composable
 internal fun RandomMovieBackgroundPager(
     state: PagerState,
-    itemState: RandomMoviePagerItemState,
+    itemState: RandomMoviePagerItemType,
     items: List<String>,
     modifier: Modifier = Modifier,
 ) {
@@ -66,13 +66,13 @@ internal fun RandomMovieBackgroundPager(
         }
     ) { targetState ->
         when (targetState) {
-            RandomMoviePagerItemState.PAGER_ITEM -> PagerItemHorizontalPager(
+            RandomMoviePagerItemType.PAGER_ITEM -> PagerItemHorizontalPager(
                 state = state,
                 items = items,
                 modifier = modifier
             )
 
-            RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> BottomSheetItemHorizontalPager(
+            RandomMoviePagerItemType.BOTTOM_SHEET_ITEM -> BottomSheetItemHorizontalPager(
                 state = state,
                 items = items,
                 isVisible = itemState.isVisible(),
@@ -187,7 +187,7 @@ private fun BottomSheetItemHorizontalPager(
     }
 }
 
-private fun RandomMoviePagerItemState.isVisible() = when (this) {
-    RandomMoviePagerItemState.PAGER_ITEM -> false
-    RandomMoviePagerItemState.BOTTOM_SHEET_ITEM -> true
+private fun RandomMoviePagerItemType.isVisible() = when (this) {
+    RandomMoviePagerItemType.PAGER_ITEM -> false
+    RandomMoviePagerItemType.BOTTOM_SHEET_ITEM -> true
 }

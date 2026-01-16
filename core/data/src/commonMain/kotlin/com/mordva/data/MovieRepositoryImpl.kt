@@ -1,7 +1,9 @@
 package com.mordva.data
 
+import MovieFilter
 import com.mordva.data.mapper.toDomain
 import com.mordva.data.mapper.toDto
+import com.mordva.data.mapper.toQueryParams
 import com.mordva.domain.model.movie.Movie
 import com.mordva.domain.repository.MovieRepository
 import com.mordva.network.external.MovieService
@@ -19,6 +21,10 @@ internal class MovieRepositoryImpl(
 
     override suspend fun getMovieById(movieId: Int): Result<Movie> {
         return remote.getMovieById(movieId).map { it.toDomain() }
+    }
+
+    override suspend fun getRandomMovie(params: MovieFilter): Result<Movie> {
+        return remote.getRandomMovie(params.toQueryParams()).map { it.toDomain() }
     }
 
     override suspend fun search(
