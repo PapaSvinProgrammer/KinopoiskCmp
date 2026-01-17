@@ -1,7 +1,7 @@
 package com.mordva.domain.repository
 
-import MovieFilter
 import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.movie.MovieFilter
 
 interface MovieRepository {
     suspend fun getMovieByFilter(queryParameters: List<Pair<String, String>>): Result<List<Movie>>

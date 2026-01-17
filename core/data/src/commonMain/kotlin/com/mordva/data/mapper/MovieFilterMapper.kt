@@ -1,7 +1,7 @@
 package com.mordva.data.mapper
 
-import MovieFilter
 import com.mordva.domain.model.DateRange
+import com.mordva.domain.model.movie.MovieFilter
 import kotlin.to
 
 fun MovieFilter.toQueryParams(): List<Pair<String, String>> {

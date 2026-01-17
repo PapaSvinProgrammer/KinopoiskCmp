@@ -16,6 +16,7 @@ import com.mordva.movie.presentation.groupPerson.GroupPersonViewModel
 import com.mordva.movie.domain.movie.GetMoviesByCollection
 import com.mordva.movie.domain.movie.GetMoviesByCompany
 import com.mordva.movie.domain.movie.GetMoviesByGenre
+import com.mordva.movie.domain.movie.RandomMovieLoadItemsUseCase
 import com.mordva.movie.domain.studio.GetStudiesByMovieId
 import com.mordva.movie.presentation.home.HomeViewModel
 import com.mordva.movie.presentation.movie.MovieViewModel
@@ -81,4 +82,5 @@ val movieModule = module {
     factoryOf(::GetCommentOnlyPositive)
     factoryOf(::GetStudiesByMovieId)
     factoryOf(::GetStudiesByMovieId)
+    factoryOf(::RandomMovieLoadItemsUseCase)
 }

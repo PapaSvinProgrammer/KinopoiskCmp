@@ -12,6 +12,18 @@ internal sealed interface RandomMovieItemState {
 
     data object Loading : RandomMovieItemState
     data object Error : RandomMovieItemState
+
+    companion object {
+        fun fromData(
+            movie: Movie,
+            images: List<Poster>,
+            directors: List<String>
+        ): RandomMovieItemState = Success(
+            movie = movie,
+            images = images,
+            director = directors.joinToString(", ")
+        )
+    }
 }
 
 internal fun RandomMovieItemState.Success.getGenres() = movie.genres.map { it.name }

@@ -1,10 +1,10 @@
 package com.mordva.data
 
-import MovieFilter
 import com.mordva.data.mapper.toDomain
 import com.mordva.data.mapper.toDto
 import com.mordva.data.mapper.toQueryParams
 import com.mordva.domain.model.movie.Movie
+import com.mordva.domain.model.movie.MovieFilter
 import com.mordva.domain.repository.MovieRepository
 import com.mordva.network.external.MovieService
 import com.mordva.sqlite.entities.movie.MovieLocalService

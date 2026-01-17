@@ -18,7 +18,6 @@ import com.mordva.movie.presentation.movie_list.MovieListScreen
 import com.mordva.movie.presentation.movie_list.MovieListViewModel
 import com.mordva.movie.presentation.randommovie.RandomMovieScreen
 import com.mordva.movie.presentation.randommovie.RandomMovieViewModel
-import com.mordva.movie.presentation.randommovie.widget.RandomMovieAction
 import com.mordva.movie.presentation.watchability.WatchabilityListScreen
 import com.mordva.movie.utils.PersonMovieListScreenObjectType
 import com.mordva.movie.utils.WatchabilityType

@@ -1,11 +1,9 @@
+package com.mordva.domain.model.movie
+
 import com.mordva.domain.model.DateRange
 import com.mordva.domain.model.Range
-import com.mordva.domain.model.movie.MovieStatus
-import com.mordva.domain.model.movie.MovieType
-import com.mordva.domain.model.movie.RatingMpaa
 
-@ConsistentCopyVisibility
-data class MovieFilter private constructor(
+data class MovieFilter(
     // Тип и статус
     val includeTypes: List<MovieType>? = null,
     val excludeTypes: List<MovieType>? = null,

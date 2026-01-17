@@ -24,7 +24,7 @@ abstract class BaseViewModel<Event> : ViewModel() {
 
     protected fun launchWithoutOld(
         key: String = DEFAULT_KEY,
-        dispatcher: CoroutineDispatcher = Dispatchers.Default,
+        dispatcher: CoroutineDispatcher = Dispatchers.IO,
         block: suspend CoroutineScope.() -> Unit
     ): Job {
         jobs.remove(key)?.cancel()
