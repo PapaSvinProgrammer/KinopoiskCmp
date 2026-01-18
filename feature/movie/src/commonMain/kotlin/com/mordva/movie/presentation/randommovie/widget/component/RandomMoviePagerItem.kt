@@ -41,8 +41,6 @@ import com.mordva.ui.util.customOffset
 import com.mordva.ui.util.measureWidthOnce
 import com.mordva.ui.widget.component.BasicLoadingBox
 import com.mordva.ui.widget.component.ErrorScreen
-import com.mordva.ui.widget.component.FadingDefaults
-import com.mordva.ui.widget.component.fadingEdge
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -107,7 +105,6 @@ internal fun RandomMoviePagerItem(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(DsSpacer.M16),
                 modifier = modifier
-                    .fadingEdge(FadingDefaults.bottomFade)
                     .clip(DsCornerShape.M60)
                     .background(MaterialTheme.colorScheme.surfaceContainerLow)
                     .measureWidthOnce { imageWidth = it }

@@ -8,6 +8,7 @@ androidx-lifecycle = "2.9.4"
 androidx-testExt = "1.3.0"
 composeMultiplatform = "1.9.3"
 compottie = "2.0.2"
+hazeVersion = "1.7.1"
 junit = "4.13.2"
 kotlin = "2.2.20"
 kotlinStdlib = "2.2.20"
@@ -31,6 +32,7 @@ ksp = "2.3.4"
 coroutines = "1.10.2"
 
 [libraries]
+haze = { module = "dev.chrisbanes.haze:haze", version.ref = "hazeVersion" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
 # --- Test ---

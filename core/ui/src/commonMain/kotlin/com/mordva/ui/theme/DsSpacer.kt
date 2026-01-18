@@ -18,6 +18,8 @@ object DsSpacer {
     val M20 = 20.dp
     val M22 = 22.dp
     val M30 = 30.dp
+    val M40 = 40.dp
+    val M48 = 48.dp
     val M64 = 64.dp
     val M70 = 70.dp
     val M100 = 100.dp

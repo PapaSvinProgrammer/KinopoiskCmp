@@ -34,6 +34,7 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.domain)
 
+            implementation(libs.haze)
             implementation(libs.bundles.coil)
             implementation(libs.bundles.koin)
             implementation(libs.bundles.composeFeature)

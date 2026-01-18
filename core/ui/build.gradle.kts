@@ -50,6 +50,7 @@ kotlin {
             api(compose.ui)
             api(compose.components.resources)
             api(compose.components.uiToolingPreview)
+            api(libs.haze)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
         }
