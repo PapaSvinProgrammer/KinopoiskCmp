@@ -17,17 +17,14 @@ internal class RandomMovieViewModel(
 ) : BaseViewModel<RandomMovieEvent>() {
     private val pagerItemState = MutableStateFlow(RandomMoviePagerItemType.PAGER_ITEM)
     private val movieListState = MutableStateFlow<List<RandomMovieItemState>>(listOf())
-    private val expandedToolbarState = MutableStateFlow(true)
 
     val state = combine(
-        expandedToolbarState,
         movieListState,
         pagerItemState
-    ) { expandedToolbar, movieList, pagerItem ->
+    ) { movieList, pagerItem ->
         RandomMovieState(
             items = movieList,
             pagerItemState = pagerItem,
-            expandedToolbar = expandedToolbar,
         )
     }.stateIn(
         scope = viewModelScope,
@@ -44,10 +41,6 @@ internal class RandomMovieViewModel(
             RandomMoviePagerItemType.PAGER_ITEM -> RandomMoviePagerItemType.BOTTOM_SHEET_ITEM
             RandomMoviePagerItemType.BOTTOM_SHEET_ITEM -> RandomMoviePagerItemType.PAGER_ITEM
         }
-    }
-
-    fun onSearchClamped() {
-        expandedToolbarState.value = !expandedToolbarState.value
     }
 
     private fun loadMovies(count: Int) = launchWithoutOld(LOAD_MOVIES) {

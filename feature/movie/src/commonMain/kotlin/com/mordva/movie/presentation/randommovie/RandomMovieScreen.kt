@@ -62,7 +62,6 @@ internal fun RandomMovieScreen(
         },
         bottomBar = {
             RandomMovieToolbar(
-                isExpanded = state.expandedToolbar,
                 onAction = { viewModel.action(it) },
                 hazeState = hazeState,
                 modifier = Modifier

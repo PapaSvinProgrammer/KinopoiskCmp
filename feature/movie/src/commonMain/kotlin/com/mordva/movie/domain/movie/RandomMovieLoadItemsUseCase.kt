@@ -4,7 +4,6 @@ import com.mordva.domain.model.category.ItemName
 import com.mordva.domain.model.category.WatchabilityItem
 import com.mordva.domain.model.image.Poster
 import com.mordva.domain.model.movie.Movie
-import com.mordva.domain.model.movie.MovieFilter
 import com.mordva.domain.model.movie.Watchability
 import com.mordva.domain.model.person.PersonMovie
 import com.mordva.domain.model.season.Season
@@ -12,9 +11,7 @@ import com.mordva.domain.model.totalValue.Rating
 import com.mordva.domain.repository.ImageRepository
 import com.mordva.domain.repository.MovieRepository
 import com.mordva.movie.presentation.randommovie.widget.RandomMovieItemState
-import com.mordva.util.multiRequestWithResult
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
 internal class RandomMovieLoadItemsUseCase(

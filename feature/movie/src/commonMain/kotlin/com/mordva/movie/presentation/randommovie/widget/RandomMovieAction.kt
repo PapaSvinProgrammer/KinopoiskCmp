@@ -18,10 +18,11 @@ internal sealed interface RandomMovieAction {
     }
 
     sealed interface BottomBarAction : RandomMovieAction {
-        data object SearchClamped : BottomBarAction
         data object SearchClicked : BottomBarAction
-        data object MovieLiked : BottomBarAction
-        data object MoviePackageAdded : BottomBarAction
+        data object StarClicked : BottomBarAction
+        data object FavoriteClicked : BottomBarAction
+        data object FilterClicked : BottomBarAction
+        data object MoreClicked : BottomBarAction
     }
 }
 
@@ -32,9 +33,10 @@ internal fun RandomMovieViewModel.action(action: RandomMovieAction) = when (acti
     RandomMovieAction.SearchSimilar -> Unit
     RandomMovieAction.ShowAllImagesClicked -> Unit
     RandomMovieAction.ShowAllPersonClicked -> Unit
-    RandomMovieAction.BottomBarAction.MovieLiked -> Unit
-    RandomMovieAction.BottomBarAction.MoviePackageAdded -> Unit
-    RandomMovieAction.BottomBarAction.SearchClamped -> onSearchClamped()
+    RandomMovieAction.BottomBarAction.StarClicked -> Unit
+    RandomMovieAction.BottomBarAction.FavoriteClicked -> Unit
     RandomMovieAction.BottomBarAction.SearchClicked -> Unit
     RandomMovieAction.TopBarAction.GoBackClicked -> Unit
+    RandomMovieAction.BottomBarAction.FilterClicked -> Unit
+    RandomMovieAction.BottomBarAction.MoreClicked -> Unit
 }
