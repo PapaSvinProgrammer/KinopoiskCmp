@@ -11,6 +11,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import ru.mordva.network.BuildKonfig
 
 const val LIMIT_API_COUNT = "20"
 
@@ -30,7 +31,7 @@ fun provideHttpClient(engine: HttpClientEngine): HttpClient {
         defaultRequest {
             url("https://api.kinopoisk.dev/")
             header("accept", "application/json")
-            header("X-API-KEY", "94D6S0T-QWZMREW-NNMTBB7-5ZGY37K")
+            header("X-API-KEY", BuildKonfig.POISK_API_KEY)
         }
 
         install(Logging) {
